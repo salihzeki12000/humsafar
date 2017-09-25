@@ -258,164 +258,166 @@
               <button class="btn btn-dark-blue ">Connect</button>
             </div>
           </div>
-        </div> -->
+      </div> -->
+  </div>
+</div>
+<!-- CONTENT END -->
+</div>
+<!-- FOLLOWERS SECTION END -->
+<!-- LEADS SECTION -->
+<div class="analytics-leads " ng-show="leads ">
+    <!-- FILTER -->
+    <div class="analytics-filter analyticsleads-filter bg-white ">
+        <div class="container-fluid ">
+            <div class="analyticsleads-filterhead clearfix ">
+                <div class="analyticsfilter-head pull-left ">
+                    <p>Daily Lead Analytics</p>
+                </div>
+                <div class="pull-right filter-analyticslead ">
+                    <form>
+                        <p class="filterlead-count ">Total Leads: <span>0</span></p>
+                        <!-- MONTH FILTER -->
+                        <div class="analytics-filterui leadfilter-month ">
+                            <div class="form-group ">
+                                <ui-select ng-model="leadFilterData.month " theme="bootstrap ">
+                                    <ui-select-match placeholder="From ">{{$select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index ">
+                                        <div>
+                                            {{month}}
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
+                            </div>
+                        </div>
+                        <!-- MONTH FILTER END  -->
+                        <!-- YEAR FILTER  -->
+                        <div class="analytics-filterui leadfilter-year ">
+                            <div class="form-group ">
+                                <ui-select ng-model="leadFilterData.year " theme="bootstrap ">
+                                    <ui-select-match placeholder="Year ">{{$select.selected}}</ui-select-match>
+                                    <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index ">
+                                        <div>
+                                            {{year}}
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
+                            </div>
+                        </div>
+                        <!-- YEAR FILTER END  -->
+                        <div class="leadfilter-btn ">
+                            <button class="btn btn-pink " ng-click="getLeadsChart(userData.urlSlug); "> Go </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <!-- CONTENT END -->
     </div>
-    <!-- FOLLOWERS SECTION END -->
-    <!-- LEADS SECTION -->
-    <div class="analytics-leads " ng-show="leads ">
-        <!-- FILTER -->
-        <div class="analytics-filter analyticsleads-filter bg-white ">
-            <div class="container-fluid ">
-                <div class="analyticsleads-filterhead clearfix ">
-                    <div class="analyticsfilter-head pull-left ">
-                        <p>Daily Lead Analytics</p>
-                    </div>
-                    <div class="pull-right filter-analyticslead ">
-                        <form>
-                            <p class="filterlead-count ">Total Leads: <span>0</span></p>
-                            <!-- MONTH FILTER -->
-                            <div class="analytics-filterui leadfilter-month ">
-                                <div class="form-group ">
-                                    <ui-select ng-model="leadFilterData.month " theme="bootstrap ">
-                                        <ui-select-match placeholder="From ">{{$select.selected}}</ui-select-match>
-                                        <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index ">
-                                            <div>
-                                                {{month}}
-                                            </div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
-                                </div>
-                            </div>
-                            <!-- MONTH FILTER END  -->
-                            <!-- YEAR FILTER  -->
-                            <div class="analytics-filterui leadfilter-year ">
-                                <div class="form-group ">
-                                    <ui-select ng-model="leadFilterData.year " theme="bootstrap ">
-                                        <ui-select-match placeholder="Year ">{{$select.selected}}</ui-select-match>
-                                        <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index ">
-                                            <div>
-                                                {{year}}
-                                            </div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
-                                </div>
-                            </div>
-                            <!-- YEAR FILTER END  -->
-                            <div class="leadfilter-btn ">
-                                <button class="btn btn-pink " ng-click="getLeadsChart(userData.urlSlug); "> Go </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+    <!-- FILTER END -->
+    <!-- EMPTY SCREEN -->
+    <div class="analytics-leadschart ">
+        <div class="container ">
+            <div class="emptyleads-analytics ">
+                <highchart config="chartConfig " style="height: 410px; "></highchart>
             </div>
         </div>
-        <!-- FILTER END -->
-        <!-- EMPTY SCREEN -->
-        <div class="analytics-leadschart ">
-            <div class="container ">
-                <div class="emptyleads-analytics ">
-                    <highchart config="chartConfig " style="height: 410px; "></highchart>
-                </div>
-            </div>
-        </div>
-        <!-- EMPTY SCREEN END -->
     </div>
-    <!-- LEADS SECTION END -->
-    <!-- VIEWS DOWNLOADS SECTION -->
-    <div class="analytics-download " ng-show="viewsdownload ">
-        <!-- FILTER -->
-        <div class="analytics-filter analyticsleads-filter bg-white " hidden>
-            <div class="container-fluid ">
-                <div class="analyticsleads-filterhead clearfix ">
-                    <div class="pull-right filter-analyticslead ">
-                        <form>
-                            <!-- MONTH FILTER -->
-                            <div class="analytics-filterui downloadfilter-month ">
-                                <div class="form-group ">
-                                    <ui-select ng-model="downloadMonthfilter " theme="bootstrap ">
-                                        <ui-select-match placeholder="From ">{{$select.selected.name}}</ui-select-match>
-                                        <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index ">
-                                            <div>
-                                                {{month}}
-                                            </div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
-                                </div>
+    <!-- EMPTY SCREEN END -->
+</div>
+<!-- LEADS SECTION END -->
+<!-- VIEWS DOWNLOADS SECTION -->
+<div class="analytics-download " ng-show="viewsdownload ">
+    <!-- FILTER -->
+    <div class="analytics-filter analyticsleads-filter bg-white " hidden>
+        <div class="container-fluid ">
+            <div class="analyticsleads-filterhead clearfix ">
+                <div class="pull-right filter-analyticslead ">
+                    <form>
+                        <!-- MONTH FILTER -->
+                        <div class="analytics-filterui downloadfilter-month ">
+                            <div class="form-group ">
+                                <ui-select ng-model="downloadMonthfilter " theme="bootstrap ">
+                                    <ui-select-match placeholder="From ">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="month in leadmonth | filter: $select.search track by $index ">
+                                        <div>
+                                            {{month}}
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
                             </div>
-                            <!-- MONTH FILTER END  -->
-                            <!-- YEAR FILTER  -->
-                            <div class="analytics-filterui downloadfilter-year ">
-                                <div class="form-group ">
-                                    <ui-select ng-model="downloadYearFilter " theme="bootstrap ">
-                                        <ui-select-match placeholder="Year ">{{$select.selected.name}}</ui-select-match>
-                                        <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index ">
-                                            <div>
-                                                {{year}}
-                                            </div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                    <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
-                                </div>
+                        </div>
+                        <!-- MONTH FILTER END  -->
+                        <!-- YEAR FILTER  -->
+                        <div class="analytics-filterui downloadfilter-year ">
+                            <div class="form-group ">
+                                <ui-select ng-model="downloadYearFilter " theme="bootstrap ">
+                                    <ui-select-match placeholder="Year ">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="year in leadyear | filter: $select.search track by $index ">
+                                        <div>
+                                            {{year}}
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="filter-droparrow "><i class="fa fa-chevron-down " ></i></span>
                             </div>
-                            <!-- YEAR FILTER END  -->
-                            <div class="leadfilter-btn ">
-                                <button class="btn btn-pink "> Go </button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <!-- YEAR FILTER END  -->
+                        <div class="leadfilter-btn ">
+                            <button class="btn btn-pink "> Go </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- FILTER END -->
-        <!-- EMPTY SCREEN -->
-        <div class="analytics-emptydownload " ng-if="!(viewDownloads && viewDownloads !='' ) ">
-            <div class="container ">
-                <div class="emptydownload-analytics ">
-                    <h3 class="color-blue avenir-heavy ">Views & Downloads</h3>
-                    <p class="color-blue avenir-roman ">All the Itineraries and Tour & Packings that have been viewed or downloaded over the last 90 days have been listed below.</p>
-                </div>
+    </div>
+    <!-- FILTER END -->
+    <!-- EMPTY SCREEN -->
+    <div class="analytics-emptydownload " ng-if="!(viewDownloads && viewDownloads !='' ) ">
+        <div class="container ">
+            <div class="emptydownload-analytics ">
+                <h3 class="color-blue avenir-heavy ">Views & Downloads</h3>
+                <p class="color-blue avenir-roman ">All the Itineraries and Tour & Packings that have been viewed or downloaded over the last 90 days have been listed below.</p>
             </div>
         </div>
-        <!-- EMPTY SCREEN END -->
-        <!-- CONTENT -->
-        <div class="analytics-downloadcontent " ng-if="viewDownloads && viewDownloads !='' ">
-            <div class="container ">
-                <div class="sec-travel-activity masonry-main " masonry preserve-order>
-                    <div class="row ">
-                        <div class="col-md-4 col-sm-6 masonry-brick " ng-repeat="activity in viewDownloads track by $index ">
-                            <div class="viewdownload-card ">
-                                <!--for tourpackage-->
-                                <div class="itinerary-img viewdownload-img" ng-if="activity.type=='toursPackage' " style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; -webkit-background-size: cover;background-size: cover;">
-                                    <div class="theme ">
+    </div>
+    <!-- EMPTY SCREEN END -->
+    <!-- CONTENT -->
+    <div class="analytics-downloadcontent " ng-if="viewDownloads && viewDownloads !='' ">
+        <div class="container ">
+            <div class="sec-travel-activity masonry-main " masonry preserve-order>
+                <div class="row ">
+                    <div class="col-md-4 col-sm-6 masonry-brick " ng-repeat="activity in viewDownloads track by $index ">
+                        <div class="viewdownload-card ">
+                            <!--for tourpackage-->
+                            <div class="itinerary-img viewdownload-img" ng-if="activity.type=='toursPackage' " style="background: url('{{activity.displayPic|uploadpath}}') no-repeat 50% 50%; -webkit-background-size: cover;background-size: cover;">
+                                    <!-- <div class="theme ">
                                         <div class="theme-name ">
                                             <p class=" ">Tour and Packages</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--<img ng-src="{{activity.displayPic|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='toursPackage' " />-->
                                     <div class="viewdownload-imgfoot ">
                                         <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">{{activity.title}}</h4>
+                                        <span class="color-white fz12">Tour and Packages</span>
                                     </div>
                                 </div>
                                 <!--for tourpackage end-->
                                 <!--for quick and detail itinerary-->
                                 <div class="itinerary-img viewdownload-img" ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " style="background: url('{{activity.coverPhoto|uploadpath}}') no-repeat 50% 50%; -webkit-background-size: cover;background-size: cover;">
-                                    <div class="theme ">
+                                    <!-- <div class="theme ">
                                         <div class="theme-name ">
                                             <p class=" "> <span ng-if="activity.type=='quick-itinerary' ">Quick </span> Itinerary</p>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--<img ng-src="{{activity.coverPhoto|uploadpath:350}} " alt=" " class="img-responsive " ng-if="activity.type=='detail-itinerary' || activity.type=='quick-itinerary' " />-->
                                     <div class="viewdownload-imgfoot ">
                                         <h4 class="avenir-heavy font-sz18 m-clear text-capitalize ">
                                             <a class="color-white" ui-sref="userquickitinerary({urlSlug:activity.user.urlSlug,id:activity.urlSlug})" ng-if="activity.type==='detail-itinerary'">{{activity.name}}</a>
                                             <a class="color-white" ui-sref="userdetailitinerary({urlSlug:activity.user.urlSlug,id:activity.urlSlug})" ng-if="activity.type==='quick-itinerary'">{{activity.name}}</a>
                                         </h4>
+                                        <span class="color-white fz12"> <span ng-if="activity.type=='quick-itinerary' ">Quick</span> Itinerary</span>
                                     </div>
                                 </div>
                                 <!--for quick and detail itinerary-->

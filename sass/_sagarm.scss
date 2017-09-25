@@ -913,13 +913,8 @@
   border-radius: 4px;
   box-shadow: 2px 3px 10px #a0a0a0;
   margin: 15px 0;
-  @include transition(all 150ms linear);
   .itinerary-img {
     min-height: 300px;
-  }
-  &:hover {
-    box-shadow: 5px 6px 10px #a0a0a0, 2px 1px 10px #a0a0a0;
-    @include transition(all 150ms linear);
   }
 }
 
@@ -1795,6 +1790,7 @@ q {
     display: inline-block;
     width: 22px;
     vertical-align: middle;
+    margin-right: 5px;
   }
   .theme-name {
     display: inline-block;
@@ -3064,6 +3060,11 @@ q {
   border-radius: 5px;
   margin: 20px 0;
   box-shadow: 2px 3px 10px #a0a0a0;
+  @include transition(all 150ms linear);
+  &:hover {
+    box-shadow : 5px 6px 10px #a0a0a0, 2px 1px 10px #a0a0a0;
+    @include transition(all 150ms linear);
+  }
 }
 
 .traveller-post {

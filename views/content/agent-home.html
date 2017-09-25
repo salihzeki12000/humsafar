@@ -83,18 +83,18 @@
 <div class="side-enquiry" ng-if="!template.isMine">
     <div class="enquiry-sidetab" ng-show="viewEnquiry" ng-class="{'view-enquiry-list' : viewEnquiry ,  ' ' : !viewEnquiry}">
         <div class="enquirytab-head">
-            <h4 class="avenir-roman color-blue">Enquire</h4>
+            <h4 class="avenir-roman color-blue">Enquire <span class="color-pink fz12">(* Indicates Mandatory Fields)</span></h4>
         </div>
-        <div class="user-enquireform">
+        <div class="user-enquireform">            
             <form name="agentEnquiry">
                 <div class="form-group">
                     <div class="enquirytab-cmpny-inputholder">
-                        <input type="text" class="form-control color-blue" placeholder="Travelling To" ng-model="enquire.travellingTo">
+                        <input type="text" class="form-control color-blue" placeholder="Travelling To *" ng-model="enquire.travellingTo">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="enquirytab-cmpny-inputholder">
-                        <input type="text" class="form-control color-blue" placeholder="Name" ng-model="enquire.name" required="">
+                        <input type="text" class="form-control color-blue" placeholder="Name *" ng-model="enquire.name" required="">
                         <div class="enquirytab-input-icon">
                             <i class="fa fa-user color-grey"></i>
                         </div>
@@ -104,7 +104,7 @@
                     <div class="col-md-5 col-sm-5">
                         <div class="form-group">
                             <div class="agentcompany-phone enquirytab-cmpny-inputholder ">
-                                <input type="tel" class="form-control color-blue" placeholder="Contact No" ng-model="enquire.contactNo" ng-intl-tel-input>
+                                <input type="tel" class="form-control color-blue" placeholder="Contact No *" ng-model="enquire.contactNo" ng-intl-tel-input>
                                 <span id="error-msg1" class="hide intel-error" ng-if="!enquire.contactNo">Invalid number</span>
                                 <div class="enquirytab-input-icon" hidden>
                                     <i class="fa fa-phone color-grey"></i>
@@ -115,7 +115,7 @@
                     <div class="col-md-7 col-sm-7">
                         <div class="form-group">
                             <div class="enquirytab-cmpny-inputholder">
-                                <input type="email" class="form-control color-blue" placeholder="Email" ng-model="enquire.email" required>
+                                <input type="email" class="form-control color-blue" placeholder="Email *" ng-model="enquire.email" required>
                                 <div class="enquirytab-input-icon">
                                     <i class="fa fa-envelope color-grey"></i>
                                 </div>

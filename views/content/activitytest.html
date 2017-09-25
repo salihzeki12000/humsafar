@@ -365,7 +365,7 @@
                     <div class="pull-left">
                         <div class="">
                             <span class="inline-block v-mid ml5 mr5" like-sound ng-click="likeUnlikeActivity(activity);">
-                                <a href="" class="fnt-20 relate"><i class="fa color-blue card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
+                                <a href="" class="fnt-20 relate"><i class="fa color-medium-grey card-like-animation " ng-class="activity.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
                                     <span></span>
                                     <audio id="like-play">
                                         <source src="img/tiny1.mp3" type="audio/mp3">
@@ -440,18 +440,18 @@
             <div class="social-likes-reviews" ng-if="!(((activity.likeCount==0)||(activity.likeCount==undefined))&&(activity.commentCount==0))">
                 <div class="clearfix">
                     <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
-                        <span class="color-blue mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-blue mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
-                           <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
-                              <ul>
-                                <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span class="color-blue mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
-                        <img src="img/comments.png" alt="" height="14">
-                        <b class=""> {{activity.commentCount}}</b>
-                        {{activity.commentCount|singularPlural:'Comments'}}
-                    </span>
+                        <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-medium-grey mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
+                         <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
+                          <ul>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                        </ul>
+                    </div>
+                </span>
+                <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
+                    <img src="img/comments.png" alt="" height="14">
+                    <b class=""> {{activity.commentCount}}</b>
+                    {{activity.commentCount|singularPlural:'Comments'}}
+                </span>
                                                     <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
@@ -604,7 +604,7 @@
                     <div class="user-social-item clearfix">
                         <div class="pull-left">
                             <ul>
-                                <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i> <span></span>
+                                <li><a href="" class="relate"><i class="fa color-medium-grey" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i> <span></span>
                                   <audio id="like-play">
                                     <source src="img/tiny1.mp3" type="audio/mp3">
                                     </audio>
@@ -641,7 +641,7 @@
             <div class="social-likes-reviews">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
+                        <span class="color-blue mr10"><i class="fa fa-heart color-medium-greye mr5"></i><b class="mr5">15660</b>Likes</span>
                     </div>
                 </div>
             </div>

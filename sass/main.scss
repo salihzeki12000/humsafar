@@ -532,12 +532,12 @@ textarea {
 }
 
 .color-darkestgrey {
-  color: #484848 !important;
+  color: #484848;
 }
 
-.color-gray {
+/*.color-gray {
   opacity: 0.8;
-}
+}*/
 
 .fz12 {
   font-size: 12px;
@@ -577,6 +577,9 @@ textarea {
 
 .color-iphn-gray{
   color : #868686;
+}
+.color-medium-grey {
+  color: #868686; 
 }
 
 .color-grey {
@@ -6362,16 +6365,15 @@ header {
 // card header end
 
 .card-imgholder {
-  min-height: 550px;
+  height: 350px;
   position: relative;
   overflow: hidden;
   fade-img-loading {
     .blur, .img-show {
-      //width: 100%;
+      width: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
-      //width: 100%;
       @include transform(translate(-50%,-50%));
     }
   }
@@ -6486,6 +6488,13 @@ display:none;
       //margin-right: 3px;
       display: inline-block;
       overflow: hidden;
+    }
+  }
+  .card-imgholder {
+    height: 550px;
+    fade-img-loading {
+      .blur{ width: 100%;  }
+      .img-show { width: auto;  }
     }
   }
 }

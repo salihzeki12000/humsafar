@@ -238,14 +238,14 @@
                     <div class="col-md-4 col-sm-6" ng-repeat="tourcard in tourData track by $index">
                         <div class="agt-itinerarycard agent-tourcard">
                             <div class="itinerary-img" style="background: url('{{tourcard.displayPic|uploadpath}}') 50% 50%; background-size: cover;">
-                                <div class="theme">
+                                <!-- <div class="theme">
                                     <div class="theme-img">
                                         <img ng-src="{{tourcard.typeOfHoliday[0] | kindOfJourney:'white'}}" class="img-responsive" alt="{{tourcard.typeOfHoliday[0]}}">
                                     </div>
                                     <div class="theme-name">
                                         <p>{{tourcard.typeOfHoliday[0]}}</p>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="country-badges">
                                     <div class="country-holder" ng-repeat="tourcountryflag in tourcard.country | limitTo : 3">
                                         <img ng-src="{{tourcountryflag.flag|uploadpath}}" alt="{{tourcountryflag.name}}" class="pointer img-responsive" title="{{tourcountryflag.name}}">
@@ -274,7 +274,8 @@
                                             </p>
                                         </div>
                                         <div class="pull-right">
-                                            <p class="font-sz18 cost-posi">{{tourcard.currency}} {{tourcard.price}}</p>
+                                            <p class="font-sz18 cost-posi m-clear">{{tourcard.currency}} {{tourcard.price}}</p>
+                                            <span class="block text-right">{{tourcard.typeOfHoliday[0]}}</span>
                                         </div>
                                         <div class="tour-btns">
                                             <a ng-href="{{tourcard.pdf|downloadLink:'tours&packages':tourcard._id:tourcard.title}}" class="btn-link btn btn-pink btn-download" ng-if="tourcard.pdf" download>Download</a>
