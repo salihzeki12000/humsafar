@@ -10,10 +10,10 @@
         </div>
         <div class="user-banner-detail full-width text-center">
             <div class="user-tag color-white">
-                <div class="user-imgholder pointer" ng-click="routeProfile();">
+                <div class="user-imgholder pointer" ng-click="routeProfile(itinerary.user.urlSlug);">
                     <img ng-src="{{itinerary.user.profilePicture|uploadpath:115:125:'cover'}}" alt="" class="img-responsive">
                 </div>
-                <h4 class="user-name avenir-roman pointer" ng-click="routeProfile();">{{itinerary.user.firstName}}</h4>
+                <h4 class="user-name avenir-roman pointer" ng-click="routeProfile(itinerary.user.urlSlug);">{{itinerary.user.firstName}}</h4>
             </div>
             <!-- <div class="journey-day">
         <span class="color-white avenir-roman">Jan 2016</span>
@@ -244,7 +244,7 @@
                 <div class="task-holder pull-left" ng-init="getClicked = false;">
                     <ul class="list-inline">
                         <li ng-if="itinerary.status == true">
-                            <a href="" class="relate inline-block" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-blue" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"
+                            <a href="" class="relate inline-block" ng-click="likeUnlikeItinerary(itinerary.likeDone,itinerary._id,itinerary.uniqueId);"><i class="fa like-button-icon color-medium-grey" ng-class="{'fa-heart-o': itinerary.likeDone == null, 'fa-heart like-animate': itinerary.likeDone == true}"
                                 like-sound></i>
                                 <span></span>
                                 <audio id="like-play">
@@ -292,11 +292,11 @@
         <!-- like and review -->
         <div class="like-review-holder pull-left">
             <div class="like-holder" ng-if="itinerary.likeCount>0 || itinerary.commentCount > 0">
-                <p class="m-clear pointer" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-blue mr5"></i><span class="like-count avenir-roman">{{itinerary.likeCount}}</span> <span class="color-blue avenir-roman">Likes</span></p>
+                <p class="m-clear pointer" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-medium-grey mr5"></i><span class="like-count color-medium-grey avenir-roman">{{itinerary.likeCount}}</span> <span class="color-medium-grey avenir-roman">Likes</span></p>
             </div>
             <div class="like-holder" ng-if="itinerary.likeCount>0 || itinerary.commentCount > 0">
-                <p class="m-clear pointer" ng-click="getCommentsData(itinerary);"><img src="img/comments.png" alt="Comments" height="16" class="agent-iti-comment-icon mr5"> <span class="like-count avenir-roman"> {{itinerary.commentCount}} </span>
-                    <span class="color-blue avenir-roman" ng-if="itinerary.commentCount==1"> Comment </span><span class="color-blue avenir-roman" ng-if="itinerary.commentCount> 1|| itinerary.commentCount==0"> Comments </span></p>
+                <p class="m-clear pointer color-medium-grey" ng-click="getCommentsData(itinerary);"><img src="img/comments.png" alt="Comments" height="16" class="agent-iti-comment-icon mr5"> <span class="like-count avenir-roman"> {{itinerary.commentCount}} </span>
+                    <span class="color-medium-grey avenir-roman" ng-if="itinerary.commentCount==1"> Comment </span><span class="color-medium-grey avenir-roman" ng-if="itinerary.commentCount> 1|| itinerary.commentCount==0"> Comments </span></p>
                 </div>
                                 <!-- <div class="review-holder">
                   <p class="avenir-heavy color-blue m-clear">
@@ -439,7 +439,7 @@
                                                 <div class="user-social-item clearfix">
                                                     <div class="pull-left">
                                                         <ul>
-                                                            <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
+                                                            <li><a href="" class="relate"><i class="fa color-medium-grey" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
                                                                 <span></span>
                                                                 <audio id="like-play">
                                                                   <source src="img/tiny1.mp3" type="audio/mp3">
@@ -465,7 +465,7 @@
             <div class="social-likes-reviews avenir-heavy">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <span class="color-blue mr10 like-block"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
+                        <span class="color-medium-grey mr10 like-block"><i class="fa fa-heart color-medium-grey mr5"></i><b class="mr5">{{life.likes}}</b>Likes</span>
                         <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span> -->
                     </div>
                     <div class="pull-right user-card-ballon">
@@ -544,7 +544,7 @@
                         <div class="user-social-item clearfix">
                             <div class="pull-left">
                                 <ul>
-                                    <li><a href="" class="relate"><i class="fa color-blue" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
+                                    <li><a href="" class="relate"><i class="fa color-medium-grey" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" ng-click="" like-sound></i>
                                         <span></span>
                                         <audio id="like-play">
                                           <source src="img/tiny1.mp3" type="audio/mp3">
@@ -582,7 +582,7 @@
               <div class="social-likes-reviews">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <span class="color-blue mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
+                        <span class="color-medium-grey mr10"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">15660</b>Likes</span>
                     </div>
                 </div>
             </div>

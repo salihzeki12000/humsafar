@@ -38,12 +38,12 @@
                             <uib-accordion-group ng-repeat="agtlead in unactionLeads track by $index" is-open="agtlead.open" class="{{agtlead.class}}">
                                 <uib-accordion-heading>
                                     <!--ng-click="leadRead(agtlead,$index,status.open)"-->
-                                    <div class="lead-tab-title color-white avenir-medium clearfix " ng-click="leadRead(agtlead,$index,agtlead.open)">
+                                    <div class="lead-tab-title color-white avenir-medium clearfix " ng-click="leadRead(agtlead)">
                                         <div class="leadtab-profileholder pull-left" ng-if="agtlead.byUser">
                                             <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.name}}" class="img-responsive">
                                         </div>
                                         <div class="leadtab-title">
-                                            <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
+                                            <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}{{agtlead.open}}</p>
                                         </div>
                                         <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                                             <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}} </span></p>
@@ -73,9 +73,9 @@
                                                     <a href="" class="text-capitalize">{{agtlead.travellingTo}}</a>
                                                 </div>
                                                 <!-- <div class="lead-content bord-bot">
-                      <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
-                      <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
-                    </div> -->
+                                                    <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
+                                                    <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="col-md-offset-1 col-md-7">

@@ -10101,14 +10101,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // });
 
     // route to user profile
-    $scope.routeProfile = function () {
+    $scope.routeProfile = function (slug) {
             if ($scope.itinerary.itineraryBy == "TravelAgent") {
                 $state.go('comingsoonpage', {
-                    'url': 'coming-soon'
+                    'urlSlug': slug
                 })
             } else {
                 $state.go('mylife', {
-                    'urlSlug': $itinerary.user.urlSlug
+                    'urlSlug': slug
                 })
             }
         }
@@ -10496,11 +10496,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.routeProfile = function () {
             if ($scope.itinerary.itineraryBy == "TravelAgent") {
                 $state.go('comingsoonpage', {
-                    'url': 'coming-soon'
+                    'urlSlug': slug
                 })
             } else {
                 $state.go('mylife', {
-                    'urlSlug': $itinerary.user.urlSlug
+                    'urlSlug': slug
                 })
             }
         }
@@ -11145,6 +11145,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         $state.go('mainpage');
                     }
                 } else {
+                    if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+                        $.jStorage.set("agentProfile", data.data);
+                    }
                     if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
                         $state.go('agent-login');
                     }
@@ -13032,6 +13035,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.showFilter = true;
     $scope.cityList = [];
+    $scope.itineraryType = [];
     $scope.albumArray = [];
     $scope.filterList = [];
     $scope.agentAlbum = [];
@@ -13161,43 +13165,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         tourCat: "Friends"
     }];
 
-    $scope.itineraryType = [{
-        name: "Adventure",
-        checked: false
-    }, {
-        name: "Business",
-        checked: false
-    }, {
-        name: "Family",
-        checked: false
-    }, {
-        name: "Romance",
-        checked: false
-    }, {
-        name: "Budget",
-        checked: false
-    }, {
-        name: "Luxury",
-        checked: false
-    }, {
-        name: "Religious",
-        checked: false
-    }, {
-        name: "Friends",
-        checked: false
-    }, {
-        name: "Shopping",
-        checked: false
-    }, {
-        name: "Solo",
-        checked: false
-    }, {
-        name: "Festival",
-        checked: false
-    }, {
-        name: "Backpacking",
-        checked: false
-    }];
+    // $scope.itineraryType = [{
+    //     name: "Adventure",
+    //     checked: false
+    // }, {
+    //     name: "Business",
+    //     checked: false
+    // }, {
+    //     name: "Family",
+    //     checked: false
+    // }, {
+    //     name: "Romance",
+    //     checked: false
+    // }, {
+    //     name: "Budget",
+    //     checked: false
+    // }, {
+    //     name: "Luxury",
+    //     checked: false
+    // }, {
+    //     name: "Religious",
+    //     checked: false
+    // }, {
+    //     name: "Friends",
+    //     checked: false
+    // }, {
+    //     name: "Shopping",
+    //     checked: false
+    // }, {
+    //     name: "Solo",
+    //     checked: false
+    // }, {
+    //     name: "Festival",
+    //     checked: false
+    // }, {
+    //     name: "Backpacking",
+    //     checked: false
+    // }];
 
     //Chart
     $scope.chartConfig = {
@@ -13355,13 +13359,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // CHANGE COVER PHOTO END
 
-    // GET AVERAGE AGENT RATING
-    $scope.getAvgRating = function (activeSlug) {
-        Agent.getAvgRating(activeSlug, function (data) {
-            $scope.avgRating = data.data;
-        });
-    };
-    // GET AVERAGE AGENT RATING END
     // TOUR FORM SAVE
     // $scope.tour.currency = [];
     $scope.selectCategory = function (obj) {
@@ -13670,12 +13667,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // });
     // on load modal end
 
-    $scope.leadRead = function (currentLead, currentIndex, open) {
-        console.log(currentIndex, open);
-        currentLead.class = 'lead-read'
-        Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
-    };
-
     // GET AGENT ITINERARY
     // FILTER ITINERARY DESTINATION
     // $scope.getItinerayCity = function (formData) {
@@ -13758,7 +13749,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.agentItineraryType = [];
     };
 
-
     $scope.getAgentItinerary = function (activeSlug) {
         scroll.scrollBusy = false;
         scroll.stopCallingApi = false;
@@ -13785,6 +13775,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     scroll.scrollBusy = false;
                     console.log(data, "iti data scroll");
                     $scope.isopenfilter = false;
+                    _.map(data.data, function (each) {
+                        _.map(each.itineraryType, function (eachType) {
+                            $scope.itineraryType.push({
+                                name: eachType,
+                                checked: false
+                            });
+                        });
+                    });
+                    $scope.itineraryType = _.uniqBy($scope.itineraryType, "name");
                     $scope.cityList = _.uniqBy(data.city, "name");
                     $scope.cityList = _.map($scope.cityList, function (cityListData) {
                         var index = _.findIndex($scope.agentCityFilter, function (each) {
@@ -13840,14 +13839,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         photoObj.pagenumber = 0;
         photoObj.album = $scope.albumArray;
         console.log('get photovideo');
-        $scope.start = function () {
-            $scope.stop();
-            promise = $interval($scope.getMoreAgentPhotos(), 200)
-        };
-        $scope.stop = function () {
-            $interval.cancel(promise);
-        };
-        $scope.start();
+        // $scope.start = function () {
+        //     $scope.stop();
+        //     promise = $interval($scope.getMoreAgentPhotos(), 200)
+        // };
+        // $scope.stop = function () {
+        //     $interval.cancel(promise);
+        // };
+        // $scope.start();
+        $scope.getMoreAgentPhotos();
     };
 
     $scope.getMoreAgentPhotos = function () {
@@ -13901,10 +13901,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 });
             }
         }
-        $scope.stop();
-        $scope.$on('$destroy', function () {
-            $scope.stop();
-        });
+        // $scope.stop();
+        // $scope.$on('$destroy', function () {
+        //     $scope.stop();
+        // });
     };
 
     $scope.filterList = _.each($scope.filterList, function (n) {
@@ -14226,7 +14226,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ANALYTICS LEADS HIGHCHARTS
     // ANALYTICS LEADS HIGHCHARTS END
 
+    // GET AVERAGE AGENT RATING
+    $scope.getAvgRating = function (activeSlug) {
+        Agent.getAvgRating(activeSlug, function (data) {
+            console.log(data.data);
+            $scope.avgRating = data.data;
+        });
+    };
+    // GET AVERAGE AGENT RATING END
     // GET LEADS
+    $scope.leadRead = function (currentLead) {
+        currentLead.class = 'lead-read';
+        if (currentLead.open) {
+            _.remove($scope.unActioned, function (each) {
+                console.log(each._id);
+                console.log(currentLead._id);
+                return each._id === currentLead._id;
+            });
+        } else {
+            Agent.changeStatus(currentLead, $scope.getAvgRating($scope.activeUrlSlug));
+        }
+    };
+
     $scope.getLeads = function (type) {
         scroll.scrollBusy = false;
         scroll.stopCallingApi = false;
@@ -14250,6 +14271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 switch (formLeadData.type) {
                     case 'unActioned':
                         console.log("in unactionLeads");
+                        $scope.getAvgRating($scope.activeUrlSlug)
                         Agent.getAllLeads(formLeadData, function (data) {
                             scroll.scrollBusy = false;
                             console.log(data, "iti data scroll");
@@ -14273,6 +14295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         break;
                     case 'actioned':
                         console.log("in actionLeads");
+                        $scope.getAvgRating($scope.activeUrlSlug)
                         Agent.getAllLeads(formLeadData, function (data) {
                             scroll.scrollBusy = false;
                             console.log(data, "iti data scroll");
@@ -14296,6 +14319,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         break;
                     default:
                         console.log("in default");
+                        $scope.getAvgRating($scope.activeUrlSlug)
                         Agent.getAllLeads(formLeadData, function (data) {
                             scroll.scrollBusy = false;
                             console.log(data, "iti data scroll");
@@ -14555,7 +14579,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // tab change
 
     $scope.getTab = function (view) {
-        $scope.agthome.innerView = allagthome[view];
         var url = "itineraries";
         var active = "";
         console.log(view);
@@ -14567,6 +14590,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.agenthomeItinerary = true;
                 $scope.initialiseArray();
                 console.log("case iti");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 1:
                 $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
@@ -14576,6 +14600,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
                 console.log("case tour");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 2:
                 $scope.getPhotoVideo($scope.activeUrlSlug);
@@ -14585,6 +14610,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
                 console.log("case pic");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 3:
                 $scope.getAgentData('testimonials&reviews', $scope.activeUrlSlug);
@@ -14595,6 +14621,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.agentScrollDown();
                 $scope.getAvgRating($scope.activeUrlSlug);
                 console.log("case test");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 4:
                 $scope.getTravelActivity($scope.activeUrlSlug);
@@ -14604,6 +14631,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
                 console.log("case travel");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 5:
                 $scope.getAvgRating($scope.activeUrlSlug);
@@ -14614,6 +14642,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
                 console.log("case lead");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 6:
                 url = "analytics";
@@ -14624,6 +14653,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.profileview = true;
                 $scope.getProfileView();
                 console.log("case ana");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             case 7:
                 url = "about-us";
@@ -14631,7 +14661,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.agenthomeItinerary = false;
                 $scope.initialiseArray();
                 $scope.agentScrollDown();
-                console.log("case ana");
+                $scope.userData = $.jStorage.get("agentProfile");
+                $scope.agthome.innerView = allagthome[view];
                 break;
             default:
                 $scope.getAgentData('tours&packages', $scope.activeUrlSlug);
@@ -14640,6 +14671,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $scope.agenthomeItinerary = true;
                 $scope.initialiseArray();
                 console.log("case def");
+                $scope.agthome.innerView = allagthome[view];
                 break;
         }
         console.log("userdata", $scope.userData.urlSlug);
@@ -14896,7 +14928,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     $scope.agthomeoptions.active = "agthome-photovideos";
                     $scope.initialiseArray();
                     $scope.agentScrollDown();
-
                     console.log("switch pic");
                     break;
                 case "testimonials-and-reviews":
@@ -14967,6 +14998,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             if (data.value) {
                 if (data.data.type === "TravelAgent") {
                     $scope.userData = data.data;
+                    $.jStorage.set("agentProfile", data.data);
                     if ($scope.userData.coverPhoto) {
                         console.log('test');
                         $scope.coverPhotoObj = {
