@@ -11145,7 +11145,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                         $state.go('mainpage');
                     }
                 } else {
-                    $.jStorage.set("agentProfile", data.data);
+                    if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+                        $.jStorage.set("agentProfile", data.data);
+                    }
                     if ($scope.userData && $scope.userData.alreadyLoggedIn == false) {
                         $state.go('agent-login');
                     }
