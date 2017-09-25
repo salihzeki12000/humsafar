@@ -13847,6 +13847,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //     $interval.cancel(promise);
         // };
         // $scope.start();
+        $scope.getMoreAgentPhotos();
     };
 
     $scope.getMoreAgentPhotos = function () {
