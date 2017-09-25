@@ -275,6 +275,9 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .trip-travellers-card{
+    margin: 5px 0 50px 0;
+  }
   .ongo-card {
     margin-top: -25px !important;
   }
@@ -722,6 +725,17 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  .trip-travellers-card{
+    width: 100%;
+    margin-top: 0;
+    padding: 0px;
+    zoom: 1;
+  }rip-travellers-card {
+    margin-top: 0;
+  }
+  .journey-tab-view > .started-journey-card {
+    margin-bottom: 25px;
+  }
   .travelled-imgholder {
     min-height: 100vw;
     max-height: 350px;
@@ -2045,6 +2059,22 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .travellers-img-ongo {
+    width: 60px;
+    height: 60px;
+  }
+  .trip-user-imgholder {
+    width: 25%;
+    h4 {
+      font-weight: 500;
+    }
+  }
+  .row-counts {
+    padding: 0px 0px;
+    button {
+      margin-top: 4px;
+    }
+  }
   .search-mobile {
     margin-top: 10px;
   }
@@ -2566,7 +2596,7 @@
   }
   .related-imgslider {
     .flexslider .slides>li {
-      width: 57px !important;
+      width: 100px !important;
     }
   }
   .user-social-item {

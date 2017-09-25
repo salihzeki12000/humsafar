@@ -1189,6 +1189,8 @@ ongojourney.filter('formatDate', function () {
       var returnVal = moment(input).format('hh:mm a');
     } else if (type == 'year') {
       var returnVal = moment(input).format('YYYY');
+    } else if(type == 'shortDate'){
+      var returnVal = moment(input).format('D MMM');
     }
     return returnVal;
   };

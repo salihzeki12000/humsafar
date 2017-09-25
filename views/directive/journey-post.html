@@ -15,11 +15,11 @@
             <h5 class="font-bold color-username pointer m-clear" ng-if="ongo.user" ui-sref="mylife({'urlSlug':ongo.user.urlSlug})">{{ongo.user.name}}</h5>
             <!-- <p class="post mb5" ng-bind-html="ongo.postString | safe" ng-if="!(ongo.buddies && ongo.buddies.length==0 && (ongo.thoughts=='' || ongo.thoughts==null || ongo.thoughts==undefined))"></p> -->
             <p class="journey-date avenir-heavy m-clear">
-            <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><span>-</span>
+            <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><span></span>|
             <!-- <i class="fa fa-calendar mr5 ml5"></i> -->
-            <span class="mr5 ml5">{{ongo.UTCModified|formatDate:'date'}}</span> |
+            <span class="mr5 ml5">{{ongo.UTCModified|formatDate:'shortDate'}}</span>
             <!-- <i class="fa fa-clock-o mr5 ml5"></i> -->
-            <span class="ml5">{{ongo.UTCModified|formatDate:'time'}}</span>
+            <!--<span class="ml5">{{ongo.UTCModified|formatDate:'time'}}</span>-->
             </p>
           </div>
         </div>
@@ -97,7 +97,8 @@
         </div>
       </div>
       </div>
-      <div ng-if="viewportWidth<=480" class="related-imgslider">
+      <div ng-if="viewportWidth<=480">
+        <div class="related-imgslider">
         <!-- related img if less then 5-->
         <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=3)">
           <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
@@ -110,7 +111,7 @@
         <!-- related img end if less then 5-->
         <div ng-if="ongo.photosVideos.length>3">
         <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120" class="related-slide carousel flex-contain" animation="true"
-          item-margin="42 " control-nav="false" animationLoop="false" slideshow="false">
+          item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
           <!-- put/remove item width 99 if needed -->
           <li>
             <div class="related-ongo-slider">
@@ -122,6 +123,7 @@
             </div>
           </li>
         </flex-slider>
+        </div>
         </div>
       </div>
 

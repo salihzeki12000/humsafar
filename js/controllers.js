@@ -1333,7 +1333,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {}
         console.log(centers);
         initMap();
-
+        console.log('yo ',$scope.journey);
     };
 
     OnGoJourney.getOneJourney({

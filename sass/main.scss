@@ -704,6 +704,11 @@ textarea {
   @include button-variant( $brand-blue, transparent, $brand-blue);
 }
 
+.btn-overlay-black {
+  background-color: rgba(0,0,0,0.5);
+  color : #fff;
+}
+
 .btn.disabled,
 .btn[disabled],
 fieldset[disabled] .btn {
@@ -2249,6 +2254,7 @@ header {
   // }
 }
 .journey-overview {
+  width: 100%;
   padding: 0px 5px;
   position: absolute;
   bottom: 5px;
@@ -5860,6 +5866,7 @@ header {
 }
 
 .journey-info-strip {
+  //display: none;
   width: 100%;
   padding: 10px 30px 7px;
   position: fixed;
@@ -6011,6 +6018,18 @@ header {
   overflow: hidden;
 }
 
+.travellers-img-ongo {
+  width: 80px;
+  height: 80px;
+  //border: 2px solid #868686;
+  border-radius: 20px;
+  background-color: $brand-light-grey;
+  box-shadow: 0 2px 3px #ccc;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
 .edit-journey,
 .following {
   margin-top: 7px;
@@ -6119,7 +6138,15 @@ header {
   }
 }
 // card
-.ongo-card-holder {
+.trip-travellers-card {
+  width: 550px;
+  margin: 5px 0 30px 0;
+  position: relative;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.ongo-card-holder
+ {
   width: 550px;
   margin-top: 80px;
   // margin-left: 30px;
@@ -6161,12 +6188,19 @@ header {
   }
 }
 // card header
-.ongo-card-header {
+.ongo-card-header,
+.trip-travellers-card-header{
   padding: 10px;
 }
 
 .card-user-imgholder {
   width: 8%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.trip-user-imgholder {
+  width: 20%;
   display: inline-block;
   vertical-align: top;
 }
@@ -6362,7 +6396,7 @@ header {
 // card header end
 
 .card-imgholder {
-  min-height: 550px;
+  min-height: 350px;
   position: relative;
   overflow: hidden;
   fade-img-loading {
@@ -6488,6 +6522,11 @@ display:none;
       overflow: hidden;
     }
   }
+}
+
+.trip-travellers-card-main{
+  padding: 10px;
+  text-align: center;
 }
 
 .video-ongo-journey {
@@ -6680,7 +6719,7 @@ display:none;
 
   .journey-change {
     display: inline-block;
-    min-width: 120px;
+    min-width: 210px;
     padding: 15px 10px;
     border-radius: 6px;
     @include transform(rotate(-2deg));
@@ -6691,7 +6730,7 @@ display:none;
   h4 {
     margin: 0;
     font-size: 18px;
-    text-shadow: 2px 2px 2px #020202;
+    //text-shadow: 2px 2px 2px #020202;
   }
 
   p {
@@ -6877,7 +6916,7 @@ display:none;
     overflow: hidden;
 
     img {
-      width: 100%;
+      //width: 100%;
     }
   }
 
@@ -12967,4 +13006,10 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .comment-edit{
   height: 18px;
+}
+.row-counts {
+  padding: 0 10px;
+}
+.row-counts button:hover {
+  color : #fff;
 }

@@ -19,7 +19,8 @@
                 <div class="user-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
                   <img src="{{journey.user.profilePicture|uploadpath:35:37:'cover'}}" alt="" class="img-responsive">
                 </div>
-                <h4 class="avenir-heavy pointer color-white" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">{{journey.user.name}}</h4>
+                <h4 class="avenir-heavy pointer color-white" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                  {{journey.user.name}}</h4>
               </div>
             </div>
             <!-- own journey end -->
@@ -70,7 +71,9 @@
             </div>
             <!-- trip list end-->
             <div class="btn-summary">
-              <button class="btn btn-white-outline btn-trip avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">Trip Summary</button>
+              <button class="btn btn-white-outline btn-trip avenir-heavy" ui-sref="tripsummary({id:journey.urlSlug})">
+                Trip Summary
+              </button>
             </div>
           </div>
           <div class="pull-right">
@@ -79,17 +82,22 @@
               <span class="color-white avenir-heavy" ng-click="editOption(ongo.shareJrny);">Share</span>
               <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
                 <ul>
-                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
-                      class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
-                      class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
-                      class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"
+                         target="_blank"
+                         class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"
+                         target="_blank"
+                         class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"
+                         target="_blank"
+                         class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
                   <li>
-                    <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
+                    <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"
+                       class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
                   </li>
-                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank"
-                      class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"
+                         target="_blank"
+                         class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
                   <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
                 </ul>
               </div>
@@ -101,9 +109,11 @@
               <span class="color-white pointer" ng-click="editOption(ongo.editThisJrny);">Edit This Journey</span>
               <div class="edit-journey-dropdown" ng-show="ongo.editThisJrny.backgroundClick">
                 <ul>
-                  <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a></li>
+                  <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a>
+                  </li>
                   <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>
-                  <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries Visited</a></li>
+                  <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries
+                    Visited</a></li>
                   <li ng-if="journey.onGoing == false">
                     <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
                   </li>
@@ -147,47 +157,121 @@
                     <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
                 </div>
                 <!-- header started end-->
-                <div class="journey-imgholder ">
+                <div class="journey-imgholder">
                   <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
                   <!--- google image --->
-                </div>
-                <div class="travelling-journey-type">
-                  <div class="clearfix">
-                    <div class="pull-left">
-                      <ul>
-                        <li ng-repeat="list in journey.kindOfJourney|limitTo:3">
-                          <a href="">
-                            <img ng-src="{{list|kindOfJourney:'pink'}}" alt="" height="15">
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="pull-right relate full-width">
-                      <div class="journey-travelling-buddies">
-                        <div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3 track by $index">
-                          <img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive" ui-sref="mylife({'urlSlug':img.urlSlug})">
+                  <div class="journey-overview">
+                    <div class="row row-counts">
+                      <div class="col-xs-8">
+                        <ul>
+                          <li>
+                            <div class="symbol-up">
+                              <img src="img/camera.png" alt="Camera" width="15" class="mr5">
+                              <span class="inline-block v-mid count-reach">{{journey.count.photos}}</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="symbol-up">
+                              <img src="img/video.png" alt="Video" width="15" class="mr5">
+                              <span class="inline-block v-mid count-reach">{{journey.count.videos}}</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="symbol-up">
+                              <img src="img/location.png" alt="Location" width="15" class="mr5">
+                              <span class="inline-block v-mid count-reach">{{journey.count.checkIns}}</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="symbol-up">
+                              <img src="img/thought-white.png" alt="Thought" width="15" class="mr5">
+                              <span class="inline-block v-mid count-reach">{{journey.count.thoughts}}</span>
+                            </div>
+                          </li>
+                        </ul>
+
+
+                      </div>
+                      <div class="col-xs-4">
+                        <div class="btn-summary pull-right">
+                          <button class="btn btn-overlay-black btn-trip avenir-heavy"
+                                  ui-sref="tripsummary({id:journey.urlSlug})">Trip Summary
+                          </button>
                         </div>
-                        <span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <!--<div class="travelling-journey-type">-->
+                <!--<div class="clearfix">-->
+                <!--<div class="pull-left">-->
+                <!--<ul>-->
+                <!--<li ng-repeat="list in journey.kindOfJourney|limitTo:3">-->
+                <!--<a href="">-->
+                <!--<img ng-src="{{list|kindOfJourney:'pink'}}" alt="" height="15">-->
+                <!--</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</div>-->
+                <!--<div class="pull-right relate full-width">-->
+                <!--<div class="journey-travelling-buddies">-->
+                <!--<div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3 track by $index">-->
+                <!--<img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive" ui-sref="mylife({'urlSlug':img.urlSlug})">-->
+                <!--</div>-->
+                <!--<span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
                 <!--<div class="journey-with">-->
-                  <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
-                    <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
-                  <!--<p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>-->
+                <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
+                  <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
+                <!--<p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>-->
                 <!--</div>-->
               </div>
             </div>
             <!-- journey started end-->
+            <!--trip traveller buddies-->
+            <div class="dash-up"></div>
+            <div class="trip-travellers-card">
+              <div class="trip-travellers-card-header">
+                <div class="clearfix gray-line-bottom">
+                  <h4 class="font-bold color-username pointer m-clear" style="text-align: center">Trip Travellers ({{journey.buddies.length+1}})</h4>
+                </div>
+              </div>
+              <div class="trip-travellers-card-main">
+                <div class="trip-user-imgholder">
+                  <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                    <img src="{{journey.user.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+                  </div>
+                  <h5 class="bold" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                    {{journey.user.name}}
+                  </h5>
+                </div>
+                <span ng-if="journey.buddies.length>0">
+                  <div class="trip-user-imgholder" ng-repeat="buddy in journey.buddies track by $index">
+                    <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+                      <img src="{{buddy.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+                    </div>
+                    <h5 class="bold" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+                      {{buddy.name}}
+                    </h5>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <!--trip traveller buddies end-->
           </div>
           <!-- journey tab view end -->
           <!-- card-ongo-main -->
           <div class="relate">
             <div class="dot-line"></div>
             <div class="card-relate-holder functionmap" ng-if="journey.post">
-              <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
-                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template" ng-repeat="ongo in journey.post"></journey-post>
+              <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey
+                            get-comments-data="getCommentsData(post)"
+                            close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template"
+                            ng-repeat="ongo in journey.post"></journey-post>
               <!-- ongo journey-end -->
               <div class="ongo-journey-end" ng-if="journey.onGoing==false">
                 <div class="journey-end text-center">
@@ -208,8 +292,10 @@
             </div>
           </div>
           <div class="" ng-if="postScrollData.viewList">
-            <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
-              list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+            <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
+                                  view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                                  list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
+                                  show-like-show='showLikeShow'></comment-like-section>
           </div>
         </div>
       </div>
