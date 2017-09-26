@@ -142,9 +142,20 @@
             <div masonry preserve-order reload-on-resize class="masonry-main">
                 <div class="masonry-brick" ng-repeat="photo in agentAlbum track by $index">
                     <div class="agent-photogallery relate pointer" ng-click="getPhotosCommentData(photo._id,$index,agentAlbum.length,agentAlbum);">
-                        <span ng-if="photo.type=='video'" class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
+                        <!-- photo  -->
+                        <div class="image-view" ng-if="photo.type=='photo'">
+                            <fade-img-loading blur="{{photo.name|uploadpath:10:10:'cover'}}" image="{{photo.name|uploadpath:'275'}}"></fade-img-loading>
+                        </div>
+                        <!-- photo  end-->
+                        <!-- video -->
+                        <div class="video-view" ng-if="photo.type=='video'">
+                            <span class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
+                            <fade-img-loading blur="{{photo.thumbnail|uploadpath:10:10:'cover'}}" image="{{photo.thumbnail|uploadpath:'275'}}"></fade-img-loading>
+                        </div>
+                        <!-- video end-->
+                        <!-- <span ng-if="photo.type=='video'" class="get-center moment-videoicon"><i class="fa fa-play-circle fa-2x color-white"></i></span>
                         <img ng-if="photo.type=='photo'" ng-src="{{photo.name|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
-                        <img ng-if="photo.type=='video'" ng-src="{{photo.thumbnail|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive">
+                        <img ng-if="photo.type=='video'" ng-src="{{photo.thumbnail|uploadpath:'275'}}" alt="{{photo.album}} | TraveLibro" class="img-responsive"> -->
                     </div>
                 </div>
             </div>

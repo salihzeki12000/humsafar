@@ -1100,6 +1100,9 @@
   border-radius: 4px;
   margin: 5px 5px 5px 5px;
   background-color: #fff;
+  .image-view, .video-view {
+    overflow: hidden;
+  }
 }
 
 .testimonial-holder {
