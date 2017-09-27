@@ -14,7 +14,7 @@
             <!-- <p class="post mb5" ng-bind-html="ongo.postString | safe" ng-if="!(ongo.buddies && ongo.buddies.length==0 && (ongo.thoughts=='' || ongo.thoughts==null || ongo.thoughts==undefined))"></p> -->
             <p class="post mb5" ng-bind-html="ongo.postString | safe"></p>
              <p class="journey-date avenir-heavy m-clear">
-            <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><span>-</span>
+              <span class="mr5 day-journey">Day {{ongo.UTCModified|dateDifference: json.startTime}}</span><span>-</span>
             <!-- <i class="fa fa-calendar mr5 ml5"></i> -->
             <span class="mr5 ml5">{{ongo.UTCModified|formatDate:'date'}}</span> |
             <!-- <i class="fa fa-clock-o mr5 ml5"></i> -->

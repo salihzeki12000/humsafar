@@ -9716,7 +9716,7 @@ var ref = "";
 
     $scope.getPastJourney = function(){
         var formData = {
-            'urlSlug': 'greece-6'
+            'urlSlug': 'your-erith-story'
         }
         pastJourney.getPastJourney(formData, function(pastStory){
           $scope.pastJourneyArray = pastStory;

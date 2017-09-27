@@ -28,7 +28,7 @@
 								</div>
 							</div>
 							<div class="pull-right">
-								<div class="journeys-dayscount color-dark-blue avenir-medium"><span class="days-count">10</span>Days</div>
+								<div class="journeys-dayscount color-dark-blue avenir-medium text-center"><span class="days-count">{{pastJourneyArray.endTime|dateDifference: pastJourneyArray.startTime}}</span>Days</div>
 							</div>
 						</div>
 					</div>	
@@ -76,7 +76,7 @@
 			<!-- destination visited end-->
 			<!-- past journey card -->
 			<div class="past-journey-card">
-				<past-journey-card></past-journey-card>
+				<past-journey-card json="pastJourneyArray" post="pastStory" ng-repeat="pastStory in pastJourneyArray.post track by $index"></past-journey-card>
 			</div>
 			<!-- past journey card end-->
 			<!-- past story main end -->
