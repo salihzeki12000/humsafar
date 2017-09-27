@@ -3,7 +3,7 @@
 
         <!-- ng-style="{ 'background-image' : (userData.company.coverPhoto != '') ? 'url(\'{{userData.company.coverPhoto|uploadpath}}\')' : 'url(\'../img/agent/bg-user.jpg\')' }" -->
         <div class="img-holder-agent bg-agent-home-img" ng-style="coverPhotoObj">
-           <div class="loading-cover-agent" ng-if="template.uploadLoader">
+         <div class="loading-cover-agent" ng-if="template.uploadLoader">
             <img src="img/page.svg" alt="Loading ..." width="30" class="get-center">
         </div>
         <div class="agt-card-posi">
@@ -83,13 +83,13 @@
 <div class="side-enquiry" ng-if="!template.isMine">
     <div class="enquiry-sidetab" ng-show="viewEnquiry" ng-class="{'view-enquiry-list' : viewEnquiry ,  ' ' : !viewEnquiry}">
         <div class="enquirytab-head">
-            <h4 class="avenir-roman color-blue">Enquire <span class="color-pink fz12">(* Indicates Mandatory Fields)</span></h4>
+            <h4 class="avenir-roman color-blue">Enquire <span class="color-pink fz12">* Indicates Mandatory Fields</span></h4>
         </div>
         <div class="user-enquireform">            
             <form name="agentEnquiry">
                 <div class="form-group">
                     <div class="enquirytab-cmpny-inputholder">
-                        <input type="text" class="form-control color-blue" placeholder="Travelling To *" ng-model="enquire.travellingTo">
+                        <input type="text" class="form-control color-blue" placeholder="Travelling To *" ng-model="enquire.travellingTo" required="">
                     </div>
                 </div>
                 <div class="form-group">
@@ -104,7 +104,7 @@
                     <div class="col-md-5 col-sm-5">
                         <div class="form-group">
                             <div class="agentcompany-phone enquirytab-cmpny-inputholder ">
-                                <input type="tel" class="form-control color-blue" placeholder="Contact No *" ng-model="enquire.contactNo" ng-intl-tel-input>
+                                <input type="tel" class="form-control color-blue" placeholder="Contact No " ng-model="enquire.contactNo" ng-intl-tel-input>
                                 <span id="error-msg1" class="hide intel-error" ng-if="!enquire.contactNo">Invalid number</span>
                                 <div class="enquirytab-input-icon" hidden>
                                     <i class="fa fa-phone color-grey"></i>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="form-group">
                     <div class="enquirytab-cmpny-inputholder">
-                        <textarea class="form-control color-blue" placeholder="Further Instructions" ng-model="enquire.instructions"></textarea>
+                        <textarea class="form-control color-blue" placeholder="Further Instructions *" ng-model="enquire.instructions" required=""></textarea>
                     </div>
                 </div>
                 <div class="enquirebutton">
