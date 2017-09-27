@@ -13799,14 +13799,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     if (data.data.length == 0) {
                         scroll.stopCallingApi = true;
                         if (itineraryObj.pagenumber === 1 && itineraryObj.city.length === 0 && itineraryObj.itineraryType.length === 0) {
+                            console.log("in if");
                             $scope.agentItinerary = [];
                             $scope.showFilter = false;
                         } else if (itineraryObj.city.length > 0 || itineraryObj.itineraryType.length > 0) {
+                            console.log("in else if");
                             $scope.showFilter = true;
                             if (itineraryObj.pagenumber === 1) {
                                 $scope.agentItinerary = [];
                             }
                         } else {
+                            console.log("in else");
                             $scope.showFilter = true;
                             // $scope.agentItinerary = [];
                         }
@@ -14047,6 +14050,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         delModal.close();
         $scope.status = {};
     };
+    var deleteModal = "";
+    $scope.deletePop = function (id) {
+        $scope.itineraryId = id;
+        deleteModal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/delete-itinerary.html",
+            scope: $scope
+        });
+    }
+    $scope.deleteItinerary = function () {
+        NavigationService.deleteItinerary($scope.itineraryId, function (data) {
+            if (data.value) {
+                $scope.getAgentItinerary($scope.activeUrlSlug);
+            }
+            deleteModal.close();
+            $scope.itineraryId = "";
+        })
+    };
     $scope.editOption = function (each) {
         $timeout(function () {
             each.backgroundClick = true;
@@ -14089,6 +14110,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 scroll.scrollBusy = false;
                                 console.log(data, "iti data scroll");
                                 if (data.data.length == 0) {
+                                    $scope.tourData = [];
                                     scroll.stopCallingApi = true;
                                 } else {
                                     if (formAgentData.pagenumber == 1) {
@@ -14113,6 +14135,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 scroll.scrollBusy = false;
                                 console.log(data, "iti data scroll");
                                 if (data.data.length == 0) {
+                                    $scope.reviewData = [];
                                     scroll.stopCallingApi = true;
                                 } else {
                                     if (formAgentData.pagenumber == 1) {
@@ -14136,6 +14159,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                                 scroll.scrollBusy = false;
                                 console.log(data, "iti data scroll");
                                 if (data.data.length == 0) {
+                                    $scope.tourData = [];
                                     scroll.stopCallingApi = true;
                                 } else {
                                     if (formAgentData.pagenumber == 1) {
