@@ -1333,7 +1333,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {}
         console.log(centers);
         initMap();
-        console.log('yo ',$scope.journey);
+        console.log('yo ', $scope.journey);
     };
 
     OnGoJourney.getOneJourney({
@@ -14730,10 +14730,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // ENQUIRY FORM FILL
     $scope.sendEnquiry = function (enquire) {
+        if ($.jStorage.get("profile") && $.jStorage.get("profile")._id) {
+            enquire.name = $.jStorage.get("profile").name;
+            enquire.email = $.jStorage.get("profile").email;
+        }
         Agent.setLeads(enquire, function (data) {
             console.log(data, 'enquire response');
             if (data.value == true) {
                 $scope.enquire = {};
+                $scope.enquire.urlSlug = $scope.activeUrlSlug;
                 $scope.showEnquiry();
             } else {
                 console.log('enquiry ma error che!');
