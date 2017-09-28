@@ -43,7 +43,7 @@
                                             <img ng-src="{{agtlead.byUser.profilePicture | uploadpath}}" alt="{{agtlead.name}}" class="img-responsive">
                                         </div>
                                         <div class="leadtab-title">
-                                            <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}{{agtlead.open}}</p>
+                                            <p class="color-pink avenir-heavy text-capitalize">{{agtlead.name}}</p>
                                         </div>
                                         <div class="leadtab-msgdiv color-white" ng-class="{'disp-none': agtlead.open, 'inline-block': !agtlead.open}">
                                             <p class="leadtab-msg"><span class="ledadmsg-country text-capitalize">{{agtlead.travellingTo}} </span><span class="ledadmsg-comment">- {{agtlead.instructions}} </span></p>
@@ -59,16 +59,16 @@
                                         <div class="col-md-4">
                                             <div class="lead-details color-white">
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
+                                                    <label class="color-cyan mr5" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact : </label>
                                                     <a href="tel">{{agtlead.contactNo}}</a>
                                                 </div>
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
+                                                    <label class="color-cyan mr5" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email : </label>
                                                     <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.email}}</a>
                                                     <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
                                                 </div>
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan text-capitalize" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
+                                                    <label class="color-cyan text-capitalize mr5" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination : </label>
                                                     <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
                                                     <a href="" class="text-capitalize">{{agtlead.travellingTo}}</a>
                                                 </div>
@@ -128,48 +128,48 @@
                                         <div class="col-md-4">
                                             <div class="lead-details color-blue">
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact: </label>
+                                                    <label class="color-cyan mr5" for=""><i class="fa fa-phone" aria-hidden="true"></i> Contact : </label>
                                                     <a href="tel"> {{agtlead.contactNo}} </a>
                                                     <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
                                                 </div>
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email: </label>
+                                                    <label class="color-cyan mr5" for=""><i class="fa fa-envelope" aria-hidden="true"></i> Email : </label>
                                                     <a href="mailto:{{agtlead.leadMail}}" class="link-underline">{{agtlead.email}}</a>
                                                     <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
                                                 </div>
                                                 <div class="lead-content bord-bot">
-                                                    <label class="color-cyan text-capitalize" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination: </label>
+                                                    <label class="color-cyan text-capitalize mr5" for=""><i class="fa fa-plane" aria-hidden="true"></i> Destination : </label>
                                                     <a href="" class="text-capitalize">{{agtlead.travellingTo}}</a>
                                                 </div>
                                                 <!-- <div class="lead-content bord-bot">
                       <label class="color-cyan" for=""><i class="fa fa-thumb-tack" aria-hidden="true"></i> Itinerary: </label>
                       <a href="" class="link-underline">{{agtlead.leadItinerary}}</a>
-                    </div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-md-offset-1 col-md-7">
-                                            <div class="lead-commentbox color-white">
-                                                <div class="lead-content">
-                                                    <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
-                                                    <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
-                                                    <p class="">{{agtlead.instructions}} </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </uib-accordion-group>
-                        </uib-accordion>
-                    </div>
-                    <!-- actioned ACCORDION END -->
+                  </div> -->
+              </div>
+          </div>
+          <div class="col-md-offset-1 col-md-7">
+            <div class="lead-commentbox color-white">
+                <div class="lead-content">
+                    <label class="color-cyan" for=""><i class="fa fa-comments" aria-hidden="true"></i> Comment: </label>
+                    <!-- <button class="btn btn-pink-outline"><i class="fa fa-lock" aria-hidden="true"></i> Upgrade</button> -->
+                    <p class="">{{agtlead.instructions}} </p>
                 </div>
-                <!-- ACTIONED ACCCORDION SECTION END -->
             </div>
         </div>
     </div>
-    <!-- PAGINATION LOADER -->
-    <div class="" ng-if="template.paginationLoader">
-        <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
-    </div>
-    <!-- PAGINATION LOADER END -->
+</div>
+</uib-accordion-group>
+</uib-accordion>
+</div>
+<!-- actioned ACCORDION END -->
+</div>
+<!-- ACTIONED ACCCORDION SECTION END -->
+</div>
+</div>
+</div>
+<!-- PAGINATION LOADER -->
+<div class="" ng-if="template.paginationLoader">
+    <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
+</div>
+<!-- PAGINATION LOADER END -->
 </div>

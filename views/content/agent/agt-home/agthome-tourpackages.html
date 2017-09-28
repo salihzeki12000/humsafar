@@ -145,16 +145,17 @@
                                         <!-- BOOKING URL -->
                                         <div class="form-group">
                                             <div class="a relate">
-                                                <input type="text" class="form-control color-white" placeholder="Your Website Booking Link URL" ng-model="tour.bookingUrl">
+                                                <input type="text" class="form-control color-white" placeholder="Your Website Booking Link URL" ng-model="tour.bookingUrl" ng-required="!tour.pdf">
                                             </div>
                                         </div>
                                         <!-- BOOKING URL END -->
                                         <!-- <p class="font-sz10 color-pink">* Please Enter Missing Details</p> -->
+                                        <p class="color-white avenir-roman text-center m-clear">OR <sup>*</sup></p>
                                         <!-- upload buttons -->
                                         <div class="button-touruploads">
                                             <div class="tour-uploads tour-pdf relate pointer" ng-hide="showTourPdf">
                                                 <button class="btn btn-white-outline pointer">Upload Pdf</button>
-                                                <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" allow-type="application/pdf" no-view class="tour-uploadinput pointer"></upload-image>
+                                                <upload-image ng-model="tour.pdf" ng-callback="tourPdf(data);" allow-type="application/pdf" no-view class="tour-uploadinput pointer" ng-required="!tour.bookingUrl"></upload-image>
                                             </div>
                                             <div class="tour-uploads tour-pic relate pointer" ng-hide="showTourPic">
                                                 <div class="pic-uploading" ng-if="template.uploadLoader">
