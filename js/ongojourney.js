@@ -1,6 +1,6 @@
 var ongojourney = angular.module('ongojourney', [])
 
-  .factory('OnGoJourney', function (TravelibroService, $filter) {
+  .factory('OnGoJourney', function (TravelibroService, $filter, NavigationService) {
     return {
       getOneJourney: function (formData, callback, errorCallback) {
         TravelibroService.http({

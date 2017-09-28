@@ -710,6 +710,9 @@ textarea {
 .btn-overlay-black {
   background-color: rgba(0,0,0,0.5);
   color : #fff;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .btn.disabled,
@@ -737,6 +740,7 @@ header {
   top: 0;
   left: 0;
   z-index: 15;
+  background-color: $brand-dark-blue;
   @include transition(all 100ms linear);
   //    &.nav-up {
   //    @include transform(translateY(-100%));
@@ -2271,6 +2275,7 @@ header {
     font-size: 11px;
     text-align: center;
     vertical-align: middle;
+    margin-right: 3px;
     img {
       display: block;
       margin: 0 auto;
@@ -6143,6 +6148,7 @@ header {
 // card
 .trip-travellers-card {
   width: 550px;
+  miin-height: 190px;
   margin: 5px 0 30px 0;
   position: relative;
   background-color: #fff;
@@ -6151,11 +6157,95 @@ header {
 .ongo-card-holder
  {
   width: 550px;
-  margin-top: 80px;
+  //margin-top: 80px;
   // margin-left: 30px;
   position: relative;
 }
+.ongo-profile {
+  width: 100%;
+  height: 550px;
+  position: relative;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: -webkit-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(0,0,0,0.6), transparent, rgba(0,0,0,0.6)); /* Standard syntax (must be last) */
+  }
+}
+.ongo-profile-info {
+  padding: 0;
+  text-align: center;
+}
+.ongo-profile-name {
+  width: auto;
+  p {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  button {
+    width: 180px;
+    height: 40px;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+}
+.static-text {
+  font-size: 14px;
+}
+.profile-overlay {
+  width: 100%;
+  position: absolute;
+  bottom: 25px;
+  //height: 100%;
 
+}
+.ongo-details-scroll {
+  width: auto;
+  height: 59px;
+  overflow: auto;
+  margin-top: 2%;
+}
+.ongo-details-scroll::-webkit-scrollbar {
+  height: 5px;
+}
+.ongo-details-scroll::-webkit-scrollbar-thumb {
+    background: $brand-pink;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.ongo-profile-details {
+  text-align: center;
+  height: 70px;
+  //height: 100px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  margin: 0 20px;
+  overflow: hidden;
+  ul {
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    li {
+      width: 130px;
+      color: #fff !important;
+      display: inline-block;
+      list-style-type: none;
+      border-right: 1px solid #fff;
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
 .ongo-journey-card {
   margin-bottom: 30px;
   border-radius: 8px;
@@ -6206,6 +6296,9 @@ header {
   width: 20%;
   display: inline-block;
   vertical-align: top;
+  h5 {
+    cursor: pointer;
+  }
 }
 
 .card-journeypost {
@@ -6225,7 +6318,9 @@ header {
     height: 20px;
   }
 }
-
+.post a{
+  color: $brand-blue
+}
 .journey-post {
   .post {
     color: #424242;
@@ -6528,7 +6623,7 @@ display:none;
     height: 550px;
     fade-img-loading {
       .blur{ width: 100%;  }
-      .img-show { width: auto;  }
+      //.img-show { width: auto;  }
     }
   }
 }
@@ -6930,6 +7025,7 @@ display:none;
   .start-journey {
     width: 100%;
     max-height: 260px;
+    min-height: 200px;
     margin-top: -2px;
     background-color: $brand-light-grey;
     overflow: hidden;
@@ -7027,6 +7123,7 @@ display:none;
   height: 29px;
   border-left: 4px dashed #f58b86;
   position: relative;
+  display: inline-block;
   bottom: 11px;
   /* top: -5px; */
   left: 50%;
@@ -13028,3 +13125,68 @@ video::-webkit-media-controls-fullscreen-button {
 .row-counts button:hover {
   color : #fff;
 }
+.journey-footer,
+.partner-login-footer{
+  display: none;
+  background-color: #fff;
+  height: 40px;
+  width: 100%;
+  bottom: 0;
+}
+.sub-text-footer{
+  font-size: 7px;
+  margin-top: 20px;
+  display: inline-block
+}
+.hideSpan{
+  display: none;
+}
+.hideSpan:first-child{
+  display: block;
+}
+.hideSpan:nth-child(2){
+  display: block;
+}
+.loadmore {
+  display: none;
+}
+.loadmore > button{
+  width: 100%;
+  height: 40px;
+  background-color: #11d3cb;
+  color: $brand-blue;
+  border: none;
+  margin-bottom: 10px;
+}
+.take-me-to-thestories {
+  width: 100%;
+  background-color: $brand-dark-blue;
+  border-radius: 6px;
+  overflow: visible;
+  position: relative;
+  margin-bottom: 20px;
+  .row {
+    margin: 0;
+  }
+}
+.explore-stories {
+  background-color: $brand-blue;
+  color: white;
+  text-align: center;
+  border-right: 1px solid #69708a;
+  height: 55px;
+  span {
+    display: block;
+  }
+}
+.explore-more {
+  font-size: 11px;
+  font-weight: 600;
+  //padding: 0 0 0 7px;
+}
+.explore-stories > span:first-child {
+  font-size: 9px;
+  padding: 12px 0 4px 0;
+}
+
+

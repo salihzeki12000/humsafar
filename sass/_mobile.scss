@@ -276,10 +276,7 @@
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
   .trip-travellers-card{
-    margin: 5px 0 50px 0;
-  }
-  .ongo-card {
-    margin-top: -25px !important;
+    margin: 5px 0 25px 0;
   }
   .image-display {
     padding: 0 5%;
@@ -371,7 +368,7 @@
     }
   }
   .ongo-journey-card {
-    margin-bottom: 50px; // background-color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 25px; // background-color: rgba(255, 255, 255, 0.75);
   }
   .ongo-journey-change {
     .journey-change {
@@ -725,13 +722,14 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  .journey-footer {
+    display: block !important;
+  }
   .trip-travellers-card{
     width: 100%;
     margin-top: 0;
     padding: 0px;
     zoom: 1;
-  }rip-travellers-card {
-    margin-top: 0;
   }
   .journey-tab-view > .started-journey-card {
     margin-bottom: 25px;
@@ -1148,8 +1146,8 @@
       padding: 15px 5px;
     }
   } // journey join
-  .card-imgholder {
-    min-height: 100vw;
+    .ongo-card-main .card-imgholder {
+    height: 100vw;
   }
   .started-journey-card .journey-imgholder, .start-journey {
     max-height: 350px;
@@ -1287,7 +1285,7 @@
   .share-dropdown {
     width: 235px;
     padding: 7px;
-    top: 27px;
+    top: 50px;
     z-index: 1;
     &:before {
       border-top: 10px solid transparent;
@@ -2059,6 +2057,48 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .navbar > .row {
+    padding: 5px 0;
+  }
+  header {
+    background-color: transparent;
+  }
+  .loadmore {
+    display: block !important;
+  }
+  .partner-login-footer {
+    display: block !important;
+    position: absolute;
+  }
+  .ongo-profile-details {
+      height: 78px;
+  }
+  .ongo-profile-details ul li{
+    width: 95px;
+    padding: 5px;
+    margin-top: 2px;
+    .travel-inside .static-text {
+      font-size: 12px;
+    }
+  }
+  .ongo-details-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .ongo-details-scroll {
+    margin-top: 2%;
+    overflow-y: hidden;
+  }
+  .ongo-card-holder {
+    margin-top: -60px;
+  }
+  .ongo-profile {
+    width: 100%;
+    height: 100vw;
+    border-radius: 0;
+  }
+  .ongo-profile-info {
+    padding-top: 45%;
+  }
   .travellers-img-ongo {
     width: 60px;
     height: 60px;
@@ -2117,9 +2157,6 @@
   .travel-life-part.bg-white,
   .travel-life-part.setting {
     background-color: #fff;
-  }
-  .ongo-card {
-    margin-top: -25px !important;
   }
   .ongo-journey-card .user-social-item {
     padding: 8px 2px 13px;
@@ -3092,5 +3129,22 @@
 }
 
 // media query for 480px to 320px end
-
+// media query for max 330px (iphone 5S)
+@media screen and (max-width: 375px) {
+  .journey-overview li {
+    margin-right: 1px;
+  }
+  .explore-more {
+    padding: 8px;
+    font-size: 12px !important;
+  }
+  .explore-stories{
+    height : 50px !important;
+  }
+  .explore-stories > span:first-child {
+    display: none;
+    font-size: 7px;
+    padding: 12px 0 6px 0;
+  }
+}
 
