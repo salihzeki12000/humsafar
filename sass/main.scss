@@ -535,9 +535,9 @@ textarea {
   color: #484848;
 }
 
-/*.color-gray {
-  opacity: 0.8;
-}*/
+.color-gray {
+  color: #8f8f90;
+}
 
 .fz12 {
   font-size: 12px;
@@ -6499,7 +6499,8 @@ header {
   overflow: hidden;
   fade-img-loading {
     .blur, .img-show {
-      width: 100%;
+      min-width: 100%;
+      min-height: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
