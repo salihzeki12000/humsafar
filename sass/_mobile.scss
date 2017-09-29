@@ -1083,7 +1083,7 @@
   }
   .ongo-card-holder {
     width: 100%;
-    margin-top: 20px;
+    //margin-top: 20px;
     padding: 0px;
     zoom: 1;
   }
@@ -2089,7 +2089,7 @@
     overflow-y: hidden;
   }
   .ongo-card-holder {
-    margin-top: -60px;
+    //margin-top: -60px;
   }
   .ongo-profile {
     width: 100%;
@@ -3130,7 +3130,7 @@
 
 // media query for 480px to 320px end
 // media query for max 330px (iphone 5S)
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 320px) {
   .journey-overview li {
     margin-right: 1px;
   }
