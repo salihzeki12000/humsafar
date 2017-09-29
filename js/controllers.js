@@ -1253,9 +1253,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.isLoggedIn = false;
         $scope.isMine = false;
     }
-    $scope.ggoo = function(){
-      window.location = "travelibro://";
-    };
     $scope.loadmore = function(){
       $scope.loadmoreOption = false;
     };
