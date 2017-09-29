@@ -797,7 +797,7 @@
     }
   }
   header {
-    padding: 10px 0 0;
+    //padding: 10px 0 0;
   }
   .mobile-header {
     border-bottom: 1px dotted #ddd;
@@ -2057,6 +2057,9 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .store-stripe {
+    display: block !important;
+  }
   .navbar > .row {
     padding: 5px 0;
   }

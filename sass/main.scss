@@ -735,7 +735,7 @@ fieldset[disabled] .btn {
 // header
 header {
   width: 100%;
-  padding: 10px 20px 0;
+  //padding: 10px 20px 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -6214,6 +6214,7 @@ header {
   height: 59px;
   overflow: auto;
   margin-top: 2%;
+  scroll-behavior: smooth;
 }
 .ongo-details-scroll::-webkit-scrollbar {
   height: 5px;
@@ -13189,5 +13190,49 @@ video::-webkit-media-controls-fullscreen-button {
   font-size: 9px;
   padding: 12px 0 4px 0;
 }
-
-
+.store-stripe {
+  display: none;
+  height: 60px;
+  background-color: #11d3cb;
+  padding: 10px 20px;
+  ul {
+    color: white;
+    li {
+      a {
+        color: white;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: -4px;
+      }
+      button {
+        margin-right: 30px;
+        background-color: transparent           ;
+        border: 1px solid white;
+        &:hover {
+          color: white;
+        }
+        &:focus:active {
+          color : white;
+        }
+      }
+      span {
+        right: 22px;
+        top: 19px;
+        position: absolute;
+        font-family: AvenirLTStd-Light;
+        font-size: 16px;
+      }
+      display: inline-block;
+    }
+  }
+}
+.loggedin-header {
+    .navbar {
+      height: 60px;
+      .row {
+        margin-top: 10px;
+      }
+    }
+}

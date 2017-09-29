@@ -11146,8 +11146,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.viewData = false;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn");
-    /////////////////////////////////////////////////
-
+    $scope.viewStripe = true;
+    $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  /////////////////////////////////////////////////
+    $scope.closeStripe = function(){
+      $scope.viewStripe = false;
+    };
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
     }, 300);

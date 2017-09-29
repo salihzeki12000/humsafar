@@ -1,5 +1,11 @@
-<header class="bg-dark-blue {{template.isLoggedIn}}" hide-on-scroll ng-controller="headerctrl" ng-show="template.isLoggedIn">
-    <nav class="navbar">
+<header class="bg-dark-blue {{template.isLoggedIn}} loggedin-header" hide-on-scroll ng-controller="headerctrl" ng-show="template.isLoggedIn">
+  <div class="store-stripe" ng-show="viewStripe">
+    <ul>
+      <li><p>TraveLibro</p>Find it for free on {{iOS?'App':'Play'}} Store.</li>
+      <li class="pull-right" style="padding-top: 4px;"><a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><button class="btn">Get</button></a><span ng-click="closeStripe()">X</span></li>
+    </ul>
+  </div>
+  <nav class="navbar">
         <div class="container-fluid">
             <!-- <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
@@ -369,7 +375,19 @@
     </section>
 </header>
 <header class="libro-header {{template.isLoggedIn}}" ng-controller="headerctrl" hide-on-scroll ng-hide="template.isLoggedIn" scrolladd1class>
-    <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
+  <div class="store-stripe" ng-show="viewStripe">
+    <ul>
+      <li><p>TraveLibro</p>Find it for free on {{iOS?'App':'Play'}} Store.</li>
+      <li class="pull-right" style="padding-top: 4px;">
+        <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}">
+          <button class="btn">Get</button>
+        </a>
+        <span ng-click="closeStripe()">X</span>
+      </li>
+    </ul>
+  </div>
+  </div>
+  <section class="bg-black custom-search pd20 " ng-class="{ 'open': isopen} ">
         <div class="container-fluid ">
             <div class="row ">
                 <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
