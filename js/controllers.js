@@ -1236,7 +1236,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
-
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if(vw <= 480){
+      $scope.loadmoreOption = true;
+    }else{
+      $scope.loadmoreOption = false;
+    }
     if ($.jStorage.get("isLoggedIn")) {
         $scope.isLoggedIn = true;
         if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
@@ -1248,8 +1253,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.isLoggedIn = false;
         $scope.isMine = false;
     }
-
-
+    $scope.loadmore = function(){
+      $scope.loadmoreOption = false;
+    };
+  // PROFILE LIST REDIRECT
+  $scope.profileListRedirect = function (pageStyle, activeUrlSlug) {
+    console.log('bantas ',activeUrlSlug);
+    if (TemplateService.isMine || ($scope.userData.following == 1 && $scope.userData.status == 'private') || $scope.userData.status == 'public') {
+      console.log('santa mein hai');
+      if (pageStyle == 'following') {
+        console.log('pageStyle following');
+        $state.go('ProfileList', {
+          'urlSlug': activeUrlSlug,
+          'active': 'following'
+        });
+      } else if (pageStyle == 'followers') {
+        console.log('pageStyle followers');
+        $state.go('ProfileList', {
+          'urlSlug': activeUrlSlug,
+          'active': 'followers'
+        });
+      } else if (pageStyle == 'countries-visited') {
+        console.log('pageStyle countries');
+        $state.go('ProfileList', {
+          'urlSlug': activeUrlSlug,
+          'active': 'countries-visited'
+        });
+      } else if (pageStyle == 'bucket-list') {
+        console.log('pageStyle bucket');
+        $state.go('ProfileList', {
+          'urlSlug': activeUrlSlug,
+          'active': 'bucket-list'
+        });
+      } else {
+        $state.go('ProfileList', {
+          'urlSlug': activeUrlSlug,
+          'active': 'following'
+        });
+      }
+    } else {
+      $location.hash('journeys');
+      anchorSmoothScroll.scrollTo('journeys');
+      // console.log('karan arjun console mein aayenge');
+    }
+  };
+  // PROFILE LIST REDIRECT END
     function calcWidth() {
         var width = $(window).width();
         var percent = 40;
@@ -1333,7 +1381,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         } else {}
         console.log(centers);
         initMap();
-        console.log('yo ', $scope.journey);
+        console.log('yo ',$scope.journey);
+        NavigationService.getProfile($scope.journey.user.urlSlug, function (data, status) {
+          $scope.userData = data.data;
+        }, function (err) {
+          console.log(err);
+        });
     };
 
     OnGoJourney.getOneJourney({
@@ -2283,8 +2336,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     }
     //   });
     // }
-
-
 })
 
 .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, $timeout, $uibModal, $location) {
@@ -5510,7 +5561,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function reloadCount() {
         NavigationService.getProfile($.jStorage.get("activeUrlSlug"), function (data, status) {
             $scope.userData = data.data;
-            // console.log($scope.userData.countriesVisited_count);
+            console.log('my life ',$scope.userData);
             updateBadgeBar($scope.userData.countriesVisited_count);
         }, function (err) {
             console.log(err);
