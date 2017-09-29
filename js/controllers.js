@@ -3148,7 +3148,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
             if (isCity === false) {
                 $state.go("destinationcountry", {
-                    name: "features-cities",
+                    name: "featured-cities",
                     url: url
                 });
             } else {
@@ -3231,7 +3231,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
             if (isCity === false) {
                 $state.go("destinationcountry", {
-                    name: "features-cities",
+                    name: "featured-cities",
                     url: url
                 });
             } else {
@@ -3537,8 +3537,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.viewTab = 1;
     $scope.destinationTabView = function (destinationType) {
         switch (destinationType) {
-            case "features-cities":
-                $scope.countryoptions.active = "features-cities";
+            case "featured-cities":
+                $scope.countryoptions.active = "featured-cities";
                 $scope.destination.innerView = alldestination[0];
                 // $scope.countryDestData = [];
                 $scope.getCountryInfo("featuredCities", $scope.urlDestinationCountry);
@@ -4091,7 +4091,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.countryView = function (url, isCity) {
             if (isCity === false) {
                 $state.go("destinationcountry", {
-                    name: "features-cities",
+                    name: "featured-cities",
                     url: url
                 });
             } else {
@@ -5063,7 +5063,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($state.params.country, 'country');
         console.log($state.params.url, 'url');
         $scope.destination.innerView = alldestination[view];
-        var url = "features-cities";
+        var url = "featured-cities";
         var active = "";
         console.log(view);
         switch (view) {
