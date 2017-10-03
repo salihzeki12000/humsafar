@@ -482,6 +482,10 @@ textarea {
   margin-left: 20px;
 }
 
+.mt60 {
+  margin-top: 60px;
+}
+
 .pad-zero {
   padding: 0 !important;
 }
@@ -6240,12 +6244,15 @@ header {
       color: #fff !important;
       display: inline-block;
       list-style-type: none;
-      border-right: 1px solid #fff;
+      border-right: 1px solid rgba(255,255,255,0.3);
       &:last-child {
         border-right: none;
       }
     }
   }
+}
+#ongo-journey-main {
+  margin-top: 60px;
 }
 .ongo-journey-card {
   margin-bottom: 30px;
@@ -13134,6 +13141,11 @@ video::-webkit-media-controls-fullscreen-button {
   height: 40px;
   width: 100%;
   bottom: 0;
+  position: fixed;
+  z-index: 10;
+}
+.partner-login-footer {
+  z-index: 15;
 }
 .sub-text-footer{
   font-size: 7px;

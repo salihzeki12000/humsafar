@@ -1237,6 +1237,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
     var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if(vw <= 480){
       $scope.loadmoreOption = true;
     }else{
@@ -1258,9 +1259,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
   // PROFILE LIST REDIRECT
   $scope.profileListRedirect = function (pageStyle, activeUrlSlug) {
-    console.log('bantas ',activeUrlSlug);
+    // console.log('bantas ',activeUrlSlug);
     if (TemplateService.isMine || ($scope.userData.following == 1 && $scope.userData.status == 'private') || $scope.userData.status == 'public') {
-      console.log('santa mein hai');
+      // console.log('santa mein hai');
       if (pageStyle == 'following') {
         console.log('pageStyle following');
         $state.go('ProfileList', {
@@ -1294,7 +1295,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     } else {
       $location.hash('journeys');
       anchorSmoothScroll.scrollTo('journeys');
-      // console.log('karan arjun console mein aayenge');
+      console.log('karan arjun console mein aayenge');
     }
   };
   // PROFILE LIST REDIRECT END
@@ -7055,7 +7056,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // PROFILE LIST REDIRECT
     $scope.profileListRedirect = function (pageStyle, activeUrlSlug) {
-        console.log('bantas');
+        console.log('bantas mylife');
         if (TemplateService.isMine || ($scope.userData.following == 1 && $scope.userData.status == 'private') || $scope.userData.status == 'public') {
             console.log('santa mein hai');
             if (pageStyle == 'following') {
@@ -8366,6 +8367,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.activeUrlSlug = $.jStorage.get("activeUrlSlug");
     } else {
         $scope.activeUrlSlug = $.jStorage.get("profile").urlSlug;
+        console.log('foreign user ',$scope.activeUrlSlug);
     }
 
     // click background close
@@ -11151,6 +11153,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
   /////////////////////////////////////////////////
     $scope.closeStripe = function(){
       $scope.viewStripe = false;
+      var a = document.getElementById('ongo-journey-main');
+      a.style.marginTop = "0px";
     };
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;

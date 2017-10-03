@@ -6,7 +6,7 @@
   <div class="on-go-journey ">
     <div class="container-fluid">
       <!-- on go journey main -->
-      <div class="ongo-journey-main">
+      <div class="ongo-journey-main" id="ongo-journey-main">
          <!--strip journey -->
         <!--<div class="journey-info-strip get-otgstrip clearfix">-->
         <!--<div class="dots-mobile color-white" ng-click="openTravelTrip();">-->
@@ -372,42 +372,42 @@
                 </div>
               </div>
               <!-- ongo journey end -->
-            <div class="loadmore" style="padding: 0 10px">
+            <div class="loadmore" style="padding: 0 10px 30px 10px">
               <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
               <div class="take-me-to-thestories"s>
                 <div style="overflow: hidden;border-radius: 8px">
                 <div class="row">
                   <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
-                  <div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div>
-                  <div class="col-xs-4 explore-stories" style="border:none" ng-click="shareSocial();" ng-init='ongo.shareJrny={}'>
+                  <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
+                  <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
                     <span>Share</span>
-                    <span class="explore-more" ng-click="editOption(ongo.shareJrny);">
+                    <span class="explore-more">
                       Past Stories
                     </span>
-                  </div>
+                  </div></a>
                 </div>
                 </div>
-                <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
-                  <ul>
-                    <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"
-                           target="_blank"
-                           class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                    <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"
-                           target="_blank"
-                           class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                    <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"
-                           target="_blank"
-                           class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                    <li>
-                      <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"
-                         class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
-                    </li>
-                    <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"
-                           target="_blank"
-                           class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                    <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
-                  </ul>
-                </div>
+                <!--<div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">-->
+                  <!--<ul>-->
+                    <!--<li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"-->
+                           <!--target="_blank"-->
+                           <!--class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>-->
+                    <!--<li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"-->
+                           <!--target="_blank"-->
+                           <!--class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>-->
+                    <!--<li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"-->
+                           <!--target="_blank"-->
+                           <!--class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>-->
+                    <!--<li>-->
+                      <!--<a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"-->
+                         <!--class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>-->
+                    <!--</li>-->
+                    <!--<li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"-->
+                           <!--target="_blank"-->
+                           <!--class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>-->
+                    <!--<li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>-->
+                  <!--</ul>-->
+                <!--</div>-->
               </div>
             </div>
             </div>
@@ -422,12 +422,6 @@
       </div>
       <!-- map -->
       <!-- map end -->
-      <div class="journey-footer" ng-hide="isLoggedIn">
-        <img src="img/ongo-brandlogo.png" alt="Travelibro" class="pull-left" style="height:40px; padding: 10px;">
-        <div class="pull-right" style="padding: 10px 3px 10px 10px;">
-          <a ui-sref="login" href="#/login"class="color-blue">Signup | Login</a>
-        </div>
-      </div>
     </div>
   </div>
 </div>
