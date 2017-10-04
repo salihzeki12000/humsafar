@@ -1,4 +1,4 @@
-<header class="bg-dark-blue {{template.isLoggedIn}} loggedin-header" hide-on-scroll ng-controller="headerctrl" ng-show="template.isLoggedIn"  >
+<header class="{{template.isLoggedIn}} loggedin-header" ng-controller="headerctrl" hide-on-scroll scrolladd1class ng-show="template.isLoggedIn" >
   <div class="store-stripe" ng-show="viewStripe">
     <ul>
       <li><p>TraveLibro</p>Find it for free on {{iOS?'App':'Play'}} Store.</li>

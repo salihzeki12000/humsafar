@@ -1,4 +1,4 @@
-<div class="user-itinerary-page relate mt-60">
+<div class="user-itinerary-page relate">
   <div class="user-banner-holder relate" scrolldown style="background-image: url('../{{itinerary.itineraryType[0]|itineraryType}}')">
     <!-- {{itinerary.itineraryType[0]}} -->
     <div class="overlay-itinerary-bg"></div>
@@ -149,7 +149,7 @@
                     </li>
                     <li ng-if="itinerary.status == false" ng-click="uploadQuickItinerary(true)">
                       <a>Publish</a>
-                    </li>                    
+                    </li>
                   </ul>
                   <ul ng-if="!template.isMine">
                     <li>

@@ -5319,6 +5319,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         profileMain: "views/content/myLife/profile.html",
         innerView: allMyLife[0]
     };
+
     $scope.viewTab = 1;
     $scope.isMine = $.jStorage.get("isMine");
     var pageNo = 0;
@@ -5748,6 +5749,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     // Little more about me ends here
     //userBadge starts here
+
     var updateBadge = function (len) {
         if (len < 4) {
             $scope.userBadgeName = "img/newbie.png";
@@ -5762,7 +5764,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
     };
     //userBadge ends here
-
 
     $scope.level = "";
     $scope.mystyle1 = {
@@ -5868,6 +5869,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
         }
         //badge-bar ends here
+        //mobile badge with star ratings
+        $scope.getUserBadge = function(badge){
+          var badgeImg = badge.split('/')[1].split('.');
+          return badgeImg[0];
+        }
+
+        $scope.getTimes = function (n, type) {
+          if (type == "marked") {
+            n = parseInt(n);
+            return new Array(n);
+          } else if (type == "unmarked") {
+            n = parseInt(n);
+            var remainCount = 5 - n;
+            return new Array(remainCount);
+          }
+        };
+        //end mobile badge
         // routing to on-the-go,detailed-iti,quick-iti
     $scope.routeTO = function (type, urlSlug, userSlug) {
         //console.log(type, urlSlug, userSlug);
