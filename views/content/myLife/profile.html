@@ -1,19 +1,19 @@
-<div class="">
+<div class="" init="{{getUserBadge(userBadgeName)}}">
   <div class="container-fluid m-p0">
     <div class="profile-photo-section relate">
       <div class="profile-image-mobile"
            style="background: url('{{userData.profilePicture|uploadpath:500:500:'cover'}}') no-repeat; background-size: cover;background-position: 50% 50%;"></div>
       <div class="profile-details-mylife">
-        <!--<div class="badgeState mobile-visible">-->
-          <!--<p class="inline-block journey-rate">-->
-            <!--<span class="capitalize color-white avenir-heavy" style="font-size: 13px"-->
-                                                     <!--ng-bind="getUserBadge(userBadgeName)"></span>-->
-            <!--<span class="rated-star color-white"><i class="fa fa-star"-->
-                                                    <!--ng-repeat="a in getTimes(level,'marked') track by $index"></i></span>-->
-            <!--<span class="non-rated-star color-white"><i class="fa fa-star-o"-->
-                                                        <!--ng-repeat="b in getTimes(level,'unmarked') track by $index"></i></span>-->
-          <!--</p>-->
-        <!--</div>-->
+        <div class="badgeState mobile-visible" ng-class="{'userState':userBadge !== 'newbie' && userBadge !== 'nomad'}">
+          <p class="inline-block journey-rate">
+            <span class="capitalize color-white avenir-heavy" style="font-size: 13px"
+                                                     ng-bind="userBadge"></span>
+            <span class="rated-star color-white"><i class="fa fa-star"
+                                                    ng-repeat="a in getTimes(level,'marked') track by $index"></i></span>
+            <span class="non-rated-star color-white"><i class="fa fa-star-o"
+                                                        ng-repeat="b in getTimes(level,'unmarked') track by $index"></i></span>
+          </p>
+        </div>
         <div class="profile-pic relate">
           <a ui-sref="setting({'path':'settings'})" ng-if="template.isMine">
             <div class="profile-imgholder ">
@@ -186,7 +186,7 @@
     </div>
   </div>
 </div> -->
-      <div class="bg-white mobile-hidden  ">
+      <div class="bg-white mobile-hidden">
         <div class="vector-section ">
           <div class="row m-m0">
             <div class="col-lg-9 col-md-8">

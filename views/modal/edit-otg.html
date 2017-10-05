@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="category-location" ng-init="ongo.typeJourney= {};">
-              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.typeJourney)">
+              <input type="text" class="form-control pointer" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.typeJourney)">
               <div class="dropdown-otg-category" ng-show="ongo.typeJourney.backgroundClick;">
                 <ul>
                   <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category;"><a href="">{{category}}</a></li>

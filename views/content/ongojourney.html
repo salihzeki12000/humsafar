@@ -18,7 +18,9 @@
                     <p class="bold pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
                       {{journey.user.name}}
                     </p>
-                    <button class="btn btn-pink">Follow</button>
+                    <button ng-if="!template.isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">
+                      {{userData.following | followFollowingStatus}}
+                    </button>
                   </div>
                   <div class="ongo-profile-details">
                     <div class="ongo-details-scroll">

@@ -2316,7 +2316,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //       }
     //     })
     //   } else {
-    //     LikesAndComments.followUser(user._id, user.name, function (data) {
+    //     LikesAndComments.followUnFollow(user._id, user.name, function (data) {
     //       //console.log(data);
     //       if (data.value) {
     //         user.following = true;
@@ -2326,17 +2326,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     });
     //   }
     // }
-
-    // $scope.followFollowing = function (user) {
-    //   //console.log("from ongojourney");
-    //   LikesAndComments.followUnFollow(user, function (data) {
-    //     if (data.value) {
-    //       user.following = data.data.responseValue;
-    //     } else {
-    //       //console.log("error updating data");
-    //     }
-    //   });
-    // }
+    //
+    $scope.followFollowing = function (user) {
+      //console.log("from ongojourney");
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          //console.log("error updating data");
+        }
+      });
+    }
 })
 
 .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, $timeout, $uibModal, $location) {
@@ -5563,13 +5563,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     function reloadCount() {
         NavigationService.getProfile($.jStorage.get("activeUrlSlug"), function (data, status) {
             $scope.userData = data.data;
-            //console.log('my life ',$scope.userData);
             updateBadgeBar($scope.userData.countriesVisited_count);
         }, function (err) {
             //console.log(err);
         });
     };
-
 
     $scope.data = {
         'bucketList': {
@@ -5871,19 +5869,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //badge-bar ends here
         //mobile badge with star ratings
         $scope.getUserBadge = function(badge){
+        try{
           var badgeImg = badge.split('/')[1].split('.');
-          return badgeImg[0];
+          $scope.userBadge = badgeImg[0];
+        }
+         catch(e){}
         }
 
         $scope.getTimes = function (n, type) {
-          if (type == "marked") {
-            n = parseInt(n);
-            return new Array(n);
-          } else if (type == "unmarked") {
-            n = parseInt(n);
-            var remainCount = 5 - n;
-            return new Array(remainCount);
-          }
+          try {
+            if (type == "marked") {
+              n = parseInt(n);
+              return new Array(n);
+            } else if (type == "unmarked") {
+              n = parseInt(n);
+              var remainCount = 5 - n;
+              return new Array(remainCount);
+            }
+          }catch(e){}
         };
         //end mobile badge
         // routing to on-the-go,detailed-iti,quick-iti
@@ -11170,9 +11173,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   /////////////////////////////////////////////////
     $scope.closeStripe = function(){
-      $scope.viewStripe = false;
-      var a = document.getElementById('ongo-journey-main');
-      a.style.marginTop = "0px";
+      try {
+        $scope.viewStripe = false;
+        var a = document.getElementById('ongo-journey-main');
+        a.style.marginTop = "0px";
+      }catch(e){}
     };
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
