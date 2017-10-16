@@ -2,10 +2,10 @@
   <div class="store-stripe" ng-show="viewStripe">
     <ul>
       <li><p>TraveLibro</p>Find it for free on {{iOS?'App':'Play'}} Store.</li>
-      <li class="pull-right" style="padding-top: 4px;"><a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><button class="btn">Get</button></a><span class="pointer" ng-click="closeStripe()">X</span></li>
+      <li class="pull-right" style="padding-top: 4px;"><a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><button class="btn">Get</button></a><span class="text-lowercase pointer" ng-click="closeStripe()">x</span></li>
     </ul>
   </div>
-  <nav class="navbar">
+  <nav class="navbar" id="navi">
         <div class="container-fluid">
             <!-- <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
@@ -382,7 +382,7 @@
         <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}">
           <button class="btn">Get</button>
         </a>
-        <span ng-click="closeStripe()" class="pointer">X</span>
+        <span ng-click="closeStripe()" class="pointer">x</span>
       </li>
     </ul>
   </div>
@@ -505,7 +505,7 @@
             </div>
         </div>
     </section>
-    <div class="nav-onhead ">
+    <div class="nav-onhead" id="nav-onhead">
         <div class="container-fluid ">
             <nav class="navbar navbar-default ">
                 <div class="row ">

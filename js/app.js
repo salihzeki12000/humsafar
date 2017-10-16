@@ -465,10 +465,15 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/users/:urlSlug/{active:(?:following|followers|countries-visited|bucket-list)}",
             templateUrl: "views/template.html",
             controller: 'ProfileListCtrl',
-        });
+        })
+        // .state('newhome', {
+        //     url: "/newhome",
+        //     templateUrl: "views/template.html",
+        //     controller: 'newHomeCtrl',
+        // });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
-}).run(['Analytics', function (Analytics) {}]);;
+}).run(['Analytics', function (Analytics) {}]);
 
 
 // firstapp.directive('loadingText', function ($compile, $parse,$document) {
@@ -636,6 +641,27 @@ firstapp.directive("scrolladd2class", function ($window) {
     };
 });
 
+firstapp.directive('scrollTo', function ($location, $anchorScroll) {
+    return function(scope, element, attrs) {
+      element.bind('click', function(event) {
+        // event.stopPropagation();
+        // var off = scope.$on('$locationChangeStart', function(ev) {
+        //   off();
+        //   ev.preventDefault();
+        // });
+        var location = attrs.scrollTo;
+        console.log('scroll to ',location);
+        $location.hash(location);
+        // $anchorScroll();
+        var b = $('.worksheet').offset().top;
+        var a = $('#'+location).offset().top;
+        $('.worksheet').animate({
+          scrollTop: a
+        }, 500);
+      });
+
+    };
+  });
 
 firstapp.directive('imageonload', function () {
     return {

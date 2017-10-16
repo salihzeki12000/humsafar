@@ -32,6 +32,9 @@
 }
 
 @media screen and (max-width: 1204px) {
+  .inspire-banner, .relive-banner {
+    height: auto !important;
+  }
   .notify-popup {
     .comment-like-notify {
       width: 45%;
@@ -722,10 +725,141 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
-  .journey-footer {
-    display: block !important;
+  /*new landing page*/
+  .landing-home {
+    .user-details-circles {
+      padding: 0 10px;
+      li {
+        width: 55px;
+        height: 55px;
+        //padding: 7px 2px;
+      }
+      .avenir-heavy {
+        font-size: 12px;
+      }
+    }
+    .user-details-stripe ul li {
+      padding: 2% 2%;
+      .avenir-heavy {
+        font-size: 14px;
+      }
+      .avenir-roman{
+        font-size: 12px;
+      }
+    }
+    .home-landing > .seemore {
+      padding: 8%;
+      img {
+        margin: 0;
+      }
+    }
+    .home-landing .iphone-device {
+       margin-top: 0;
+       padding: 9% 0;
+    }
+    .spread-word .list-inline li {
+      width: 42px;
+      padding: 0;
+      .fa {
+        font-size: 20px;
+      }
+    }
+    .inspire-banner, .relive-banner {
+      width: 95%;
+      height: auto;
+    }
+    .inspire-banner .inspire-text {
+      text-align: center;
+      padding: 0 20px 20px;
+      margin-top: 0;
+    }
+    .relive-banner .relive-text {
+      text-align: center;
+      padding: 10px 20px 0px;
+      margin-top: 0;
+    }
+    #capture .download {
+      margin: 0 0 50px 0;
+      span {
+        display: block;
+      }
+    }
+    .user-display {
+      padding: 0 60px 20px;
+      text-align: center;
+      margin-top: -25px;
+    }
+    .text-heavy {
+      font-size: 23px;
+    }
+    .text-18 {
+      font-size: 14px;
+    }
+    .profile-detail {
+      h4 {
+        font-size: 14px;
+      }
+      h2 {
+        font-size: 20px;
+        padding: 0;
+        margin: -5px 0;
+      }
+    }
+    .trending-stuff {
+      font-size: 14px;
+    }
+    .capture-row {
+      margin: 0 -27px;
+    }
+    .popular-user {
+      margin: 0;
+      .profile-image-mobile, .profile-pic {
+        height: calc(100vw - 150px);
+      }
+    }
+    .capture-row .col-md-4 {
+      padding: 0;
+    }
+    #discover .row .col-md-6 {
+      padding: 0;
+    }
+    .sections-holder {
+      padding: 0 30px;
+    }
+    .submenu, .fixed-subnavigation {
+      display: none;
+    }
+    .libro-logo {
+      width: 64px;
+    }
+    .below-headline, .headline {
+      padding: 0 4%;
+    }
+    .home-landing .below-headline {
+      font-size: 15px;
+    }
+    .home-landing > h1{
+      font-size: 26px;
+      padding-top : 60px;
+    }
+    .home-scroll {
+      display: none;
+    }
+    .download img {
+      width: 100px;
+    }
+    .iphone-device {
+      .iphone {
+        width: 100%;
+      }
+      .iphone .iphone-screen {
+        max-width: 70%;
+        margin-left: 14%;
+      }
+    }
   }
-  .trip-travellers-card{
+  /*new landing pade end*/
+  .trip-travellers-card {
     width: 100%;
     margin-top: 0;
     padding: 0px;
@@ -2057,6 +2191,13 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  #content {
+    margin-top: 50px;
+  }
+
+  //new landing page
+
+  //end new landing page
   .store-stripe {
     display: block !important;
   }
@@ -2809,7 +2950,7 @@
     display: none;
   }
   .profile-photo-section {
-    width: 100vw;
+    width: 100%;
     height: 75vh;
     margin: 0 !important;
     &:before {

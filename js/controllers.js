@@ -192,6 +192,198 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 })
 
+// .controller('newHomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location, $anchorScroll) {
+//     //Used to name the .html file
+//     // cfpLoadingBar.start();
+//     $scope.template = TemplateService.changecontent("newhome");
+//     $scope.menutitle = NavigationService.makeactive("newHome");
+//     TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
+//     $scope.navigation = NavigationService.getnav();
+//     $scope.accessToken = $.jStorage.get("accessToken");
+//     $scope.bookingLink = function () {
+//         window.location.href = "https://travelibro.com/bookings/";
+//     };
+//     //get popular user details
+//     $scope.popular_users = [
+//       {
+//         name: 'nomadic-boys',
+//         data: {}
+//       },
+//       {
+//         name: 'collette-stohler',
+//         data: {}
+//       }
+//     ];
+//     $scope.popular_users.forEach(function(user){
+//       NavigationService.getProfile(user.name, function(data){
+//             user.data = data.data;
+//           },function (err) {
+//           })
+//     });
+//   setTimeout(function(){
+//     $(document).ready(function(){
+//
+//       $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
+//         console.log('iphone done');
+//         $('.iphone-screen').css('display','block');
+//         $(this).off(e);
+//       });
+//       $(".libro-logo")
+//         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+//           function(e){
+//             $(this).css('opacity','1');
+//             $(this).off(e);
+//           });
+//       $('.worksheet').scroll(function(){
+//         if($('.worksheet').scrollTop()<3) {
+//           $("#nav-onhead").removeClass('blue-head');
+//         }
+//         else {
+//           $("#nav-onhead").addClass('blue-head');
+//         }
+//         var firstHeight = $('.home-landing').height();
+//         if($('.worksheet').scrollTop() > firstHeight-100 && $('.worksheet').scrollTop()<3500) {
+//           $("#navigation").removeClass("submenu");
+//           $("#navigation").addClass("fixed-subnavigation");
+//           $("#navigation").addClass("fade-now");
+//         }
+//         else {
+//           $("#navigation").removeClass("fixed-subnavigation");
+//           $("#navigation").addClass("submenu");
+//         }
+//       });
+//     })
+//   },2000);
+//   $('.sectionScroll li a').click(function(){
+//     console.log('defines');
+//     var scrollSec = this.attr('title').offset().top();
+//     console.log(scrollSec,'scroll');
+//     $('.worksheet').animate({
+//       scrollTop: scrollSec
+//     }, 500);
+//   });
+//
+//   $scope.changePage = function (text) {
+//         // //console.log(text);
+//         var length = $(".fp-section").length;
+//         $timeout(function () {
+//             $('.scene').parallax();
+//             swiper = new Swiper('.swiper-container', {
+//                 pagination: '.swiper-pagination',
+//                 direction: 'vertical',
+//                 slidesPerView: 1,
+//                 paginationClickable: true,
+//                 spaceBetween: 0,
+//                 mousewheelControl: false,
+//                 mousewheelForceToAxis: false,
+//                 keyboardControl: false,
+//                 parallax: true,
+//                 hashnav: true
+//             });
+//         }, 500);
+//         if (length === 0) {
+//             $('.fullpage').fullpage({
+//                 //Navigation
+//                 onLeave: function (index, nextIndex, direction) {
+//                     $timeout(function () {
+//                         $('.scene').parallax();
+//                         swiper = new Swiper('.swiper-container', {
+//                             pagination: '.swiper-pagination',
+//                             direction: 'vertical',
+//                             slidesPerView: 1,
+//                             paginationClickable: true,
+//                             spaceBetween: 0,
+//                             mousewheelControl: false,
+//                             mousewheelForceToAxis: false,
+//                             keyboardControl: false,
+//                             parallax: true,
+//                             hashnav: true
+//                         });
+//                         swiper.slideTo(nextIndex - 1);
+//                         if ($(window).width() >= 767) {
+//                             for (i = 1; i < 4; i++) {
+//                                 if (i == nextIndex - 1) {
+//                                     $('#video' + i).get(0).load();
+//                                     $('#video' + i).get(0).play();
+//                                 } else {
+//                                     $('#video' + i).get(0).pause();
+//                                 }
+//                             }
+//                         }
+//                     }, 500);
+//                 }
+//             });
+//         }
+//
+//         // //console.log(text);
+//         $scope.homeval = text;
+//         switch (text) {
+//             case "share":
+//                 $.fn.fullpage.moveTo(5);
+//                 break;
+//             case "mylife":
+//                 $.fn.fullpage.moveTo(4);
+//                 break;
+//             case "locallife":
+//                 $.fn.fullpage.moveTo(3);
+//                 break;
+//             case "travellife":
+//                 $.fn.fullpage.moveTo(2);
+//                 break;
+//             case "home":
+//                 $.fn.fullpage.moveTo(1);
+//                 break;
+//             default:
+//                 $.fn.fullpage.moveTo(1);
+//                 break;
+//         }
+//     };
+//     // $(window).load(function () {
+//     //     document.getElementById('movie1').play();
+//     //     if ($(window).width() < 767) {
+//     //         $('video').remove();
+//     //     }
+//     // });
+//     // setTimeout(function () {
+//     //
+//     //
+//     // }, 500);
+//     //
+//     // $scope.$on('$viewContentLoaded', function () {
+//     //     $timeout(function () {
+//     //         $('body').addClass('fp-');
+//     //         $scope.changePage($stateParams.id);
+//     //     }, 1000);
+//     // });
+//     // cfpLoadingBar.complete();
+//     // $scope.audioStatus = {
+//     //     on: true
+//     // }
+//     // $scope.muteVolume = function () {
+//     //     for (i = 1; i <= 3; i++) {
+//     //         if ($("#video" + i)[0].muted) {
+//     //             $("#video" + i)[0].muted = false;
+//     //             $scope.audioStatus = {
+//     //                 on: true
+//     //             }
+//     //         } else {
+//     //             $("#video" + i)[0].muted = true;
+//     //             $scope.audioStatus = {}
+//     //         }
+//     //     }
+//     // }
+//     // $timeout(function () {
+//     //     if ((navigator.platform.indexOf("iPhone") != -1) ||
+//     //         (navigator.platform.indexOf("iPod") != -1) ||
+//     //         (navigator.platform.indexOf("iPad") != -1)) {
+//     //         $(".download-app").addClass("hide");
+//     //     }
+//     // }, 200);
+//     // $scope.customLink = function () {
+//     //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+//     // };
+// })
+
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
     $scope.userData = $.jStorage.get("profile");
@@ -1826,26 +2018,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
                 step = 0;
                 var linesCount = line.length - 1;
-                for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
+                try {
+                  for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
                     if ((value == true) && (percentComplete < 100)) {
-                        if (markerCount == i) {
-                            markers[markerCount].setIcon("");
-                            if (markers[markerCount].map == null) {
-                                markers[markerCount].setMap(map);
-                            };
-                            markers[markerCount].setIcon("img/maps/green-marker.png");
-                        } else if (markerCount >= i) {
-                            markers[markerCount].setMap(null);
-                        } else if ((markerCount <= i)) {
-                            if (markers[markerCount].map == null) {
-                                markers[markerCount].setMap(map);
-                            };
-                            markers[markerCount].setIcon("img/maps/small-marker.png");
+                      if (markerCount == i) {
+                        markers[markerCount].setIcon("");
+                        if (markers[markerCount].map == null) {
+                          markers[markerCount].setMap(map);
                         }
+                        ;
+                        markers[markerCount].setIcon("img/maps/green-marker.png");
+                      } else if (markerCount >= i) {
+                        markers[markerCount].setMap(null);
+                      } else if ((markerCount <= i)) {
+                        if (markers[markerCount].map == null) {
+                          markers[markerCount].setMap(map);
+                        }
+                        ;
+                        markers[markerCount].setIcon("img/maps/small-marker.png");
+                      }
                     } else {
-                        break;
+                      break;
                     }
-                }
+                  }
+                }catch(e){}
                 redLineDraw(i, departure, arrival, percentComplete, value, flag);
 
                 //clearPolyLines starts
@@ -11175,7 +11371,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeStripe = function(){
       try {
         $scope.viewStripe = false;
-        var a = document.getElementById('ongo-journey-main');
+        var a = document.getElementById('content');
         a.style.marginTop = "0px";
       }catch(e){}
     };

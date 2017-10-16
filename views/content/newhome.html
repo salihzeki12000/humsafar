@@ -1,0 +1,374 @@
+<div class="worksheet">
+  <div class="landing-home" ng-class="{'know-more-travelibro': viewModal == true,'': viewModal == false}">
+    <div class="container-fluid">
+    <div class="home-landing" id="home-landing" auto-height>
+      <h1 class="headline">Turning every Traveller into Storyteller!</h1>
+      <p class="below-headline">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
+      <div class="seemore">
+        <!--<img src="img/know-more-gray.png" alt="know more" width="90px">-->
+        <div class="know-watch-more text-center" ng-init="viewModal=false" >
+          <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal = true">
+          <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/222624906?title=0&amp;byline=0&amp;portrait=0"
+             fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
+            <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
+          </a>
+        </div>
+      </div>
+      <div class="iphone-device">
+        <div class="libro-logo-holder">
+          <img src="img/Icon.png" alt="" class="libro-logo">
+        </div>
+        <div class="iphone" id="iphone">
+          <img src="img/iphone-screen.png" alt="" class="iphone-screen" id="iphone-screen">
+          <img src="img/hero_large_2x.png" alt="">
+        </div>
+      </div>
+      <div class="download">
+        <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+      </div>
+      <div class="mouse-scrolldown text-center home-scroll" ng-click="scrollDown();">
+        <img src="img/mouse-scroll-grey.png" alt="Travelibro">
+        <p>Scroll Down</p>
+      </div>
+    </div>
+    <!--<div class="home-navigation">-->
+      <div class="submenu" role="navigation" id="navigation">
+        <ul class="sectionScroll">
+          <li><a href="" scroll-to="discover" class="take-scroll" title="">DISCOVER</a></li>|
+          <li><a href="" scroll-to="capture" class="take-scroll" title="">CAPTURE</a></li>|
+          <li><a href="" scroll-to="inspire" class="take-scroll" title="">INSPIRE</a></li>|
+          <li><a href="" scroll-to="relive" class="take-scroll" title="">RELIVE</a></li>
+        </ul>
+      </div>
+    <!--</div>-->
+    <div class="sections-holder">
+      <div id="discover" auto-height>
+        <h2 class="text-heavy color-42 visible-xs">DISCOVER</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Trending Travellers</h3>
+            <div class="popular-user">
+              <div class="profile-pic profile-image-mobile relate">
+                <img src="/img/nomadic_boys.jpg" alt="" class="img-responsive get-center">
+                <div class="user-details-stripe">
+                  <ul>
+                    <li class="text-center pointer">
+                      <div class="travel-inside">
+                        <span class="avenir-heavy">{{popular_users[0].data.photos_count}}</span>
+                        <span class="block avenir-roman mt5">photos</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="travel-inside">
+                        <span class="avenir-heavy">{{popular_users[0].data.videos_count}}</span>
+                        <span class="block avenir-roman mt5">videos</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="travel-inside">
+                        <span class="avenir-heavy ">{{popular_users[0].data.followers_count}}</span>
+                        <span class="block avenir-roman mt5">followers</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="travel-inside">
+                        <span class="avenir-heavy ">{{popular_users[0].data.countriesVisited_count}}</span>
+                        <span class="block avenir-roman mt5">countries</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="travel-inside">
+                        <span class="avenir-heavy ">{{popular_users[0].data.journeysCreated_count}}</span>
+                        <span class="block avenir-roman mt5">journeys</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="profile-detail">
+                <h4 class="color-blue">Worlds Finest Gay Tavellers</h4>
+                <h2 class="color-blue">Nomadic Boys</h2>
+              </div>
+            </div>
+            <a href="https://travelibro.com/#/popular-bloggers" ui-sref="popularblogger"><div class="trending-stuff">View Top 20 Trending Travellers<div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
+          </div>
+          <div class="col-md-6">
+            <h3>Trending Stories</h3>
+            <div class="popular-user">
+              <div class="profile-pic profile-image-mobile relate">
+                <img src="/img/romaroo1.jpg" alt="" class="img-responsive get-center">
+                <div class="user-details-circles pull-left">
+                  <ul>
+                    <li class="text-center pointer">
+                      <div class="symbol-up">
+                        <img src="img/camera.png" alt="Camera" width="15" class="mr5">
+                        <span class="avenir-heavy">{{popular_users[1].data.photos_count}}</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="symbol-up">
+                        <img src="img/video.png" alt="Video" width="15" class="mr5">
+                        <span class="avenir-heavy">{{popular_users[1].data.videos_count}}</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer">
+                      <div class="symbol-up">
+                        <img src="img/location.png" alt="Location" width="15" class="mr5">
+                        <span class="avenir-heavy ">{{popular_users[1].data.countriesVisited_count}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="profile-detail">
+                <h4 class="color-blue">Greece Story - 15 Days</h4>
+                <h2 class="color-blue">Roamaroo</h2>
+              </div>
+            </div>
+            <a href="https://travelibro.com/#/popular-journeys" ui-sref="popularjourney"><div class="trending-stuff">View Top 50 Trending Stories <div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
+          </div>
+        </div>
+      </div>
+      <div id="capture" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs">CAPTURE</h2>
+        <div class="row capture-row">
+          <div class="col-md-4">
+            <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
+            <div class="user-display">
+              <h2 class="text-heavy">On-The-Go Stories</h2>
+              <p class="text-18">Capture each moment of your journey live On-The-Go to create a stunning timeline with friends and family.</p>
+              <span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="/img/Past Stories.png" alt="" class="full-img">
+            <div class="user-display">
+              <h2 class="text-heavy">Past Stories</h2>
+              <p class="text-18">Its automatic quick and easy. Publish and share your past stories within minutes.</p>
+              <span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img src="/img/Local Stories.png" alt="" class="full-img">
+            <div class="user-display">
+              <h2 class="text-heavy">Local Stories</h2>
+              <p class="text-18">Share the love for your city by capturing the favourite moments of your local life to inspire others.</p>
+              <span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>
+            </div>
+          </div>
+        </div>
+        <div class="download">
+          <span class="color-blue">Get Started Now</span>
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+      </div>
+      </div>
+      <div id="inspire" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs">INSPIRE</h2>
+        <div class="inspire-banner">
+          <div class="row">
+            <div class="col-md-8"><img src="/img/Inspire.png" alt="" width="100%"></div>
+            <div class="col-md-4" style="text-align: left">
+              <div class="inspire-text">
+                <h2 class="text-heavy">Inspire others</h2>
+                <p class="below-headline" style="padding-bottom: 15px">with your live travel and local stories.</p>
+                <p class="text-18">Your followers can view your activities real-time and you can share these stories on other social mediums.</p>
+                <!--<div class="social-icon-menu">-->
+                  <div class="social-icons">
+                    <ul class="list-unstyled list-inline">
+                      <li>
+                        <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-42">
+                          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-42">
+                          <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://twitter.com/travelibro/" target="_blank" class="color-42">
+                          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://plus.google.com/+TravelibroApp" target="_blank" class="color-42">
+                          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="mailto:info@travelibro.com" class="color-42">
+                          <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </a>
+                      </li>
+                    </ul>
+                    </div>
+                <!--</div>-->
+
+                <span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="relive" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs">RELIVE</h2>
+        <div class="relive-banner" style="overflow: visible">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="relive-text">
+                <h2 class="text-heavy">Your Personalised Life Diary</h2>
+                <p class="text-18">Relive a lifetime of all your travel & local memories - past and present stories, photos, videos, reviews ans experiences.</p>
+                <span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>
+              </div>
+              </div>
+            <div class="col-md-6">
+              <div style="padding: 35px;margin-top: 30px;">
+                <img src="/img/relive.png" alt="" width="100%">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="register-as-partner">
+      <div class="overlay-home">
+        <div class="register-text">
+          <h1 class="text-heavy">REGISTER AS PARTNER</h1>
+          <span>Travel Agent | Tour Operator | Local Guide</span>
+          <p class="text-18">Open your business to the world. Try a 90 day free trial!</p>
+          <a href="#/partnerlogin"><div class="trending-stuff pointer">Sign Up Now <div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="spread-word">
+      <div class="spread-text">
+        <h1 class="text-heavy">SPREAD THE WORD</h1>
+        <p class="text-18">We would really appreciate if you can help us spread the word and share Travelibro for everyone to enjoy!</p>
+        <div class="social-icons">
+          <ul class="list-unstyled list-inline">
+            <li>
+              <a href="https://www.instagram.com/travelibro/" target="_blank" class="color-42">
+                <i class="fa fa-instagram"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-42">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/travelibro/" target="_blank" class="color-42">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://plus.google.com/+TravelibroApp" target="_blank" class="color-42">
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://in.pinterest.com/travelibro/" target="_blank" class="color-42">
+                <i class="fa fa-pinterest" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/travelibro-com" target="_blank" class="color-42">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCF4_sVa7oxUq3Qkpczuj5-Q" target="_blank" class="color-42">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    <div class="footer-filler">
+      <div class="filler-text">
+        <h1 class="text-heavy">EVERYONE ON TRAVELIBRO IS A STORYTELLER</h1>
+        <div class="download">
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+        </div>
+      </div>
+    </div>
+    <div class="home-footer">
+      <div class="row color-white">
+        <div class="col-md-2 col-sm-4 col-xs-6">
+          <ul class="list-unstyled list-inline">
+            <li><h4 class="text-heavy">DISCOVER</h4></li>
+            <li class="text-18" ng-repeat="menu in navigation track by $index">
+              <a ui-sref="{{menu.anchor}}" ng-if="menu.anchor">{{menu.name}}</a>
+              <a href="{{menu.link}}" ng-if="menu.link">{{menu.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6" ng-repeat="menu in navigation track by $index" ng-if="menu.subnav" ng-class="{'hidden-xs':menu.name=='About Us'}">
+          <ul class="list-unstyled list-inline">
+            <li><h4 class="text-heavy">{{menu.name|uppercase}}</h4></li>
+            <li class="text-18" ng-repeat="i in menu.subnav track by $index">
+              <a ng-if="i.anchor" ui-sref="{{i.anchor}}">{{i.name}}</a>
+              <a ng-if="i.link" href="{{i.link}}">{{i.name}}</a>
+            </li>
+          </ul>
+        </div>
+        <!--<div class="col-md-2 col-xs-4">-->
+          <!--<ul class="list-unstyled list-inline">-->
+            <!--<li><h4 class="text-heavy">BOOKINGS</h4></li>-->
+            <!--<li class="text-18"><a href="">Flights</a></li>-->
+            <!--<li class="text-18"><a href="">Hotels</a></li>-->
+            <!--<li class="text-18"><a href="">Vacation Rentals</a></li>-->
+            <!--<li class="text-18"><a href="">Homestays</a></li>-->
+            <!--<li class="text-18"><a href="">Car Rentals</a></li>-->
+            <!--<li class="text-18"><a href="">Tours & Excursions</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col-md-2 hidden-sm hidden-xs">-->
+          <!--<ul class="list-unstyled list-inline">-->
+            <!--<li><h4 class="text-heavy">ABOUT US</h4>-->
+            <!--<li class="text-18"><a href="">About Travelibro</a></li>-->
+            <!--<li class="text-18"><a href="">Advertise With Us</a></li>-->
+            <!--<li class="text-18"><a href="">Contact Us</a></li>-->
+            <!--<li class="text-18"><a href="">Terms & Conditions</a></li>-->
+            <!--<li class="text-18"><a href="">Privacy Policy</a></li>-->
+          <!--</ul>-->
+        <!--</div>-->
+        <div class="col-md-6 col-xs-12">
+          <ul class="list-unstyled list-inline">
+            <li><h4 class="text-heavy">THE TRAVEL SOCIAL COMMUNITY</h4>
+            <li class="text-18">
+              <a href="">
+                We are passionate travellers set our to create a passionate community of the new age traveller.
+                Your feedback along the way would help us achieve this goal.We look forward to your feedback at info@travelibro.com.
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<div class="know-more-modal" >
+  <div class="modal-main">
+    <div class="modal-imgholder"><img src="img/libro-home/login-phone.png" alt="" class="img-responsive"></div>
+    <div class="modal-descp">
+      <div class="close-btn"><i class="fa fa-times pointer" ng-click="viewModal=false"></i></div>
+      <h3 class="avenir-heavy">Capture and Relive Your Travel Stories</h3>
+      <div class="modal-scroll-descp">
+        <p>We have witnessed a change in the way travel experiences are being shared from writing a blog about a holiday to sharing a few selected moments on social media for instant likes and gratification. </p>
+        <p>We believe that this sudden migration has led to a gap in the market, a need to capture and share travel experiences differently. </p>
+        <p>TraveLibro is your own personalised Travel Diary. </p>
+        <p>Now capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
+        <p>Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
+      </div>
+      <h4 class="text-uppercase avenir-heavy">Sign up now to tell your stories differently.</h4>
+      <a href="" ui-sref="login" class="btn btn-pink">Sign Up</a>
+    </div>
+  </div>
+</div>

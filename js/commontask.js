@@ -640,7 +640,7 @@ commontask.directive('linkProfile', function ($compile, $parse, $state) {
 
 commontask.filter("followFollowingStatus", function () {
     return function (input) {
-        console.log(input, "---");
+        // console.log(input, "---");
         if (input === 1) {
             return "Following";
         } else if (input === 0) {
