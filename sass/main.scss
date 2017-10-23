@@ -1,6 +1,7 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "https://api.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
@@ -8462,11 +8463,12 @@ display:none;
 /*past itinerary*/
   .main-paststory {
     width: 550px;
+    display: inline-block;
+    vertical-align: top;
   }
   .box-start-paststory {
     overflow: hidden;
   }
-  .pastjourney-start { margin-bottom: 20px; }
   .past-story-detail {
     padding: 10px;
     background-color: rgba(255,255,255,0.95);
@@ -8508,6 +8510,14 @@ display:none;
   .dest-heading {
     font-size: 17px;
   }
+  .past-story-heading {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include background(linear-gradient(rgba(0,0,0,0.7),transparent));
+  }
   .past-flag-holder {
     @include square(30px);
     border-radius: 100%;
@@ -8529,19 +8539,52 @@ display:none;
       border-top: none;
     }
   }
-  .dest-country-vist {
+  .dest-country-vist,  {
     display: inline-block;
     font-size: 15px;
     vertical-align: top;    
   }
-  .country-name-visited + .city-name-visited { border-left: none; }
   .city-name-visited {
-    padding: 0px 5px;
-    border-left: 1px solid $brand-dark-blue;
     display: inline-block;
+    span {
+      &:first-child {
+        border-left: none;
+      }
+      padding: 0px 5px;
+      border-left: 1px solid $brand-dark-blue;
+      display: inline-block;
+      font-size: 14px;
+    }   
   }
   .edit-delete-dest { margin: 10px 0; }
   .edit-dest { margin: 0px 10px; }
+  .add-more-post {
+    @include square(50px);
+    border-radius: 100%;
+    cursor: pointer;
+    display: inline-block;
+    background-color: $brand-pink;
+    line-height: 58px;
+    text-align: center;
+    i { font-size: 22px; }
+  }
+  /*map gl past story */
+  .map-paststory {
+    width: calc(100vw - 610px);
+    height: 100vh;
+    /*margin-left: -4px;*/
+    display: inline-block;
+    vertical-align: top;
+  }
+  .map-marker {
+    width: 22px;
+    height: 31px;
+    background: url('../img/maps/red-marker.png') no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    cursor: pointer;
+  }
+  /*map gl past story */
 /*past itinerary end*/
 
 // itinerary
@@ -12928,3 +12971,13 @@ video::-webkit-media-controls-fullscreen-button {
 //   }
 // }
 // travelibro loader end
+/*mapbox*/
+.marker {
+  background-image: url('https://travelibro.com/img/mobile-logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+/*mapbox end*/

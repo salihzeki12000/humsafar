@@ -1,29 +1,105 @@
-<div class="edit-journeypop-main add-otgpop-main">
-  <!-- add otg -->
-  <div class="edit-otg-sec add-otg-sec">
-    <!-- add otg title -->
-    <div class="edit-otg-title add-otg-title">
-      <h4 class="avenir-roman text-center color-white">Add Photos & Videos</h4>
+<div class="edit-journeypop-main">
+  <!-- edit otg -->
+  <div class="edit-otg-sec">
+    <!-- edit otg info window -->
+    <!-- edit otg title -->
+    <div class="edit-otg-title">
+      <!-- <h4 class="avenir-roman text-center color-white">Edit Activity</h4> -->
       <div class="pull-right">
-        <span class="close pop-close-btn notify-close" ng-click="$dismiss();">
-          <!--<img src="img/cancel.png" alt="Cancel" class="img-responsive">-->
-          X
-        </span>
+        <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
       </div>
     </div>
-    <!-- add otg title end-->
-    <!-- add otg photos and videos -->
-    <div class="otg-photo-video add-otg">
+    <!-- edit otg title end-->
+    <div class="edit-otg-info">
       <div class="row">
-        <!-- photo sec -->
+        <!-- search location sec -->
         <div class="col-md-6 col-sm-6">
-          <div class="view-photo-sec otg-bg-all">
-            <div class="otg-photo-count">
-              <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
-              <span class="avenir-roman">({{otgPhoto.length}})</span>
+          <div class="otg-search-location otg-bg-all">
+            <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22">
+            <div class="search-by-category" ng-init="ongo.locationEdit = {};">
+              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()">
+              <div class="search-otg-location" ng-show="showLocation &&  ongo.locationEdit.backgroundClick;">
+                <ul>
+                  <li ng-repeat="location in nearByLocation track by $index" ng-click="locationId(location);viewLocation();">
+                    <a href="" >{{location.name}}</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="category-location" ng-init="ongo.typeJourney= {};">
+                <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.typeJourney)">
+                <div class="dropdown-otg-category" ng-show="ongo.typeJourney.backgroundClick;">
+                  <ul>
+                    <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category;"><a href="">{{category}}</a></li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <!-- photo upload -->
-            <div class="uplad-otg-sec" ng-hide="photoSec">
+          </div>
+          <!-- search location sec end -->
+          <!-- tag friends sec -->
+          <div class="col-md-4 col-sm-6" hidden>
+            <div class="tag-journey-friend otg-bg-all">
+              <img src="img/ongojourney/otg-tag.png" alt="" class="img-responsive icon-tag" width="25">
+              <div class="tag-otg-friend">
+                <input type="text" class="form-control" placeholder="Search to Tag/Untag Friends" ng-model="ongo.getSearchedList" ng-change="listTagfriend();">
+                <!--<div class="tagfriend-count avenir-roman"><span>{{ongo.buddiesCount}}</span> Friends</div>-->
+                <div class="dropdown-tagfriend tagfriend-list" ng-show="viewListFriend">
+                  <ul>
+                    <li ng-repeat="list in tagFriends track by $index">
+                      <div class="friend-listholder select-friend">
+                        <input type="checkbox" name="tag-list {{list.name}}" id="{{list._id}}" ng-model="list.checked"  ng-click="editTagFriends(list);">
+                        <label for="{{list._id}}" class="{{list.noEdit}}">
+                          <div class="friend-imgholder">
+                            <img ng-src="{{list.profilePicture|uploadpath:25}}" alt="" class="img-responsive">
+                          </div>
+                          <span class="color-blue avenir-roman">{{list.name}}</span>
+                        </label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- tagged buddy images -->
+              <div class="tagged-buddy-images">
+                <div class="buddy-tagged-view">
+                  <div class="buddy-viewholder" ng-repeat="pic in ongo.buddies track by $index">
+                    <img ng-src="{{pic.profilePicture|uploadpath:34}}" alt="" class="img-responsive">
+                  </div>
+                </div>
+              </div>
+              <!-- tagged buddy images end-->
+            </div>
+          </div>
+          <!-- tag friends sec end-->
+          <!-- otg thought sec -->
+          <div class="col-md-6 col-sm-12">
+            <div class="edit-otg-thought otg-bg-all">
+              <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
+              <div class="otg-thought" ng-init="ongo.editArea={};ongo.editArea.backgroundClick = false">
+                <textarea maxlength="180" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>
+                <!-- hashtag in edit -->
+                <find-tags class="hashtag-edit" ng-model="ongo.thoughts" element-id="editTextarea" enable="hashTag" ng-show="ongo.editArea.backgroundClick;"></find-tags>
+                <!-- hashtag in edit end-->
+                <div class="thoughtCount"><span>{{ongo.thoughts.length}}</span><span> / 180</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- otg thought sec end-->
+        </div>
+      </div>
+      <!-- edit otg info window end-->
+      <!-- add otg photos and videos -->
+      <div class="otg-photo-video add-otg">
+        <div class="row">
+          <!-- photo sec -->
+          <div class="col-md-6 col-sm-6">
+            <div class="view-photo-sec otg-bg-all">
+              <div class="otg-photo-count">
+                <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
+                <span class="avenir-roman">({{otgPhoto.length}})</span>
+              </div>
+              <!-- photo upload -->
+              <div class="uplad-otg-sec" ng-hide="photoSec">
               <!--<img src="img/upload-blue.png" alt="" class="m-center img-responsive" width="47px">
               <p class="text-center color-dark-blue avenir-roman">Drag photos here</p>
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
@@ -157,26 +233,12 @@
     </div>
   </div>
   <!-- add otg photos and videos end-->
-  <!-- tag selected peoples -->
-  <div class="tag-selected-buddy">
-    <div class="select-buddy inline-block" ng-repeat="buddy in ongo.buddies track by $index" ng-click="selectBuddy(buddy)" ng-class="{'active': buddy.selected==true,'':buddy.selected==false}">
-      <div class="tagging-buddy-holder">
-        <img ng-src="{{buddy.profilePicture|uploadpath:45:50:'cover'}}" alt="{{buddy.name}}" class="img-responsive">
-        <div class="checked-friend">
-          <i class="fa fa-check"></i>
-        </div>
-      </div>
-      <h5 class="color-white">{{buddy.firstName}}
-        <span class="block mt5">{{buddy.lastName}}</span></h5>
-      </div>
-    </div>
-    <!-- tag selected peoples end-->
-  </div>
-  <!-- add otg end-->
-  <!-- save or cancel otg -->
-  <div class="save-cancel-otg text-center">
-    <a href="" class="color-white" ng-click="$close();">Cancel</a>
-    <button class="btn btn-pink btn-more" ng-click="savePhotosVideos(); $dismiss();">Done</button>
-  </div>
-  <!-- save or cancel otg end-->
+</div>
+<!-- edit otg end-->
+<!-- save or cancel otg -->
+<div class="save-cancel-otg text-center">
+  <a href="" class="color-white" ng-click="$dismiss();">Cancel</a>
+  <button class="btn btn-pink btn-more" ng-click="addNewPost(); $dismiss();">Save</button>
+</div>
+<!-- save or cancel otg end-->
 </div>

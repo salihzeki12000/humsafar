@@ -11,6 +11,7 @@ var ongojourney = angular.module('ongojourney', [])
           data: formData
         }, 'allLoader').success(function (data) {
           var journey = data.data;
+          console.log(journey,'date wala data jo aaya wo');
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
           journey.buddiesString = "";
@@ -935,9 +936,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           scope: $scope,
           backdropClass: "review-backdrop",
         })
+        console.log($scope.json.post,'ongo journey');
       };
 
       $scope.updateDateTime = function (id, formData, dt) {
+        console.log($scope.ongo,'click wala');
         console.log(dt);
         console.log(formData, dt);
         var date = $filter('formatDateCalender')(dt);
@@ -957,7 +960,9 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
             "urlSlug": $scope.json.urlSlug
           }
           OnGoJourney.getOneJourney(formData, function (journeys) {
+            console.log(journeys.post,'journeys',$scope.json.post,'json post');
             $scope.json.post = journeys.post;
+            console.log($scope.json.post,'json post');
           }, function (err) {
             console.log(err);
           });

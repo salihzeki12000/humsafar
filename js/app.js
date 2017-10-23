@@ -349,7 +349,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'QuickItineraryCtrl'
         })
         .state('paststory', {
-            url: "/past-story",
+            url: "/users/:urlSlug/past-story/:id",
             templateUrl: "views/template.html",
             controller: 'PastStoryCtrl'
         })

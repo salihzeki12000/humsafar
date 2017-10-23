@@ -14,9 +14,11 @@ var pointsForLine = function () {};
 var line = [];
 var markers = [];
 var travelPath;
+var initMapGl = function() {};
 var initMap = function () {};
 var setMarker = function () {};
 var map;
+var mapGl;
 var center = {};
 var centers = [];
 markers[0] = {};
@@ -5812,23 +5814,29 @@ var ref = "";
     }
         //badge-bar ends here
         // routing to on-the-go,detailed-iti,quick-iti
-        $scope.routeTO = function (type, urlSlug, userSlug) {
-            console.log(type, urlSlug, userSlug);
-            if (type == "on-the-go-journey" || type == "ended-journey") {
+        $scope.routeTO = function (journey) {
+            if (journey.type == "on-the-go-journey") {
                 $state.go('ongojourney', {
-                    'id': urlSlug,
-                    'urlSlug': userSlug
+                    'id': journey.urlSlug,
+                    'urlSlug': journey.user.urlSlug
                 });
-            } else if (type == "quick-itinerary") {
+            } else if (journey.type == "quick-itinerary") {
                 $state.go('userquickitinerary', {
-                    'id': urlSlug,
-                    'urlSlug': userSlug
+                    'id': journey.urlSlug,
+                    'urlSlug': journey.user.urlSlug
                 });
-            } else if (type == 'detail-itinerary') {
+            } else if (journey.type == 'detail-itinerary') {
                 $state.go('userdetailitinerary', {
-                    'id': urlSlug,
-                    'urlSlug': userSlug
+                    'id': journey.urlSlug,
+                    'urlSlug': journey.user.urlSlug
                 });
+            }else if(journey.type == "ended-journey"){
+              if(journey.draft = true){
+                $state.go('paststory',{
+                  'id': journey.urlSlug,
+                  'urlSlug': journey.user.urlSlug
+                });
+              }
             }
         };
     // routing to on-the-go,detailed-iti,quick-iti ends here
@@ -8941,7 +8949,7 @@ var ref = "";
     });
 
     $scope.searchCity = function (countryId, searchData, cityVisited) {
-        console.log("in search city");
+        console.log("in search city",countryId);
         var formData = {
             "country": countryId,
             "search": searchData
@@ -9550,6 +9558,7 @@ var ref = "";
     });
 
     $scope.searchCity = function (countryId, searchData, cityVisited) {
+        console.log(countryId,'country id',cityVisited,'city visited');
         var formData = {
             "country": countryId,
             "search": searchData
@@ -9580,6 +9589,7 @@ var ref = "";
     };
 
     $scope.updateCountryPanel = function (countryPanel, countryId) {
+        console.log(countryPanel,'what is country panel',countryId,'why country id');
         var currentId = $scope.addCountry[countryPanel].country;
         var index = _.indexOf($scope.previousCountryId, countryId);
         $scope.previousCountryId[countryPanel] = countryId;
@@ -9705,27 +9715,730 @@ var ref = "";
     // month array end
 
 })
-.controller('PastStoryCtrl', function ($scope, TemplateService, NavigationService, pastJourney, $timeout, $stateParams, $state) {
+.controller('PastStoryCtrl', function ($scope, TemplateService,TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state,LikesAndComments,$http,) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
     $scope.menutitle = NavigationService.makeactive("Past Story");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();  
-    $scope.pastJourneyArray = [];
 
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+        if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+          $scope.isMine = true;
+          } else {
+            $scope.isMine = false;
+          }
+    } else {
+        $scope.isLoggedIn = false;
+        $scope.isMine = false;
+    }
+     function calcWidth() {
+        var width = $(window).width();
+        var percent = 40;
+        var newPadding = width * percent / 100;
+        var newCarHolderWidth = (newPadding - 30);
+        var newZoomCarHolder = newCarHolderWidth / 550;
+
+        $scope.mapJourneyCss = {
+            "padding-left": newPadding
+        };
+        $scope.cardHolderCss = {
+            zoom: newZoomCarHolder
+        }
+        console.log(newPadding, width);
+    };
+    if ($(window).width() > 991) {
+        calcWidth();
+    }
+    $scope.ongoCard = true;
+
+    $(window).scroll(function (event) {
+        didScroll = true;
+    });
+
+    setInterval(function () {
+        if (didScroll) {
+            // hasScrolled();
+            didScroll = false;
+        }
+    }, 250);
+    $scope.userData = $.jStorage.get("profile");
+    $scope.pastJourneyArray = [];
+    $scope.destinationVisited = [];
+    $scope.destinationData = {
+        cityVisited : [],
+        country : {
+            flag: '',
+            name: '',
+        }
+    };
+    $scope.viewCardComment = false;
+    $scope.getCard = "";
+    $scope.comment = {
+        'text': ""
+    };
+    $scope.cities = [];
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
+    $scope.showEdit =  -1;
+    var mapBoxPoints = [];
     $scope.getPastJourney = function(){
         var formData = {
-            'urlSlug': 'your-erith-story'
+            // 'urlSlug': 'my-greater-london-story'
+            // 'urlSlug': 'paris-2018'
+            'urlSlug': $stateParams.id
         }
         pastJourney.getPastJourney(formData, function(pastStory){
           $scope.pastJourneyArray = pastStory;
+          if(!$scope.pastJourneyArray.destinationVisited){
+            $scope.pastJourneyArray.destinationVisited = [];
+          }
+          var postsWithLatLng = [];
+        postsWithLatLng = _.filter($scope.pastJourneyArray.post, 'latlong');
+        _.each(postsWithLatLng, function (n, $index) {
+            if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+                centers[$index] = {
+                    "lat": parseFloat(n.latlong.lat),
+                    "lng": parseFloat(n.latlong.long)
+                };
+            } else {}
+        });
+        if (pastStory && pastStory.location && pastStory.location.lat) {
+            var obj = {
+                "lat": parseFloat(pastStory.location.lat),
+                "lng": parseFloat(pastStory.location.long)
+            }
+            centers.unshift(obj);
+        } else {}
+        console.log(centers);
+        initMap();
         },function(error){
           console.log(error);
         })
     }  
     $scope.getPastJourney();
+    //maps integration starts here
+    var mapStyle = [{
+        "featureType": "all",
+        "elementType": "labels.text.fill",
+        "stylers": [{
+            "color": "#ffffff"
+        }]
+    }, {
+        "featureType": "all",
+        "elementType": "labels.text.stroke",
+        "stylers": [{
+            "visibility": "on"
+        }, {
+            "color": "#3e606f"
+        }, {
+            "weight": 2
+        }, {
+            "gamma": 0.84
+        }]
+    }, {
+        "featureType": "all",
+        "elementType": "labels.icon",
+        "stylers": [{
+            "visibility": "off"
+        }]
+    }, {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [{
+            "weight": 0.6
+        }, {
+            "color": "#1a3541"
+        }]
+    }, {
+        "featureType": "landscape",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#2c5a71"
+        }]
+    }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#406d80"
+        }]
+    }, {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#2c5a71"
+        }]
+    }, {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#29768a"
+        }, {
+            "lightness": -37
+        }]
+    }, {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#406d80"
+        }]
+    }, {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{
+            "color": "#2c3757"
+        }]
+    }]
 
+
+    line = _.map(centers, function () {
+        return {};
+    });
+    _.map(centers, function () {
+        markers.push({});
+    });
+     initMap = function () {
+        var $map = $('#map');
+        var mapDim = {
+            height: $map.height(),
+            width: $map.width()
+        }
+        center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+        if (typeof google === 'object' && typeof google.maps === 'object') {
+            var bounds = new google.maps.LatLngBounds();
+
+            setMarker = function (status, current, previous, i) {
+                var currentPosition = new google.maps.LatLng(current.lat, current.lng);
+                if (previous != null) {
+                    console.log("previous should set now");
+                    var previousPosition = new google.maps.LatLng(previous.lat, previous.lng);
+                    // markers[i-1].setMap(null);
+                    var previousObj = {
+                        position: previousPosition,
+                        map: map,
+                        icon: "img/maps/red-marker.png"
+                    }
+                        // marker = new google.maps.Marker(previousObj);
+                        // markers[i-1] = marker;
+                    }
+                    var currentObj = {
+                        position: currentPosition,
+                        map: map,
+                    // icon: "img/maps/small-marker.png"
+                };
+                if (status == "small-marker") {
+                    currentObj.icon = "img/maps/small-marker.png";
+                } else if (status == "red-marker") {
+                    currentObj.icon = "img/maps/red-marker.png";
+                } else if (status == "green-marker") {
+                    currentObj.icon = "img/maps/green-marker.png";
+                } else if (status == null) {
+                    currentObj.map = null;
+                    currentObj.zIndex = i;
+                }
+                marker = new google.maps.Marker(currentObj);
+                markers[i] = marker;
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                center: center,
+                zoom: 4,
+                styles: mapStyle,
+                disableDefaultUI: true
+            });
+
+            var step = 0;
+            var numSteps = 100; //Change this to set animation resolution
+            var lineSymbol = {
+                path: 'M 0,-1 0,1',
+                strokeOpacity: 0,
+                scale: 3
+            };
+            // Grey static dotted - polylines starts here
+            travelPath = new google.maps.Polyline({
+                path: centers,
+                geodesic: true,
+                strokeColor: '#D3D3D3',
+                strokeOpacity: 0,
+                strokeWeight: -3,
+                icons: [{
+                    icon: lineSymbol,
+                    offset: '0',
+                    repeat: '20px'
+                }],
+            });
+            travelPath.setMap(map);
+            // Grey static polylines ends here
+
+            var myVar = setInterval(myTimer, 1000);
+
+            function myTimer() {
+                if (centers.length != 0) {
+                    _.each(centers, function (n, index) {
+                        setMarker(null, n, null, index + 1);
+                    });
+                    if ($scope.journey && $scope.journey.location && $scope.journey.location.lat) {
+                        setMarker("green-marker", centers[0], null, 1);
+                        markers[1].setMap(map);
+                        markers[1].setIcon("img/maps/green-marker.png");
+                    }
+                    clearInterval(myVar);
+                } else {
+                    console.log("didnt got center");
+                }
+            };
+
+            function getBoundsZoomLevel(bounds, mapDim) {
+                var WORLD_DIM = {
+                    height: 256,
+                    width: 256
+                };
+                var ZOOM_MAX = 21;
+
+                function latRad(lat) {
+                    var sin = Math.sin(lat * Math.PI / 180);
+                    var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+                    return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+                }
+
+                function zoom(mapPx, worldPx, fraction) {
+                    return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+                }
+
+                var ne = bounds.getNorthEast();
+                var sw = bounds.getSouthWest();
+
+                var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+                var lngDiff = ne.lng() - sw.lng();
+                var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+                var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+                var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+                return Math.min(latZoom, lngZoom, ZOOM_MAX);
+            }
+
+            function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+                var xdiff = (centers[i].lat - centers[i - 1].lat);
+                var ydiff = (centers[i].lng - centers[i - 1].lng);
+                var currentZoom = currentZoom = map.getZoom();
+                var commingZoom;
+                if (value) {
+                    var markerBounds = new google.maps.LatLngBounds();
+                    markerBounds.extend(departure);
+                    markerBounds.extend(arrival);
+                    commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
+                    map.fitBounds(markerBounds);
+                }
+                var frac1 = xdiff / 100;
+                var frac2 = ydiff / 100;
+                var iniLat = centers[i - 1].lat;
+                var iniLng = centers[i - 1].lng;
+                var timePerStep = frac1; //Change this to alter animation speed
+                var lineSymbol = {
+                    path: 'M 0,-1 0,1',
+                    // path: google.maps.SymbolPath.map - icon - airport,
+                    strokeOpacity: 1,
+                    scale: 3
+                };
+                if (percentComplete == 100 && flag) {
+                    if (markers[i + 1].map == null) {
+                        markers[i + 1].setMap(map);
+                    }
+                    markers[i + 1].setIcon("img/maps/green-marker.png");
+                    markers[i].setIcon("img/maps/red-marker.png");
+                } else if ((percentComplete > 98 && percentComplete < 100 && i == centers.length - 1)) {
+                    if (markers[i + 1].map == null) {
+                        markers[i + 1].setMap(map);
+                    }
+                    markers[i + 1].setIcon("img/maps/green-marker.png");
+                    markers[i].setIcon("img/maps/red-marker.png");
+                }
+
+                if (_.isEmpty(line[i])) {
+                    line[i] = new google.maps.Polyline({
+                        path: [departure, departure],
+                        // strokeColor: "#f2675b", //orange
+                        // strokeColor: "#263757", //navy-blue
+                        strokeColor: "#11d3cb", //navy-blue
+                        // strokeOpacity: 1, --for continuous line
+                        //   strokeWeight: 3,
+                        strokeOpacity: 0, //for dotted lines
+                        strokeWeight: 3,
+                        icons: [{
+                            icon: lineSymbol,
+                            offset: '0', //set +ve val for moving trails
+                            repeat: '20px'
+                        }],
+                        geodesic: true, //set to false if you want straight line instead of arc
+                        map: map,
+                    });
+                }
+                var drawLine = function (departure, arrival, percent, i, value) {
+                    percentFrac = percent / 100;
+                    var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+                    line[i].setPath([departure, are_we_there_yet]);
+                    // static center =center of departure and arrival starts
+                    if (value) {
+                        center = {
+                            "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                            "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
+                        }
+                        center = new google.maps.LatLng(center.lat, center.lng);
+                    }
+                    // static center =center of departure and arrival ends
+                    map.setCenter(center);
+                };
+                drawLine(departure, arrival, percentComplete, i, value);
+            }
+            pointsForLine = function (i, percentComplete, value, flag) {
+                // i=currennt card comming from bottom / arrival card
+                //value=true for identifyng current departure and arrival
+                //flag=true only when percentComplete reaches 100
+                console.log(i);
+                var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+                var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+                step = 0;
+                var linesCount = line.length - 1;
+                for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
+                    if ((value == true) && (percentComplete < 100)) {
+                        if (markerCount == i) {
+                            markers[markerCount].setIcon("");
+                            if (markers[markerCount].map == null) {
+                                markers[markerCount].setMap(map);
+                            };
+                            markers[markerCount].setIcon("img/maps/green-marker.png");
+                        } else if (markerCount >= i) {
+                            markers[markerCount].setMap(null);
+                        } else if ((markerCount <= i)) {
+                            if (markers[markerCount].map == null) {
+                                markers[markerCount].setMap(map);
+                            };
+                            markers[markerCount].setIcon("img/maps/small-marker.png");
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                redLineDraw(i, departure, arrival, percentComplete, value, flag);
+
+                //clearPolyLines starts
+                while ((linesCount >= (i + 1)) && (value)) {
+                    if (!_.isEmpty(line[linesCount])) {
+                        line[linesCount].setMap(null);
+                        markers[linesCount].setMap(null);
+                        line[linesCount] = {};
+                    };
+                    linesCount--;
+                };
+                //clearPolyLines ends
+
+                //draw succeeding polyLines starts
+                if (i > 1) {
+                    pointsForLine(i - 1, 100);
+                    count = centers.length;
+                };
+                //draw succeeding polyLines end
+            };
+        }
+    };
+    setTimeout(function () {
+        initMap();
+    }, 1000);
+    // Map end
+    $scope.viewEdit = function(index){
+      console.log(index);
+      if($scope.showEdit == index){
+        $scope.showEdit =  -1;
+      }else{
+        $scope.showEdit = index;
+      }
+    }
+    // add destination
+    console.log($scope.pastDestination,'before function');
+    $scope.addDestination = function(destinationData){
+        $scope.destinationData = [];
+        console.log($scope.destinationData,'empty');
+        $scope.pastJourneyArray.destinationVisited.push(destinationData);
+    }
+    $scope.deleteVisited = function(index){
+        // $scope.pastJourneyArray.destinationVisited[index] = [];
+        $scope.pastJourneyArray.destinationVisited.splice(index,1);
+    }
+    console.log($scope.pastDestination,'what is pastDestination');
+    // add destination end
+    // get country data
+   var countriesCallback = function (data) {
+        // countries = data.data;
+        // var countries = _.differenceBy(countries,'name');
+        $scope.countries = data.data;
+        // $scope.currency = data.data;
+    };
+
+    NavigationService.getAllCountries(countriesCallback, function () {
+        console.log("error getting data");
+    });
+      // country replace
+    console.log($scope.pastJourneyArray,'what is country');
+    $scope.countryReplace = function(destinationData,index,countryData){
+        console.log(destinationData,'what is country data',index);
+        $scope.pastJourneyArray.destinationVisited[index].country = destinationData.country;
+        $scope.pastJourneyArray.destinationVisited[index].cityVisited = [];
+        console.log($scope.pastJourneyArray.destinationVisited,'new country Data'); 
+    }
+    console.log($scope.pastJourneyArray.destinationVisited,'destiantion visited all data');
+    // country replace end
+
+    $scope.getCityVisited = function(countryId,searchKey){
+        console.log(countryId,'what is country id',searchKey,'what is search key');
+        var formData = {
+            country: countryId,
+            search: searchKey
+        }
+        var str = searchKey;
+        console.log(str);
+        $scope.cities = [];
+        if (str && str.length > 3) {
+            NavigationService.searchCityByCountry(formData, function (data) {
+                $scope.cities = data.data;
+                // cities = data.data;
+                // var cities = _.differenceBy(cities, cityVisited, 'name');
+                // $scope.cities = cities;
+            });
+        }
+    }
+    // get country data end
+    // get likes and comment
+
+
+    $scope.getCommentsData = function (pastStory) {
+        console.log(pastStory, 'pastStory');
+        $scope.post = pastStory;
+        $scope.previousId;
+        $scope.viewCardLike = false;
+        $scope.postScrollData.type = pastStory.type;
+        $scope.postScrollData._id = pastStory._id;
+        var callback = function (data) {
+            $scope.uniqueArr = [];
+            $scope.listOfComments = data.data;
+            $scope.postScrollData.viewList = true;
+            $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+        }
+        if ($scope.previousId != $scope.post._id) {
+            // $scope.focus('enterComment');
+            $scope.listOfComments = [];
+            $scope.viewCardComment = true;
+            $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+            $scope.getCard = "view-whole-card";
+            LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+        } else {
+            if ($scope.viewCardComment) {
+                $scope.viewCardComment = false;
+                $scope.pastJourneyArray.journeyHighLight = "";
+                $scope.getCard = "";
+                $scope.comment.text = "";
+            } else {
+                $scope.listOfComments = [];
+                $scope.viewCardComment = true;
+                // $scope.focus('enterComment');
+                $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+                $scope.getCard = "view-whole-card";
+                LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+            }
+        }
+        $scope.previousId = $scope.post._id;
+    };
+    $scope.getLikesData = function (pastStory) {
+        console.log('post ka click',pastStory);
+        $scope.postScrollData.type = pastStory.type;
+        $scope.postScrollData._id = pastStory._id;
+        $scope.viewCardComment = false;
+        var callback = function (data) {
+            $scope.postScrollData.viewList = true;
+            $scope.listOfLikes = data.data;
+            console.log($scope.listOfLikes);
+        };
+        if ($scope.previousLikeId != pastStory._id) {
+            // $scope.focus('enterComment');
+            $scope.listOfLikes = [];
+            $scope.viewCardLike = true;
+            $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+            $scope.showLikeShow = "show-like-side-sec";
+            LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+        } else {
+            if ($scope.viewCardLike) {
+                $scope.viewCardLike = false;
+                $scope.journey.journeyHighLight = "";
+                $scope.getCard = "";
+                $scope.showLikeShow = "";
+            } else {
+                $scope.listOfComments = [];
+                $scope.viewCardLike = true;
+                // $scope.focus('enterComment');
+                $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+                $scope.showLikeShow = "show-like-side-sec";
+                LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+            }
+        }
+        $scope.previousLikeId = pastStory._id;
+    };
+
+    $scope.closeBackDrop = function () {
+      console.log('close');
+        $scope.viewCardComment = false;
+        $scope.viewCardLike = false;
+        $scope.pastJourneyArray.journeyHighLight = "";
+        $scope.getCard = "";
+        $scope.comment.text = "";
+        $scope.showLikeShow = "";
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.likePageNumber = 1;
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        console.log($scope.postScrollData, 'post scroll data');
+        $timeout(function () {
+            $scope.postScrollData.likePageNumber = 1;
+            $scope.listOfLikes = [];
+            $scope.listOfComments = [];
+            $scope.postScrollData.busy = false;
+            $scope.postScrollData.stopCallingApi = false;
+            $scope.postScrollData.viewList = false;
+            console.log($scope.postScrollData, 'console wla post scroll data');
+        }, 100);
+
+    };
+    // get likes and comment end
+    // save destination visited data
+    $scope.saveDestinationVisited = function(){
+      var formData = {
+        'destinationVisited': $scope.pastJourneyArray.destinationVisited,
+        '_id': $scope.pastJourneyArray._id
+      };
+      console.log(formData,'destinationVisited');
+      TravelibroService.http({
+            url: adminURL + "/draft/editDataWeb",
+            method: "POST",
+            data: formData
+        }).success(function (data) {
+          console.log(data);
+        }).error(function (data) {
+            console.log(data);
+        });
+      console.log('destinationVisited',$scope.pastJourneyArray.destinationVisited);
+    }
+    // save destination visited data end
+  
+//     initMapGl = function(){
+//       mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdHRyYXZlbGlicm8iLCJhIjoiY2o4NWpjdXUyMGppZTJwbWdxbGEzbWFvMyJ9.GQiCLwqxy-fqQik3cGn8EQ';
+//       var mapGl = new mapboxgl.Map({
+//         container: 'map',
+//         center: [72.8372, 18.9353],
+//         zoom: 7,
+//         style: 'mapbox://styles/mapbox/satellite-streets-v9'
+//       });
+//       var mapBoxPoints = [
+//         [72.9781,19.2183],
+//         [73.0297,19.0330],
+//         [73.2368,19.1668],
+//         [73.1763,18.9004],
+//         [73.4062,18.7546],
+//         [73.8331,19.4650],
+//         [74.7496,19.0952],
+//         [74.7496,19.0952],
+//         [72.9106,20.3893],
+//         [72.8372,18.9353]
+//       ];
+//       mapGl.fitBounds(mapBoxPoints);
+//       var geojsonObj = {
+//                 "type": "FeatureCollection",
+//                 "features":[{
+//                   "type": "Feature",
+//                   "properties": {},
+//                   "geometry": {
+//                     "type": "LineString",
+//                     "coordinates": mapBoxPoints
+//                     // [                        
+//                     //     [72.9781,19.2183],
+//                     //     [73.0297,19.0330],
+//                     //     [73.2368,19.1668],
+//                     //     [73.1763,18.9004],
+//                     //     [73.4062,18.7546],
+//                     //     [73.8331,19.4650],
+//                     //     [74.7496,19.0952],
+//                     //     [74.7496,19.0952],
+//                     //     [72.9106,20.3893],
+//                     //     [72.8372,18.9353]
+//                     //   ]
+//                     }
+//                   }                
+//                 ]
+//               }
+//       mapGl.on('load', function () {
+//         mapGl.addLayer({
+//         "id": "route",
+//         "type": "line",
+//         "source": {
+//             "type": "geojson",
+//             "data": geojsonObj
+//         },
+//         "layout": {
+
+//             "line-join": "round",
+//             "line-cap": "round"
+//         },
+//         "paint": {
+//             "line-color": "#fff",
+//             "line-width": 2
+//         }
+//     });
+//         var mapBoxPoints = new mapboxgl.LngLatBounds();
+//         geojsonObj.features.forEach(function(marker) {
+//         // create a HTML element for each feature
+//         var el = document.createElement('div');
+//         el.className = 'marker';
+
+//        // make a marker for each feature and add to the map
+//       console.log(marker.geometry.coordinates);
+//       console.log(mapBoxPoints,'what is mapbox points');
+//       var marker = new mapboxgl.Marker(el)
+//       // .setLngLat(marker.geometry.coordinates)
+//       // mapBoxPoints.extend(marker.geometry.coordinates)
+//       // .addTo(mapGl);
+// });
+//         mapGl.fitBounds(mapBoxPoints);
+//       });
+      
+//     }    
+
+    // setTimeout(function(){
+    //   initMapGl();
+    // },1000);
+    
+    $scope.editOption = function (model) {
+      $timeout(function () {
+          model.backgroundClick = true;
+          backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+  };
 })
 .controller('EditorItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -11109,6 +11822,14 @@ var ref = "";
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
     }, 300);
+
+
+    // $(document).ready(function(){
+    //     window.location = 'TraveLibro://travellibro.app.ascra.com/';
+    //     // window.location: 'yourapp://app.com/?screen=xxxxx';
+    //     console.log('TraveLibro://com.ascra.app.travellibro/?screen=xxxxx');
+    //     alert('TraveLibro://com.ascra.app.travellibro/?screen=xxxxx');
+    // })
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {

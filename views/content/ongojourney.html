@@ -80,20 +80,20 @@
               <div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">
                 <ul>
                   <li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
-                      class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
+                    class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+                    <li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
                       class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                  <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
-                      class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-                  <li>
-                    <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
-                  </li>
-                  <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank"
-                      class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                  <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
-                </ul>
-              </div>
-            </div>
+                      <li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro" target="_blank"
+                        class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+                        <li>
+                          <a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
+                        </li>
+                        <li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}" target="_blank"
+                          class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+                          <li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
+                        </ul>
+                      </div>
+                    </div>
             <!--<div class="following hide">
               <span class="color-white avenir-medium">Following</span>
             </div>-->
@@ -131,10 +131,10 @@
                 <!-- header started -->
                 <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
                   <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="template.isMine">
-                    <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
+                    <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive pointer">
                     <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
                       <ul>
-                        <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
+                        <!-- <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li> -->
                         <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
                       </ul>
                     </div>
@@ -145,10 +145,10 @@
                     <span class="mr5">{{journey.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span>
                     <!-- <i class="fa fa-clock-o mr5"></i> -->
                     <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
-                </div>
-                <!-- header started end-->
-                <div class="journey-imgholder ">
-                  <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
+                  </div>
+                  <!-- header started end-->
+                  <div class="journey-imgholder ">
+                    <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
                   <!--- google image --->
                 </div>
                 <div class="travelling-journey-type">
@@ -175,46 +175,46 @@
                 <div class="journey-with">
                   <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
                     <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
-                  <p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>
+                    <p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>
+                  </div>
                 </div>
               </div>
+              <!-- journey started end-->
             </div>
-            <!-- journey started end-->
-          </div>
-          <!-- journey tab view end -->
-          <!-- card-ongo-main -->
-          <div class="relate">
-            <div class="dot-line"></div>
-            <div class="card-relate-holder functionmap" ng-if="journey.post">
-              <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
+            <!-- journey tab view end -->
+            <!-- card-ongo-main -->
+            <div class="relate">
+              <div class="dot-line"></div>
+              <div class="card-relate-holder functionmap" ng-if="journey.post">
+                <journey-post post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey get-comments-data="getCommentsData(post)"
                 close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template" ng-repeat="ongo in journey.post"></journey-post>
-              <!-- ongo journey-end -->
-              <div class="ongo-journey-end" ng-if="journey.onGoing==false">
-                <div class="journey-end text-center">
-                  <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
-                  <p class="m-clear color-white avenir-roman">
-                    <!-- <i class="fa fa-calendar mr5"></i> -->
-                    <span class="mr5">{{journey.endTime|formatDate: 'date'}}</span>
-                    <span class="mr5">|</span>
-                    <!-- <i class="fa fa-clock-o mr5"></i> -->
-                    <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
-                </div>
-                <div class="end-journey-flag text-center">
-                  <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
-                  <span class="color-white jenna-font">until we meet again!</span>
+                <!-- ongo journey-end -->
+                <div class="ongo-journey-end" ng-if="journey.onGoing==false">
+                  <div class="journey-end text-center">
+                    <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
+                    <p class="m-clear color-white avenir-roman">
+                      <!-- <i class="fa fa-calendar mr5"></i> -->
+                      <span class="mr5">{{journey.endTime|formatDate: 'date'}}</span>
+                      <span class="mr5">|</span>
+                      <!-- <i class="fa fa-clock-o mr5"></i> -->
+                      <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
+                    </div>
+                    <div class="end-journey-flag text-center">
+                      <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
+                      <span class="color-white jenna-font">until we meet again!</span>
+                    </div>
+                  </div>
+                  <!-- ongo journey end -->
                 </div>
               </div>
-              <!-- ongo journey end -->
+              <div class="" ng-if="postScrollData.viewList">
+                <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+              </div>
             </div>
           </div>
-          <div class="" ng-if="postScrollData.viewList">
-            <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
-              list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
-          </div>
+          <!-- map -->
+          <!-- map end -->
         </div>
       </div>
-      <!-- map -->
-      <!-- map end -->
     </div>
-  </div>
-</div>
