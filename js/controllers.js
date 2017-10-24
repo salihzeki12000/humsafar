@@ -220,11 +220,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 //           },function (err) {
 //           })
 //     });
+//     console.log('popular users ',$scope.popular_users);
 //   setTimeout(function(){
 //     $(document).ready(function(){
-//
+//       //start landing page animation
 //       $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
-//         console.log('iphone done');
 //         $('.iphone-screen').css('display','block');
 //         $(this).off(e);
 //       });
@@ -234,15 +234,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 //             $(this).css('opacity','1');
 //             $(this).off(e);
 //           });
+//       //end landing page animation
 //       $('.worksheet').scroll(function(){
+//         //start blue navbar on scroll
 //         if($('.worksheet').scrollTop()<3) {
 //           $("#nav-onhead").removeClass('blue-head');
 //         }
 //         else {
 //           $("#nav-onhead").addClass('blue-head');
 //         }
+//         //end blue navbar on scroll
 //         var firstHeight = $('.home-landing').height();
-//         if($('.worksheet').scrollTop() > firstHeight-100 && $('.worksheet').scrollTop()<3500) {
+//         if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<3500) {
 //           $("#navigation").removeClass("submenu");
 //           $("#navigation").addClass("fixed-subnavigation");
 //           $("#navigation").addClass("fade-now");
@@ -251,24 +254,56 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 //           $("#navigation").removeClass("fixed-subnavigation");
 //           $("#navigation").addClass("submenu");
 //         }
+//         //end blue navbar
+//         //change active section anchor color
+//         var $div = $(".worksheet").offset().top + 250;
+//         if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
+//           $('.discover1').css('color', '#424242');
+//         }else {
+//           $('.discover1').css('color', '#d2d2d2');
+//         }
+//         if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
+//           $('.capture1').css('color', '#424242');
+//         }else {
+//           $('.capture1').css('color', '#d2d2d2');
+//         }
+//         if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
+//           $('.inspire1').css('color', '#424242');
+//         }else {
+//           $('.inspire1').css('color', '#d2d2d2');
+//         }
+//         if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
+//           $('.relive1').css('color', '#424242');
+//         }else {
+//           $('.relive1').css('color', '#d2d2d2');
+//         }
 //       });
 //     })
 //   },2000);
-//   $('.sectionScroll li a').click(function(){
-//     console.log('defines');
-//     var scrollSec = this.attr('title').offset().top();
-//     console.log(scrollSec,'scroll');
-//     $('.worksheet').animate({
-//       scrollTop: scrollSec
-//     }, 500);
-//   });
 //
+// $scope.openKnowMore = function(){
+//   $(".know-more-modal").addClass("show-know-more");
+// };
+// $scope.closeKnowMore = function(){
+//   $(".know-more-modal").removeClass("show-know-more");
+// };
+//   $scope.go_at = function(section){
+//   console.log('worksheet ',$('.worksheet')[0].scrollTop);
+//   var extra_space = 0;
+//   if(section == 'discover' || section == 'capture')
+//   {extra_space = 130;}
+//   else
+//   {extra_space = 145;}
+//   $('.worksheet').animate({
+//       scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
+//     'slow');
+// };
 //   $scope.changePage = function (text) {
 //         // //console.log(text);
 //         var length = $(".fp-section").length;
 //         $timeout(function () {
 //             $('.scene').parallax();
-//             swiper = new Swiper('.swiper-container', {
+//               swiper = new Swiper('.swiper-container', {
 //                 pagination: '.swiper-pagination',
 //                 direction: 'vertical',
 //                 slidesPerView: 1,
@@ -314,7 +349,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 //                 }
 //             });
 //         }
-//
 //         // //console.log(text);
 //         $scope.homeval = text;
 //         switch (text) {
@@ -1325,7 +1359,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var saveDataCallback = function (data, status) {
         if (data.value === true) {
             NavigationService.getProfile($.jStorage.get("profile").urlSlug, function (data, status) {
-                //console.log(data, 'holiday wala data');
                 if (data.data._id) {
                     $.jStorage.set("isLoggedIn", true);
                     $.jStorage.set("profile", data.data);

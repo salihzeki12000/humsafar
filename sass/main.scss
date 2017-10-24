@@ -1615,7 +1615,7 @@ header {
 }
 
 .travel-inside {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .all-profile-detail {
@@ -13325,11 +13325,7 @@ video::-webkit-media-controls-fullscreen-button {
     padding-top: 80px;
   }
   h1, p, .seemore {
-    -webkit-animation: fadeIn 2s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadeIn 2s; /* Firefox < 16 */
-    -ms-animation: fadeIn 2s; /* Internet Explorer */
-    -o-animation: fadeIn 2s; /* Opera < 12.1 */
-    animation: fadeIn 2s;
+    @include animation(fadeIn 2s);
   }
   .below-headline {
     font-size: 18px;
@@ -13361,11 +13357,7 @@ video::-webkit-media-controls-fullscreen-button {
   min-width: 300px;
   width : 750px;
   //padding-top: 200px;
-  -webkit-animation: fadedown 3s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadedown 3s; /* Firefox < 16 */
-  -ms-animation: fadedown 3s; /* Internet Explorer */
-  -o-animation: fadedown 3s; /* Opera < 12.1 */
-  animation: fadedown 3s;
+  @include animation(fadedown 3s);
   img {
     width: 100%;
   }
@@ -13374,65 +13366,17 @@ video::-webkit-media-controls-fullscreen-button {
     position: absolute;
     width: 540px;
     margin-left: 85px;
-    animation: zoomin 1s;
+    @include animation(zoomin 1s);
   }
 }
 //FADE-DOWN ANIMATION KEYFRAMES
-@keyframes fadedown {
-  from { opacity: 0;transform: translateY(-100px); }
-  to   { opacity: 1;transform: translateY(0); }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes fadedown {
-  from { opacity: 0;transform: translateY(-100px); }
-  to   { opacity: 1;transform: translateY(0); }
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadedown {
-  from { opacity: 0;transform: translateY(-100px); }
-  to   { opacity: 1;transform: translateY(0); }
-}
-
-/* Internet Explorer */
-@-ms-keyframes fadedown {
-  from { opacity: 0;transform: translateY(-100px); }
-  to   { opacity: 1;transform: translateY(0); }
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fadedown {
+@include keyframes(fadedown) {
   from { opacity: 0;transform: translateY(-100px); }
   to   { opacity: 1;transform: translateY(0); }
 }
 
 //FADE-IN ANIMATION KEYFRAMES
-@keyframes fadeIn {
-  from { opacity: 0;transform: translateY(30px);}
-  to   { opacity: 1;transform: translateY(0);}
-}
-
-/* Firefox < 16 */
-@-moz-keyframes fadeIn {
-  from { opacity: 0;transform: translateY(30px);}
-  to   { opacity: 1;transform: translateY(0);}
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadeIn {
-  from { opacity: 0;transform: translateY(30px);}
-  to   { opacity: 1;transform: translateY(0);}
-}
-
-/* Internet Explorer */
-@-ms-keyframes fadeIn {
-  from { opacity: 0;transform: translateY(30px);}
-  to   { opacity: 1;transform: translateY(0);}
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fadeIn {
+@include keyframes(fadeIn) {
   from { opacity: 0;transform: translateY(30px);}
   to   { opacity: 1;transform: translateY(0);}
 }
@@ -13443,91 +13387,15 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .blue-head {
   background-color: $brand-blue;
-  animation: fade-now 1s;
+  @include animation(fade-now 1s);
 }
-@keyframes fade-now {
-  from { opacity: 0;}
-  to   { opacity: 1;}
-}
-
-/* Firefox < 16 */
-@-moz-keyframes fade-now {
-  from { opacity: 0;}
-  to   { opacity: 1;}
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fade-now {
-  from { opacity: 0;}
-  to   { opacity: 1;}
-}
-
-/* Internet Explorer */
-@-ms-keyframes fade-now {
-  from { opacity: 0;}
-  to   { opacity: 1;}
-}
-
-/* Opera < 12.1 */
-@-o-keyframes fade-now {
+@include keyframes(fade-now) {
   from { opacity: 0;}
   to   { opacity: 1;}
 }
 
 //ZOOM-IN ANIMATION KEYFRAMES
-@keyframes zoomin {
-  from {
-    opacity: 0;
-    width: 270px;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Firefox < 16 */
-@-moz-keyframes zoomin {
-  from {
-    opacity: 0;
-    width: 270px;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes zoomin {
-  from {
-    opacity: 0;
-    width: 270px;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Internet Explorer */
-@-ms-keyframes zoomin {
-  from {
-    opacity: 0;
-    width: 270px;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Opera < 12.1 */
-@-o-keyframes zoomin {
+@include keyframes(zoomin) {
   from {
     opacity: 0;
     width: 270px;
@@ -13542,10 +13410,10 @@ video::-webkit-media-controls-fullscreen-button {
 .libro-logo {
   width: 90px;
   opacity: 0;
-  animation: bounceIn 2s;
+  @include animation(bounceIn 2s);
   animation-delay: 4s;
 }
-@keyframes bounceIn {
+@include keyframes(bounceIn) {
   0% {
     opacity: 0;
     transform: scale(.3);
@@ -13602,16 +13470,7 @@ video::-webkit-media-controls-fullscreen-button {
     }
   }
 }
-.popular-user {
-  min-height: 300px;
-  height: auto;
-  /* width: 100%; */
-  overflow: hidden;
-  background-color: white;
-  box-shadow: 4px 6px 50px 0px #d2d2d2;
-  border-radius: 15px;
-  margin: 0 30px;
-}
+
 #capture .download {
   text-align: center;
   span {
@@ -13619,15 +13478,26 @@ video::-webkit-media-controls-fullscreen-button {
     padding-right: 10px;
   }
 }
+.current-active {
+  color : #424242;
+}
 .landing-home .container-fluid {
   padding: 0;
 }
 .popular-user {
+  height: auto;
+  /* width: 100%; */
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 4px 6px 50px 0px #d2d2d2;
+  border-radius: 15px;
+  margin: 0 60px;
   .profile-image-mobile {
     display: block;
   }
   .profile-pic {
-    height: 390px;
+    width: 100%;
+    height: 300px;
     overflow: hidden;
     img {
       min-width: 100%;
@@ -13637,11 +13507,24 @@ video::-webkit-media-controls-fullscreen-button {
   .profile-detail{
     text-align: left;
     font-family: AvenirLTStd-Heavy;
-    padding: 0 10px 10px 10px;
+    padding: 0 10px 1px 10px;
     h2 {
       margin-top: 0;
     }
   }
+}
+.show-know-more {
+  opacity: 1;
+  z-index: 1;
+  @include transition(all 300ms linear);
+}
+
+.relive-mobile-holder {
+  padding: 35px;
+  margin-top: 30px;
+}
+.landing-col {
+  padding: 0 6%;
 }
 .full-img {
   width: 100%;
@@ -13662,6 +13545,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 #discover {
   text-align: center;
+  @include animation(fadeIn 2s);
   h3 {
     font-weight: 600;
     padding-bottom: 20px;
@@ -13690,7 +13574,7 @@ video::-webkit-media-controls-fullscreen-button {
   height: 600px;
   border-radius: 15px;
   .inspire-text {
-    padding: 0 20px;
+    padding: 0 10px 0 0;
     margin-top: 50%;
   }
   .social-icons {
@@ -13786,7 +13670,7 @@ video::-webkit-media-controls-fullscreen-button {
   ul li {
     display: inline-block;
     color: white;
-    padding: 2% 3%;
+    padding: 1% 2%;
     .avenir-heavy {
       font-size: 20px;
     }
@@ -13800,8 +13684,8 @@ video::-webkit-media-controls-fullscreen-button {
     background: rgba(0, 0, 0, 0.6);
     border-radius: 62%;
     display: inline-block;
-    width: 65px;
-    height: 65px;
+    width: 59px;
+    height: 59px;
     padding: 7px;
     margin: 0 5px;
   }
@@ -13809,10 +13693,9 @@ video::-webkit-media-controls-fullscreen-button {
     padding-top: 4px;
   }
   .symbol-up {
-    margin-top: -8px;
-    padding: 14px;
+    padding: 5px 13px;
     img {
-      padding-bottom: 5px;
+      padding: 3px 2px;
     }
   }
   .avenir-heavy {

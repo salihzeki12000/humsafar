@@ -1,13 +1,13 @@
 <div class="worksheet">
   <div class="landing-home" ng-class="{'know-more-travelibro': viewModal == true,'': viewModal == false}">
     <div class="container-fluid">
-    <div class="home-landing" id="home-landing" auto-height>
+    <div class="home-landing bottomspace" id="home-landing" auto-height>
       <h1 class="headline">Turning every Traveller into Storyteller!</h1>
       <p class="below-headline">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
       <div class="seemore">
         <!--<img src="img/know-more-gray.png" alt="know more" width="90px">-->
         <div class="know-watch-more text-center" ng-init="viewModal=false" >
-          <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal = true">
+          <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
           <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/222624906?title=0&amp;byline=0&amp;portrait=0"
              fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
             <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
@@ -33,22 +33,23 @@
       </div>
     </div>
     <!--<div class="home-navigation">-->
-      <div class="submenu" role="navigation" id="navigation">
+      <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
         <ul class="sectionScroll">
-          <li><a href="" scroll-to="discover" class="take-scroll" title="">DISCOVER</a></li>|
-          <li><a href="" scroll-to="capture" class="take-scroll" title="">CAPTURE</a></li>|
-          <li><a href="" scroll-to="inspire" class="take-scroll" title="">INSPIRE</a></li>|
-          <li><a href="" scroll-to="relive" class="take-scroll" title="">RELIVE</a></li>
+          <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
+          <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
+          <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
+          <li ng-click="go_at('relive')" ><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
         </ul>
       </div>
     <!--</div>-->
     <div class="sections-holder">
-      <div id="discover" auto-height>
-        <h2 class="text-heavy color-42 visible-xs">DISCOVER</h2>
+      <div id="discover" class="discover bottomspace" auto-height>
+        <h2 class="text-heavy color-42 visible-xs visible-sm">DISCOVER</h2>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6 ">
             <h3>Trending Travellers</h3>
             <div class="popular-user">
+              <a href="#/users/{{popular_users[0].data.urlSlug}}" ui-sref="mylife({'urlSlug':popular_users[0].data.urlSlug})">
               <div class="profile-pic profile-image-mobile relate">
                 <img src="/img/nomadic_boys.jpg" alt="" class="img-responsive get-center">
                 <div class="user-details-stripe">
@@ -90,14 +91,16 @@
                 <h4 class="color-blue">Worlds Finest Gay Tavellers</h4>
                 <h2 class="color-blue">Nomadic Boys</h2>
               </div>
+              </a>
             </div>
             <a href="https://travelibro.com/#/popular-bloggers" ui-sref="popularblogger"><div class="trending-stuff">View Top 20 Trending Travellers<div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 ">
             <h3>Trending Stories</h3>
             <div class="popular-user">
+              <a href="#/users/{{popular_users[1].data.urlSlug}}" ui-sref="mylife({'urlSlug':popular_users[1].data.urlSlug})">
               <div class="profile-pic profile-image-mobile relate">
-                <img src="/img/romaroo1.jpg" alt="" class="img-responsive get-center">
+                <img src="/img/romaroo.jpg" alt="" class="img-responsive get-center">
                 <div class="user-details-circles pull-left">
                   <ul>
                     <li class="text-center pointer">
@@ -125,13 +128,14 @@
                 <h4 class="color-blue">Greece Story - 15 Days</h4>
                 <h2 class="color-blue">Roamaroo</h2>
               </div>
+              </a>
             </div>
             <a href="https://travelibro.com/#/popular-journeys" ui-sref="popularjourney"><div class="trending-stuff">View Top 50 Trending Stories <div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
           </div>
         </div>
       </div>
-      <div id="capture" auto-height>
-        <h2 class="text-heavy color-42 text-center visible-xs">CAPTURE</h2>
+      <div id="capture" class="capture bottomspace" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs visible-sm">CAPTURE</h2>
         <div class="row capture-row">
           <div class="col-md-4">
             <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
@@ -164,8 +168,8 @@
           <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
       </div>
       </div>
-      <div id="inspire" auto-height>
-        <h2 class="text-heavy color-42 text-center visible-xs">INSPIRE</h2>
+      <div id="inspire" class="inspire bottomspace" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs visible-sm">INSPIRE</h2>
         <div class="inspire-banner">
           <div class="row">
             <div class="col-md-8"><img src="/img/Inspire.png" alt="" width="100%"></div>
@@ -212,8 +216,8 @@
           </div>
         </div>
       </div>
-      <div id="relive" auto-height>
-        <h2 class="text-heavy color-42 text-center visible-xs">RELIVE</h2>
+      <div id="relive" class="relive bottomspace" auto-height>
+        <h2 class="text-heavy color-42 text-center visible-xs visible-sm">RELIVE</h2>
         <div class="relive-banner" style="overflow: visible">
           <div class="row">
             <div class="col-md-6">
@@ -224,7 +228,7 @@
               </div>
               </div>
             <div class="col-md-6">
-              <div style="padding: 35px;margin-top: 30px;">
+              <div class="relive-mobile-holder">
                 <img src="/img/relive.png" alt="" width="100%">
               </div>
             </div>
@@ -358,7 +362,7 @@
   <div class="modal-main">
     <div class="modal-imgholder"><img src="img/libro-home/login-phone.png" alt="" class="img-responsive"></div>
     <div class="modal-descp">
-      <div class="close-btn"><i class="fa fa-times pointer" ng-click="viewModal=false"></i></div>
+      <div class="close-btn"><i class="fa fa-times pointer" ng-click="closeKnowMore();viewModal=false;"></i></div>
       <h3 class="avenir-heavy">Capture and Relive Your Travel Stories</h3>
       <div class="modal-scroll-descp">
         <p>We have witnessed a change in the way travel experiences are being shared from writing a blog about a holiday to sharing a few selected moments on social media for instant likes and gratification. </p>

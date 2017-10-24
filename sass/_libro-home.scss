@@ -681,7 +681,7 @@ a.color-white {
 .know-more-travelibro {
   @include filter(blur(10px));
 }
-.know-more-travelibro + .know-more-modal {
+.know-more-travelibro + .know-more-modal{
   opacity: 1;
   z-index: 1;
   @include transition(all 300ms linear);

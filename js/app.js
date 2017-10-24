@@ -640,7 +640,7 @@ firstapp.directive("scrolladd2class", function ($window) {
         });
     };
 });
-
+var prev = [];
 firstapp.directive('scrollTo', function ($location, $anchorScroll) {
     return function(scope, element, attrs) {
       element.bind('click', function(event) {
@@ -649,15 +649,21 @@ firstapp.directive('scrollTo', function ($location, $anchorScroll) {
         //   off();
         //   ev.preventDefault();
         // });
+
         var location = attrs.scrollTo;
         console.log('scroll to ',location);
         $location.hash(location);
         // $anchorScroll();
         var b = $('.worksheet').offset().top;
         var a = $('#'+location).offset().top;
+        console.log(a,b);
+        if(prev.length >= 2)
+          prev.shift();
+          prev.push(a);
         $('.worksheet').animate({
           scrollTop: a
         }, 500);
+        console.log('a---',prev);
       });
 
     };

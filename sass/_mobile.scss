@@ -35,6 +35,9 @@
   .inspire-banner, .relive-banner {
     height: auto !important;
   }
+  #discover .popular-user {
+    margin: 0;
+  }
   .notify-popup {
     .comment-like-notify {
       width: 45%;
@@ -278,6 +281,19 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  #discover .popular-user {
+    margin: 0 3%;
+  }
+  #relive .relive-text {
+    margin : 30px 0;
+  }
+  #inspire .inspire-banner .inspire-text {
+    padding: 0 20px;
+    margin : 20px 0;
+  }
+  #inspire, #relive {
+    padding: 0;
+  }
   .trip-travellers-card{
     margin: 5px 0 25px 0;
   }
@@ -727,6 +743,21 @@
 @media screen and (max-width: 767px) {
   /*new landing page*/
   .landing-home {
+    #relive h2{
+      padding-top: 30px;
+    }
+    .footer-filler .filler-text {
+      padding: 23% 6%;
+    }
+    .relive-mobile-holder {
+      margin-bottom: -100px;
+    }
+    .bottomspace {
+      min-height: 0 !important;
+    }
+    #discover, #capture, #inspire, #relive {
+      min-height: 0;
+    }
     .user-details-circles {
       padding: 0 10px;
       li {
@@ -739,7 +770,7 @@
       }
     }
     .user-details-stripe ul li {
-      padding: 2% 2%;
+      padding: 2% 1%;
       .avenir-heavy {
         font-size: 14px;
       }
@@ -765,7 +796,7 @@
       }
     }
     .inspire-banner, .relive-banner {
-      width: 95%;
+      width: 100%;
       height: auto;
     }
     .inspire-banner .inspire-text {
@@ -809,12 +840,12 @@
       font-size: 14px;
     }
     .capture-row {
-      margin: 0 -27px;
+      //margin: 0 -27px;
     }
     .popular-user {
       margin: 0;
       .profile-image-mobile, .profile-pic {
-        height: calc(100vw - 150px);
+        height: 250px;
       }
     }
     .capture-row .col-md-4 {
@@ -824,7 +855,7 @@
       padding: 0;
     }
     .sections-holder {
-      padding: 0 30px;
+      padding: 40px 15px 90px;
     }
     .submenu, .fixed-subnavigation {
       display: none;
@@ -2196,7 +2227,17 @@
   }
 
   //new landing page
-
+  .landing-home {
+    .user-details-circles .symbol-up {
+      padding: 2px 10px;
+      img {
+        padding: 4px 3px;
+      }
+      span {
+        margin-left: -5px;
+      }
+    }
+  }
   //end new landing page
   .store-stripe {
     display: block !important;
