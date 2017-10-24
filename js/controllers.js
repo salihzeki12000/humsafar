@@ -1327,6 +1327,7 @@ var ref = "";
             } else {}
         });
         if (journeys && journeys.location && journeys.location.lat) {
+            console.log('when is comes');
             var obj = {
                 "lat": parseFloat(journeys.location.lat),
                 "lng": parseFloat(journeys.location.long)
@@ -1598,6 +1599,7 @@ var ref = "";
                         map: map,
                     // icon: "img/maps/small-marker.png"
                 };
+                console.log(currentObj,'currentObj');
                 if (status == "small-marker") {
                     currentObj.icon = "img/maps/small-marker.png";
                 } else if (status == "red-marker") {
@@ -5836,6 +5838,11 @@ var ref = "";
                   'id': journey.urlSlug,
                   'urlSlug': journey.user.urlSlug
                 });
+              }else {
+                $state.go('ongojourney', {
+                    'id': journey.urlSlug,
+                    'urlSlug': journey.user.urlSlug
+                });
               }
             }
         };
@@ -9765,10 +9772,28 @@ var ref = "";
 
     setInterval(function () {
         if (didScroll) {
-            // hasScrolled();
+            hasScrolled();
             didScroll = false;
         }
     }, 250);
+     function hasScrolled() {
+        var st = $(this).scrollTop();
+
+        if (Math.abs(lastScrollTop - st) <= delta)
+            return;
+
+        if (st > lastScrollTop && st > journeyInfoStrip) {
+            // Scroll Down
+            $('.journey-info-strip').addClass('remove-otgstrip').removeClass('get-otgstrip');
+        } else {
+            // Scroll Up
+            if (st + $(window).height() < $(document).height()) {
+                $('.journey-info-strip').addClass('get-otgstrip').removeClass('remove-otgstrip');
+            }
+        }
+
+        lastScrollTop = st;
+    }
     $scope.userData = $.jStorage.get("profile");
     $scope.pastJourneyArray = [];
     $scope.destinationVisited = [];
@@ -9802,8 +9827,8 @@ var ref = "";
             // 'urlSlug': 'paris-2018'
             'urlSlug': $stateParams.id
         }
-        pastJourney.getPastJourney(formData, function(pastStory){
-          $scope.pastJourneyArray = pastStory;
+        pastJourney.getPastJourney(formData, function(pastStoryData){
+          $scope.pastJourneyArray = pastStoryData;
           if(!$scope.pastJourneyArray.destinationVisited){
             $scope.pastJourneyArray.destinationVisited = [];
           }
@@ -9817,10 +9842,11 @@ var ref = "";
                 };
             } else {}
         });
-        if (pastStory && pastStory.location && pastStory.location.lat) {
+        if (pastStoryData && pastStoryData.location && pastStoryData.location.lat) {
+            console.log('when is comes');
             var obj = {
-                "lat": parseFloat(pastStory.location.lat),
-                "lng": parseFloat(pastStory.location.long)
+                "lat": parseFloat(pastStoryData.location.lat),
+                "lng": parseFloat(pastStoryData.location.long)
             }
             centers.unshift(obj);
         } else {}
@@ -9993,7 +10019,7 @@ var ref = "";
                     _.each(centers, function (n, index) {
                         setMarker(null, n, null, index + 1);
                     });
-                    if ($scope.journey && $scope.journey.location && $scope.journey.location.lat) {
+                    if ($scope.pastJourneyArray && $scope.pastJourneyArray.location && $scope.pastJourneyArray.location.lat) {
                         setMarker("green-marker", centers[0], null, 1);
                         markers[1].setMap(map);
                         markers[1].setIcon("img/maps/green-marker.png");
