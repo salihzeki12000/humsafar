@@ -10,122 +10,122 @@
         <div class="ongo-card-holder" ng-style="cardHolderCss">
           <!--slug profile-->
 
-            <div class="ongo-profile"
-                 style="background: url('{{journey.user.profilePicture|uploadpath:400:400:'cover'}}') no-repeat; background-size: cover;background-position: 50% 50%;">
-              <div class="profile-overlay">
-                <div class="ongo-profile-info m-center">
-                  <div class="ongo-profile-name">
-                    <p class="bold pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
-                      {{journey.user.name}}
-                    </p>
-                    <button ng-if="!template.isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">
-                      {{userData.following | followFollowingStatus}}
-                    </button>
-                  </div>
-                  <div class="ongo-profile-details">
-                    <div class="ongo-details-scroll">
-                      <ul>
-                        <li class="text-center pointer" ng-click="profileListRedirect('following',userData.urlSlug)">
-                          <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})" -->
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.following_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">following</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="profileListRedirect('followers',userData.urlSlug)">
-                          <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})" -->
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.followers_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">followers</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer"
-                            ng-click="profileListRedirect('countries-visited',userData.urlSlug)">
-                          <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})" -->
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.countriesVisited_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">countries visited</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="profileListRedirect('bucket-list',userData.urlSlug)">
-                          <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})" -->
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.bucketList_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">bucket List</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="getTab(0);">
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.journeysCreated_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">journeys created</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="getTab(0);">
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.checkins_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">check-ins</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="getTab(1);">
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.photos_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">photos</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="getTab(2);">
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.reviews_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">reviews</span>
-                          </div>
-                        </li>
-                        <li class="text-center pointer" ng-click="getTab(0);">
-                          <div class="travel-inside">
-                            <span class="avenir-heavy color-white">{{userData.itinerary_count}}</span>
-                            <span class="block static-text avenir-roman color-white mt5">itineraries</span>
-                          </div>
-                        </li>
-                      </ul>
+          <div class="ongo-profile"
+          style="background: url('{{journey.user.profilePicture|uploadpath:400:400:'cover'}}') no-repeat; background-size: cover;background-position: 50% 50%;">
+          <div class="profile-overlay">
+            <div class="ongo-profile-info m-center">
+              <div class="ongo-profile-name">
+                <p class="bold pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                  {{journey.user.name}}
+                </p>
+                <button ng-if="!template.isMine" class="btn btn-pink btn-more" ng-click="followFollowing(userData)">
+                  {{userData.following | followFollowingStatus}}
+                </button>
+              </div>
+              <div class="ongo-profile-details">
+                <div class="ongo-details-scroll">
+                  <ul>
+                    <li class="text-center pointer" ng-click="profileListRedirect('following',userData.urlSlug)">
+                      <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'following'})" -->
+                      <div class="travel-inside">
+                        <span class="avenir-heavy color-white">{{userData.following_count}}</span>
+                        <span class="block static-text avenir-roman color-white mt5">following</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer" ng-click="profileListRedirect('followers',userData.urlSlug)">
+                      <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'followers'})" -->
+                      <div class="travel-inside">
+                        <span class="avenir-heavy color-white">{{userData.followers_count}}</span>
+                        <span class="block static-text avenir-roman color-white mt5">followers</span>
+                      </div>
+                    </li>
+                    <li class="text-center pointer"
+                    ng-click="profileListRedirect('countries-visited',userData.urlSlug)">
+                    <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'countries-visited'})" -->
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.countriesVisited_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">countries visited</span>
                     </div>
-                  </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="profileListRedirect('bucket-list',userData.urlSlug)">
+                    <!-- ui-sref="ProfileList({'urlSlug':activeUrlSlug,'active':'bucket-list'})" -->
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.bucketList_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">bucket List</span>
+                    </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="getTab(0);">
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.journeysCreated_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">journeys created</span>
+                    </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="getTab(0);">
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.checkins_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">check-ins</span>
+                    </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="getTab(1);">
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.photos_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">photos</span>
+                    </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="getTab(2);">
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.reviews_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">reviews</span>
+                    </div>
+                  </li>
+                  <li class="text-center pointer" ng-click="getTab(0);">
+                    <div class="travel-inside">
+                      <span class="avenir-heavy color-white">{{userData.itinerary_count}}</span>
+                      <span class="block static-text avenir-roman color-white mt5">itineraries</span>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          <!--slug profile end-->
-          <!-- journey tab view -->
-          <div class="journey-tab-view">
-            <!-- journey started -->
-            <div class="started-journey-card">
-              <div class="relate text-center">
-                <div class="journey-start">
-                  <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
-                  <h4 class="avenir-roman"><span class="block">{{journey.name}}</span></h4>
-                  <div class="you-in">
-                    <img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
-                  </div>
+        </div>
+      </div>
+      <!--slug profile end-->
+      <!-- journey tab view -->
+      <div class="journey-tab-view">
+        <!-- journey started -->
+        <div class="started-journey-card">
+          <div class="relate text-center">
+            <div class="journey-start">
+              <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
+              <h4 class="avenir-roman"><span class="block">{{journey.name}}</span></h4>
+              <div class="you-in">
+                <img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
+              </div>
+            </div>
+          </div>
+          <div class="box-start-journey" ng-class="{'hasLatLng':journey.location && journey.location.lat}">
+            <!-- header started -->
+            <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
+              <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="template.isMine">
+                <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
+                <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
+                  <ul>
+                    <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
+                    <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
+                  </ul>
                 </div>
               </div>
-              <div class="box-start-journey" ng-class="{'hasLatLng':journey.location && journey.location.lat}">
-                <!-- header started -->
-                <div class="started-heading relate text-center clearfix" ng-init="ongo.kindOf = {};">
-                  <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="template.isMine">
-                    <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
-                    <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
-                      <ul>
-                        <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
-                        <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <h4 class="color-white avenir-light">{{journey.startLocation}}</h4>
-                  <p class="color-white m-clear avenir-roman">
-                    <!-- <i class="fa fa-calendar mr5"></i> -->
-                    <span class="mr5">{{journey.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span>
-                    <!-- <i class="fa fa-clock-o mr5"></i> -->
-                    <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
-                </div>
-                <!-- header started end-->
-                <div class="start-journey">
-                  <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
+              <h4 class="color-white avenir-light">{{journey.startLocation}}</h4>
+              <p class="color-white m-clear avenir-roman">
+                <!-- <i class="fa fa-calendar mr5"></i> -->
+                <span class="mr5">{{journey.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span>
+                <!-- <i class="fa fa-clock-o mr5"></i> -->
+                <span class="mr5">{{journey.startTime|formatDate: 'time'}}</span></p>
+              </div>
+              <!-- header started end-->
+              <div class="start-journey">
+                <img ng-src="{{journey.startLocationPic | uploadpath}}" alt="" class="img-responsive">
                   <!--- google image --->
                   <div class="journey-overview">
                     <div class="row m-clear">
@@ -171,86 +171,86 @@
                 </div>
 
                 <!--<div class="travelling-journey-type">-->
-                <!--<div class="clearfix">-->
-                <!--<div class="pull-left">-->
-                <!--<ul>-->
-                <!--<li ng-repeat="list in journey.kindOfJourney|limitTo:3">-->
-                <!--<a href="">-->
-                <!--<img ng-src="{{list|kindOfJourney:'pink'}}" alt="" height="15">-->
-                <!--</a>-->
-                <!--</li>-->
-                <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="pull-right relate full-width">-->
-                <!--<div class="journey-travelling-buddies">-->
-                <!--<div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3 track by $index">-->
-                <!--<img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive" ui-sref="mylife({'urlSlug':img.urlSlug})">-->
-                <!--</div>-->
-                <!--<span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="journey-with">-->
+                  <!--<div class="clearfix">-->
+                    <!--<div class="pull-left">-->
+                      <!--<ul>-->
+                        <!--<li ng-repeat="list in journey.kindOfJourney|limitTo:3">-->
+                          <!--<a href="">-->
+                            <!--<img ng-src="{{list|kindOfJourney:'pink'}}" alt="" height="15">-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+                            <!--<div class="pull-right relate full-width">-->
+                              <!--<div class="journey-travelling-buddies">-->
+                                <!--<div class="img-buddies pointer" ng-repeat="img in journey.buddies|limitTo:3 track by $index">-->
+                                  <!--<img ng-src="{{img.profilePicture|uploadpath:50}}" alt="" class="img-responsive" ui-sref="mylife({'urlSlug':img.urlSlug})">-->
+                                  <!--</div>-->
+                                  <!--<span ng-show="journey.showRemainingCount" class="">+{{journey.remainingCount}}</span>-->
+                                  <!--</div>-->
+                                  <!--</div>-->
+                                  <!--</div>-->
+                                  <!--</div>-->
+                                  <!--<div class="journey-with">-->
                 <!--<p class="avenir-roman m-clear">{{journey.startLocation}} {{journey.start_Time.year}} <b>{{journey.user.name}}</b> with <b>Monish Shah</b>,
                   <b>Malhar Gala</b> &amp; <b>Nida Kapadia</b></p>-->
-                <!--<p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>-->
-                <!--</div>-->
+                  <!--<p class="avenir-roman m-clear" ng-bind-html="journey.startJourneyString | safe"></p>-->
+                  <!--</div>-->
+                </div>
               </div>
-            </div>
-            <!-- journey started end-->
-            <!--trip traveller buddies-->
-            <div class="dash-up"></div>
-            <div class="trip-travellers-card">
-              <div class="trip-travellers-card-header">
-                <div class="clearfix gray-line-bottom">
-                  <h4 class="font-bold color-username pointer m-clear" style="text-align: center;padding: 6px 0">Trip Travellers
+              <!-- journey started end-->
+              <!--trip traveller buddies-->
+              <div class="dash-up"></div>
+              <div class="trip-travellers-card">
+                <div class="trip-travellers-card-header">
+                  <div class="clearfix gray-line-bottom">
+                    <h4 class="font-bold color-username pointer m-clear" style="text-align: center;padding: 6px 0">Trip Travellers
                     ({{journey.buddies.length+1}})</h4>
-                </div>
-              </div>
-              <div class="trip-travellers-card-main">
-                <div class="trip-user-imgholder">
-                  <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
-                    <img src="{{journey.user.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
                   </div>
-                  <h5 class="bold" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
-                    {{journey.user.name}}
-                  </h5>
                 </div>
-                <span ng-if="journey.buddies.length>0">
-                  <div class="trip-user-imgholder" ng-repeat="buddy in journey.buddies track by $index">
-                    <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
-                      <img src="{{buddy.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+                <div class="trip-travellers-card-main">
+                  <div class="trip-user-imgholder">
+                    <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                      <img src="{{journey.user.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
                     </div>
-                    <h5 class="bold" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
-                      {{buddy.name}}
+                    <h5 class="bold" ui-sref="mylife({'urlSlug':journey.user.urlSlug})">
+                      {{journey.user.name}}
                     </h5>
                   </div>
-                </span>
+                  <span ng-if="journey.buddies.length>0">
+                    <div class="trip-user-imgholder" ng-repeat="buddy in journey.buddies track by $index">
+                      <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+                        <img src="{{buddy.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+                      </div>
+                      <h5 class="bold" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+                        {{buddy.name}}
+                      </h5>
+                    </div>
+                  </span>
+                </div>
               </div>
+              <!--trip traveller buddies end-->
             </div>
-            <!--trip traveller buddies end-->
-          </div>
-          <!-- journey tab view end -->
-          <!-- card-ongo-main -->
-          <div class="relate">
-            <div class="dot-line"></div>
-            <div class="card-relate-holder functionmap" ng-if="journey.post">
+            <!-- journey tab view end -->
+            <!-- card-ongo-main -->
+            <div class="relate">
+              <div class="dot-line"></div>
+              <div class="card-relate-holder functionmap" ng-if="journey.post">
                 <journey-post ng-repeat="ongo in journey.post track by $index" ng-class="{'hideSpan':loadmoreOption}" post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey
-                              get-comments-data="getCommentsData(post)"
-                              close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template">
-                </journey-post>
-              </div>
-              <!-- ongo journey-end -->
-              <div class="ongo-journey-end" ng-hide="loadmoreOption" ng-if="journey.onGoing==false">
-                <div class="journey-end text-center">
-                  <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
-                  <p class="m-clear color-white avenir-roman">
-                    <!-- <i class="fa fa-calendar mr5"></i> -->
-                    <span class="mr5">{{journey.endTime|formatDate: 'date'}}</span>
-                    <span class="mr5">|</span>
-                    <!-- <i class="fa fa-clock-o mr5"></i> -->
-                    <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
+                get-comments-data="getCommentsData(post)"
+                close-back-drop="closeBackDrop()" get-likes-data="getLikesData(post)" template="template">
+              </journey-post>
+            </div>
+            <!-- ongo journey-end -->
+            <div class="ongo-journey-end" ng-hide="loadmoreOption" ng-if="journey.onGoing==false">
+              <div class="journey-end text-center">
+                <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
+                <p class="m-clear color-white avenir-roman">
+                  <!-- <i class="fa fa-calendar mr5"></i> -->
+                  <span class="mr5">{{journey.endTime|formatDate: 'date'}}</span>
+                  <span class="mr5">|</span>
+                  <!-- <i class="fa fa-clock-o mr5"></i> -->
+                  <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
                 </div>
                 <div class="end-journey-flag text-center">
                   <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
@@ -258,56 +258,56 @@
                 </div>
               </div>
               <!-- ongo journey end -->
-            <div class="loadmore" style="padding: 0 10px 30px 10px">
-              <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
-              <div class="take-me-to-thestories"s>
-                <div style="overflow: hidden;border-radius: 8px">
-                <div class="row">
-                  <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
-                  <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
-                  <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
-                    <span>Share</span>
-                    <span class="explore-more">
-                      Past Stories
-                    </span>
-                  </div></a>
-                </div>
-                </div>
-                <!--<div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">-->
-                  <!--<ul>-->
-                    <!--<li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"-->
-                           <!--target="_blank"-->
-                           <!--class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>-->
-                    <!--<li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"-->
-                           <!--target="_blank"-->
-                           <!--class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>-->
-                    <!--<li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"-->
+              <div class="loadmore" style="padding: 0 10px 30px 10px">
+                <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
+                <div class="take-me-to-thestories"s>
+                  <div style="overflow: hidden;border-radius: 8px">
+                    <div class="row">
+                      <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
+                      <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
+                      <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
+                        <span>Share</span>
+                        <span class="explore-more">
+                          Past Stories
+                        </span>
+                      </div></a>
+                    </div>
+                  </div>
+                  <!--<div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">-->
+                    <!--<ul>-->
+                      <!--<li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"-->
+                       <!--target="_blank"-->
+                       <!--class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>-->
+                       <!--<li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"-->
+                         <!--target="_blank"-->
+                         <!--class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>-->
+                         <!--<li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"-->
                            <!--target="_blank"-->
                            <!--class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>-->
-                    <!--<li>-->
-                      <!--<a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"-->
-                         <!--class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>-->
-                    <!--</li>-->
-                    <!--<li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"-->
-                           <!--target="_blank"-->
-                           <!--class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>-->
-                    <!--<li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>-->
-                  <!--</ul>-->
-                <!--</div>-->
+                           <!--<li>-->
+                            <!--<a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"-->
+                             <!--class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>-->
+                             <!--</li>-->
+                             <!--<li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"-->
+                               <!--target="_blank"-->
+                               <!--class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>-->
+                               <!--<li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>-->
+                               <!--</ul>-->
+                               <!--</div>-->
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                       <div class="" ng-if="postScrollData.viewList">
+                        <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
+                        view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                        list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
+                        show-like-show='showLikeShow'></comment-like-section>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- map -->
+                  <!-- map end -->
+                </div>
               </div>
             </div>
-            </div>
-          </div>
-          <div class="" ng-if="postScrollData.viewList">
-            <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
-                                  view-card-comment="viewCardComment" view-card-like='viewCardLike'
-                                  list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
-                                  show-like-show='showLikeShow'></comment-like-section>
-          </div>
-        </div>
-      </div>
-      <!-- map -->
-      <!-- map end -->
-    </div>
-  </div>
-</div>
