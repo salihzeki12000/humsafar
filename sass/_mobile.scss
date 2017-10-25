@@ -29,6 +29,14 @@
       zoom: 0.75;
     }
   }
+  .discover {
+    .trending-travellers .blogger-cover {
+      margin: 15px 0;
+    }
+    .trending-stories .activity-post-main{
+      margin: 10px 0 20px;
+    }
+  }
 }
 
 @media screen and (max-width: 1204px) {
@@ -261,7 +269,8 @@
     min-height: 280px;
     max-height: 362px;
   }
-  .blog-itineraries-main .masonry-brick {
+  .blog-itineraries-main .masonry-brick,
+  .trending-stories .masonry-brick {
     margin-bottom: 0;
     padding: 0 10px;
   }
@@ -730,7 +739,7 @@
       text-align: center;
     }
   }
-  .popular-blogger .socialize-holder {
+  .popular-blogger .socialize-holder ,.trending-travellers .socialize-holder{
     text-align: center;
   }
   .destination-featured {
@@ -742,7 +751,14 @@
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
   /*new landing page*/
+  .row-pad {
+      padding: 0 5%;
+    }
   .landing-home {
+    .travelled-imgholder {
+      min-height: calc(100vw - 50px);
+      max-height: 350px;
+    }
     #relive h2{
       padding-top: 30px;
     }
@@ -1954,7 +1970,7 @@
       display: none;
     }
   }
-  .popular-blogger {
+  .popular-blogger, .trending-travellers {
     margin-top: 0px;
     .bloggerholder-made .cfj-holder li {
       float: none;
@@ -2149,7 +2165,7 @@
   .addfixed2 .destin-fixednav {
     top: 55px;
   }
-  .blog-itineraries-main {
+  .blog-itineraries-main, .trending-stories {
     margin-bottom: 10px;
     padding-top: 15px;
   }

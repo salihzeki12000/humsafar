@@ -466,11 +466,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "views/template.html",
             controller: 'ProfileListCtrl',
         })
-        // .state('newhome', {
-        //     url: "/newhome",
-        //     templateUrl: "views/template.html",
-        //     controller: 'newHomeCtrl',
-        // });
+        .state('newhome', {
+            url: "/newhome",
+            templateUrl: "views/template.html",
+            controller: 'newHomeCtrl',
+        });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
 }).run(['Analytics', function (Analytics) {}]);

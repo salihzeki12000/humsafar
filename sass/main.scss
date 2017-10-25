@@ -4931,7 +4931,8 @@ header {
 
 .blog-itineraries-main {
   padding-top: 80px;
-
+}
+.blog-itineraries-main, .trending-stories {
   .blog-post {
     overflow: visible;
   }
@@ -4943,7 +4944,7 @@ header {
 
 .popular-itinerary,
 .popular-journeypage {
-  .blog-itineraries-main .masonry-brick {
+  .blog-itineraries-main .masonry-brick, .trending-stories .masonry-brick {
     margin-bottom: 0;
   }
 }
@@ -5388,7 +5389,7 @@ header {
 .follow-or-following {
   span {
     font-size: 13px;
-    @extend .avenir-heavy;
+    @extend .avenir-medium;
     font-weight: 200;
   }
 }
@@ -13385,6 +13386,10 @@ video::-webkit-media-controls-fullscreen-button {
   animation-name: fade-now;
   animation-duration: 1s;
 }
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 2s;
+}
 .blue-head {
   background-color: $brand-blue;
   @include animation(fade-now 1s);
@@ -13444,16 +13449,17 @@ video::-webkit-media-controls-fullscreen-button {
   color: #d2d2d2;
 }
 .sectionScroll {
-  font-family: AvenirLTStd-Heavy;
+  font-family: AvenirLTStd-Light;
   text-align: center;
   font-size: 40px;
-  font-weight: 800;
   li{
     a,a>span {
       color: #d2d2d2;
     }
+    font-family: AvenirLTStd-Heavy;
     display: inline-block;
     padding: 0 10px 0px 1px;
+    font-weight: 800;
   }
 }
 .fixed-subnavigation {
@@ -13545,7 +13551,6 @@ video::-webkit-media-controls-fullscreen-button {
 }
 #discover {
   text-align: center;
-  @include animation(fadeIn 2s);
   h3 {
     font-weight: 600;
     padding-bottom: 20px;
@@ -13703,4 +13708,37 @@ video::-webkit-media-controls-fullscreen-button {
   }
 }
 
+.trending-travellers {
+  margin-top: 0;
+  .blogger-cover {
+    margin: 0 25px;
+    border-radius: 15px;
+  }
+  .gallery-imgholder, .blogger-cover:before {
+    border-radius: 15px;
+  }
+  .blogger-cover:before {
+    background-color: transparent;
+  }
+  .blogger-cont-holder {
+    background: linear-gradient(transparent, rgba(0,0,0,1));
+    border-radius: 0 0 15px 15px;
+  }
+  //.img-show {
+  //  border-radius: 0 0 15px 15px;
+  //}
+}
+.trending-stories {
+  text-align: left;
+  .activity-post-main {
+    margin: 10px 25px 20px 25px;
+    border-radius: 15px;
+  }
+  .travelled-imgholder {
+    border-radius: 0 0 15px 15px ;
+  }
+}
 
+//.row-pad {
+//  padding: 0 2%;
+//}

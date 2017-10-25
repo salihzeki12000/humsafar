@@ -192,231 +192,273 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 })
 
-// .controller('newHomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location, $anchorScroll) {
-//     //Used to name the .html file
-//     // cfpLoadingBar.start();
-//     $scope.template = TemplateService.changecontent("newhome");
-//     $scope.menutitle = NavigationService.makeactive("newHome");
-//     TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
-//     $scope.navigation = NavigationService.getnav();
-//     $scope.accessToken = $.jStorage.get("accessToken");
-//     $scope.bookingLink = function () {
-//         window.location.href = "https://travelibro.com/bookings/";
-//     };
-//     //get popular user details
-//     $scope.popular_users = [
-//       {
-//         name: 'nomadic-boys',
-//         data: {}
-//       },
-//       {
-//         name: 'collette-stohler',
-//         data: {}
-//       }
-//     ];
-//     $scope.popular_users.forEach(function(user){
-//       NavigationService.getProfile(user.name, function(data){
-//             user.data = data.data;
-//           },function (err) {
-//           })
-//     });
-//     console.log('popular users ',$scope.popular_users);
-//   setTimeout(function(){
-//     $(document).ready(function(){
-//       //start landing page animation
-//       $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
-//         $('.iphone-screen').css('display','block');
-//         $(this).off(e);
-//       });
-//       $(".libro-logo")
-//         .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
-//           function(e){
-//             $(this).css('opacity','1');
-//             $(this).off(e);
-//           });
-//       //end landing page animation
-//       $('.worksheet').scroll(function(){
-//         //start blue navbar on scroll
-//         if($('.worksheet').scrollTop()<3) {
-//           $("#nav-onhead").removeClass('blue-head');
-//         }
-//         else {
-//           $("#nav-onhead").addClass('blue-head');
-//         }
-//         //end blue navbar on scroll
-//         var firstHeight = $('.home-landing').height();
-//         if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<3500) {
-//           $("#navigation").removeClass("submenu");
-//           $("#navigation").addClass("fixed-subnavigation");
-//           $("#navigation").addClass("fade-now");
-//         }
-//         else {
-//           $("#navigation").removeClass("fixed-subnavigation");
-//           $("#navigation").addClass("submenu");
-//         }
-//         //end blue navbar
-//         //change active section anchor color
-//         var $div = $(".worksheet").offset().top + 250;
-//         if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
-//           $('.discover1').css('color', '#424242');
-//         }else {
-//           $('.discover1').css('color', '#d2d2d2');
-//         }
-//         if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
-//           $('.capture1').css('color', '#424242');
-//         }else {
-//           $('.capture1').css('color', '#d2d2d2');
-//         }
-//         if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
-//           $('.inspire1').css('color', '#424242');
-//         }else {
-//           $('.inspire1').css('color', '#d2d2d2');
-//         }
-//         if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
-//           $('.relive1').css('color', '#424242');
-//         }else {
-//           $('.relive1').css('color', '#d2d2d2');
-//         }
-//       });
-//     })
-//   },2000);
-//
-// $scope.openKnowMore = function(){
-//   $(".know-more-modal").addClass("show-know-more");
-// };
-// $scope.closeKnowMore = function(){
-//   $(".know-more-modal").removeClass("show-know-more");
-// };
-//   $scope.go_at = function(section){
-//   console.log('worksheet ',$('.worksheet')[0].scrollTop);
-//   var extra_space = 0;
-//   if(section == 'discover' || section == 'capture')
-//   {extra_space = 130;}
-//   else
-//   {extra_space = 145;}
-//   $('.worksheet').animate({
-//       scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
-//     'slow');
-// };
-//   $scope.changePage = function (text) {
-//         // //console.log(text);
-//         var length = $(".fp-section").length;
-//         $timeout(function () {
-//             $('.scene').parallax();
-//               swiper = new Swiper('.swiper-container', {
-//                 pagination: '.swiper-pagination',
-//                 direction: 'vertical',
-//                 slidesPerView: 1,
-//                 paginationClickable: true,
-//                 spaceBetween: 0,
-//                 mousewheelControl: false,
-//                 mousewheelForceToAxis: false,
-//                 keyboardControl: false,
-//                 parallax: true,
-//                 hashnav: true
-//             });
-//         }, 500);
-//         if (length === 0) {
-//             $('.fullpage').fullpage({
-//                 //Navigation
-//                 onLeave: function (index, nextIndex, direction) {
-//                     $timeout(function () {
-//                         $('.scene').parallax();
-//                         swiper = new Swiper('.swiper-container', {
-//                             pagination: '.swiper-pagination',
-//                             direction: 'vertical',
-//                             slidesPerView: 1,
-//                             paginationClickable: true,
-//                             spaceBetween: 0,
-//                             mousewheelControl: false,
-//                             mousewheelForceToAxis: false,
-//                             keyboardControl: false,
-//                             parallax: true,
-//                             hashnav: true
-//                         });
-//                         swiper.slideTo(nextIndex - 1);
-//                         if ($(window).width() >= 767) {
-//                             for (i = 1; i < 4; i++) {
-//                                 if (i == nextIndex - 1) {
-//                                     $('#video' + i).get(0).load();
-//                                     $('#video' + i).get(0).play();
-//                                 } else {
-//                                     $('#video' + i).get(0).pause();
-//                                 }
-//                             }
-//                         }
-//                     }, 500);
-//                 }
-//             });
-//         }
-//         // //console.log(text);
-//         $scope.homeval = text;
-//         switch (text) {
-//             case "share":
-//                 $.fn.fullpage.moveTo(5);
-//                 break;
-//             case "mylife":
-//                 $.fn.fullpage.moveTo(4);
-//                 break;
-//             case "locallife":
-//                 $.fn.fullpage.moveTo(3);
-//                 break;
-//             case "travellife":
-//                 $.fn.fullpage.moveTo(2);
-//                 break;
-//             case "home":
-//                 $.fn.fullpage.moveTo(1);
-//                 break;
-//             default:
-//                 $.fn.fullpage.moveTo(1);
-//                 break;
-//         }
-//     };
-//     // $(window).load(function () {
-//     //     document.getElementById('movie1').play();
-//     //     if ($(window).width() < 767) {
-//     //         $('video').remove();
-//     //     }
-//     // });
-//     // setTimeout(function () {
-//     //
-//     //
-//     // }, 500);
-//     //
-//     // $scope.$on('$viewContentLoaded', function () {
-//     //     $timeout(function () {
-//     //         $('body').addClass('fp-');
-//     //         $scope.changePage($stateParams.id);
-//     //     }, 1000);
-//     // });
-//     // cfpLoadingBar.complete();
-//     // $scope.audioStatus = {
-//     //     on: true
-//     // }
-//     // $scope.muteVolume = function () {
-//     //     for (i = 1; i <= 3; i++) {
-//     //         if ($("#video" + i)[0].muted) {
-//     //             $("#video" + i)[0].muted = false;
-//     //             $scope.audioStatus = {
-//     //                 on: true
-//     //             }
-//     //         } else {
-//     //             $("#video" + i)[0].muted = true;
-//     //             $scope.audioStatus = {}
-//     //         }
-//     //     }
-//     // }
-//     // $timeout(function () {
-//     //     if ((navigator.platform.indexOf("iPhone") != -1) ||
-//     //         (navigator.platform.indexOf("iPod") != -1) ||
-//     //         (navigator.platform.indexOf("iPad") != -1)) {
-//     //         $(".download-app").addClass("hide");
-//     //     }
-//     // }, 200);
-//     // $scope.customLink = function () {
-//     //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-//     // };
-// })
+.controller('newHomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location, $anchorScroll) {
+    //Used to name the .html file
+    // cfpLoadingBar.start();
+    $scope.template = TemplateService.changecontent("newhome");
+    $scope.menutitle = NavigationService.makeactive("newHome");
+    TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
+    $scope.navigation = NavigationService.getnav();
+    $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.bookingLink = function () {
+        window.location.href = "https://travelibro.com/bookings/";
+    };
+    //get popular user details
+    $scope.popular_users = [
+      {
+        name: 'nomadic-boys',
+        data: {}
+      },
+      {
+        name: 'collette-stohler',
+        data: {}
+      }
+    ];
+    $scope.popular_users.forEach(function(user){
+      NavigationService.getProfile(user.name, function(data){
+            user.data = data.data;
+          },function (err) {
+          })
+    });
+    $scope.trendingTravellers = [];
+    $scope.trendingStories = [];
+    var getPopularBlogger = function (pageNo) {
+      NavigationService.popularBlogger({
+        pagenumber: pageNo
+      }, function (data) {
+        _.each(data.data, function (newArr) {
+          if( newArr.name == "Roamaroo" || newArr.name == "Bruised Passports" || newArr.name == "Nomadic Boys") {
+            $scope.trendingTravellers.push(newArr);
+          }
+        });
+      });
+      console.log($scope.trendingTravellers);
+    };
+    var getPopularJourney = function (pageNo) {
+      NavigationService.popularJourney({
+        pagenumber: pageNo
+      }, function (data) {
+        console.log('data from server --',data);
+        _.each(data.data, function (newArr) {
+          if(newArr._id == "599b0f0bbf0f565607fb9d76" || newArr._id == "593b5c70ce72c970d44963fa" || newArr._id == "5987c9048fa3f71c98d9adf0") {
+              $scope.trendingStories.push(newArr);
+              console.log('now pushing ', newArr.user.name);
+          }
+        });
+      });
+      console.log($scope.trendingStories);
+    };
+    getPopularBlogger(1);
+    getPopularJourney(1);
+
+    setTimeout(function(){
+      $(document).ready(function(){
+        //start landing page animation
+        $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
+          $('.iphone-screen').css('display','block');
+          $(this).off(e);
+        });
+        $(".libro-logo")
+          .on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd",
+            function(e){
+              $(this).css('opacity','1');
+              $(this).off(e);
+            });
+        //end landing page animation
+        $('.worksheet').scroll(function(){
+          //start blue navbar on scroll
+          if($('.worksheet').scrollTop()<3) {
+            $("#nav-onhead").removeClass('blue-head');
+          }
+          else {
+            $("#nav-onhead").addClass('blue-head');
+          }
+          //end blue navbar on scroll
+          var firstHeight = $('.home-landing').height();
+          if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<4000) {
+            $("#navigation").removeClass("submenu");
+            $("#navigation").addClass("fixed-subnavigation");
+            $("#navigation").addClass("fade-now");
+          }
+          else {
+            $("#navigation").removeClass("fixed-subnavigation");
+            $("#navigation").addClass("submenu");
+          }
+          //end blue navbar
+          //change active section anchor color
+          var $div = $(".worksheet").offset().top + 250;
+          if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
+            $('.discover1').css('color', '#424242');
+          }else {
+            $('.discover1').css('color', '#d2d2d2');
+          }
+          if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
+            $('.capture1').css('color', '#424242');
+          }else {
+            $('.capture1').css('color', '#d2d2d2');
+          }
+          if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
+            $('.inspire1').css('color', '#424242');
+          }else {
+            $('.inspire1').css('color', '#d2d2d2');
+          }
+          if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
+            $('.relive1').css('color', '#424242');
+          }else {
+            $('.relive1').css('color', '#d2d2d2');
+          }
+          if (isScrolledIntoView('.anime') === true) {
+            $('.anime').addClass('fadeIn');
+            console.log('yes yes');
+          }
+        });
+      })
+    },2000);
+    var isScrolledIntoView = function(elem) {
+      var docViewTop = $('.worksheet').scrollTop();
+      var docViewBottom = docViewTop + $('.worksheet').height();
+
+      var elemTop = $(elem).offset().top;
+      var elemBottom = elemTop + $(elem).height();
+
+      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    };
+    $scope.openKnowMore = function(){
+      $(".know-more-modal").addClass("show-know-more");
+    };
+    $scope.closeKnowMore = function(){
+      $(".know-more-modal").removeClass("show-know-more");
+    };
+    $scope.go_at = function(section){
+    console.log('worksheet ',$('.worksheet')[0].scrollTop);
+    var extra_space = 0;
+    if(section == 'discover' || section == 'capture')
+    {extra_space = 130;}
+    else
+    {extra_space = 145;}
+    $('.worksheet').animate({
+        scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
+      'slow');
+  };
+  $scope.changePage = function (text) {
+        // //console.log(text);
+        var length = $(".fp-section").length;
+        $timeout(function () {
+            $('.scene').parallax();
+              swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 1,
+                paginationClickable: true,
+                spaceBetween: 0,
+                mousewheelControl: false,
+                mousewheelForceToAxis: false,
+                keyboardControl: false,
+                parallax: true,
+                hashnav: true
+            });
+        }, 500);
+        if (length === 0) {
+            $('.fullpage').fullpage({
+                //Navigation
+                onLeave: function (index, nextIndex, direction) {
+                    $timeout(function () {
+                        $('.scene').parallax();
+                        swiper = new Swiper('.swiper-container', {
+                            pagination: '.swiper-pagination',
+                            direction: 'vertical',
+                            slidesPerView: 1,
+                            paginationClickable: true,
+                            spaceBetween: 0,
+                            mousewheelControl: false,
+                            mousewheelForceToAxis: false,
+                            keyboardControl: false,
+                            parallax: true,
+                            hashnav: true
+                        });
+                        swiper.slideTo(nextIndex - 1);
+                        if ($(window).width() >= 767) {
+                            for (i = 1; i < 4; i++) {
+                                if (i == nextIndex - 1) {
+                                    $('#video' + i).get(0).load();
+                                    $('#video' + i).get(0).play();
+                                } else {
+                                    $('#video' + i).get(0).pause();
+                                }
+                            }
+                        }
+                    }, 500);
+                }
+            });
+        }
+        // //console.log(text);
+        $scope.homeval = text;
+        switch (text) {
+            case "share":
+                $.fn.fullpage.moveTo(5);
+                break;
+            case "mylife":
+                $.fn.fullpage.moveTo(4);
+                break;
+            case "locallife":
+                $.fn.fullpage.moveTo(3);
+                break;
+            case "travellife":
+                $.fn.fullpage.moveTo(2);
+                break;
+            case "home":
+                $.fn.fullpage.moveTo(1);
+                break;
+            default:
+                $.fn.fullpage.moveTo(1);
+                break;
+        }
+    };
+    // $(window).load(function () {
+    //     document.getElementById('movie1').play();
+    //     if ($(window).width() < 767) {
+    //         $('video').remove();
+    //     }
+    // });
+    // setTimeout(function () {
+    //
+    //
+    // }, 500);
+    //
+    // $scope.$on('$viewContentLoaded', function () {
+    //     $timeout(function () {
+    //         $('body').addClass('fp-');
+    //         $scope.changePage($stateParams.id);
+    //     }, 1000);
+    // });
+    // cfpLoadingBar.complete();
+    // $scope.audioStatus = {
+    //     on: true
+    // }
+    // $scope.muteVolume = function () {
+    //     for (i = 1; i <= 3; i++) {
+    //         if ($("#video" + i)[0].muted) {
+    //             $("#video" + i)[0].muted = false;
+    //             $scope.audioStatus = {
+    //                 on: true
+    //             }
+    //         } else {
+    //             $("#video" + i)[0].muted = true;
+    //             $scope.audioStatus = {}
+    //         }
+    //     }
+    // }
+    // $timeout(function () {
+    //     if ((navigator.platform.indexOf("iPhone") != -1) ||
+    //         (navigator.platform.indexOf("iPod") != -1) ||
+    //         (navigator.platform.indexOf("iPad") != -1)) {
+    //         $(".download-app").addClass("hide");
+    //     }
+    // }, 200);
+    // $scope.customLink = function () {
+    //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    // };
+})
 
 .controller('LoginCtrl', function ($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
