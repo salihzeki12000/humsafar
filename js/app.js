@@ -691,6 +691,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
             model: '=ngModel',
             type: "@type",
             callback: "&ngCallback",
+            dataValue: "@datatype",
             allowType: "@allowType"
         },
         link: function ($scope, element, attrs) {
@@ -733,6 +734,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                         _.each(newVal, function (newV, key) {
                             if (newV && newV.file) {
                                 TemplateService.uploadLoader = true;
+                                TemplateService.type = $scope.dataValue;
                                 $timeout(function(){
                                  TemplateService.uploadLoader = false;
                                 },36000);
@@ -778,6 +780,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                     transformRequest: angular.identity
                 }).success(function (data) {
                     TemplateService.uploadLoader = false;
+                    TemplateService.type = $scope.dataValue;
                     $scope.uploadStatus = "uploaded";
                     if ($scope.isMultiple) {
 

@@ -6031,7 +6031,7 @@ header {
 .user-img-ongo {
   width: 32px;
   height: 34px;
-  border: 2px solid #868686;
+  border: 1px solid #868686;
   border-radius: 12px;
   background-color: $brand-light-grey;
   box-shadow: 0 2px 3px #ccc;
@@ -6305,7 +6305,7 @@ header {
 .card-user-imgholder {
   width: 8%;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .trip-user-imgholder {
@@ -6320,7 +6320,7 @@ header {
 .card-journeypost {
   width: 83%;
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .card-iconholder {
@@ -6836,8 +6836,8 @@ display:none;
 
 .ongo-journey-change {
   max-width: 350px;
-  margin: 30px auto;
-
+  /*margin: 30px auto;*/
+  margin: 0 auto 30px;
   .journey-change {
     display: inline-block;
     min-width: 210px;
@@ -7975,6 +7975,9 @@ display:none;
   // position: relative;
   position: absolute;
   z-index: 5;
+  &.past-thought {
+    width: 93%;
+  }
 }
 
 .icon-thought {
@@ -8746,19 +8749,38 @@ display:none;
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 30px;
-    background-color: rgba(255,255,255,0.95);
+    /*background-color: rgba(255,255,255,0.95);*/
+    background-color: #fff;
     color: $brand-dark-blue;
     /*overflow: hidden;*/
   }
-  .edit-country, .edit-city {
+  .edit-country {
     width: 180px;
     display: inline-block;
-    vertical-align: middle;
+    vertical-align: bottom;
+    .ui-select-container {
+      margin: 5px 0;
+    }
   }
   .edit-city {
+    display: inline-block;
+    vertical-align: bottom;
     .ui-select-multiple.ui-select-bootstrap {
-      height: 34px;
-      border-radius: 6px;
+      border-radius: 0px;
+      margin: 5px 0;
+      border: none;
+      border-bottom: 1px solid #ebebeb;
+      position: relative; 
+      &:before, &:after {
+        content: '';
+        width: 1px;
+        height: 50%;
+        position: absolute;
+        bottom: 0;
+        background-color: #ebebeb;
+      } 
+      &:before { left: 0; }
+      &:after { right: 0; }
     }
   }
   .edit-action {
@@ -8799,10 +8821,11 @@ display:none;
   .dest-country-vist,  {
     display: inline-block;
     font-size: 15px;
-    vertical-align: top;    
+    vertical-align: middle;    
   }
   .city-name-visited {
     display: inline-block;
+    vertical-align: middle;
     span {
       &:first-child {
         border-left: none;
@@ -8815,15 +8838,34 @@ display:none;
   }
   .edit-delete-dest { margin: 10px 0; }
   .edit-dest { margin: 0px 10px; }
+  .add-card-post div {
+    margin-bottom: 20px;
+  }
+  .add-day-post {
+     div { margin: 10px 0px 20px; }     
+  }
+  .add-post {
+    .postto-day { 
+        font-size: 14px; 
+        letter-spacing: 1px;
+      }
+  }
   .add-more-post {
     @include square(50px);
     border-radius: 100%;
     cursor: pointer;
     display: inline-block;
     background-color: $brand-pink;
-    line-height: 58px;
+    /*line-height: 58px;*/
     text-align: center;
-    i { font-size: 22px; }
+    position: relative;
+    &:before, &:after {
+      content: '';
+      @extend.get-center;
+      background-color: #fff;
+    }
+    &:before { @include size(20px,2px) }
+    &:after { @include size(2px,20px) }
   }
   /*map gl past story */
   .map-paststory {

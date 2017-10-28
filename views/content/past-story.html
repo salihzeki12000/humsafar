@@ -118,7 +118,7 @@
 								<div class="pull-left">
 									<span class="avenir-medium color-dark-blue">Destination Visited</span>
 								</div>
-								<div class="pull-right">
+								<div class="pull-right" ng-if="isMine">
 									<span class="add-dest-visited avenir-medium color-dark-blue pointer" ng-click="addDestination(destinationData);">Add</span>
 								</div>
 							</div>
@@ -166,7 +166,7 @@
 										</div>
 									</div>
 									<div class="pull-right">
-										<div class="edit-delete-dest">
+										<div class="edit-delete-dest" ng-if="isMine">
 											<span class="edit-dest pointer" title="Edit" ng-click=viewEdit($index);><i class="fa fa-pencil color-light-grey"></i></span>
 											<span class="delete-dest pointer" title="Delete" ng-click="deleteVisited($index,country);"><i class="fa fa-trash color-light-grey"></i></span>
 										</div>
@@ -209,7 +209,7 @@
 					</div>
 					<!--trip traveller buddies end-->
 					<!-- past journey card -->
-					<div class="past-journey-card" ng-if="pastJourneyArray.post">
+					<div class="past-journey-card functionmap" ng-if="pastJourneyArray.post">
 						<past-journey-card is-mine="template.isMine" is-logged-in="isLoggedIn" json="pastJourneyArray" post="pastStory" ng-repeat="pastStory in pastJourneyArray.post track by $index" get-likes-data="getLikesData(post)" get-comments-data="getCommentsData(post)" close-back-drop="closeBackDrop()" template="template" ></past-journey-card>
 						<!-- past story-end -->
 						<div class="past-story-end ongo-journey-end" ng-if="journey.onGoing==false">

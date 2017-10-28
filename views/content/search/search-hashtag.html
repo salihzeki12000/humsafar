@@ -98,37 +98,37 @@
                 <div class="post-img relate" ng-if="post.photos.length>0 && post.type!='quick-itinerary' && post.type!='detail-itinerary'"
                   ng-init="post.index=0">
                   <img ng-src="{{post.photos[post.index].name|uploadpath}}" alt="" class="img-responsive">
-              </div>-->
+                </div>-->
 
                 <div class="post-img relate" ng-if="post.showMap && post.imageUrl">
                   <img src="{{post.imageUrl}}" alt="" class="img-responsive">
                 </div>
                 <div class="post-img card-imgholder pointer relate" ng-if="post.photos.length>0 && post.type!='quick-itinerary' && post.type!='detail-itinerary'"
                   ng-init="post.index=0">
-                    <div class="blur-img">
-                          <img ng-src="{{post.photos[post.index].name|uploadpath}}" alt="">
-                    </div>
+                  <div class="blur-img">
+                    <img ng-src="{{post.photos[post.index].name|uploadpath}}" alt="">
+                  </div>
                   <img ng-src="{{post.photos[post.index].name|uploadpath}}" alt="" class="card-img">
-              </div>
-              <!-- img post end -->
-              <!-- img post slider -->
-              <div class="imgpost-relatedslider" ng-if="post.photos.length>1 && post.type!='quick-itinerary' && post.type!='detail-itinerary'">
-                <flex-slider class="carousel" flex-slide="photo in post.photos track by $index" item-width="65" animation="slide" item-margin="5"
+                </div>
+                <!-- img post end -->
+                <!-- img post slider -->
+                <div class="imgpost-relatedslider" ng-if="post.photos.length>1 && post.type!='quick-itinerary' && post.type!='detail-itinerary'">
+                  <flex-slider class="carousel" flex-slide="photo in post.photos track by $index" item-width="65" animation="slide" item-margin="5"
                   direction-nav="true" control-nav="false" mousewheel="false">
                   <li>
                     <div class="related-postimgholder" ng-click="changeImage($index,post)">
                       <img ng-src="{{photo.name|uploadpath:85:85:'cover'}}" alt="" class="img-responsive">
                     </div>
                   </li>
-                  </flex-slider>
-                  <div class="post-rating" hidden>
-                    <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </span>
-                  </div>
+                </flex-slider>
+                <div class="post-rating" hidden>
+                  <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                  </span>
+                </div>
               </div>
               <!-- img post slider end -->
               <!-- post travelled journey -->
@@ -243,19 +243,24 @@
                 <div class="pull-left">
                   <div class="">
                     <span class="inline-block v-mid mr5" ng-click="likeUnlikepost(post)" ;>
-                        <a href="" class="fnt-20"><i class="fa color-blue card-like-animation " ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i></a>
+                      <a href="" class="fnt-20"><i class="fa color-medium-grey card-like-animation " ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                        <span></span>
+                        <audio id="like-play">
+                          <source src="img/tiny1.mp3" type="audio/mp3">
+                          </audio>
+                        </a>
                       </span>
-                    <div class="inline-block v-mid" ng-if="!(post.type=='editor')">
-                      <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(post)"></span>
-                      <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="post.type =='ended-journey' || post.type =='detail-itinerary' || post.type =='quick-itinerary'"></span>
-                      <span class="pointer mr5" ng-click="sharePost(post.sharingUrl)"><img src="img/share.png" alt="" height="19"></span>
+                      <div class="inline-block v-mid" ng-if="!(post.type=='editor')">
+                        <span class="pointer mr5"><img src="img/comments.png" alt="" height="19" ng-click="getCommentsData(post)"></span>
+                        <span class="pointer mr5"><img src="img/reviews.png" alt="" height="19" ng-if="post.type =='ended-journey' || post.type =='detail-itinerary' || post.type =='quick-itinerary'"></span>
+                        <span class="pointer mr5" ng-click="sharePost(post.sharingUrl)"><img src="img/share.png" alt="" height="19"></span>
+                      </div>
+                      <div class="inline-block v-mid" ng-if="post.type=='editor'">
+                        <span class="pointer mr5"><img src="img/comments-white.png" alt="" height="19"></span>
+                        <span class="pointer mr5"><img src="img/reviews-white.png" alt="" height="19"></span>
+                        <span class="pointer mr5"><img src="img/share-white.png" alt="" height="19"></span>
+                      </div>
                     </div>
-                    <div class="inline-block v-mid" ng-if="post.type=='editor'">
-                      <span class="pointer mr5"><img src="img/comments-white.png" alt="" height="19"></span>
-                      <span class="pointer mr5"><img src="img/reviews-white.png" alt="" height="19"></span>
-                      <span class="pointer mr5"><img src="img/share-white.png" alt="" height="19"></span>
-                    </div>
-                  </div>
                   <!--<ul>
                       <li><a href=""><i class="fa fa-heart-o color-blue"></i></a></li>
                       <div ng-if="!(post.type=='editor' || post.type=='detail-itinerary' || post.type=='quick-itinerary')">
@@ -293,38 +298,38 @@
                         </li>
                       </div>
                     </ul>-->
-                </div>
-                <div class="pull-right" ng-if="!((post.type =='editor') || (post.type =='editor-blog'))">
-                  <div class="three-dots relate pointer" ng-init="post.option={}">
-                    <span ng-click="editOption(post.option)">
+                  </div>
+                  <div class="pull-right" ng-if="!((post.type =='editor') || (post.type =='editor-blog'))">
+                    <div class="three-dots relate pointer" ng-init="post.option={}">
+                      <span ng-click="editOption(post.option)">
                         <img src="img/options.png" alt="" class="if-blue" ng-if="!(post.type=='editor')">
                         <img src="img/options-white.png" alt="" class="if-white" ng-if="post.type=='editor'">
                       </span>
-                    <div class="post-edit-option" ng-show="post.option.backgroundClick">
-                      <ul>
-                        <li ng-if="post.owner._id==userData._id">Hide From All</li>
-                        <li ng-if="post.owner._id!=userData._id">Report</li>
-                      </ul>
+                      <div class="post-edit-option" ng-show="post.option.backgroundClick">
+                        <ul>
+                          <li ng-if="post.owner._id==userData._id">Hide From All</li>
+                          <li ng-if="post.owner._id!=userData._id">Report</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="social-likes-reviews" ng-if="!(((post.likeCount==0)||(post.likeCount==undefined))&&(post.commentCount==0))">
-                <div class="clearfix">
-                  <div class="pull-left" ng-init="post.listLike={}" ng-click="getLikesData(post);">
-                    <span class="color-blue mr10 card-like avenir-heavy"><i class="fa fa-heart color-blue mr5"></i><b>{{post.likeCount}}</b> {{post.likeCount|singularPlural:'Likes'}}
+                <div class="social-likes-reviews" ng-if="!(((post.likeCount==0)||(post.likeCount==undefined))&&(post.commentCount==0))">
+                  <div class="clearfix">
+                    <div class="pull-left" ng-init="post.listLike={}" ng-click="getLikesData(post);">
+                      <span class="color-medium-grey mr10 card-like avenir-heavy"><i class="fa fa-heart  color-medium-grey mr5"></i><b>{{post.likeCount}}</b> {{post.likeCount|singularPlural:'Likes'}}
                        <div class="card-like-dropdown" ng-show="post.listLike.backgroundClick;">
-                          <ul>
-                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                          </ul>
-                        </div>
-                      </span>
+                        <ul>
+                          <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                        </ul>
+                      </div>
+                    </span>
                     <!--<span class="color-blue mr10 card-like avenir-heavy" ng-click="getLikes(ongo._id);editOption(ongo.like)"><i class="fa fa-heart color-blue mr5"></i><b>{{ongo.likeCount|filterCount}}</b> {{ongo.likeCount|singularOrPlural:'like'}}-->
-                    <span class="color-blue">
+                      <span class="color-blue">
                         <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">
                         <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">
                         <span ng-if="!((post.class !='travel-taught') || (post.class !='local-life'))">354 Reviews (4.5/5)</span></span>
-                  </div>
+                      </div>
                   <!-- <div class="pull-right">
                     <div class="post-travel-icon">
                       <img src="img/travel.png" alt="" class="post-travel-icon" ng-if="post.type!='local-life'">

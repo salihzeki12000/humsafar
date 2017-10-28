@@ -13,7 +13,7 @@
     <div class="edit-otg-info">
       <div class="row">
         <!-- search location sec -->
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6" ng-class="{'col-md-6':journey.draft==true,'':journey.draft==false}">
           <div class="otg-search-location otg-bg-all">
             <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22">
             <div class="search-by-category" ng-init="ongo.locationEdit = {};">
@@ -37,7 +37,7 @@
           </div>
           <!-- search location sec end -->
           <!-- tag friends sec -->
-          <div class="col-md-4 col-sm-6">
+          <div class="col-md-4 col-sm-6" ng-class="{'hide':journey.draft==true,'':journey.draft==false}">
             <div class="tag-journey-friend otg-bg-all">
               <img src="img/ongojourney/otg-tag.png" alt="" class="img-responsive icon-tag" width="25">
               <div class="tag-otg-friend">
@@ -72,8 +72,8 @@
           </div>
           <!-- tag friends sec end-->
           <!-- otg thought sec -->
-          <div class="col-md-4 col-sm-12">
-            <div class="edit-otg-thought otg-bg-all">
+          <div class="col-md-4 col-sm-12" ng-class="{'col-md-6':journey.draft==true,'':journey.draft==false}">
+            <div class="edit-otg-thought otg-bg-all" ng-class="{'past-thought':journey.draft==true,'':journey.draft==false}">
               <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
               <div class="otg-thought" ng-init="ongo.editArea={};ongo.editArea.backgroundClick = false">
                 <textarea maxlength="180" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>

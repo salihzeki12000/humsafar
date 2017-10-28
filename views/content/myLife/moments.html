@@ -14,7 +14,7 @@
               <li><a class="tab-heading" ng-click="getTab(0); ">Journey</a></li>
               <li><a class="tab-heading" ng-click="getTab(1); ">Moments</a></li>
               <li><a class="tab-heading" ng-click="getTab(2); ">Reviews</a></li>
-              <li><a  class="tab-heading" ng-click="getTab(3); ">Drafts</a></li>
+              <!-- <li><a  class="tab-heading" ng-click="getTab(3); ">Drafts</a></li> -->
             </ul>
           </div>
           <!-- end tabs -->
@@ -136,43 +136,43 @@
                     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
                       <h3 class="color-pink empty-title">Travel Becomes A Reason To Take Pictures And Store Them</h3>
                       <p class="empty-descp">Some memories are worth sharing, travel surely tops the list. Your travels will not only inspire you
-                        to explore more of the world, you may just move another soul or two!</p>
-                        <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
-                        <div class="journey-downloadicon">
-                          <ul class="list-unstyled list-inline text-center color-pink">
-                            <li class="">
-                              Download App
-                            </li>
-                            <li>
-                              <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-pink">
-                                <i class="fa fa-apple"></i>
-                              </a>
-                            </li>
-                            <li>|</li>
-                            <li>
-                              <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-pink" target="_blank">
-                                <i class="fa fa-android"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                      to explore more of the world, you may just move another soul or two!</p>
+                      <p class="empty-descp">This space will get populated when you capture your Travel and Local life using the TraveLibro App.</p>
+                      <div class="journey-downloadicon">
+                        <ul class="list-unstyled list-inline text-center color-pink">
+                          <li class="">
+                            Download App
+                          </li>
+                          <li>
+                            <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-pink">
+                              <i class="fa fa-apple"></i>
+                            </a>
+                          </li>
+                          <li>|</li>
+                          <li>
+                            <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-pink" target="_blank">
+                              <i class="fa fa-android"></i>
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
-                  <!-- empty travel view profile user login for first time-->
+                </div>
+                <!-- empty travel view profile user login for first time-->
 
-                  <!-- PRIVATE PROFILE EMPTY SCREEN -->
-                  <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
-                    <div class="row">
-                      <div class="col-md-offset-2 col-md-8">
-                        <div class="private-accountcover text-center">
-                          <h3>This account is Private.</h3>
-                          <p>Follow to view their Travel and Local Life.</p>
-                        </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their Travel and Local Life.</p>
                       </div>
                     </div>
                   </div>
-                  <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+                </div>
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
 
 
                 <!--<div class="container-fluid">
@@ -218,43 +218,43 @@
             <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
               <h3 class="color-cyan empty-title">Suspended In Time</h3>
               <p class="empty-descp">Beautiful memories created through fabulous pictures and videos of those precious moments shared with
-                family, friends and yourself.</p>
-                <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
-                <div class="journey-downloadicon">
-                  <ul class="list-unstyled list-inline text-center color-cyan">
-                    <li class="">
-                      Download App
-                    </li>
-                    <li>
-                      <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-cyan">
-                        <i class="fa fa-apple"></i>
-                      </a>
-                    </li>
-                    <li>|</li>
-                    <li>
-                      <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-cyan" target="_blank">
-                        <i class="fa fa-android"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+              family, friends and yourself.</p>
+              <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
+              <div class="journey-downloadicon">
+                <ul class="list-unstyled list-inline text-center color-cyan">
+                  <li class="">
+                    Download App
+                  </li>
+                  <li>
+                    <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-cyan">
+                      <i class="fa fa-apple"></i>
+                    </a>
+                  </li>
+                  <li>|</li>
+                  <li>
+                    <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-cyan" target="_blank">
+                      <i class="fa fa-android"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-          <!-- empty local view profile user login for first time-->
+        </div>
+        <!-- empty local view profile user login for first time-->
 
-          <!-- PRIVATE PROFILE EMPTY SCREEN -->
-          <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
-            <div class="row">
-              <div class="col-md-offset-2 col-md-8">
-                <div class="private-accountcover text-center">
-                  <h3>This account is Private.</h3>
-                  <p>Follow to view their Travel and Local Life.</p>
-                </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN -->
+        <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined || userData.following==null) && userData.status=='private'">
+          <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+              <div class="private-accountcover text-center">
+                <h3>This account is Private.</h3>
+                <p>Follow to view their Travel and Local Life.</p>
               </div>
             </div>
           </div>
-          <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+        </div>
+        <!-- PRIVATE PROFILE EMPTY SCREEN END -->
                 <!--<div class="container-fluid">
                 <div class="row">
                   <div class="col-md-3 col-sm-4" >-->
@@ -267,16 +267,16 @@
                             <div class="img-backholder">
                               <img ng-src="{{moment.data[0].name|uploadpath:230:230:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='photo'">
                             <!--<img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" style="border:2px solid red"
-                            ng-if="moment.data[0].type=='video'">-->
-                            <img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='video'">
+                              ng-if="moment.data[0].type=='video'">-->
+                              <img ng-src="{{moment.data[0].thumbnail|uploadpath:180:180:'cover'}}" alt="" class="img-responsive" ng-if="moment.data[0].type=='video'">
+                            </div>
+                            <div class="img-frontholder">
+                              <img src="img/moment-local.png" alt="" class="img-responsive">
+                            </div>
                           </div>
-                          <div class="img-frontholder">
-                            <img src="img/moment-local.png" alt="" class="img-responsive">
+                          <div class="local-info text-center avenir-roman">
+                            <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
                           </div>
-                        </div>
-                        <div class="local-info text-center avenir-roman">
-                          <h4>{{moment.token|momentsDate}} <span>({{moment.count}})</span></h4>
-                        </div>
                         <!--</div>
                   </div>
                 </div>-->

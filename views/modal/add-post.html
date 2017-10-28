@@ -4,7 +4,7 @@
     <!-- edit otg info window -->
     <!-- edit otg title -->
     <div class="edit-otg-title">
-      <!-- <h4 class="avenir-roman text-center color-white">Edit Activity</h4> -->
+      <h4 class="avenir-roman text-center color-white">Edit Activity</h4>
       <div class="pull-right">
         <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
       </div>
@@ -73,7 +73,7 @@
           <!-- tag friends sec end-->
           <!-- otg thought sec -->
           <div class="col-md-6 col-sm-12">
-            <div class="edit-otg-thought otg-bg-all">
+            <div class="edit-otg-thought otg-bg-all past-thought">
               <img src="img/ongojourney/otg-thought.png" alt="" class="img-responsive icon-thought" width="20">
               <div class="otg-thought" ng-init="ongo.editArea={};ongo.editArea.backgroundClick = false">
                 <textarea maxlength="180" class="form-control edit-textarea" id="editTextarea" ng-model="ongo.thoughts" ng-click="editOption(ongo.editArea);" ng-class="{'opened-editarea': ongo.editArea.backgroundClick == true, '': ongo.editArea.backgroundClick == false}">{{ongo.thoughts}}</textarea>
@@ -105,7 +105,7 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn relate text-center">
                 <button class="btn btn-pink btn-more pointer">Upload Photos</button>
-                <upload-image datatype="photo" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
+                <upload-image datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- photo upload end-->
@@ -155,7 +155,7 @@
             <div class="add-otg-more" ng-show="photoSec">
               <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
               <div class="add-more-pic">
-                <upload-image datatype="photo" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,type);" no-view>
+                <upload-image datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,type);" no-view>
                 </upload-image>
               </div>
             </div>
@@ -177,7 +177,7 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn text-center relate">
                 <button class="btn btn-pink btn-more">Upload Videos</button>
-                <upload-image datatype="video" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+                <upload-image datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
               </div>
             </div>
             <!-- video upload end-->
@@ -223,7 +223,7 @@
           <div class="add-otg-more" ng-show="videoSec">
             <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
             <div class="add-more-vid">
-              <upload-image datatype="video" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+              <upload-image datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
             </div>
           </div>
           <!-- add more photo video part end-->

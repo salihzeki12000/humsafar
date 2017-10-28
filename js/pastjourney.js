@@ -317,8 +317,9 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
       var modal = "";
       $scope.editCheckIn = function(){
       	// journey and paststory has same modal
+        $scope.journey = $scope.pastJourneyArray;
       	$scope.ongo = $scope.pastStory;
-      	console.log($scope.pastStory,'pastStory');
+      	console.log($scope.pastStory,'pastStory',$scope.pastJourneyArray,'pastJourneyArray');
       	modal = $uibModal.open({
           animation: true,
           templateUrl: "views/modal/edit-otg.html",
