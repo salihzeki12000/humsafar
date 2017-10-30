@@ -990,7 +990,7 @@ pastJourney.filter('formatTimeCalender', function () {
 
 pastJourney.filter('formatDate', function () {
   return function (input, type) {
-    console.log(input,'input',type,'type');
+    // console.log(input,'input',type,'type');
     if (type == 'date') {
       var returnVal = moment(input).format('D MMM, YYYY');
     } else if (type == 'time') {

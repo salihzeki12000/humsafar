@@ -6312,24 +6312,54 @@ $scope.rateDestination = function(destRate, type) {
         };
         //end mobile badge
         // routing to on-the-go,detailed-iti,quick-iti
-    $scope.routeTO = function (type, urlSlug, userSlug) {
-        //console.log(type, urlSlug, userSlug);
-        if (type == "on-the-go-journey" || type == "ended-journey") {
-            $state.go('ongojourney', {
-                'id': urlSlug,
-                'urlSlug': userSlug
-            });
-        } else if (type == "quick-itinerary") {
-            $state.go('userquickitinerary', {
-                'id': urlSlug,
-                'urlSlug': userSlug
-            });
-        } else if (type == 'detail-itinerary') {
-            $state.go('userdetailitinerary', {
-                'id': urlSlug,
-                'urlSlug': userSlug
-            });
+    // $scope.routeTO = function (type, urlSlug, userSlug) {
+    //     //console.log(type, urlSlug, userSlug);
+    //     if (type == "on-the-go-journey" || type == "ended-journey") {
+    //         $state.go('ongojourney', {
+    //             'id': urlSlug,
+    //             'urlSlug': userSlug
+    //         });
+    //     } else if (type == "quick-itinerary") {
+    //         $state.go('userquickitinerary', {
+    //             'id': urlSlug,
+    //             'urlSlug': userSlug
+    //         });
+    //     } else if (type == 'detail-itinerary') {
+    //         $state.go('userdetailitinerary', {
+    //             'id': urlSlug,
+    //             'urlSlug': userSlug
+    //         });
+    //     }
+    // };
+    $scope.routeTO = function(journey) {
+      if (journey.type == "on-the-go-journey") {
+        $state.go('ongojourney', {
+          'id': journey.urlSlug,
+          'urlSlug': journey.user.urlSlug
+        });
+      } else if (journey.type == "quick-itinerary") {
+        $state.go('userquickitinerary', {
+          'id': journey.urlSlug,
+          'urlSlug': journey.user.urlSlug
+        });
+      } else if (journey.type == 'detail-itinerary') {
+        $state.go('userdetailitinerary', {
+          'id': journey.urlSlug,
+          'urlSlug': journey.user.urlSlug
+        });
+      } else if (journey.type == "ended-journey") {
+        if (journey.draft === true) {
+          $state.go('paststory', {
+            'id': journey.urlSlug,
+            'urlSlug': journey.user.urlSlug
+          });
+        } else {
+          $state.go('ongojourney', {
+            'id': journey.urlSlug,
+            'urlSlug': journey.user.urlSlug
+          });
         }
+      }
     };
     // routing to on-the-go,detailed-iti,quick-iti ends here
 

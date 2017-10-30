@@ -57,7 +57,7 @@
  			</div>
  			<!-- past journey videos end-->
  			<!-- related img if less then 5 -->
- 			<div class="relate-pic" ng-if="(pastStory.photosVideos.length>1)&&(pastStory.photosVideos.length<=5)">
+ 			<div class="relate-pic related-imgslider" ng-if="(pastStory.photosVideos.length>1)&&(pastStory.photosVideos.length<=5)">
  				<div class="related-ongo-slider related-past-slider" ng-repeat="relatePic in pastStory.photosVideos track by $index">
  					<!-- for image  -->					
  					<img ng-src="{{relatePic.name|uploadpath:120:120:'cover'}}" alt="" class="img-full-sqr img-responsive pointer" ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
