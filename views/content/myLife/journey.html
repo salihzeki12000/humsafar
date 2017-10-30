@@ -15,7 +15,7 @@
               <li><a href="" class="tab-heading" ng-click="getTab(0)">Journey</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(1)">Moments</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(2)">Reviews</a></li>
-              <li><a href="" class="tab-heading" ng-click="getTab(3)">Drafts</a></li>
+              <!-- <li><a href="" class="tab-heading" ng-click="getTab(3)">Drafts</a></li> -->
             </ul>
           </div>
           <!-- end tabs -->
@@ -304,9 +304,9 @@
                                 <!--<span class="color-blue avenir-heavy" ng-if="life.pointReview.length>0"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
                                 <span ng-click="openCommentSection(life)" class="color-medium-grey mr10 card-comment avenir-roman pointer"><img src="img/comments.png" alt="" class="mr5 v-mid" height="14"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                               </div>
-                              <div class="pull-right">
+                              <!-- <div class="pull-right">
                                 <img src="img/travel.png" alt="">
-                              </div>
+                              </div> -->
                             </div>
                           </div>
                         </div>
@@ -403,7 +403,7 @@
                                 <ul>
                                   <li ng-click="likeUnlikeActivity(life)">
                                     <a href="" class="relate">
-                                      <i class="fa color-blue card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
+                                      <i class="fa color-medium-grey card-like-animation" ng-class="life.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound></i>
                                       <span></span>
                                       <audio id="like-play">
                                         <source src="img/tiny1.mp3" type="audio/mp3">
@@ -438,13 +438,13 @@
                             <div class="social-likes-reviews" ng-if="!(((life.likeCount==0)||(life.likeCount==undefined))&&(life.commentCount==0))">
                               <div class="clearfix">
                                 <div class="pull-left">
-                                  <span ng-click="openLikeSection(life)" class="color-blue mr10 avenir-heavy pointer"><i class="fa fa-heart color-blue mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
+                                  <span ng-click="openLikeSection(life)" class="color-medium-grey mr10 avenir-heavy pointer"><i class="fa fa-heart color-medium-grey mr5"></i><b>{{life.likeCount|filterCount}}</b> {{life.likeCount|singularPlural:'Likes'}}</span>
                                   <!--<span class="color-blue avenir-heavy"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{life.reviews}} Reviews ({{life.pointReview}}/5)</span>-->
-                                  <span class="color-blue mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
+                                  <span class="color-medium-grey mr10 card-comment avenir-heavy pointer" ng-click="openCommentSection(life)"><img src="img/comments.png" alt="" class="mr5" height="12"><b>{{life.commentCount|filterCount}}</b> {{life.commentCount|singularPlural:'Comments'}}</span>
                                 </div>
-                                <div class="pull-right">
+                                <!-- <div class="pull-right">
                                   <img src="img/travel.png" alt="">
-                                </div>
+                                </div> -->
                               </div>
                             </div>
                           </div>

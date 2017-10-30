@@ -81,15 +81,15 @@
           <div class="user-social-item clearfix">
             <div class="pull-left">
               <ul>
-                <li><a href="" class="relate pointer"  ng-click="likeUnlikeActivity(itinerary);"><i class="fa color-blue" ng-class="itinerary.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  like-sound></i>
-                <span></span>
-                <audio id="like-play">
-                  <source src="img/tiny1.mp3" type="audio/mp3">
-                </audio>
-              </a></li>
-                <li class="pointer">
-                  <a href="" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="18"></a>
-                </li>
+                <li><a href="" class="relate pointer"  ng-click="likeUnlikeActivity(itinerary);"><i class="fa color-medium-grey" ng-class="itinerary.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"  like-sound></i>
+                  <span></span>
+                  <audio id="like-play">
+                    <source src="img/tiny1.mp3" type="audio/mp3">
+                    </audio>
+                  </a></li>
+                  <li class="pointer">
+                    <a href="" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="18"></a>
+                  </li>
                 <!-- <li>
                   <a href=""><img src="img/reviews.png" alt="" height="18"></a>
                 </li> -->
@@ -107,8 +107,8 @@
           <div class="social-likes-reviews avenir-heavy">
             <div class="clearfix">
               <div class="pull-left">
-                <span class="color-blue mr10 pointer" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-blue mr5"></i><b class="mr5">{{itinerary.likeCount}}</b>Likes</span>
-                <span class="color-blue mr10 pointer" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="14"><b class=""> {{itinerary.commentCount}} </b> Comments</span>
+                <span class="color-medium-grey mr10 pointer" ng-click="getLikesData(itinerary);"><i class="fa fa-heart color-medium-grey mr5"></i><b class="mr5">{{itinerary.likeCount}}</b>Likes</span>
+                <span class="color-medium-grey mr10 pointer" ng-click="getCommentsData(itinerary)"><img src="img/comments.png" alt="" height="14"><b class=""> {{itinerary.commentCount}} </b> Comments</span>
                 <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
               </div>
               <!-- <div class="pull-right">

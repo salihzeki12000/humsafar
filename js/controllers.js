@@ -1633,77 +1633,371 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     // change ended journey date end
     //maps integration starts here
-    var mapStyle = [{
-        "featureType": "all",
-        "elementType": "labels.text.fill",
-        "stylers": [{
-            "color": "#ffffff"
-        }]
-    }, {
-        "featureType": "all",
-        "elementType": "labels.text.stroke",
-        "stylers": [{
-            "visibility": "on"
-        }, {
-            "color": "#3e606f"
-        }, {
-            "weight": 2
-        }, {
-            "gamma": 0.84
-        }]
-    }, {
-        "featureType": "all",
-        "elementType": "labels.icon",
-        "stylers": [{
-            "visibility": "off"
-        }]
-    }, {
+    // var mapStyle = [{
+    //   "featureType": "all",
+    //   "elementType": "labels.text.fill",
+    //   "stylers": [{
+    //     "color": "#ffffff"
+    //   }]
+    // }, {
+    //   "featureType": "all",
+    //   "elementType": "labels.text.stroke",
+    //   "stylers": [{
+    //     "visibility": "on"
+    //   }, {
+    //     "color": "#3e606f"
+    //   }, {
+    //     "weight": 2
+    //   }, {
+    //     "gamma": 0.84
+    //   }]
+    // }, {
+    //   "featureType": "all",
+    //   "elementType": "labels.icon",
+    //   "stylers": [{
+    //     "visibility": "off"
+    //   }]
+    // }, {
+    //   "featureType": "administrative",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "weight": 0.6
+    //   }, {
+    //     "color": "#1a3541"
+    //   }]
+    // }, {
+    //   "featureType": "landscape",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#2c5a71"
+    //   }]
+    // }, {
+    //   "featureType": "poi",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#406d80"
+    //   }]
+    // }, {
+    //   "featureType": "poi.park",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#2c5a71"
+    //   }]
+    // }, {
+    //   "featureType": "road",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#29768a"
+    //   }, {
+    //     "lightness": -37
+    //   }]
+    // }, {
+    //   "featureType": "transit",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#406d80"
+    //   }]
+    // }, {
+    //   "featureType": "water",
+    //   "elementType": "geometry",
+    //   "stylers": [{
+    //     "color": "#2c3757"
+    //   }]
+    // }]
+    var mapStyle = [
+    {
         "featureType": "administrative",
-        "elementType": "geometry",
-        "stylers": [{
-            "weight": 0.6
-        }, {
-            "color": "#1a3541"
-        }]
-    }, {
-        "featureType": "landscape",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#2c5a71"
-        }]
-    }, {
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#d6e2e6"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#cfd4d5"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#7492a8"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "lightness": 25
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#cfd4d5"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#7492a8"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural.terrain",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
         "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#406d80"
-        }]
-    }, {
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#588ca4"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -100
+            }
+        ]
+    },
+    {
         "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#2c5a71"
-        }]
-    }, {
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#a9de83"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#bae6a1"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#c6e8b3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#bae6a1"
+            }
+        ]
+    },
+    {
         "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#29768a"
-        }, {
-            "lightness": -37
-        }]
-    }, {
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#41626b"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -45
+            },
+            {
+                "lightness": 10
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#c1d1d6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#a6b5bb"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#9fb6bd"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
         "featureType": "transit",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#406d80"
-        }]
-    }, {
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -70
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#b4cbd4"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#588ca4"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#008cb5"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station.airport",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -5
+            }
+        ]
+    },
+    {
         "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [{
-            "color": "#2c3757"
-        }]
-    }]
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#a6cbe3"
+                // "color": "#2c3757"
+            }
+        ]
+    }
+]
 
     //latlongs format
     // var center = {
@@ -3428,7 +3722,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             } else {
 
             }
-
         });
     };
 
@@ -4229,24 +4522,23 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
         // destination search dropdown end
 
-    $scope.resetFilters = function (id) {
-        $scope.cityRestaurantCuisine = [];
-        $scope.citySubTypeData = [];
-        $scope.cityBudgetData = [];
-    };
-
-    var modal = "";
-    $scope.rateDestination = function (destRate, type) {
-        if (!($.jStorage.get("isLoggedIn"))) {
-            $state.go('login');
-        } else {
-            //console.log(destRate, 'check in');
-            $scope.destReview = destRate;
-            if (destRate.userReview.length !== 0) {
-                //console.log("Edit Rating");
-                if (destRate.userReview[0].rating != undefined) {
-                    $scope.starRating(parseInt(destRate.userReview[0].rating));
-                } else {
+$scope.resetFilters = function(id) {
+  $scope.cityRestaurantCuisine = [];
+  $scope.citySubTypeData = [];
+  $scope.cityBudgetData = [];
+};
+var modal = "";
+$scope.rateDestination = function(destRate, type) {
+  if (!($.jStorage.get("isLoggedIn"))) {
+    $state.go('login');
+  } else {
+    //console.log(destRate, 'check in');
+    $scope.destReview = destRate;
+    if (destRate.userReview.length !== 0) {
+      //console.log("Edit Rating");
+      if (destRate.userReview[0].rating != undefined) {
+        $scope.starRating(parseInt(destRate.userReview[0].rating));
+      } else {
 
                 }
             } else {
@@ -4868,9 +5160,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     break;
                 default:
 
-            }
-        }
-        // city hotel filter end
+      $scope.hotelBudget[getBudgetHotel].checked = false;
+      console.log($scope.cityBudgetData, 'budget remove');
+  }
+}
+// city hotel filter end
 
     // city clear all function
     $scope.clearHotel = function () {
@@ -6652,14 +6946,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     var allMyLife = [
-        "views/content/myLife/journey.html",
-        "views/content/myLife/moments.html",
-        "views/content/myLife/reviews.html",
-        "views/content/myLife/holidayplanner.html"
+      "views/content/myLife/journey.html",
+      "views/content/myLife/moments.html",
+      "views/content/myLife/reviews.html",
+      "views/content/myLife/drafts.html"
     ];
     $scope.myLife = {
-        profileMain: "views/content/myLife/profile.html",
-        innerView: allMyLife[0]
+      profileMain: "views/content/myLife/profile.html",
+      innerView: allMyLife[0]
     };
     // change url
     $scope.viewTab = 1;
@@ -7464,15 +7758,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 })
 
-.controller('HolidayPlannerCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+  .controller('DraftsCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
-    $scope.template = TemplateService.changecontent("holidayplanner");
-    $scope.menutitle = NavigationService.makeactive("HolidayPlanner");
+    $scope.template = TemplateService.changecontent("drafts");
+    $scope.menutitle = NavigationService.makeactive("Drafts");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
-})
+  })
 
 .controller('ProfileCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -9148,7 +9442,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     });
 
     $scope.searchCity = function (countryId, searchData, cityVisited) {
-        //console.log("in search city");
         var formData = {
             "country": countryId,
             "search": searchData
@@ -9911,9 +10204,1059 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.monthDrop = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     // month array end
 
-})
+  })
+  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments, $http, $uibModal,$filter) {
+    //Used to name the .html file
 
-.controller('EditorItineraryCtrl', function ($scope, TemplateService, NavigationService, $timeout) {
+    $scope.template = TemplateService.changecontent("past-story");
+    $scope.menutitle = NavigationService.makeactive("Past Story");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+
+    function calcWidth() {
+      var width = $(window).width();
+      var percent = 40;
+      var newPadding = width * percent / 100;
+      var newCarHolderWidth = (newPadding - 30);
+      var newZoomCarHolder = newCarHolderWidth / 550;
+
+      $scope.mapJourneyCss = {
+        "padding-left": newPadding
+      };
+      $scope.cardHolderCss = {
+        zoom: newZoomCarHolder
+      }
+      console.log(newPadding, width);
+    };
+    if ($(window).width() > 991) {
+      calcWidth();
+    }
+    $scope.ongoCard = true;
+
+    $(window).scroll(function(event) {
+      didScroll = true;
+    });
+
+    setInterval(function() {
+      if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+      }
+    }, 250);
+
+    function hasScrolled() {
+      var st = $(this).scrollTop();
+
+      if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+      if (st > lastScrollTop && st > journeyInfoStrip) {
+        // Scroll Down
+        $('.journey-info-strip').addClass('remove-otgstrip').removeClass('get-otgstrip');
+      } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+          $('.journey-info-strip').addClass('get-otgstrip').removeClass('remove-otgstrip');
+        }
+      }
+
+      lastScrollTop = st;
+    }
+    $scope.userData = $.jStorage.get("profile");
+    $scope.pastJourneyArray = [];
+    $scope.destinationVisited = [];
+    $scope.destinationData = {
+      cityVisited: [],
+      country: {
+        flag: '',
+        name: '',
+        _id:''
+      }
+    };
+    $scope.viewCardComment = false;
+    $scope.getCard = "";
+    $scope.comment = {
+      'text': ""
+    };
+    $scope.cities = [];
+    $scope.allPhotos = {};
+    $scope.allPhotos.photoSliderIndex = "";
+    $scope.allPhotos.photoSliderLength = "";
+    $scope.allPhotos.newArray = [];
+    $scope.postScrollData = {};
+    $scope.postScrollData.likePageNumber = 1;
+    $scope.postScrollData.busy = false;
+    $scope.postScrollData.stopCallingApi = false;
+    $scope.postScrollData.viewList = false;
+    $scope.showEdit = -1;
+    var mapBoxPoints = [];
+    $scope.getPastJourney = function() {
+      var formData = {
+        // 'urlSlug': 'my-greater-london-story'
+        // 'urlSlug': 'paris-2018'
+        'urlSlug': $stateParams.id
+      }
+      pastJourney.getPastJourney(formData, function(pastStoryData) {
+        $scope.pastJourneyArray = pastStoryData;
+        if (!$scope.pastJourneyArray.destinationVisited) {
+          $scope.pastJourneyArray.destinationVisited = [];
+        }
+        var postsWithLatLng = [];
+        postsWithLatLng = _.filter($scope.pastJourneyArray.post, 'latlong');
+        _.each(postsWithLatLng, function(n, $index) {
+          if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+            centers[$index] = {
+              "lat": parseFloat(n.latlong.lat),
+              "lng": parseFloat(n.latlong.long)
+            };
+          } else {}
+        });
+        if (pastStoryData && pastStoryData.location && pastStoryData.location.lat) {
+          console.log('when is comes');
+          var obj = {
+            "lat": parseFloat(pastStoryData.location.lat),
+            "lng": parseFloat(pastStoryData.location.long)
+          }
+          centers.unshift(obj);
+        } else {}
+        console.log(centers);
+        initMap();
+      }, function(error) {
+        console.log(error);
+      })
+    }
+    $scope.getPastJourney();
+    //maps integration starts here
+    var mapStyle = [
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#d6e2e6"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#cfd4d5"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#7492a8"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "lightness": 25
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#cfd4d5"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#7492a8"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural.terrain",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#dde2e3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#588ca4"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -100
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#a9de83"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#bae6a1"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#c6e8b3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.sports_complex",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#bae6a1"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#41626b"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -45
+            },
+            {
+                "lightness": 10
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#c1d1d6"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "color": "#a6b5bb"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway.controlled_access",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#9fb6bd"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "saturation": -70
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#b4cbd4"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#588ca4"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#008cb5"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.station.airport",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": -5
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#a6cbe3"
+                // "color": "#2c3757"
+            }
+        ]
+    }
+]
+
+
+    line = _.map(centers, function() {
+      return {};
+    });
+    _.map(centers, function() {
+      markers.push({});
+    });
+
+    initMap = function() {
+      var $map = $('#map');
+      var mapDim = {
+        height: $map.height(),
+        width: $map.width()
+      }
+      center = new google.maps.LatLng(centers[0].lat, centers[0].lng);
+      if (typeof google === 'object' && typeof google.maps === 'object') {
+        var bounds = new google.maps.LatLngBounds();
+
+        setMarker = function(status, current, previous, i) {
+          var currentPosition = new google.maps.LatLng(current.lat, current.lng);
+          if (previous != null) {
+            //console.log("previous should set now");
+            var previousPosition = new google.maps.LatLng(previous.lat, previous.lng);
+            // markers[i-1].setMap(null);
+            var previousObj = {
+              position: previousPosition,
+              map: map,
+              icon: "img/maps/red-marker.png"
+            }
+            // marker = new google.maps.Marker(previousObj);
+            // markers[i-1] = marker;
+          }
+          var currentObj = {
+            position: currentPosition,
+            map: map,
+            // icon: "img/maps/small-marker.png"
+          };
+          if (status == "small-marker") {
+            currentObj.icon = "img/maps/small-marker.png";
+          } else if (status == "red-marker") {
+            currentObj.icon = "img/maps/red-marker.png";
+          } else if (status == "green-marker") {
+            currentObj.icon = "img/maps/green-marker.png";
+          } else if (status == null) {
+            currentObj.map = null;
+            currentObj.zIndex = i;
+          }
+          marker = new google.maps.Marker(currentObj);
+          markers[i] = marker;
+        };
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          center: center,
+          zoom: 3,
+          styles: mapStyle,
+          disableDefaultUI: true
+        });
+
+        var step = 0;
+        var numSteps = 100; //Change this to set animation resolution
+        var lineSymbol = {
+          path: 'M 0,-1 0,1',
+          strokeOpacity: 0,
+          scale: 3
+        };
+        // Grey static dotted - polylines starts here
+        travelPath = new google.maps.Polyline({
+          path: centers,
+          geodesic: true,
+          strokeColor: '#D3D3D3',
+          strokeOpacity: 0,
+          strokeWeight: -3,
+          icons: [{
+            icon: lineSymbol,
+            offset: '0',
+            repeat: '20px'
+          }],
+        });
+        travelPath.setMap(map);
+        // Grey static polylines ends here
+
+        var myVar = setInterval(myTimer, 1000);
+
+        function myTimer() {
+          if (centers.length != 0) {
+            _.each(centers, function(n, index) {
+              setMarker(null, n, null, index + 1);
+            });
+            if ($scope.pastJourneyArray && $scope.pastJourneyArray.location && $scope.pastJourneyArray.location.lat) {
+              setMarker("green-marker", centers[0], null, 1);
+              markers[1].setMap(map);
+              markers[1].setIcon("img/maps/green-marker.png");
+            }
+            clearInterval(myVar);
+          } else {
+            //console.log("didnt got center");
+          }
+        };
+
+        function getBoundsZoomLevel(bounds, mapDim) {
+          var WORLD_DIM = {
+            height: 256, //height was 256
+            width:  256 //width was 256
+          };
+          var ZOOM_MAX = 21;
+
+          function latRad(lat) {
+            var sin = Math.sin(lat * Math.PI / 180);
+            var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+            return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+          }
+
+          function zoom(mapPx, worldPx, fraction) {
+            return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+          }
+
+          var ne = bounds.getNorthEast();
+          var sw = bounds.getSouthWest();
+
+          var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+          var lngDiff = ne.lng() - sw.lng();
+          var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+          var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+          var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+          return Math.min(latZoom, lngZoom, ZOOM_MAX);
+        }
+
+        function redLineDraw(i, departure, arrival, percentComplete, value, flag) {
+          var xdiff = (centers[i].lat - centers[i - 1].lat);
+          var ydiff = (centers[i].lng - centers[i - 1].lng);
+          var currentZoom = currentZoom = map.getZoom();
+          var commingZoom;
+          if (value) {
+            var markerBounds = new google.maps.LatLngBounds();
+            markerBounds.extend(departure);
+            markerBounds.extend(arrival);
+            commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
+            map.fitBounds(markerBounds);
+          }
+          var frac1 = xdiff / 100;
+          var frac2 = ydiff / 100;
+          var iniLat = centers[i - 1].lat;
+          var iniLng = centers[i - 1].lng;
+          var timePerStep = frac1; //Change this to alter animation speed
+          var lineSymbol = {
+            path: 'M 0,-1 0,1',
+            // path: google.maps.SymbolPath.map - icon - airport,
+            strokeOpacity: 1,
+            scale: 3
+          };
+          if (percentComplete == 100 && flag) {
+            if (markers[i + 1].map == null) {
+              markers[i + 1].setMap(map);
+            }
+            markers[i + 1].setIcon("img/maps/green-marker.png");
+            markers[i].setIcon("img/maps/red-marker.png");
+          } else if ((percentComplete > 98 && percentComplete < 100 && i == centers.length - 1)) {
+            if (markers[i + 1].map == null) {
+              markers[i + 1].setMap(map);
+            }
+            markers[i + 1].setIcon("img/maps/green-marker.png");
+            markers[i].setIcon("img/maps/red-marker.png");
+          }
+
+          if (_.isEmpty(line[i])) {
+            line[i] = new google.maps.Polyline({
+              path: [departure, departure],
+              // strokeColor: "#f2675b", //orange
+               strokeColor: "#263757", //navy-blue
+              //strokeColor: "#11d3cb", //cyan-blue
+              // strokeOpacity: 1, --for continuous line
+              //   strokeWeight: 3,
+              strokeOpacity: 0, //for dotted lines
+              strokeWeight: 3,
+              icons: [{
+                icon: lineSymbol,
+                offset: '0', //set +ve val for moving trails
+                repeat: '20px'
+              }],
+              geodesic: true, //set to false if you want straight line instead of arc
+              map: map,
+            });
+          }
+          var drawLine = function(departure, arrival, percent, i, value) {
+            percentFrac = percent / 100;
+            var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
+            line[i].setPath([departure, are_we_there_yet]);
+            // static center =center of departure and arrival starts
+            if (value) {
+              center = {
+                "lat": iniLat + (centers[i].lat - centers[i - 1].lat) / 2,
+                "lng": iniLng + (centers[i].lng - centers[i - 1].lng) / 2
+              }
+              center = new google.maps.LatLng(center.lat, center.lng);
+            }
+            // static center =center of departure and arrival ends
+            map.setCenter(center);
+          };
+          drawLine(departure, arrival, percentComplete, i, value);
+        }
+        pointsForLine = function(i, percentComplete, value, flag) {
+          // i=currennt card comming from bottom / arrival card
+          //value=true for identifyng current departure and arrival
+          //flag=true only when percentComplete reaches 100
+          var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+          var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+          step = 0;
+          var linesCount = line.length - 1;
+          try {
+            for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
+              if ((value == true) && (percentComplete < 100)) {
+                if (markerCount == i) {
+                  markers[markerCount].setIcon("");
+                  if (markers[markerCount].map == null) {
+                    markers[markerCount].setMap(map);
+                  };
+                  markers[markerCount].setIcon("img/maps/green-marker.png");
+                } else if (markerCount >= i) {
+                  markers[markerCount].setMap(null);
+                } else if ((markerCount <= i)) {
+                  if (markers[markerCount].map == null) {
+                    markers[markerCount].setMap(map);
+                  };
+                  markers[markerCount].setIcon("img/maps/small-marker.png");
+                }
+              } else {
+                break;
+              }
+            }
+          } catch (e) {}
+          redLineDraw(i, departure, arrival, percentComplete, value, flag);
+
+          //clearPolyLines starts
+          while ((linesCount >= (i + 1)) && (value)) {
+            if (!_.isEmpty(line[linesCount])) {
+              line[linesCount].setMap(null);
+              markers[linesCount].setMap(null);
+              line[linesCount] = {};
+            };
+            linesCount--;
+          };
+          //clearPolyLines ends
+
+          //draw succeeding polyLines starts
+          if (i > 1) {
+            pointsForLine(i - 1, 100);
+            count = centers.length;
+          };
+          //draw succeeding polyLines end
+        };
+      }
+    };
+    setTimeout(function() {
+      initMap();
+    }, 1000);
+    // Map end
+    //change banner date and time starts
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeBannerDate = function() {
+      $scope.journey = $scope.pastJourneyArray;
+      $scope.ongo = $scope.pastStory;
+      console.log($scope.pastJourneyArray,'pastJourneyarry');
+      //console.log("Banner Date");
+      $scope.isPostDate = false;
+      $scope.isBannerDate = true;
+      date = $scope.pastJourneyArray.startTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+
+      //console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified);
+      $scope.options = {
+        minDate: new Date(1 / 1 / 1970),
+        maxDate: new Date($scope.pastJourneyArray.post[$scope.pastJourneyArray.post.length - 1].UTCModified),
+        showWeeks: false
+      };
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+
+    $scope.updateBannerDateTime = function(id, formData, dt) {
+      //console.log(dt);
+      console.log(id,'id');
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function(data) {
+        var formData = {
+          "urlSlug": $scope.pastJourneyArray.urlSlug
+        }
+        pastJourney.getPastJourney(formData, function(pastStoryData) {
+          $scope.pastJourneyArray.startTime = pastStoryData.startTime;
+          modal.close();
+          //console.log(journeys);
+        }, function(err) {
+          //console.log(err);
+        });
+      }
+      result._id = id;
+      result.startTime = new Date(date + " " + time);
+      pastJourney.updateBannerDateTime(result, callback);
+    };
+    //change banner date and time ends
+    $scope.viewEdit = function(index) {
+      console.log(index);
+      if ($scope.showEdit == index) {
+        $scope.showEdit = -1;
+      } else {
+        $scope.showEdit = index;
+      }
+    }
+    // add destination
+    console.log($scope.pastDestination, 'before function');
+    $scope.addDestination = function(destinationData) {
+      $scope.pastJourneyArray.destinationVisited.push(destinationData);
+      console.log($scope.pastJourneyArray.destinationVisited.length-1);
+      console.log($scope.pastJourneyArray.destinationVisited,'destinationVisited',$scope.countries,'countries');
+      $scope.showEdit = $scope.pastJourneyArray.destinationVisited.length-1;
+
+      // adding and removing country
+      _.each($scope.pastJourneyArray.destinationVisited, function(destVisit){
+        console.log(destVisit,'index');
+        _.remove($scope.countries, function(country){
+          return country._id == destVisit.country._id;
+        })
+        console.log($scope.countries,'country');
+      });
+
+      // adding and removing country end
+    }
+    $scope.deleteVisited = function(index,country) {
+      console.log(country,'what is country',$scope.countries,'what was old');
+      // $scope.pastJourneyArray.destinationVisited[index] = [];
+      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
+      $scope.countries.push(country.country);
+      console.log($scope.countries,'what is new country');
+    }
+    console.log($scope.pastDestination, 'what is pastDestination');
+    // add destination end
+    // get country data
+    var countriesCallback = function(data) {
+      // countries = data.data;
+      // var countries = _.differenceBy(countries,'name');
+      $scope.countries = data.data;
+      // $scope.currency = data.data;
+    };
+
+    NavigationService.getAllCountries(countriesCallback, function() {
+      console.log("error getting data");
+    });
+    // country replace
+    console.log($scope.pastJourneyArray, 'what is country');
+    $scope.countryReplace = function(destinationData, index, countryData) {
+      console.log(destinationData, 'what is country data', index);
+      $scope.pastJourneyArray.destinationVisited[index].country = destinationData.country;
+      $scope.pastJourneyArray.destinationVisited[index].cityVisited = [];
+      console.log($scope.pastJourneyArray.destinationVisited, 'new country Data');
+    }
+    console.log($scope.pastJourneyArray.destinationVisited, 'destiantion visited all data');
+    // country replace end
+
+    $scope.getCityVisited = function(countryId, searchKey) {
+      console.log(countryId, 'what is country id', searchKey, 'what is search key');
+      var formData = {
+        country: countryId,
+        search: searchKey
+      }
+      var str = searchKey;
+      console.log(str);
+      $scope.cities = [];
+      if (str && str.length > 3) {
+        NavigationService.searchCityByCountry(formData, function(data) {
+          $scope.cities = data.data;
+          // cities = data.data;
+          // var cities = _.differenceBy(cities, cityVisited, 'name');
+          // $scope.cities = cities;
+        });
+      }
+    }
+    // get country data end
+    // get likes and comment
+
+
+    $scope.getCommentsData = function(pastStory) {
+      console.log(pastStory, 'pastStory');
+      $scope.post = pastStory;
+      $scope.previousId;
+      $scope.viewCardLike = false;
+      $scope.postScrollData.type = pastStory.type;
+      $scope.postScrollData._id = pastStory._id;
+      var callback = function(data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        $scope.postScrollData.viewList = true;
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != $scope.post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          $scope.pastJourneyArray.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+        }
+      }
+      $scope.previousId = $scope.post._id;
+    };
+    $scope.getLikesData = function(pastStory) {
+      console.log('post ka click', pastStory);
+      $scope.postScrollData.type = pastStory.type;
+      $scope.postScrollData._id = pastStory._id;
+      $scope.viewCardComment = false;
+      var callback = function(data) {
+        $scope.postScrollData.viewList = true;
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      if ($scope.previousLikeId != pastStory._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.showLikeShow = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+        }
+      }
+      $scope.previousLikeId = pastStory._id;
+    };
+
+    $scope.closeBackDrop = function() {
+      console.log('close');
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.pastJourneyArray.journeyHighLight = "";
+      $scope.getCard = "";
+      $scope.comment.text = "";
+      $scope.showLikeShow = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.postScrollData.likePageNumber = 1;
+      $scope.postScrollData.busy = false;
+      $scope.postScrollData.stopCallingApi = false;
+      console.log($scope.postScrollData, 'post scroll data');
+      $timeout(function() {
+        $scope.postScrollData.likePageNumber = 1;
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        $scope.postScrollData.viewList = false;
+        console.log($scope.postScrollData, 'console wla post scroll data');
+      }, 100);
+
+    };
+    // get likes and comment end
+    // save destination visited data
+    $scope.saveDestinationVisited = function() {
+      console.log($scope.pastJourneyArray.destinationVisited, 'new array');
+      var formData = {
+        'destinationVisited': $scope.pastJourneyArray.destinationVisited,
+        '_id': $scope.pastJourneyArray._id
+      };
+      console.log(formData, 'destinationVisited');
+      TravelibroService.http({
+        url: adminURL + "/draft/editDataWeb",
+        method: "POST",
+        data: formData
+      }).success(function(data) {
+        console.log(data);
+        if(data.value==true){
+          $scope.showEdit = -1;
+        }
+      }).error(function(data) {
+        console.log(data);
+      });
+      console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
+    }
+    // save destination visited data end
+
+    //     initMapGl = function(){
+    //       mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdHRyYXZlbGlicm8iLCJhIjoiY2o4NWpjdXUyMGppZTJwbWdxbGEzbWFvMyJ9.GQiCLwqxy-fqQik3cGn8EQ';
+    //       var mapGl = new mapboxgl.Map({
+    //         container: 'map',
+    //         center: [72.8372, 18.9353],
+    //         zoom: 7,
+    //         style: 'mapbox://styles/mapbox/satellite-streets-v9'
+    //       });
+    //       var mapBoxPoints = [
+    //         [72.9781,19.2183],
+    //         [73.0297,19.0330],
+    //         [73.2368,19.1668],
+    //         [73.1763,18.9004],
+    //         [73.4062,18.7546],
+    //         [73.8331,19.4650],
+    //         [74.7496,19.0952],
+    //         [74.7496,19.0952],
+    //         [72.9106,20.3893],
+    //         [72.8372,18.9353]
+    //       ];
+    //       mapGl.fitBounds(mapBoxPoints);
+    //       var geojsonObj = {
+    //                 "type": "FeatureCollection",
+    //                 "features":[{
+    //                   "type": "Feature",
+    //                   "properties": {},
+    //                   "geometry": {
+    //                     "type": "LineString",
+    //                     "coordinates": mapBoxPoints
+    //                     // [
+    //                     //     [72.9781,19.2183],
+    //                     //     [73.0297,19.0330],
+    //                     //     [73.2368,19.1668],
+    //                     //     [73.1763,18.9004],
+    //                     //     [73.4062,18.7546],
+    //                     //     [73.8331,19.4650],
+    //                     //     [74.7496,19.0952],
+    //                     //     [74.7496,19.0952],
+    //                     //     [72.9106,20.3893],
+    //                     //     [72.8372,18.9353]
+    //                     //   ]
+    //                     }
+    //                   }
+    //                 ]
+    //               }
+    //       mapGl.on('load', function () {
+    //         mapGl.addLayer({
+    //         "id": "route",
+    //         "type": "line",
+    //         "source": {
+    //             "type": "geojson",
+    //             "data": geojsonObj
+    //         },
+    //         "layout": {
+
+    //             "line-join": "round",
+    //             "line-cap": "round"
+    //         },
+    //         "paint": {
+    //             "line-color": "#fff",
+    //             "line-width": 2
+    //         }
+    //     });
+    //         var mapBoxPoints = new mapboxgl.LngLatBounds();
+    //         geojsonObj.features.forEach(function(marker) {
+    //         // create a HTML element for each feature
+    //         var el = document.createElement('div');
+    //         el.className = 'marker';
+
+    //        // make a marker for each feature and add to the map
+    //       console.log(marker.geometry.coordinates);
+    //       console.log(mapBoxPoints,'what is mapbox points');
+    //       var marker = new mapboxgl.Marker(el)
+    //       // .setLngLat(marker.geometry.coordinates)
+    //       // mapBoxPoints.extend(marker.geometry.coordinates)
+    //       // .addTo(mapGl);
+    // });
+    //         mapGl.fitBounds(mapBoxPoints);
+    //       });
+
+    //     }
+
+    // setTimeout(function(){
+    //   initMapGl();
+    // },1000);
+
+    $scope.editOption = function(model) {
+      $timeout(function() {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+  })
+  .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -11057,201 +12400,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
     };
     // other itineraries main
-    $scope.travelLife = [{
-        otherProfile: true,
-        viewProfile: [{
-            imgBg: "img/itinerary/religious.jpg",
-            profileImg: "img/profile-main.png",
-            name: "Andrea Christina",
-            location: "London",
-            follower: "2090"
-        }],
-    }, {
-        class: "visiting-post travel-visit",
-        popItinerary: false,
-        visitPost: true,
-        getvisitPost: [{
-            travelVisit: true,
-            imgVisit: "img/india-gate.jpg",
-            locationLocal: "Mumbai",
-            tagTravel: "Book Your Travel form take off to touchdown!",
-            visitImg: true,
-        }, ],
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "follow",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ]
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "following",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ]
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "follow",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ]
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "following",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ]
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "following",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ]
-    }, {
-        popItinerary: true,
-        heading: "Editor",
-        follower: "following",
-        timestampDate: "14 Jan, 2014",
-        timestampHour: "01:20 pm",
-        imgTravelled: "img/london.jpg",
-        Travelledtag: "London Eye",
-        photoCount: "28",
-        videoCount: "5",
-        locationVisited: "9",
-        itineraryType1: "img/sunset.png",
-        itineraryType2: "img/bag-journey.png",
-        itineraryType3: "img/luxury-journey.png",
-        travelledDay: "75",
-        onwayTag: "love in paris",
-        imgOnway: "img/paris.jpg",
-        cost: "$10,000",
-        spendingDay: "75",
-        likes: "15660",
-        reviews: "354",
-        pointReview: "4.5",
-        countryVisit: [{
-            imgFlag: "img/india-visit.png"
-        }, {
-            imgFlag: "img/england-visit.png"
-        }, {
-            imgFlag: "img/canada-visit.png",
-        }, ],
-    }, ];
     // other itineraries main end
 
 })
@@ -13701,12 +14849,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // TOUR FORM SAVE END
 
     //TOUR PDF DOWNLOAD
-    $scope.downloadTourPdf = function (tour) {
-        Agent.downloadTourPdf(tour, function (data) {
-            if (data.value == true) {
-                //console.log('hello');
-            }
-        });
+    $scope.downloadTourPdf = function(tour) {
+      Agent.downloadTourPdf(tour, function(data) {
+        if (data.value == true) {
+          //console.log('hello');
+        }
+      });
     };
     //TOUR PDF DOWNLOAD END
 
