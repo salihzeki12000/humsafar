@@ -5085,6 +5085,7 @@ header {
   margin-top: 2px;
   width: 86%;
   h4 {
+    color: #424242;
     font-size: 15px;
   }
 }
@@ -5124,11 +5125,11 @@ header {
   }
 
   a {
-    color: $brand-blue;
+    color: #424242;
 
     &:active,
     &:hover {
-      color: $brand-blue;
+      color: #424242;
     }
   }
 }
@@ -6335,7 +6336,8 @@ header {
   }
 }
 .post a{
-  color: $brand-blue
+  /*color: $brand-blue;*/
+  color: #424242;
 }
 .journey-post {
   .post {
@@ -6856,8 +6858,8 @@ display:none;
   }
 
   p {
-    // margin: 15px 0;
-    margin: 15px 0 15px -19px;
+     margin: 15px 0;
+    /*margin: 15px 0 15px -19px;*/
     /*text-shadow: 2px 2px 2px #020202;*/
   }
 }
@@ -6871,12 +6873,12 @@ display:none;
   .journey-end {
     padding: 10px;
     border-radius: 6px;
-    margin-left: -18px;
+    /*margin-left: -18px;*/
     // background-color: rgba(242, 103, 91, 0.75);
-    background-color: $brand-pink;
+    background-color: #fff;
 
     p {
-      text-shadow: 2px 2px 2px #020202;
+      /*text-shadow: 2px 2px 2px #020202;*/
     }
   }
 
@@ -6893,7 +6895,7 @@ display:none;
       margin-top: 10px;
       display: inline-block;
       font-size: 45px;
-      text-shadow: 2px 2px 2px #020202;
+      /*text-shadow: 2px 2px 2px #020202;*/
     }
   }
 }
@@ -6911,8 +6913,8 @@ display:none;
   }
 
   .journey-start {
-    background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;
-    background-size: contain;
+    /*background: url('../img/ongojourney/bg-start-white.png') no-repeat 50% 50%;*/
+    /*background-size: contain;*/
 
     h4 {
       margin: 25px 0 20px;
@@ -8711,7 +8713,6 @@ display:none;
 /*past itinerary*/
   .main-paststory {
     width: 550px;
-    display: inline-block;
     vertical-align: top;
   }
 /*  .box-start-paststory {
@@ -8843,17 +8844,35 @@ display:none;
   .add-card-post div {
     margin-bottom: 20px;
   }
-  .add-day-post {
-     div { margin: 10px 0px 20px; }     
+  .day-post-holder {
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin: 10px 0px 30px;
+    background-color: #7492a8;
+    .add-more-post {
+      margin-right: 5px;
+      font-size: 14px;
+      display: inline-block;
+      vertical-align: middle;
+     }
+     p {
+      margin: 0;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+     }
   }
-  .add-post {
-    .postto-day { 
-        font-size: 14px; 
-        letter-spacing: 1px;
-      }
+  .postto-day {
+    width: 45%;
+    padding: 14px;
+    border-radius: 6px;
+    margin: 0 auto;
+    background-color: #7492a8;
+    font-size: 14px; 
+    letter-spacing: 1px;
   }
   .add-more-post {
-    @include square(50px);
+    @include square(45px);
     border-radius: 100%;
     cursor: pointer;
     display: inline-block;
@@ -8866,8 +8885,8 @@ display:none;
       @extend.get-center;
       background-color: #fff;
     }
-    &:before { @include size(20px,2px) }
-    &:after { @include size(2px,20px) }
+    &:before { @include size(50%,2px) }
+    &:after { @include size(2px,50%) }
   }
   /*map gl past story */
   .map-paststory {

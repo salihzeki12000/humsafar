@@ -97,10 +97,12 @@
         <div class="started-journey-card">
           <div class="relate text-center">
             <div class="journey-start">
-              <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
+              <img src="img/ongojourney/journey-step-white.png" alt="" class="img-responsive m-center hidden-sm hidden-xs" width="40">
+              <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center hidden-md hidden-lg" width="40">
               <h4 class="avenir-roman"><span class="block">{{journey.name}}</span></h4>
               <div class="you-in">
-                <img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
+                <img src="img/icons/bon-voyage.png" alt="" class="img-responsive m-center hidden-sm hidden-xs" width="140">
+                <img src="img/icons/at.png" alt="" class="img-responsive m-center hidden-md hidden-lg" width="140">
               </div>
             </div>
           </div>
@@ -244,8 +246,8 @@
             <!-- ongo journey-end -->
             <div class="ongo-journey-end" ng-hide="loadmoreOption" ng-if="journey.onGoing==false">
               <div class="journey-end text-center">
-                <h4 class="color-white avenir-roman">{{ongo.location}}</h4>
-                <p class="m-clear color-white avenir-roman">
+                <h4 class="color-pink avenir-heavy">{{ongo.location}}</h4>
+                <p class="m-clear color-pink avenir-heavy">
                   <!-- <i class="fa fa-calendar mr5"></i> -->
                   <span class="mr5">{{journey.endTime|formatDate: 'date'}}</span>
                   <span class="mr5">|</span>

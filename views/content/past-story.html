@@ -6,14 +6,16 @@
 	<div class="past-journey on-go-journey mt60">
 		<div class="container-fluid">
 			<!-- past story main -->
-			<section class="main-paststory" ng-style="cardHolderCss">
+			<section class="main-paststory ongo-card-holder" ng-style="cardHolderCss">
 				<div class="started-journey-card">
 					<div class="relate text-center">
 						<div class="pastjourney-start journey-start">
-							<img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center" width="40">
+							<img src="img/ongojourney/journey-step-white.png" alt="" class="img-responsive m-center hidden-sm hidden-xs" width="40">
+							<img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center hidden-md hidden-lg" width="40">
 							<h4 class="avenir-roman color-white"><span class="block">{{pastJourneyArray.name}}</span></h4>
 							<div class="you-in">
-								<img src="img/icons/at.png" alt="" class="img-responsive m-center" width="140">
+								<img src="img/icons/bon-voyage.png" alt="" class="img-responsive m-center hidden-sm hidden-xs" width="140">
+								<img src="img/icons/at.png" alt="" class="img-responsive m-center hidden-md hidden-lg" width="140">
 							</div>
 						</div>
 					</div>
@@ -234,8 +236,8 @@
 						<!-- ongo journey-end -->
 						<div class="ongo-journey-end past-journey-end" ng-if="pastJourneyArray.onGoing==false">
 							<div class="journey-end text-center">
-								<h4 class="color-white avenir-roman">{{pastStory.location}}</h4>
-								<p class="m-clear color-white avenir-roman">
+								<h4 class="color-pink avenir-heavy">{{pastStory.location}}</h4>
+								<p class="m-clear color-pink avenir-heavy">
 									<!-- <i class="fa fa-calendar mr5"></i> -->
 									<span class="mr5">{{pastStory.endTime|formatDate: 'date'}}</span>
 									<span class="mr5">|</span>

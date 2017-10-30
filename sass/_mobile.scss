@@ -386,13 +386,30 @@
       margin-top: 10px;
     }
   }
+  .dash-up { border-left: 4px dashed #f58b86; }
+  .day-post-holder {
+    background-color: $brand-pink;
+  }
+  .add-more-post { 
+    background-color: #fff; 
+    &:before, &:after {
+      background-color: $brand-pink;
+    }
+  }
+  .postto-day {
+    width: auto;
+    padding: 14px 24px;
+    display: inline-block;
+    background-color: $brand-pink;
+  }
   .ongo-journey-card {
     margin-bottom: 25px; // background-color: rgba(255, 255, 255, 0.75);
   }
   .ongo-journey-change {
     .journey-change {
-      background-color: rgba(242, 103, 91, 0.75);
+      background-color: #ef645e;
     }
+    h4 { color: #fff; }
     p {
       color: #fff;
       text-shadow: 2px 1px 1px #000;
@@ -400,20 +417,21 @@
     }
   }
   .ongo-journey-join .join-card {
-    background-color: rgba(242, 103, 91, 0.75);
+    background-color: #ef645e;
   }
   .ongo-journey-left .journey-left {
     background-color: rgba(44, 55, 87, 0.75);
   }
   .ongo-journey-end {
     .journey-end {
-      background-color: rgba(242, 103, 91, 0.75);
+      background-color: #ef645e;
     }
     .end-journey-flag {
       span {
         color: #fff;
       }
     }
+    p { color: #fff  }
   }
   .ongo-card-holder {
     margin: 0 auto;
@@ -2208,7 +2226,7 @@
   }
   .ongo-journey-change {
     p {
-      margin-left: -21px;
+      /*margin-left: -21px;*/
       /*background-color: #171a2c;*/
     }
   } //   .post-travel-icon {
@@ -2723,7 +2741,7 @@
     p {
       margin: 10px 0;
       font-size: 13px;
-      margin-left: -18px;
+      /*margin-left: -18px;*/
     }
   }
   //card
