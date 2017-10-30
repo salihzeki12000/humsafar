@@ -6840,12 +6840,13 @@ display:none;
   margin: 0 auto 30px;
   .journey-change {
     display: inline-block;
-    min-width: 210px;
+    /*min-width: 210px;*/
+    min-width: 160px;
     padding: 15px 10px;
     border-radius: 6px;
     @include transform(rotate(-2deg));
     // background-color: rgba(242, 103, 91, 0.75);
-    background-color: $brand-pink;
+    background-color: #fff;
   }
 
   h4 {
@@ -6857,7 +6858,7 @@ display:none;
   p {
     // margin: 15px 0;
     margin: 15px 0 15px -19px;
-    text-shadow: 2px 2px 2px #020202;
+    /*text-shadow: 2px 2px 2px #020202;*/
   }
 }
 // change journey card end
@@ -6918,7 +6919,7 @@ display:none;
       font-size: 20px;
       position: relative;
       color: #fff;
-      text-shadow: 2px 2px 2px #020202;
+      /*text-shadow: 2px 2px 2px #020202;*/
 
       &:before {
         content: "";
@@ -7138,7 +7139,8 @@ display:none;
 .dash-up{
   width: 4px;
   height: 29px;
-  border-left: 4px dashed #f58b86;
+  /*border-left: 4px dashed #f58b86;*/
+  border-left: 4px dashed #fff;
   position: relative;
   display: inline-block;
   bottom: 11px;
@@ -12522,7 +12524,8 @@ display:none;
   position: fixed;
   top: 0;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.2);
+  /*background-color: rgba(0, 0, 0, 0.2);*/
+  background-color: #a6cbe3;
 
   &:before {
     content: '';
@@ -12533,6 +12536,7 @@ display:none;
     // left: 651px;
     z-index: 1;
     @include background(linear-gradient(to right, rgba(0, 0, 0, 0.82), transparent));
+    display: none;
   }
 
   img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {

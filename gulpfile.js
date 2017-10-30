@@ -62,6 +62,7 @@ var jsArray = [
     './js/templateservice.js',
     './js/fileuploadservice.js',
     './js/ongojourney.js',
+    './js/pastjourney.js',
     './js/itinerary.js',
     './js/commontask.js',
     './js/activity.js',
