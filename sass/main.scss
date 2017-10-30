@@ -1,6 +1,7 @@
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 @import "../bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "https://api.mapbox.com/mapbox-gl-js/v0.40.1/mapbox-gl.js";
 @import "../bower_components/flexslider/flexslider.css";
 @import "../bower_components/font-awesome/css/font-awesome.min.css";
 @import "../bower_components/fancyBox/source/jquery.fancybox.css";
@@ -543,7 +544,7 @@ textarea {
   color: #8f8f90;
 }
 
-.color-42 {
+.color-iphone-gray {
   color: #424242;
 }
 
@@ -1593,10 +1594,10 @@ header {
 
 .user-travel-detail {
   padding: 15px 0;
+  margin-bottom: -4px;
   background: url('../img/travel-detail-bg.png') no-repeat;
   background-size: 100% 100%;
   text-align: center;
-
   ul {
     padding: 0;
     margin: 0;
@@ -1620,7 +1621,7 @@ header {
 
 .all-profile-detail {
   padding: 0 25px;
-  margin-top: -5px;
+  // margin-top: -5px;
 }
 
 .more-about-me {
@@ -4710,7 +4711,29 @@ header {
   padding: 25px 0;
   border-bottom: 2px solid #ebebeb;
 }
-
+.landing-home .social-icons {
+  .facebook:hover {
+    background-color: #3b5998;
+  }
+  .instagram:hover {
+    background-color: #c32aa3;
+  }
+  .pinterest:hover {
+    background-color: #cb2027;
+  }
+  .google:hover {
+    background-color: #df4a32;
+  }
+  .twitter:hover {
+    background-color: #00b6f1;
+  }
+  .youtube:hover {
+    background-color: #ff0000;
+  }
+  .linkedin:hover {
+    background-color: #007bb6;
+  }
+}
 .advertise-section {
   padding: 25px 0;
 }
@@ -5162,7 +5185,7 @@ header {
   position: absolute;
   top: 20px;
   right: 0;
-  background-color: #ff6759;
+  background-color: black;
   z-index: 1;
   @include transition( all 300ms linear);
   @extend .pointer;
@@ -5177,12 +5200,12 @@ header {
   border: 1px solid transparent;
 
   &:hover {
-    border: 1px solid $brand-pink;
-    background-color: #fff;
+    border: 1px solid #fff;
+    background-color: black;
     @include transition( all 300ms linear);
 
     span {
-      color: $brand-pink;
+      color: #fff;
       @include transition( all 300ms linear);
     }
   }
@@ -5442,11 +5465,11 @@ header {
   }
 
   .tag-ongo-journey {
-    background-color: $brand-cyan;
+    background-color: black;
     @include transition( all 300ms linear);
 
     span {
-      color: $brand-blue;
+      //color: $brand-blue;
       @extend .avenir-heavy;
       @include transition( all 300ms linear);
     }
@@ -5477,11 +5500,11 @@ header {
 
   &:hover {
     border: 1px solid transparent;
-    background-color: $brand-blue;
+    background-color: black;
     @include transition( all 300ms linear);
 
     span {
-      color: $brand-cyan;
+      color: #fff;
       @include transition( all 300ms linear);
     }
   }
@@ -5492,11 +5515,11 @@ header {
 
   &:hover {
     border: 1px solid transparent;
-    background-color: $brand-blue;
+    background-color: black;
     @include transition( all 300ms linear);
 
     span {
-      color: $brand-cyan;
+      color: #fff;
       @include transition( all 300ms linear);
     }
   }
@@ -5504,10 +5527,10 @@ header {
 
 .local-life {
   .tag-ongo-journey {
-    background-color: $brand-cyan;
+    background-color: black;
 
     span {
-      color:$brand-blue;
+      color:#fff;
       @extend .avenir-heavy;
     }
   }
@@ -8702,6 +8725,148 @@ display:none;
   }
 }
 // trip summary end
+
+/*past itinerary*/
+  .main-paststory {
+    width: 550px;
+    display: inline-block;
+    vertical-align: top;
+  }
+/*  .box-start-paststory {
+    overflow: hidden;
+  }*/
+  .past-story-detail {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.95);
+  }
+  .start-end-date {
+    margin: 10px 0;
+  }
+  .past-startdate, .past-enddate {
+    margin: 0;
+    display: inline-block;
+    font-size: 15px;
+    color: $brand-dark-blue;
+    .date {
+      margin: 0px 5px;
+      font-size: 17px;
+      color: $brand-grey;
+    }
+    .edit-date {
+      font-size: 12px;
+      color: $brand-light-grey;
+    }
+  }
+  .past-startdate {
+    margin-right: 5px;
+  }
+  .days-count {
+    font-size: 25px;
+    display: block;
+    line-height: 100%;
+  }
+  .pastdestination-visited {
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 30px;
+    background-color: rgba(255,255,255,0.95);
+    color: $brand-dark-blue;
+    /*overflow: hidden;*/
+  }
+  .edit-country, .edit-city {
+    width: 180px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .edit-city {
+    .ui-select-multiple.ui-select-bootstrap {
+      height: 34px;
+      border-radius: 6px;
+    }
+  }
+  .edit-action {
+    margin: 10px 0;
+  }
+  .dest-heading {
+    font-size: 17px;
+  }
+  .past-story-heading {
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include background(linear-gradient(rgba(0,0,0,0.7),transparent));
+  }
+  .past-flag-holder {
+    @include square(30px);
+    border-radius: 100%;
+    border: 1px solid #fff;
+    margin-right: 10px;
+    position: relative;
+    box-shadow: 1px 2px 4px #424242;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    img {
+      max-height: 100%;
+    }
+  }
+  .list-holder {
+    padding-top: 10px;
+    border-top: 1px solid #ebebeb;
+    &:first-child {
+      border-top: none;
+    }
+  }
+  .dest-country-vist  {
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;
+  }
+  .city-name-visited {
+    display: inline-block;
+    span {
+      &:first-child {
+        border-left: none;
+      }
+      padding: 0px 5px;
+      border-left: 1px solid $brand-dark-blue;
+      display: inline-block;
+      font-size: 14px;
+    }
+  }
+  .edit-delete-dest { margin: 10px 0; }
+  .edit-dest { margin: 0px 10px; }
+  .add-more-post {
+    @include square(50px);
+    border-radius: 100%;
+    cursor: pointer;
+    display: inline-block;
+    background-color: $brand-pink;
+    line-height: 58px;
+    text-align: center;
+    i { font-size: 22px; }
+  }
+  /*map gl past story */
+  .map-paststory {
+    width: calc(100vw - 610px);
+    height: 100vh;
+    /*margin-left: -4px;*/
+    display: inline-block;
+    vertical-align: top;
+  }
+  .map-marker {
+    width: 22px;
+    height: 31px;
+    background: url('../img/maps/red-marker.png') no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    cursor: pointer;
+  }
+  /*map gl past story */
+/*past itinerary end*/
+
 // itinerary
 
 .itinerary-holder {
@@ -13306,6 +13471,7 @@ video::-webkit-media-controls-fullscreen-button {
   position: fixed;
   overflow: auto;
 }
+
 .home-landing {
   color: #424242;
   //min-height: 100%;
@@ -13326,7 +13492,7 @@ video::-webkit-media-controls-fullscreen-button {
     padding-top: 80px;
   }
   h1, p, .seemore {
-    @include animation(fadeIn 2s);
+    @include animation(fadedown 700ms);
   }
   .below-headline {
     font-size: 18px;
@@ -13344,7 +13510,7 @@ video::-webkit-media-controls-fullscreen-button {
     }
   }
 }
-.text-18 {
+.footer-text {
   font-size: 18px;
 }
 .text-heavy {
@@ -13358,7 +13524,7 @@ video::-webkit-media-controls-fullscreen-button {
   min-width: 300px;
   width : 750px;
   //padding-top: 200px;
-  @include animation(fadedown 3s);
+  @include animation(fadeIn 2s);
   img {
     width: 100%;
   }
@@ -13367,7 +13533,7 @@ video::-webkit-media-controls-fullscreen-button {
     position: absolute;
     width: 540px;
     margin-left: 85px;
-    @include animation(zoomin 1s);
+    @include animation(zoomin 700ms);
   }
 }
 //FADE-DOWN ANIMATION KEYFRAMES
@@ -13388,7 +13554,16 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .fadeIn {
   animation-name: fadeIn;
-  animation-duration: 2s;
+  animation-duration: 1s;
+}
+.sectionStripe {
+  margin-top: -60px;
+}
+.hideNavbar {
+  display: none;
+}
+.fadeOut {
+  @include animation(fadeOut 1s);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -13397,6 +13572,10 @@ video::-webkit-media-controls-fullscreen-button {
 @include keyframes(fade-now) {
   from { opacity: 0;}
   to   { opacity: 1;}
+}
+@include keyframes(fadeOut) {
+  from { opacity: 1;}
+  to   { opacity: 0;}
 }
 
 //ZOOM-IN ANIMATION KEYFRAMES
@@ -13416,7 +13595,7 @@ video::-webkit-media-controls-fullscreen-button {
   width: 90px;
   opacity: 0;
   @include animation(bounceIn 2s);
-  animation-delay: 4s;
+  animation-delay: 2.5s;
 }
 @include keyframes(bounceIn) {
   0% {
@@ -13446,7 +13625,7 @@ video::-webkit-media-controls-fullscreen-button {
 .submenu {
   padding: 20px 0 100px 0;
   background-color: #ffffff;
-  color: #d2d2d2;
+  color: #eeeeee;
 }
 .sectionScroll {
   font-family: AvenirLTStd-Light;
@@ -13464,7 +13643,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .fixed-subnavigation {
   background-color: #ffffff;
-  color: #d2d2d2;
+  color: #eeeeee;
   position: fixed;
   top: 50px;
   z-index: 200;
@@ -13483,6 +13662,10 @@ video::-webkit-media-controls-fullscreen-button {
     font-weight: 600;
     padding-right: 10px;
   }
+}
+#capture .vimeo:hover,
+#capture .vimeo:focus{
+  color: $brand-pink;
 }
 .current-active {
   color : #424242;
@@ -13543,7 +13726,7 @@ video::-webkit-media-controls-fullscreen-button {
   color : white;
   font-family: AvenirLTStd-Heavy;
   font-size: 16px;
-  border-radius: 25px;
+  border-radius: 15px;
   padding: 15px;
   width: fit-content;
   width: -moz-fit-content;
@@ -13551,6 +13734,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 #discover {
   text-align: center;
+  padding-bottom: 50px;
   h3 {
     font-weight: 600;
     padding-bottom: 20px;
@@ -13599,7 +13783,7 @@ video::-webkit-media-controls-fullscreen-button {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  //position: static;
+  position: static;
   //background-attachment: fixed;
 }
 .register-text {
@@ -13636,6 +13820,13 @@ video::-webkit-media-controls-fullscreen-button {
     li:last-child {
       border-right: 1px dotted;
     }
+    li:hover {
+      @include animation(fade-now 700ms);
+    }
+    li:hover > a{
+      color: #fff;
+      @include animation(fade-now 700ms);
+    }
   }
 }
 .footer-filler {
@@ -13662,6 +13853,9 @@ video::-webkit-media-controls-fullscreen-button {
   }
   .row {
     padding: 20px 50px;
+  }
+  .color-white {
+    opacity: 0.5;
   }
 }
 .sections-holder {
@@ -13707,12 +13901,31 @@ video::-webkit-media-controls-fullscreen-button {
     color: white;
   }
 }
+/*mapbox*/
+.marker {
+  background-image: url('https://travelibro.com/img/mobile-logo.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+/*mapbox end*/
 
 .trending-travellers {
   margin-top: 0;
   .blogger-cover {
-    margin: 0 25px;
+    margin: 0 25px 20px;
     border-radius: 15px;
+    box-shadow:5px 5px 30px rgba(0, 0, 0, 0.35);
+    @include transition(all 150ms linear);
+    &:hover {
+      box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.35), 2px 6px 40px rgba(0, 0, 0, 0.35);
+      @include transition(all 150ms linear);
+    }
+    .gallery-imgholder {
+      border-radius: 15px;
+    }
   }
   .gallery-imgholder, .blogger-cover:before {
     border-radius: 15px;
@@ -13721,7 +13934,17 @@ video::-webkit-media-controls-fullscreen-button {
     background-color: transparent;
   }
   .blogger-cont-holder {
-    background: linear-gradient(transparent, rgba(0,0,0,1));
+
+    border-radius: 0 0 15px 15px;
+  }
+  .blogger-details-bg {
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    height: 70%;
+    z-index: 2;
     border-radius: 0 0 15px 15px;
   }
   //.img-show {
@@ -13733,12 +13956,48 @@ video::-webkit-media-controls-fullscreen-button {
   .activity-post-main {
     margin: 10px 25px 20px 25px;
     border-radius: 15px;
+    box-shadow:5px 5px 30px rgba(0, 0, 0, 0.35);
+    @include transition(all 150ms linear);
+    &:hover {
+      box-shadow: 5px 6px 10px rgba(0, 0, 0, 0.35), 2px 6px 40px rgba(0, 0, 0, 0.35);
+      @include transition(all 150ms linear);
+    }
   }
-  .travelled-imgholder {
-    border-radius: 0 0 15px 15px ;
+  .post-footer {
+    height: 20px;
   }
 }
-
+.home-navigation {
+  height: 150px;
+}
 //.row-pad {
 //  padding: 0 2%;
 //}
+.landing-home .blogger-cont-holder {
+  h4 {
+    margin-bottom: 0;
+  }
+  h5 {
+    margin-top: 2px;
+    margin-bottom: 20px;
+  }
+  .bloggerholder-made li h4 {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+.autoHeight {
+  min-height: 740px;
+}
+.copyright {
+  font-family: AvenirLTStd-Heavy;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.activity-see-more {
+  font-weight: 500;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 8px;
+}

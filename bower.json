@@ -56,7 +56,8 @@
     "international-phone-number": "^0.0.16",
     "highcharts-ng": "^0.0.6",
     "highcharts": "^5.0.12",
-    "angular-ui-tinymce": "^0.0.19"
+    "angular-ui-tinymce": "^0.0.19",
+    "mapbox-gl": "^2.0.2"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"

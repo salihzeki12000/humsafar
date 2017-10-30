@@ -290,8 +290,14 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
-  #discover .popular-user {
-    margin: 0 3%;
+  #discover {
+    .popular-user {
+      margin: 0 3%;
+    }
+    .trending-travellers .blogger-cover,
+    trending-travellers .blogger-cover .gallery-imgholder {
+      width: 320px;
+    }
   }
   #relive .relive-text {
     margin : 30px 0;
@@ -751,9 +757,15 @@
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
   /*new landing page*/
+  .mobile-headline {
+    font-size: 35px;
+  }
   .row-pad {
       padding: 0 5%;
     }
+  #capture .row-pad {
+    padding: 0;
+  }
   .landing-home {
     .travelled-imgholder {
       min-height: calc(100vw - 50px);
@@ -773,6 +785,13 @@
     }
     #discover, #capture, #inspire, #relive {
       min-height: 0;
+    }
+    #discover {
+      padding-bottom: 0;
+      .trending-travellers .blogger-cover,
+      trending-travellers .blogger-cover .gallery-imgholder {
+        width: 100%;
+      }
     }
     .user-details-circles {
       padding: 0 10px;
@@ -835,11 +854,14 @@
       padding: 0 60px 20px;
       text-align: center;
       margin-top: -25px;
+      h2 {
+        font-size: 25px;
+      }
     }
     .text-heavy {
-      font-size: 23px;
+      //font-size: 23px;
     }
-    .text-18 {
+    .footer-text {
       font-size: 14px;
     }
     .profile-detail {
@@ -2244,6 +2266,9 @@
 
   //new landing page
   .landing-home {
+    .home-footer .row {
+      padding: 20px 30px;
+    }
     .user-details-circles .symbol-up {
       padding: 2px 10px;
       img {
@@ -3425,6 +3450,17 @@
 // media query for 480px to 320px end
 // media query for max 330px (iphone 5S)
 @media screen and (max-width: 320px) {
+  .landing-home {
+    #discover h3 {
+      padding-bottom: 0px;
+    }
+    h1 {
+      font-size: 20px;
+    }
+    .user-display {
+    }
+    padding: 0 0 20px;
+  }
   .journey-overview li {
     margin-right: 1px;
   }

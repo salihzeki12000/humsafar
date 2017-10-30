@@ -1,260 +1,84 @@
-var globalGetProfile = function (data, status) {
-    if (data.data._id) {
-        $.jStorage.set("isLoggedIn", true);
-        $.jStorage.set("profile", data.data);
-        // //console.log($.jStorage.get('profile'));
-        //console.log("Profile successfully set on jStorage");
-    } else {
-        $.jStorage.flush();
-    }
+var globalGetProfile = function(data, status) {
+  if (data.data._id) {
+    $.jStorage.set("isLoggedIn", true);
+    $.jStorage.set("profile", data.data);
+    // //console.log($.jStorage.get('profile'));
+    //console.log("Profile successfully set on jStorage");
+  } else {
+    $.jStorage.flush();
+  }
 };
 var abc = {};
 
-var pointsForLine = function () {};
+var pointsForLine = function() {};
 var line = [];
 var markers = [];
 var travelPath;
-var initMap = function () {};
-var setMarker = function () {};
+var initMapGl = function() {};
+var initMap = function() {};
+var setMarker = function() {};
 var map;
+var mapGl;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
-    .run(['$anchorScroll', function ($anchorScroll) {
-        $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
-    }])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
+  .run(['$anchorScroll', function($anchorScroll) {
+    $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
+  }])
 
-.controller('HomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location) {
+  .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location) {
     //Used to name the .html file
     cfpLoadingBar.start();
-    $scope.template = TemplateService.changecontent("home");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
+    $scope.template = TemplateService.changecontent("newhome");
     $scope.menutitle = NavigationService.makeactive("Home");
     TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
     $scope.navigation = NavigationService.getnav();
     var swiper = {};
     $scope.accessToken = $.jStorage.get("accessToken");
+    $scope.bookingLink = function() {
+      window.location.href = "https://travelibro.com/bookings/";
+    }
+    $scope.screenWidth = 3;
+    var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+    if(screenWidth >=768 && screenWidth<=991) {
+      $scope.screenWidth = 4;
+    }
     $scope.bookingLink = function () {
-        window.location.href = "https://travelibro.com/bookings/";
-    }
-    $scope.videoPlay = [{
-        videourl: "",
-        vimeourl: "",
-        imgurl: "img/libro-home/transparent-home.png",
-        id: "0"
-    }, {
-        videourl: "img/libro-home/videos/travellife.mp4",
-        vimeourl: "https://player.vimeo.com/video/207906141",
-        imgurl: "img/libro-home/videos/travel-life.jpg",
-        id: "1"
-    }, {
-        videourl: "img/libro-home/videos/locallife.mp4",
-        vimeourl: "https://player.vimeo.com/video/207905802",
-        imgurl: "img/libro-home/videos/local-life.jpg",
-        id: "2"
-    }, {
-        videourl: "img/libro-home/videos/mylife.mp4",
-        vimeourl: "https://player.vimeo.com/video/207906010",
-        imgurl: "img/libro-home/videos/my-life.jpg",
-        id: "3"
-    }, {
-        videourl: "",
-        vimeourl: "",
-        imgurl: "img/libro-home/transparent-home.png",
-        id: "4"
-    }];
-    abc = $scope;
-    $scope.section = {
-        one: "views/section/mainhome.html",
-        two: "views/section/travellife.html",
-        three: "views/section/locallife.html",
-        four: "views/section/mylife.html",
-        five: "views/section/share.html",
-    };
-    $scope.changePage = function (text) {
-        // //console.log(text);
-        var length = $(".fp-section").length;
-        $timeout(function () {
-            $('.scene').parallax();
-            swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                direction: 'vertical',
-                slidesPerView: 1,
-                paginationClickable: true,
-                spaceBetween: 0,
-                mousewheelControl: false,
-                mousewheelForceToAxis: false,
-                keyboardControl: false,
-                parallax: true,
-                hashnav: true
-            });
-        }, 500);
-        if (length === 0) {
-            $('.fullpage').fullpage({
-                //Navigation
-                onLeave: function (index, nextIndex, direction) {
-                    $timeout(function () {
-                        $('.scene').parallax();
-                        swiper = new Swiper('.swiper-container', {
-                            pagination: '.swiper-pagination',
-                            direction: 'vertical',
-                            slidesPerView: 1,
-                            paginationClickable: true,
-                            spaceBetween: 0,
-                            mousewheelControl: false,
-                            mousewheelForceToAxis: false,
-                            keyboardControl: false,
-                            parallax: true,
-                            hashnav: true
-                        });
-                        swiper.slideTo(nextIndex - 1);
-                        if ($(window).width() >= 767) {
-                            for (i = 1; i < 4; i++) {
-                                if (i == nextIndex - 1) {
-                                    $('#video' + i).get(0).load();
-                                    $('#video' + i).get(0).play();
-                                } else {
-                                    $('#video' + i).get(0).pause();
-                                }
-                            }
-                        }
-                    }, 500);
-                }
-            });
-        }
-
-        // //console.log(text);
-        $scope.homeval = text;
-        switch (text) {
-            case "share":
-                $.fn.fullpage.moveTo(5);
-                break;
-            case "mylife":
-                $.fn.fullpage.moveTo(4);
-                break;
-            case "locallife":
-                $.fn.fullpage.moveTo(3);
-                break;
-            case "travellife":
-                $.fn.fullpage.moveTo(2);
-                break;
-            case "home":
-                $.fn.fullpage.moveTo(1);
-                break;
-            default:
-                $.fn.fullpage.moveTo(1);
-                break;
-        }
-    };
-    $(window).load(function () {
-        document.getElementById('movie1').play();
-        if ($(window).width() < 767) {
-            $('video').remove();
-        }
-    });
-    setTimeout(function () {
-
-
-    }, 500);
-
-    $scope.$on('$viewContentLoaded', function () {
-        $timeout(function () {
-            $('body').addClass('fp-');
-            $scope.changePage($stateParams.id);
-        }, 1000);
-    });
-    cfpLoadingBar.complete();
-    $scope.audioStatus = {
-        on: true
-    }
-    $scope.muteVolume = function () {
-        for (i = 1; i <= 3; i++) {
-            if ($("#video" + i)[0].muted) {
-                $("#video" + i)[0].muted = false;
-                $scope.audioStatus = {
-                    on: true
-                }
-            } else {
-                $("#video" + i)[0].muted = true;
-                $scope.audioStatus = {}
-            }
-        }
-    }
-    $timeout(function () {
-        if ((navigator.platform.indexOf("iPhone") != -1) ||
-            (navigator.platform.indexOf("iPod") != -1) ||
-            (navigator.platform.indexOf("iPad") != -1)) {
-            $(".download-app").addClass("hide");
-        }
-    }, 200);
-    $scope.customLink = function () {
-        window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-    };
-})
-
-.controller('newHomeCtrl', function ($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location, $anchorScroll) {
-    //Used to name the .html file
-    // cfpLoadingBar.start();
-    $scope.template = TemplateService.changecontent("newhome");
-    $scope.menutitle = NavigationService.makeactive("newHome");
-    TemplateService.title = "TraveLibro - Your Travel Life | Local Life";
-    $scope.navigation = NavigationService.getnav();
-    $scope.accessToken = $.jStorage.get("accessToken");
-    $scope.bookingLink = function () {
-        window.location.href = "https://travelibro.com/bookings/";
+      window.location.href = "https://travelibro.com/bookings/";
     };
     //get popular user details
-    $scope.popular_users = [
-      {
-        name: 'nomadic-boys',
-        data: {}
-      },
-      {
-        name: 'collette-stohler',
-        data: {}
-      }
-    ];
-    $scope.popular_users.forEach(function(user){
-      NavigationService.getProfile(user.name, function(data){
-            user.data = data.data;
-          },function (err) {
-          })
-    });
-    $scope.trendingTravellers = [];
-    $scope.trendingStories = [];
-    var getPopularBlogger = function (pageNo) {
+    var getTrendingData = function (pageNo) {
       NavigationService.popularBlogger({
         pagenumber: pageNo
       }, function (data) {
-        _.each(data.data, function (newArr) {
-          if( newArr.name == "Roamaroo" || newArr.name == "Bruised Passports" || newArr.name == "Nomadic Boys") {
-            $scope.trendingTravellers.push(newArr);
-          }
-        });
+        console.log('limit data ',data);
+        $scope.trendingTravellers = data.data;
       });
-      console.log($scope.trendingTravellers);
-    };
-    var getPopularJourney = function (pageNo) {
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
-        console.log('data from server --',data);
-        _.each(data.data, function (newArr) {
-          if(newArr._id == "599b0f0bbf0f565607fb9d76" || newArr._id == "593b5c70ce72c970d44963fa" || newArr._id == "5987c9048fa3f71c98d9adf0") {
-              $scope.trendingStories.push(newArr);
-              console.log('now pushing ', newArr.user.name);
-          }
-        });
+        $scope.trendingStories = data.data;
       });
-      console.log($scope.trendingStories);
     };
-    getPopularBlogger(1);
-    getPopularJourney(1);
-
+    getTrendingData(1);
     setTimeout(function(){
       $(document).ready(function(){
+        //setting auto-height for tab screen
+        if(screenWidth >= 768 && screenWidth<screenHeight){
+          console.log('its a tab');
+          var autoHeightElem = angular.element(document.querySelectorAll("[auto-height]"));
+          _.each(autoHeightElem, function (elem) {
+            $(elem).css('min-height',735);
+          });
+        }
+        //setting auto-height for tab screen end
         //start landing page animation
         $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
+          console.log('here we go');
           $('.iphone-screen').css('display','block');
           $(this).off(e);
         });
@@ -265,64 +89,63 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $(this).off(e);
             });
         //end landing page animation
+
         $('.worksheet').scroll(function(){
           //start blue navbar on scroll
-          if($('.worksheet').scrollTop()<3) {
-            $("#nav-onhead").removeClass('blue-head');
-          }
-          else {
-            $("#nav-onhead").addClass('blue-head');
+          if(screenWidth<=480) {
+            if ($('.worksheet').scrollTop() < 3) {
+              $("#nav-onhead").removeClass('blue-head');
+              $(".activeNavbar").removeClass('blue-head');
+            }
+            else {
+              $("#nav-onhead").addClass('blue-head');
+              $(".activeNavbar").addClass('blue-head');
+            }
           }
           //end blue navbar on scroll
-          var firstHeight = $('.home-landing').height();
-          if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<4000) {
+          var firstHeight = $('.worksheet').height();
+          if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<4300) {
             $("#navigation").removeClass("submenu");
-            $("#navigation").addClass("fixed-subnavigation");
-            $("#navigation").addClass("fade-now");
+            $("#navigation").addClass("fixed-subnavigation fade-now sectionStripe");
+            if(screenWidth>991){
+              $(".libro-header").addClass("fadeOut");
+              $(".activeNavbar").addClass("hideNavbar");
+            }
           }
           else {
-            $("#navigation").removeClass("fixed-subnavigation");
+            $("#navigation").removeClass("fixed-subnavigation sectionStripe");
             $("#navigation").addClass("submenu");
+            $(".activeNavbar").removeClass(" hideNavbar");
+
           }
           //end blue navbar
           //change active section anchor color
-          var $div = $(".worksheet").offset().top + 250;
+          var $div = $('.worksheet').offset().top + 250;
           if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
             $('.discover1').css('color', '#424242');
           }else {
-            $('.discover1').css('color', '#d2d2d2');
+            $('.discover1').css('color', '#eeeeee');
           }
           if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
             $('.capture1').css('color', '#424242');
           }else {
-            $('.capture1').css('color', '#d2d2d2');
+            $('.capture1').css('color', '#eeeeee');
           }
           if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
             $('.inspire1').css('color', '#424242');
           }else {
-            $('.inspire1').css('color', '#d2d2d2');
+            $('.inspire1').css('color', '#eeeeee');
           }
           if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
             $('.relive1').css('color', '#424242');
           }else {
-            $('.relive1').css('color', '#d2d2d2');
+            $('.relive1').css('color', '#eeeeee');
           }
-          if (isScrolledIntoView('.anime') === true) {
-            $('.anime').addClass('fadeIn');
-            console.log('yes yes');
-          }
+
         });
       })
     },2000);
-    var isScrolledIntoView = function(elem) {
-      var docViewTop = $('.worksheet').scrollTop();
-      var docViewBottom = docViewTop + $('.worksheet').height();
 
-      var elemTop = $(elem).offset().top;
-      var elemBottom = elemTop + $(elem).height();
-
-      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-    };
     $scope.openKnowMore = function(){
       $(".know-more-modal").addClass("show-know-more");
     };
@@ -330,137 +153,173 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $(".know-more-modal").removeClass("show-know-more");
     };
     $scope.go_at = function(section){
-    console.log('worksheet ',$('.worksheet')[0].scrollTop);
-    var extra_space = 0;
-    if(section == 'discover' || section == 'capture')
-    {extra_space = 130;}
-    else
-    {extra_space = 145;}
-    $('.worksheet').animate({
-        scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
-      'slow');
-  };
-  $scope.changePage = function (text) {
-        // //console.log(text);
-        var length = $(".fp-section").length;
-        $timeout(function () {
-            $('.scene').parallax();
-              swiper = new Swiper('.swiper-container', {
-                pagination: '.swiper-pagination',
-                direction: 'vertical',
-                slidesPerView: 1,
-                paginationClickable: true,
-                spaceBetween: 0,
-                mousewheelControl: false,
-                mousewheelForceToAxis: false,
-                keyboardControl: false,
-                parallax: true,
-                hashnav: true
-            });
-        }, 500);
-        if (length === 0) {
-            $('.fullpage').fullpage({
-                //Navigation
-                onLeave: function (index, nextIndex, direction) {
-                    $timeout(function () {
-                        $('.scene').parallax();
-                        swiper = new Swiper('.swiper-container', {
-                            pagination: '.swiper-pagination',
-                            direction: 'vertical',
-                            slidesPerView: 1,
-                            paginationClickable: true,
-                            spaceBetween: 0,
-                            mousewheelControl: false,
-                            mousewheelForceToAxis: false,
-                            keyboardControl: false,
-                            parallax: true,
-                            hashnav: true
-                        });
-                        swiper.slideTo(nextIndex - 1);
-                        if ($(window).width() >= 767) {
-                            for (i = 1; i < 4; i++) {
-                                if (i == nextIndex - 1) {
-                                    $('#video' + i).get(0).load();
-                                    $('#video' + i).get(0).play();
-                                } else {
-                                    $('#video' + i).get(0).pause();
-                                }
-                            }
-                        }
-                    }, 500);
-                }
-            });
-        }
-        // //console.log(text);
-        $scope.homeval = text;
-        switch (text) {
-            case "share":
-                $.fn.fullpage.moveTo(5);
-                break;
-            case "mylife":
-                $.fn.fullpage.moveTo(4);
-                break;
-            case "locallife":
-                $.fn.fullpage.moveTo(3);
-                break;
-            case "travellife":
-                $.fn.fullpage.moveTo(2);
-                break;
-            case "home":
-                $.fn.fullpage.moveTo(1);
-                break;
-            default:
-                $.fn.fullpage.moveTo(1);
-                break;
-        }
+      console.log('worksheet ',$('.worksheet')[0].scrollTop);
+      var extra_space = 0;
+      if(section == 'discover' || section == 'capture')
+      {extra_space = 130;}
+      else
+      {extra_space = 145;}
+      $('.worksheet').animate({
+          scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
+        'slow');
     };
-    // $(window).load(function () {
-    //     document.getElementById('movie1').play();
-    //     if ($(window).width() < 767) {
-    //         $('video').remove();
-    //     }
+
+    // $scope.videoPlay = [{
+    //   videourl: "",
+    //   vimeourl: "",
+    //   imgurl: "img/libro-home/transparent-home.png",
+    //   id: "0"
+    // }, {
+    //   videourl: "img/libro-home/videos/travellife.mp4",
+    //   vimeourl: "https://player.vimeo.com/video/207906141",
+    //   imgurl: "img/libro-home/videos/travel-life.jpg",
+    //   id: "1"
+    // }, {
+    //   videourl: "img/libro-home/videos/locallife.mp4",
+    //   vimeourl: "https://player.vimeo.com/video/207905802",
+    //   imgurl: "img/libro-home/videos/local-life.jpg",
+    //   id: "2"
+    // }, {
+    //   videourl: "img/libro-home/videos/mylife.mp4",
+    //   vimeourl: "https://player.vimeo.com/video/207906010",
+    //   imgurl: "img/libro-home/videos/my-life.jpg",
+    //   id: "3"
+    // }, {
+    //   videourl: "",
+    //   vimeourl: "",
+    //   imgurl: "img/libro-home/transparent-home.png",
+    //   id: "4"
+    // }];
+    // abc = $scope;
+    // $scope.section = {
+    //   one: "views/section/mainhome.html",
+    //   two: "views/section/travellife.html",
+    //   three: "views/section/locallife.html",
+    //   four: "views/section/mylife.html",
+    //   five: "views/section/share.html",
+    // };
+    // $scope.changePage = function(text) {
+    //   // //console.log(text);
+    //   var length = $(".fp-section").length;
+    //   $timeout(function() {
+    //     $('.scene').parallax();
+    //     swiper = new Swiper('.swiper-container', {
+    //       pagination: '.swiper-pagination',
+    //       direction: 'vertical',
+    //       slidesPerView: 1,
+    //       paginationClickable: true,
+    //       spaceBetween: 0,
+    //       mousewheelControl: false,
+    //       mousewheelForceToAxis: false,
+    //       keyboardControl: false,
+    //       parallax: true,
+    //       hashnav: true
+    //     });
+    //   }, 500);
+    //   if (length === 0) {
+    //     $('.fullpage').fullpage({
+    //       //Navigation
+    //       onLeave: function(index, nextIndex, direction) {
+    //         $timeout(function() {
+    //           $('.scene').parallax();
+    //           swiper = new Swiper('.swiper-container', {
+    //             pagination: '.swiper-pagination',
+    //             direction: 'vertical',
+    //             slidesPerView: 1,
+    //             paginationClickable: true,
+    //             spaceBetween: 0,
+    //             mousewheelControl: false,
+    //             mousewheelForceToAxis: false,
+    //             keyboardControl: false,
+    //             parallax: true,
+    //             hashnav: true
+    //           });
+    //           swiper.slideTo(nextIndex - 1);
+    //           if ($(window).width() >= 767) {
+    //             for (i = 1; i < 4; i++) {
+    //               if (i == nextIndex - 1) {
+    //                 $('#video' + i).get(0).load();
+    //                 $('#video' + i).get(0).play();
+    //               } else {
+    //                 $('#video' + i).get(0).pause();
+    //               }
+    //             }
+    //           }
+    //         }, 500);
+    //       }
+    //     });
+    //   }
+    //
+    //   // //console.log(text);
+    //   $scope.homeval = text;
+    //   switch (text) {
+    //     case "share":
+    //       $.fn.fullpage.moveTo(5);
+    //       break;
+    //     case "mylife":
+    //       $.fn.fullpage.moveTo(4);
+    //       break;
+    //     case "locallife":
+    //       $.fn.fullpage.moveTo(3);
+    //       break;
+    //     case "travellife":
+    //       $.fn.fullpage.moveTo(2);
+    //       break;
+    //     case "home":
+    //       $.fn.fullpage.moveTo(1);
+    //       break;
+    //     default:
+    //       $.fn.fullpage.moveTo(1);
+    //       break;
+    //   }
+    // };
+    // $(window).load(function() {
+    //   document.getElementById('movie1').play();
+    //   if ($(window).width() < 767) {
+    //     $('video').remove();
+    //   }
     // });
-    // setTimeout(function () {
+    // setTimeout(function() {
     //
     //
     // }, 500);
     //
-    // $scope.$on('$viewContentLoaded', function () {
-    //     $timeout(function () {
-    //         $('body').addClass('fp-');
-    //         $scope.changePage($stateParams.id);
-    //     }, 1000);
+    // $scope.$on('$viewContentLoaded', function() {
+    //   $timeout(function() {
+    //     $('body').addClass('fp-');
+    //     $scope.changePage($stateParams.id);
+    //   }, 1000);
     // });
     // cfpLoadingBar.complete();
     // $scope.audioStatus = {
-    //     on: true
+    //   on: true
     // }
-    // $scope.muteVolume = function () {
-    //     for (i = 1; i <= 3; i++) {
-    //         if ($("#video" + i)[0].muted) {
-    //             $("#video" + i)[0].muted = false;
-    //             $scope.audioStatus = {
-    //                 on: true
-    //             }
-    //         } else {
-    //             $("#video" + i)[0].muted = true;
-    //             $scope.audioStatus = {}
-    //         }
+    // $scope.muteVolume = function() {
+    //   for (i = 1; i <= 3; i++) {
+    //     if ($("#video" + i)[0].muted) {
+    //       $("#video" + i)[0].muted = false;
+    //       $scope.audioStatus = {
+    //         on: true
+    //       }
+    //     } else {
+    //       $("#video" + i)[0].muted = true;
+    //       $scope.audioStatus = {}
     //     }
+    //   }
     // }
-    // $timeout(function () {
-    //     if ((navigator.platform.indexOf("iPhone") != -1) ||
-    //         (navigator.platform.indexOf("iPod") != -1) ||
-    //         (navigator.platform.indexOf("iPad") != -1)) {
-    //         $(".download-app").addClass("hide");
-    //     }
+    // $timeout(function() {
+    //   if ((navigator.platform.indexOf("iPhone") != -1) ||
+    //     (navigator.platform.indexOf("iPod") != -1) ||
+    //     (navigator.platform.indexOf("iPad") != -1)) {
+    //     $(".download-app").addClass("hide");
+    //   }
     // }, 200);
-    // $scope.customLink = function () {
-    //     window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
+    // $scope.customLink = function() {
+    //   window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
     // };
-})
+  })
 
-.controller('LoginCtrl', function ($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
+  .controller('LoginCtrl', function($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
     //Used to name the .html file
     $scope.userData = $.jStorage.get("profile");
     $scope.template = TemplateService.changecontent("login");
@@ -474,292 +333,290 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.alreadyExist = false;
     $scope.password = {};
 
-    $scope.initialiseError = function () {
-        $scope.showError = {
-            'show': false,
-            'msg': ''
-        }
+    $scope.initialiseError = function() {
+      $scope.showError = {
+        'show': false,
+        'msg': ''
+      }
     }
     $scope.initialiseError();
 
-    $scope.bookingLink = function () {
-        window.location.href = "https://travelibro.com/bookings/";
+    $scope.bookingLink = function() {
+      window.location.href = "https://travelibro.com/bookings/";
     }
     if (typeof $.fn.fullpage.destroy == 'function') {
-        $.fn.fullpage.destroy('all');
+      $.fn.fullpage.destroy('all');
     }
 
-    $(window).load(function () {
-        // //console.log("tooltip");
-        $('[data-toggle="tooltip"]').tooltip();
+    $(window).load(function() {
+      // //console.log("tooltip");
+      $('[data-toggle="tooltip"]').tooltip();
     });
 
-    $scope.openalreadyexist = function (size) {
-        $uibModal.open({
-            animation: true,
-            templateUrl: 'views/modal/alreadyexist.html',
-            controller: 'LoginCtrl',
-            scope: $scope,
-            windowClass: "notexist",
-            size: "sm"
-        });
+    $scope.openalreadyexist = function(size) {
+      $uibModal.open({
+        animation: true,
+        templateUrl: 'views/modal/alreadyexist.html',
+        controller: 'LoginCtrl',
+        scope: $scope,
+        windowClass: "notexist",
+        size: "sm"
+      });
     };
-    var setLoginVariables = function (data, type) {
-        $.jStorage.set("accessToken", data.accessToken);
-        if (data.type == "TravelAgent") {
-            NavigationService.getAgentsProfile("", function (data1) {
-                if (data1.data._id && data1.data.type == 'TravelAgent') {
-                    $.jStorage.set("isLoggedIn", true);
-                    $.jStorage.set("profile", data1.data);
-                    var alreadyLoggedIn = data1.data.alreadyLoggedIn;
+    var setLoginVariables = function(data, type) {
+      $.jStorage.set("accessToken", data.accessToken);
+      if (data.type == "TravelAgent") {
+        NavigationService.getAgentsProfile("", function(data1) {
+          if (data1.data._id && data1.data.type == 'TravelAgent') {
+            $.jStorage.set("isLoggedIn", true);
+            $.jStorage.set("profile", data1.data);
+            var alreadyLoggedIn = data1.data.alreadyLoggedIn;
 
-                    function callSetting() {
-                        if (alreadyLoggedIn === true) {
-                            var slug = $.jStorage.get("activeUrlSlug");
-                            if (slug === null || slug === "") {
-                                slug = $.jStorage.get("profile").urlSlug;
-                            }
-                            if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-                                window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
-                            } else {
-                                if ($.jStorage.get("profile").type == "User") {
-                                    $state.go("mylife", {
-                                        name: 'journey',
-                                        urlSlug: slug
-                                    });
-                                } else {
-                                    $state.go("agent-home", {
-                                        urlSlug: slug
-                                    });
-                                }
-                            }
-                        } else {
-                            if ($.jStorage.get("profile").type == "User") {
-                                $state.go('mainpage');
-                            } else if ($.jStorage.get("profile").type == "TravelAgent") {
-                                $state.go('agent-login');
-                            }
-                        }
-                    }
-                    if (data.loginType) {
-                        var modalPas = $uibModal.open({
-                            templateUrl: "views/modal/changePassword.html",
-                            animation: true,
-                            scope: $scope,
-                            windowClass: "report-modal",
-                            backdrop: "static"
-                        });
-                        $scope.changePassword = function () {
-                            if ($scope.password.passChange) {
-                                if ($scope.password.newPassword === $scope.password.confirmPassword) {
-                                    delete $scope.password.confirmPassword;
-                                    Agent.changePassword($scope.password, function (data) {
-                                        if (data.value === true) {
-                                            modalPas.close();
-                                            callSetting();
-                                        } else {
-                                            $scope.password.status = true;
-                                            $scope.password.msg = "*Old Password Mismatch.";
-                                            $timeout(function () {
-                                                $scope.password.status = false;
-                                            }, 10000);
-                                        }
-                                    });
-                                } else {
-                                    $scope.password.status = true;
-                                    $scope.password.msg = "*New Password Mismatch.";
-                                    $timeout(function () {
-                                        $scope.password.status = false;
-                                    }, 10000);
-                                }
-                            } else {
-                                callSetting();
-                            }
-                        }
-                    } else {
+            function callSetting() {
+              if (alreadyLoggedIn === true) {
+                var slug = $.jStorage.get("activeUrlSlug");
+                if (slug === null || slug === "") {
+                  slug = $.jStorage.get("profile").urlSlug;
+                }
+                if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                  window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+                } else {
+                  if ($.jStorage.get("profile").type == "User") {
+                    $state.go("mylife", {
+                      name: 'journey',
+                      urlSlug: slug
+                    });
+                  } else {
+                    $state.go("agent-home", {
+                      urlSlug: slug
+                    });
+                  }
+                }
+              } else {
+                if ($.jStorage.get("profile").type == "User") {
+                  $state.go('mainpage');
+                } else if ($.jStorage.get("profile").type == "TravelAgent") {
+                  $state.go('agent-login');
+                }
+              }
+            }
+            if (data.loginType) {
+              var modalPas = $uibModal.open({
+                templateUrl: "views/modal/changePassword.html",
+                animation: true,
+                scope: $scope,
+                windowClass: "report-modal",
+                backdrop: "static"
+              });
+              $scope.changePassword = function() {
+                if ($scope.password.passChange) {
+                  if ($scope.password.newPassword === $scope.password.confirmPassword) {
+                    delete $scope.password.confirmPassword;
+                    Agent.changePassword($scope.password, function(data) {
+                      if (data.value === true) {
+                        modalPas.close();
                         callSetting();
-                    }
-                } else {}
-            }, function (err) {
-                //console.log(err);
-            });
-        } else if (data.type == "User") {
-            NavigationService.getProfile("", function (data1) {
-                if (data1.data._id) {
-                    $.jStorage.set("isLoggedIn", true);
-                    $.jStorage.set("profile", data1.data);
-                    var alreadyLoggedIn = data1.data.alreadyLoggedIn;
-                    //console.log(alreadyLoggedIn, "alereadyLoggedin");
-                    if (alreadyLoggedIn === true) {
-                        var slug = $.jStorage.get("activeUrlSlug");
-                        //console.log(slug);
-                        if (slug === null || slug === "") {
-                            slug = $.jStorage.get("profile").urlSlug;
-                        }
-                        if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
-                            window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
-                        } else {
-                            if ($.jStorage.get("profile").type == "User") {
-                                $state.go("mylife", {
-                                    name: 'journey',
-                                    urlSlug: slug
-                                });
-                            } else {
-                                $state.go("agent-login", {
-                                    urlSlug: slug
-                                });
-                            }
-                        }
-                    } else {
-                        if ($.jStorage.get("profile").type == "User") {
-                            $state.go('mainpage');
-                        } else {
-                            $state.go('agent-login');
-                        }
-                    }
-                } else {}
-            }, function (err) {
-                //console.log(err);
-            });
-        };
+                      } else {
+                        $scope.password.status = true;
+                        $scope.password.msg = "*Old Password Mismatch.";
+                        $timeout(function() {
+                          $scope.password.status = false;
+                        }, 10000);
+                      }
+                    });
+                  } else {
+                    $scope.password.status = true;
+                    $scope.password.msg = "*New Password Mismatch.";
+                    $timeout(function() {
+                      $scope.password.status = false;
+                    }, 10000);
+                  }
+                } else {
+                  callSetting();
+                }
+              }
+            } else {
+              callSetting();
+            }
+          } else {}
+        }, function(err) {
+          //console.log(err);
+        });
+      } else if (data.type == "User") {
+        NavigationService.getProfile("", function(data1) {
+          if (data1.data._id) {
+            $.jStorage.set("isLoggedIn", true);
+            $.jStorage.set("profile", data1.data);
+            var alreadyLoggedIn = data1.data.alreadyLoggedIn;
+            //console.log(alreadyLoggedIn, "alereadyLoggedin");
+            if (alreadyLoggedIn === true) {
+              var slug = $.jStorage.get("activeUrlSlug");
+              //console.log(slug);
+              if (slug === null || slug === "") {
+                slug = $.jStorage.get("profile").urlSlug;
+              }
+              if ($.jStorage.get("url") && $.jStorage.get("url") !== "") {
+                window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
+              } else {
+                if ($.jStorage.get("profile").type == "User") {
+                  $state.go("mylife", {
+                    name: 'journey',
+                    urlSlug: slug
+                  });
+                } else {
+                  $state.go("agent-login", {
+                    urlSlug: slug
+                  });
+                }
+              }
+            } else {
+              $state.go("agent-login", {
+                urlSlug: slug
+              });
+            }
+          } else {}
+        }, function(err) {
+          //console.log(err);
+        });
+      }
     }
 
     var ref = "";
-    var checktwitter = function (data, status) { //for getting accessToken
-        var repdata = {};
-        if (ref.closed) {
-            $interval.cancel(stopinterval);
+    var checktwitter = function(data, status) { //for getting accessToken
+      var repdata = {};
+      if (ref.closed) {
+        $interval.cancel(stopinterval);
+      } else {
+        if (data.accessToken) {
+          ref.close();
+          $interval.cancel(stopinterval);
+          setLoginVariables(data);
         } else {
-            if (data.accessToken) {
-                ref.close();
-                $interval.cancel(stopinterval);
-                setLoginVariables(data);
-            } else {
-                //console.log(data);
-            }
+          //console.log(data);
         }
+      }
     };
 
-    var callAtIntervaltwitter = function () {
-        NavigationService.getAccessToken(checktwitter, function (err) {
-            //console.log(err);
-        });
+    var callAtIntervaltwitter = function() {
+      NavigationService.getAccessToken(checktwitter, function(err) {
+        //console.log(err);
+      });
     };
 
 
-    $scope.socialLogin = function (loginTo) {
-        ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
-        stopinterval = $interval(callAtIntervaltwitter, 2000);
+    $scope.socialLogin = function(loginTo) {
+      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+      stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
-    $scope.submit = function () {
-        //console.log("sndasdjsdjsa", $scope.formData);
-        NavigationService.oldUsersLogin($scope.formData, function (succ1) {
-            if (succ1.value) {
-                //console.log(succ1);
-                NavigationService.getAccessToken(function (succ2) {
-                    //console.log(succ2);
-                    // $.jStorage.set("accessToken", succ2.accessToken);
-                    if (succ2.accessToken && succ2.accessToken !== "") {
-                        NavigationService.getProfile("", function (succ3) {
-                            if (succ3.data && succ3.data.type == 'User') {
-                                $.jStorage.set("accessToken", succ2.accessToken);
-                                $.jStorage.set("isLoggedIn", false);
-                                $.jStorage.set("oldUserData", succ3.data);
-                                $.jStorage.set("qualifiedForLoginFlow", true);
-                                // $state.go("login-flow", {
-                                //   'accessToken': succ2.accessToken
-                                // });
-                                $state.go("login-flow");
-                                // window.location = "http://travelibro.net/blog"
-                            } else {
-                                $scope.showError.show = true;
-                                $scope.showError.msg = 'Theres Another Page For Partners';
-                            }
-                        }, function (err3) {
-                            //console.log(err3);
-                        });
-                    } else {
-
-                    }
-                }, function (err2) {
-                    //console.log(err2);
-                });
+    $scope.submit = function() {
+      //console.log("sndasdjsdjsa", $scope.formData);
+      NavigationService.oldUsersLogin($scope.formData, function(succ1) {
+        if (succ1.value) {
+          //console.log(succ1);
+          NavigationService.getAccessToken(function(succ2) {
+            //console.log(succ2);
+            // $.jStorage.set("accessToken", succ2.accessToken);
+            if (succ2.accessToken && succ2.accessToken !== "") {
+              NavigationService.getProfile("", function(succ3) {
+                if (succ3.data && succ3.data.type == 'User') {
+                  $.jStorage.set("accessToken", succ2.accessToken);
+                  $.jStorage.set("isLoggedIn", false);
+                  $.jStorage.set("oldUserData", succ3.data);
+                  $.jStorage.set("qualifiedForLoginFlow", true);
+                  // $state.go("login-flow", {
+                  //   'accessToken': succ2.accessToken
+                  // });
+                  $state.go("login-flow");
+                  // window.location = "http://travelibro.net/blog"
+                } else {
+                  $scope.showError.show = true;
+                  $scope.showError.msg = 'Theres Another Page For Partners';
+                }
+              }, function(err3) {
+                //console.log(err3);
+              });
             } else {
-                // //console.log(data);
-                $scope.showError.show = true;
-                $scope.showError.msg = 'Incorrect Email or Password entered';
-                //things to do when user email or password is wrong
+
             }
-        });
+          }, function(err2) {
+            //console.log(err2);
+          });
+        } else {
+          // //console.log(data);
+          $scope.showError.show = true;
+          $scope.showError.msg = 'Incorrect Email or Password entered';
+          //things to do when user email or password is wrong
+        }
+      });
     };
 
     //Agent Section
     // AGENT LOGIN SIGN UP TOGGLE
-    $scope.toggleAgentSign = function () {
-        if ($scope.agentSignup == false) {
-            $scope.agentSignup = true;
-        } else {
-            $scope.agentSignup = false;
-        }
+    $scope.toggleAgentSign = function() {
+      if ($scope.agentSignup == false) {
+        $scope.agentSignup = true;
+      } else {
+        $scope.agentSignup = false;
+      }
     };
     // AGENT LOGIN SIGN UP TOGGLE END
     $scope.agentLoginForm = {};
     $scope.agentSignUpForm = {};
-    $scope.registerAsAgent = function (formData) {
-        NavigationService.registerAsAgent(formData, function (data) {
-            if (data.value) {
-                // $scope.alreadyExist = false;
-                NavigationService.getAccessToken(setLoginVariables, function (err) {
-                    //console.log(err);
-                });
-            } else {
-                // $scope.alreadyExist = true;
-                $scope.showError.show = true;
-                if (data.data == "Registered as User") {
-                    $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner";
-                } else {
-                    $scope.showError.msg = "Email already exists as Partner";
-                }
-                $timeout(function () {
-                    $scope.showError = {
-                        show: "",
-                        msg: ""
-                    };
-                }, 10000);
-            }
+    $scope.registerAsAgent = function(formData) {
+      NavigationService.registerAsAgent(formData, function(data) {
+        if (data.value) {
+          // $scope.alreadyExist = false;
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          // $scope.alreadyExist = true;
+          $scope.showError.show = true;
+          if (data.data == "Registered as User") {
+            $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner";
+          } else {
+            $scope.showError.msg = "Email already exists as Partner";
+          }
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
 
-        });
+      });
     }
-    $scope.loginAsAgent = function (formData) {
-        NavigationService.loginAsAgent(formData, function (data) {
-            if (data.value) {
-                NavigationService.getAccessToken(setLoginVariables, function (err) {
-                    //console.log(err);
-                });
-            } else {
-                $scope.showError.show = true;
-                $scope.showError.msg = "Incorrect Email or Password";
-                $timeout(function () {
-                    $scope.showError = {
-                        show: "",
-                        msg: ""
-                    };
-                }, 10000);
-            }
-        });
+    $scope.loginAsAgent = function(formData) {
+      NavigationService.loginAsAgent(formData, function(data) {
+        if (data.value) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          $scope.showError.show = true;
+          $scope.showError.msg = "Incorrect Email or Password";
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+      });
     };
     if ($.jStorage.get("profile") && $.jStorage.get("profile").urlSlug) {
-        if ($.jStorage.get("profile").type === "User") {
-            $state.go("mylife", { urlSlug: $.jStorage.get("profile").urlSlug });
-        } else {
-            $state.go("agent-home-without", { urlSlug: $.jStorage.get("profile").urlSlug });
-        }
+      if ($.jStorage.get("profile").type === "User") {
+        $state.go("mylife", { urlSlug: $.jStorage.get("profile").urlSlug });
+      } else {
+        $state.go("agent-home-without", { urlSlug: $.jStorage.get("profile").urlSlug });
+      }
     }
     //Agent Section End
-})
+  })
 
-.controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ForgotPasswordEmailCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     //console.log("Testing //consoles");
@@ -771,46 +628,46 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template.header = "";
     $scope.template.footer = "";
     if (typeof $.fn.fullpage.destroy == 'function') {
-        $.fn.fullpage.destroy('all');
+      $.fn.fullpage.destroy('all');
     }
     $scope.userData = {};
     $scope.resend = false;
     $scope.showErr = {
-        status: "",
-        msg: ""
+      status: "",
+      msg: ""
     };
-    $scope.editUserData = function (obj) {
-        NavigationService.sendOtpToReset(obj.email, function (data) {
-            if (data.value) {
-                $scope.resend = true;
-                $scope.showErr = {
-                    status: true,
-                    msg: "Email sent successfully."
-                };
-                $timeout(function () {
-                    $scope.showErr = {
-                        status: "",
-                        msg: ""
-                    };
-                }, 10000);
-                $scope.userData = {};
-            } else {
-                $scope.showErr = {
-                    status: false,
-                    msg: "Email not registered."
-                };
-                $timeout(function () {
-                    $scope.showErr = {
-                        status: "",
-                        msg: ""
-                    };
-                }, 10000);
-            }
-        });
+    $scope.editUserData = function(obj) {
+      NavigationService.sendOtpToReset(obj.email, function(data) {
+        if (data.value) {
+          $scope.resend = true;
+          $scope.showErr = {
+            status: true,
+            msg: "Email sent successfully."
+          };
+          $timeout(function() {
+            $scope.showErr = {
+              status: "",
+              msg: ""
+            };
+          }, 10000);
+          $scope.userData = {};
+        } else {
+          $scope.showErr = {
+            status: false,
+            msg: "Email not registered."
+          };
+          $timeout(function() {
+            $scope.showErr = {
+              status: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+      });
     };
-})
+  })
 
-.controller('ContactCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ContactCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     //console.log("Testing //consoles");
@@ -821,58 +678,58 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
-        $.fn.fullpage.destroy('all');
+      $.fn.fullpage.destroy('all');
     }
 
 
-})
+  })
 
-// .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
-//   //Used to name the .html file
+  // .controller('BookingCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  //   //Used to name the .html file
 
-//   //console.log("Testing //consoles");
+  //   //console.log("Testing //consoles");
 
-//   $scope.template = TemplateService.changecontent("booking");
-//   $scope.menutitle = NavigationService.makeactive("Bookings");
-//   TemplateService.title = $scope.menutitle;
-//   $scope.navigation = NavigationService.getnav();
-//   $scope.animationsEnabled = true;
-//   if (typeof $.fn.fullpage.destroy == 'function') {
-//     $.fn.fullpage.destroy('all');
-//   }
-//   $scope.bookingnav = [{
-//     name: "Flights",
-//     classis: "active",
-//     link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
-//     target: "_blank"
-//   }, {
-//     name: "Hotels",
-//     classis: "active",
-//     link: "https://travelibro.com/bookings/hotels",
-//     target: "_self"
-//   }, {
-//     name: "Vacation Rentals",
-//     classis: "active",
-//     link: "https://travelibro.com/bookings/vacation-rentals",
-//     target: "_self"
-//   }, {
-//     name: "Homestays",
-//     classis: "active",
-//     link: "https://travelibro.com/bookings/home-stays",
-//     target: "_self"
-//   }, {
-//     name: "Car Rentals",
-//     classis: "active",
-//     link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
-//     target: "_blank"
-//   }, {
-//     name: "Tours & Excursions",
-//     classis: "active",
-//     link: "https://travelibro.com/bookings/tours-and-excursions",
-//     target: "_self"
-//   }]
-// })
-.controller('AdvertiseCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  //   $scope.template = TemplateService.changecontent("booking");
+  //   $scope.menutitle = NavigationService.makeactive("Bookings");
+  //   TemplateService.title = $scope.menutitle;
+  //   $scope.navigation = NavigationService.getnav();
+  //   $scope.animationsEnabled = true;
+  //   if (typeof $.fn.fullpage.destroy == 'function') {
+  //     $.fn.fullpage.destroy('all');
+  //   }
+  //   $scope.bookingnav = [{
+  //     name: "Flights",
+  //     classis: "active",
+  //     link: "http://flights.travelibro.com/en-GB/flights/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Hotels",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/hotels",
+  //     target: "_self"
+  //   }, {
+  //     name: "Vacation Rentals",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/vacation-rentals",
+  //     target: "_self"
+  //   }, {
+  //     name: "Homestays",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/home-stays",
+  //     target: "_self"
+  //   }, {
+  //     name: "Car Rentals",
+  //     classis: "active",
+  //     link: "https://flights.travelibro.com/en-GB/carhire/#/result?originplace=&destinationplace=",
+  //     target: "_blank"
+  //   }, {
+  //     name: "Tours & Excursions",
+  //     classis: "active",
+  //     link: "https://travelibro.com/bookings/tours-and-excursions",
+  //     target: "_self"
+  //   }]
+  // })
+  .controller('AdvertiseCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     //console.log("Testing //consoles");
@@ -883,11 +740,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     $scope.animationsEnabled = true;
     if (typeof $.fn.fullpage.destroy == 'function') {
-        $.fn.fullpage.destroy('all');
+      $.fn.fullpage.destroy('all');
     }
-})
+  })
 
-.controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', 'cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', '$filter', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window, $filter) {
+  .controller('MainPageCtrl', ['$scope', 'TemplateService', 'NavigationService', 'cfpLoadingBar', '$timeout', '$http', '$state', 'FileUploadService', 'FileUploader', 'DataUriToBlob', '$window', '$filter', function($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $http, $state, FileUploadService, FileUploader, DataUriToBlob, $window, $filter) {
     //Used to name the .html file
     // //console.log("Testing //consoles");
     $scope.form = {};

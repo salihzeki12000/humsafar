@@ -202,6 +202,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
                 if (isEnabled) {
                     OneSignal.setSubscription(true);
                 } else {
+                    console.log($.jStorage.get('profile').notificationPermission,'hw');
                     if ($.jStorage.get('profile').notificationPermission === "default") {
                         OneSignal.registerForPushNotifications({
                             modalPrompt: true

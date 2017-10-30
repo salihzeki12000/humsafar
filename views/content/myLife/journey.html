@@ -15,7 +15,7 @@
               <li><a href="" class="tab-heading" ng-click="getTab(0)">Journey</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(1)">Moments</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(2)">Reviews</a></li>
-              <!-- <li><a href="" class="tab-heading" ng-click="getTab(3)">Holiday Planner</a></li> -->
+              <li><a href="" class="tab-heading" ng-click="getTab(3)">Drafts</a></li>
             </ul>
           </div>
           <!-- end tabs -->
@@ -156,7 +156,7 @@
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                           </div>
                           <!--jounrey main detail card-->
-                          <div class="travelled-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
+                          <div class="travelled-journey relate" ng-click="routeTO(life)">
                             <!-- ONGO BADGE BADGE -->
                           <!-- <div class="tag-ongo-journey">
                             <span class="inline-block color-white">On The Go</span>
@@ -279,7 +279,7 @@
                                   <span class="pl10"><img src="img/options.png" alt=""></span>
                                 </div>
                                 <div class="journey-edit-options" ng-show="life.dropdown.backgroundClick;">
-                                  <ul ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
+                                  <ul ng-click="routeTO(life)">
                                     <li>
                                       <a href="">Edit Journey Name</a>
                                     </li>
@@ -325,7 +325,7 @@
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                           </div>
                           <!--for itinerary card main-->
-                          <div class="onway-journey relate" ng-click="routeTO(life.type,life.urlSlug,life.user.urlSlug)">
+                          <div class="onway-journey relate" ng-click="routeTO(life)">
                             <!-- ONGO BADGE BADGE -->
                           <!-- <div class="tag-ongo-journey" ng-if="life.type=='detail-itinerary' && life.status==true">
                             <span class="inline-block color-white">Itinerary</span>

@@ -19,6 +19,7 @@
                                         <div class="user-pic pointer" ng-if="activity.type=='travel-life' || activity.type=='local-life'" ui-sref="mylife({'urlSlug':activity.postCreator.urlSlug})">
                                             <img ng-src="{{activity.postCreator.profilePicture|uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
                                         </div>
+
                                         <!--<div class="user-pic" ng-if="activity.type=='quick-itinerary'">
                       <img ng-src="{{activity.creator.profilePicture|uploadpath:65:67}}" alt="" class="img-responsive">
                   </div>-->
@@ -35,6 +36,7 @@
                 <div class="user-pic pointer" ng-if="activity.type=='agentStatus'" ui-sref="agent-home({'urlSlug': activity.user.urlSlug, 'name' : 'travel-activity'})">
                     <img ng-src="{{activity.user.profilePicture|uploadpath:50:50:'cover'}}" alt="{{activity.user.name}}" class="img-responsive">
                 </div>
+
                 <!-- agent status end-->
                 <!-- agent profile end-->
             </div>
@@ -65,7 +67,11 @@
                       </div>-->
                   </div>
               </div>
-          </div>
+              <div class="pull-right activity-see-more .color-darkgrey">
+                <span ng-if="activity.type =='travel-life'" ui-sref="single-notification({'postId': activity._id, 'urlSlug': activity.user.urlSlug})">See more</span>
+                <span ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'" ng-click="routeOngo(activity);">See more</span>
+              </div>
+            </div>
           <!-- post status -->
                                     <!--<div class="post-your-status" ng-if="activity.status">
                     <p class="your-post">
@@ -80,6 +86,7 @@
                     </div>
                 </div> -->
                 <!-- post type icon end -->
+
             </div>
             <!-- post header end -->
             <!-- post status -->
@@ -107,19 +114,13 @@
             <div class="post-main-section">
                 <div class="relate">
                     <!-- tag on journey -->
-                    <div class="tag-ongo-journey pointer" ng-if="activity.type =='travel-life'" ui-sref="single-notification({
-                    'postId': activity._id,
-                    'urlSlug': activity.user.urlSlug
-                })">
+                    <div class="tag-ongo-journey pointer" ng-if="activity.type =='travel-life'">
                 <span class="inline-block">Travel Life</span>
             </div>
-            <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'" ng-click="routeOngo(activity);">
+            <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'">
                 <span class="inline-block">Travel Life</span>
             </div>
-            <div class="tag-ongo-journey" ng-if="activity.type =='local-life'" ui-sref="single-notification({
-            'postId': activity._id,
-            'urlSlug': activity.user.urlSlug
-        })">
+            <div class="tag-ongo-journey" ng-if="activity.type =='local-life'">
         <span class="inline-block">Local Life</span>
     </div>
     <div class="tag-ongo-journey" ng-if="((activity.type =='editor-blog'))">

@@ -94,7 +94,7 @@ var firstapp = angular.module('firstapp', [
     'angularFileUpload',
     'angular-google-analytics',
     'highcharts-ng'
-]);
+    ]);
 
 firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, cfpLoadingBarProvider, AnalyticsProvider, ipnConfig) {
     // for http request with session
@@ -109,45 +109,45 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
     cfpLoadingBarProvider.includeBar = true;
     cfpLoadingBarProvider.spinnerTemplate = '<div id="loader" class="travelibro-loader"><img src="img/loader.gif" width="180px" alt="Travelibro" class="img-responsive" /></div>';
     $stateProvider
-        .state('header', {
-            templateUrl: "views/template.html",
-            controller: 'headerctrl'
-        })
-        .state('home', {
-            url: "/",
-            templateUrl: "views/template.html",
-            controller: 'HomeCtrl'
-        })
-        .state('about', {
-            url: "/about-us",
-            templateUrl: "views/template.html",
-            controller: 'AboutCtrl'
-        })
-        .state('termscondition', {
-            url: "/terms-conditions.pdf",
-            templateUrl: "views/template.html",
-            controller: 'TermsConditionsCtrl'
-        })
-        .state('privacypolicy', {
-            url: "/privacy-policy",
-            templateUrl: "views/template.html",
-            controller: 'PrivacyPolicyCtrl'
-        })
-        .state('forgot-password', {
-            url: "/forgot-password/:token/:email",
-            templateUrl: "views/template.html",
-            controller: 'ForgotPasswordCtrl'
-        })
-        .state('forgot-password-email', {
-            url: "/forgot-password-email",
-            templateUrl: "views/template.html",
-            controller: 'ForgotPasswordEmailCtrl'
-        })
-        .state('contact', {
-            url: "/contact-us",
-            templateUrl: "views/template.html",
-            controller: 'ContactCtrl'
-        })
+    .state('header', {
+        templateUrl: "views/template.html",
+        controller: 'headerctrl'
+    })
+    .state('home', {
+        url: "/",
+        templateUrl: "views/template.html",
+        controller: 'HomeCtrl'
+    })
+    .state('about', {
+        url: "/about-us",
+        templateUrl: "views/template.html",
+        controller: 'AboutCtrl'
+    })
+    .state('termscondition', {
+        url: "/terms-conditions.pdf",
+        templateUrl: "views/template.html",
+        controller: 'TermsConditionsCtrl'
+    })
+    .state('privacypolicy', {
+        url: "/privacy-policy",
+        templateUrl: "views/template.html",
+        controller: 'PrivacyPolicyCtrl'
+    })
+    .state('forgot-password', {
+        url: "/forgot-password/:token/:email",
+        templateUrl: "views/template.html",
+        controller: 'ForgotPasswordCtrl'
+    })
+    .state('forgot-password-email', {
+        url: "/forgot-password-email",
+        templateUrl: "views/template.html",
+        controller: 'ForgotPasswordEmailCtrl'
+    })
+    .state('contact', {
+        url: "/contact-us",
+        templateUrl: "views/template.html",
+        controller: 'ContactCtrl'
+    })
         // .state('booking-notRequired', {
         //   url: "/bookings-notRequired",
         //   templateUrl: "views/template.html",
@@ -196,7 +196,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             reloadOnSearch: false
         })
         .state('mylife1', {
-            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews)}",
+            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews|drafts)}",
             templateUrl: "views/template.html",
             controller: 'MylifeCtrl',
             reloadOnSearch: false
@@ -358,6 +358,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "views/template.html",
             controller: 'QuickItineraryCtrl'
         })
+        .state('paststory', {
+            url: "/users/:urlSlug/past-story/:id",
+            templateUrl: "views/template.html",
+            controller: 'PastStoryCtrl'
+        })
         .state('editoritinerary', {
             url: "/editor-itinerary",
             templateUrl: "views/template.html",
@@ -466,11 +471,6 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "views/template.html",
             controller: 'ProfileListCtrl',
         })
-        .state('newhome', {
-            url: "/newhome",
-            templateUrl: "views/template.html",
-            controller: 'newHomeCtrl',
-        });
     $urlRouterProvider.otherwise("/");
     $locationProvider.html5Mode(isproduction);
 }).run(['Analytics', function (Analytics) {}]);
@@ -529,6 +529,41 @@ firstapp.directive('autoHeight', function ($compile, $parse) {
     };
 });
 
+firstapp.directive('appearInscreen', function ($compile, $parse) {
+    return {
+        restrict: 'EA',
+        replace: false,
+        link: function ($scope, element, attrs) {
+            var $element = $(element);
+            function isElementInViewport(elem) {
+              var $elem = $(elem);
+              // Get the scroll position of the page.
+              var scrollElem = ((navigator.userAgent.toLowerCase().indexOf('webkit') != -1) ? 'body' : 'html');
+              var viewportTop = $(scrollElem).scrollTop();
+              var viewportBottom = viewportTop + $('.worksheet').height();
+
+              // Get the position of the element on the page.
+              var elemTop = Math.round( $elem.offset().top );
+              var elemBottom = elemTop + $elem.height();
+
+              return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
+            }
+            function checkAnimation() {
+                if (isElementInViewport($element)) {
+                  $element.addClass('fadeIn');
+                } else {
+                  $element.removeClass('fadeIn');
+                }
+            }
+            $(document).ready(function(){
+                $('.worksheet').scroll(function(){
+                  checkAnimation();
+                });
+            });
+        }
+    };
+});
+
 firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
@@ -569,9 +604,9 @@ firstapp.directive('scrolldown', function ($compile, $parse) {
             var $element = $(element);
             $scope.scrollDown = function () {
                 $('html,body').animate({
-                        scrollTop: $(".second").offset().top
-                    },
-                    'slow');
+                    scrollTop: $(".second").offset().top
+                },
+                'slow');
             };
         }
     };
@@ -1044,53 +1079,53 @@ firstapp.filter('kindOfJourney', function () {
         var returnVal = "";
         switch (input) {
             case "friends":
-                returnVal = "img/kindofjourney/" + color + "-friends.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-friends.png";
+            break;
             case "backpacking":
-                returnVal = "img/kindofjourney/" + color + "-backpacking.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-backpacking.png";
+            break;
             case "business":
-                returnVal = "img/kindofjourney/" + color + "-business.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-business.png";
+            break;
             case "religious":
-                returnVal = "img/kindofjourney/" + color + "-religious.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-religious.png";
+            break;
             case "romance":
-                returnVal = "img/kindofjourney/" + color + "-romance.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-romance.png";
+            break;
             case "budget":
-                returnVal = "img/kindofjourney/" + color + "-budget.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-budget.png";
+            break;
             case "luxury":
-                returnVal = "img/kindofjourney/" + color + "-luxury.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-luxury.png";
+            break;
             case "family":
-                returnVal = "img/kindofjourney/" + color + "-family.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-family.png";
+            break;
             case "solo":
-                returnVal = "img/kindofjourney/" + color + "-solo.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-solo.png";
+            break;
             case "betterhalf":
-                returnVal = "img/kindofjourney/" + color + "-betterhalf.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-betterhalf.png";
+            break;
             case "colleague":
-                returnVal = "img/kindofjourney/" + color + "-colleague.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-colleague.png";
+            break;
             case "festival":
-                returnVal = "img/kindofjourney/" + color + "-festival.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-festival.png";
+            break;
             case "adventure":
-                returnVal = "img/kindofjourney/" + color + "-adventure.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-adventure.png";
+            break;
             case "cultural":
-                returnVal = "img/kindofjourney/" + color + "-logo.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-logo.png";
+            break;
             case "educational":
-                returnVal = "img/kindofjourney/" + color + "-logo.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-logo.png";
+            break;
             case "lgbt":
-                returnVal = "img/kindofjourney/" + color + "-logo.png";
-                break;
+            returnVal = "img/kindofjourney/" + color + "-logo.png";
+            break;
         }
         return returnVal;
     };
@@ -1101,46 +1136,46 @@ firstapp.filter('kindOfCheckIn', function () {
         var returnVal = "";
         switch (input) {
             case "Cinema & Theatre":
-                returnVal = "img/icons/smallcinema.png";
-                break;
+            returnVal = "img/icons/smallcinema.png";
+            break;
             case "Restaurants & Bars":
-                returnVal = "img/icons/small-resto.png";
-                break;
+            returnVal = "img/icons/small-resto.png";
+            break;
             case "Shopping":
-                returnVal = "img/icons/smallshopping.png";
-                break;
+            returnVal = "img/icons/smallshopping.png";
+            break;
             case "Transportation":
-                returnVal = "img/icons/smallairport.png";
-                break;
+            returnVal = "img/icons/smallairport.png";
+            break;
             case "Nature and Parks":
-                returnVal = "img/icons/smallnature.png";
-                break;
+            returnVal = "img/icons/smallnature.png";
+            break;
             case "Sights and Landmarks":
-                returnVal = "img/icons/smallsight.png";
-                break;
+            returnVal = "img/icons/smallsight.png";
+            break;
             case "Museums and Galleries":
-                returnVal = "img/icons/smallmuseums.png";
-                break;
+            returnVal = "img/icons/smallmuseums.png";
+            break;
             case "Zoo and Aquariums":
-                returnVal = "img/icons/smallzoos.png";
-                break;
+            returnVal = "img/icons/smallzoos.png";
+            break;
             case "Religious":
-                returnVal = "img/icons/smallreligious.png";
-                break;
+            returnVal = "img/icons/smallreligious.png";
+            break;
             case "Hotels & Accomodations":
-                returnVal = "img/icons/smallhotels.png";
-                break;
+            returnVal = "img/icons/smallhotels.png";
+            break;
             case "Others":
-                returnVal = "img/icons/smallothers.png";
-                break;
+            returnVal = "img/icons/smallothers.png";
+            break;
             case "Other":
-                returnVal = "img/smallothers.png";
-                break;
+            returnVal = "img/smallothers.png";
+            break;
             case "City":
-                returnVal = "img/icons/cityfull.png";
-                break;
+            returnVal = "img/icons/cityfull.png";
+            break;
             default:
-                returnVal = "img/icons/smallothers.png";
+            returnVal = "img/icons/smallothers.png";
         }
         console.log(input, returnVal);
         return returnVal;
@@ -1152,46 +1187,46 @@ firstapp.filter('kindOfReviewCheckIn', function () {
         var returnVal = "";
         switch (input) {
             case "Cinema & Theatre":
-                returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-cinema.png";
+            break;
             case "Restaurants & Bars":
-                returnVal = "img/kindOfReviewCheckIn/grey-restaraunt.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-restaraunt.png";
+            break;
             case "Shopping":
-                returnVal = "img/kindOfReviewCheckIn/grey-shopping.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-shopping.png";
+            break;
             case "Transportation":
-                returnVal = "img/kindOfReviewCheckIn/grey-airport.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-airport.png";
+            break;
             case "Nature and Parks":
-                returnVal = "img/kindOfReviewCheckIn/grey-nature.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-nature.png";
+            break;
             case "Sights and Landmarks":
-                returnVal = "img/kindOfReviewCheckIn/grey-sights.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-sights.png";
+            break;
             case "Museums and Galleries":
-                returnVal = "img/kindOfReviewCheckIn/grey-museums.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-museums.png";
+            break;
             case "Zoo and Aquariums":
-                returnVal = "img/kindOfReviewCheckIn/grey-zoo.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-zoo.png";
+            break;
             case "Religious":
-                returnVal = "img/kindOfReviewCheckIn/grey-religious.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-religious.png";
+            break;
             case "Hotels & Accomodations":
-                returnVal = "img/kindOfReviewCheckIn/grey-hotels.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-hotels.png";
+            break;
             case "Others":
-                returnVal = "img/kindOfReviewCheckIn/grey-others.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-others.png";
+            break;
             case "Other":
-                returnVal = "img/kindOfReviewCheckIn/grey-others.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-others.png";
+            break;
             case "City":
-                returnVal = "img/kindOfReviewCheckIn/grey-city.png";
-                break;
+            returnVal = "img/kindOfReviewCheckIn/grey-city.png";
+            break;
             default:
-                returnVal = "img/kindOfReviewCheckIn/grey-others.png";
+            returnVal = "img/kindOfReviewCheckIn/grey-others.png";
         }
         console.log(input, returnVal);
         return returnVal;
@@ -1254,44 +1289,44 @@ firstapp.filter('itineraryType', function () {
         var random = getRandomInt(1, 2);
         switch (input) {
             case "adventure":
-                returnVal = "img/banner-itinerary/adventure" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/adventure" + random + ".jpg";
+            break;
             case "business":
-                returnVal = "img/banner-itinerary/business" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/business" + random + ".jpg";
+            break;
             case "family":
-                returnVal = "img/banner-itinerary/family" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/family" + random + ".jpg";
+            break;
             case "romance":
-                returnVal = "img/banner-itinerary/romance" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/romance" + random + ".jpg";
+            break;
             case "backpacking":
-                returnVal = "img/banner-itinerary/backpacking" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/backpacking" + random + ".jpg";
+            break;
             case "religious":
-                returnVal = "img/banner-itinerary/religious" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/religious" + random + ".jpg";
+            break;
             case "budget":
-                returnVal = "img/banner-itinerary/budget" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/budget" + random + ".jpg";
+            break;
             case "luxury":
-                returnVal = "img/banner-itinerary/luxury" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/luxury" + random + ".jpg";
+            break;
             case "solo":
-                returnVal = "img/banner-itinerary/sole" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/sole" + random + ".jpg";
+            break;
             case "festival":
-                returnVal = "img/banner-itinerary/all" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/all" + random + ".jpg";
+            break;
             case "shopping":
-                returnVal = "img/banner-itinerary/all" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/all" + random + ".jpg";
+            break;
             case "friends":
-                returnVal = "img/banner-itinerary/friends" + random + ".jpg";
-                break;
+            returnVal = "img/banner-itinerary/friends" + random + ".jpg";
+            break;
             default:
-                returnVal = "img/banner-itinerary/all1.jpg";
-                break;
+            returnVal = "img/banner-itinerary/all1.jpg";
+            break;
         }
         console.log(returnVal, 'return wla kya hai');
         return returnVal;
@@ -1675,8 +1710,8 @@ firstapp.directive('uiSrefIf', function ($compile) {
             val: '@uiSrefVal',
             if: '=uiSrefIf'
         },
-        link: function ($scope, $element, $attrs) {
-            $element.removeAttr('ui-sref-if');
+    link: function ($scope, $element, $attrs) {
+        $element.removeAttr('ui-sref-if');
             // $compile($element)($scope);
 
             $scope.$watch('if', function (bool) {
@@ -1716,14 +1751,14 @@ firstapp.filter('trafficType', function () {
         var returnVal = "";
         switch (input) {
             case "Off Season":
-                returnVal = "img/destination/off-season.png";
-                break;
+            returnVal = "img/destination/off-season.png";
+            break;
             case "Shoulder Season":
-                returnVal = "img/destination/shoulder-season.png";
-                break;
+            returnVal = "img/destination/shoulder-season.png";
+            break;
             case "Peak Season":
-                returnVal = "img/destination/peak-season.png";
-                break;
+            returnVal = "img/destination/peak-season.png";
+            break;
             default:
         };
         return returnVal;
@@ -1731,41 +1766,41 @@ firstapp.filter('trafficType', function () {
 });
 // get attribute in html
 firstapp.filter('safe', function ($sce) {
-        return function (input) {
+    return function (input) {
             // console.log(input,'input');
             return $sce.trustAsHtml(input);
         }
     })
     // get attribute in html end
-firstapp.filter('seasonType', function () {
-    return function (input) {
-        input = input.trim();
-        console.log(input, 'seasonType');
-        var returnVal = "";
-        switch (input) {
-            case "Spring":
+    firstapp.filter('seasonType', function () {
+        return function (input) {
+            input = input.trim();
+            console.log(input, 'seasonType');
+            var returnVal = "";
+            switch (input) {
+                case "Spring":
                 returnVal = "img/destination/spring.png";
                 break;
-            case "Summer":
+                case "Summer":
                 returnVal = "img/destination/summer.png";
                 break;
-            case "Winter":
+                case "Winter":
                 returnVal = "img/destination/winter.png";
                 break;
-            case "Autumn":
+                case "Autumn":
                 returnVal = "img/destination/autumn.png";
                 break;
-            case "Monsoon":
+                case "Monsoon":
                 returnVal = "img/destination/monsoon.png";
                 break;
-            case "Wet Season":
+                case "Wet Season":
                 returnVal = "img/destination/wet-season.png";
                 break;
-            default:
-        };
-        return returnVal;
-    }
-});
+                default:
+            };
+            return returnVal;
+        }
+    });
 // $(document).ready(function () {
 //   $(".element").typed({
 //     strings: ["Capture | Inspire | Relive...", "Travel Life | Local Life...", "Loading...", "Almost There..."],
