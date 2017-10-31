@@ -120,7 +120,7 @@
             <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'">
                 <span class="inline-block">Travel Life</span>
             </div>
-            <div class="tag-ongo-journey" ng-if="activity.type =='local-life'">
+                  <div class="tag-ongo-journey" ng-if="activity.type =='local-life'" ui-sref="single-notification({'postId': activity._id,'urlSlug': activity.user.urlSlug})">
         <span class="inline-block">Local Life</span>
     </div>
     <div class="tag-ongo-journey" ng-if="((activity.type =='editor-blog'))">

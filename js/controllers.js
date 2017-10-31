@@ -61,6 +61,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
+        console.log('journeys',data);
         $scope.trendingStories = data.data;
       });
     };
@@ -104,20 +105,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
           //end blue navbar on scroll
           var firstHeight = $('.worksheet').height();
-          if($('.worksheet').scrollTop() > firstHeight-200 && $('.worksheet').scrollTop()<4300) {
+          if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
             $("#navigation").removeClass("submenu");
-            $("#navigation").addClass("fixed-subnavigation fade-now sectionStripe");
+            $("#navigation").addClass("fixed-subnavigation sectionStripe");
             if(screenWidth>991){
-              $(".libro-header").addClass("fadeOut");
-              $(".activeNavbar").addClass("hideNavbar");
+              $(".libro-header, .loggedin-header").removeClass("swipeIn");
+              $(".libro-header, .loggedin-header").addClass("swipeOut");
+              $("header").css({'opacity':0});
+              $timeout(function(){
+                $("header").css({'z-index':-10});
+              },200)
             }
           }
           else {
             $("#navigation").removeClass("fixed-subnavigation sectionStripe");
             $("#navigation").addClass("submenu");
-            $(".activeNavbar").removeClass(" hideNavbar");
-
+            if($(".libro-header").hasClass("swipeOut") || $(".loggedin-header").hasClass("swipeOut")){
+              $(".libro-header, .loggedin-header").addClass("swipeIn");
+            }
+            $(".libro-header, .loggedin-header").removeClass("swipeOut");
+            $("header").css({'z-index':16,'opacity':1});
           }
+
           //end blue navbar
           //change active section anchor color
           var $div = $('.worksheet').offset().top + 250;
@@ -145,7 +154,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
       })
     },2000);
-
     $scope.openKnowMore = function(){
       $(".know-more-modal").addClass("show-know-more");
     };

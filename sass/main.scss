@@ -13627,8 +13627,11 @@ video::-webkit-media-controls-fullscreen-button {
 .hideNavbar {
   display: none;
 }
-.fadeOut {
-  @include animation(fadeOut 1s);
+.swipeOut {
+  @include animation(swipeOut 2s ease-out);
+}
+.swipeIn {
+  @include animation(swipeIn 1.5s ease-in);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -13638,9 +13641,13 @@ video::-webkit-media-controls-fullscreen-button {
   from { opacity: 0;}
   to   { opacity: 1;}
 }
-@include keyframes(fadeOut) {
-  from { opacity: 1;}
-  to   { opacity: 0;}
+@include keyframes(swipeOut) {
+  0% { opacity: 1;transform: translateY(0);}
+  100% { opacity: 0;transform: translateY(-50vh);}
+}
+@include keyframes(swipeIn) {
+  0% { opacity: 0;transform: translateY(-50vh);}
+  100% { opacity: 1;transform: translateY(0);}
 }
 
 //ZOOM-IN ANIMATION KEYFRAMES
