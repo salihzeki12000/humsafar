@@ -2195,7 +2195,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     scale: 3
                 };
                 if (percentComplete == 100 && flag) {
-                    if (markers[i + 1].map == null) {
+                    if (markers[i + 1].map == null){
                         markers[i + 1].setMap(map);
                     }
                     markers[i + 1].setIcon("img/maps/green-marker.png");
@@ -2212,8 +2212,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     line[i] = new google.maps.Polyline({
                         path: [departure, departure],
                         // strokeColor: "#f2675b", //orange
-                        // strokeColor: "#263757", //navy-blue
-                        strokeColor: "#11d3cb", //navy-blue
+                         strokeColor: "#263757", //navy-blue
+                        //strokeColor: "#11d3cb", //cyan
                         // strokeOpacity: 1, --for continuous line
                         //   strokeWeight: 3,
                         strokeOpacity: 0, //for dotted lines
@@ -15506,7 +15506,6 @@ $scope.rateDestination = function(destRate, type) {
                                 scroll.scrollBusy = false;
                                 //console.log(data, "iti data scroll");
                                 if (data.data.length == 0) {
-                                    $scope.tourData = [];
                                     scroll.stopCallingApi = true;
                                 } else {
                                     if (formAgentData.pagenumber == 1) {

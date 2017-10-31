@@ -1678,6 +1678,9 @@ q {
 .tour-package-card {
   .imgfoot-top {
     padding: 10px;
+    &.view-tour {
+      padding: 10px 10px 20px;
+    }
     h4 {
       margin-top: 0;
       margin-bottom: 5px;
@@ -2672,7 +2675,7 @@ q {
 
 .contacttab-btn {
   position: fixed;
-  top: 310px;
+  top: 260px;
   right: -29px;
   z-index: 4;
   @include transform(rotate(-90deg));
@@ -2756,6 +2759,7 @@ q {
   width: 100%;
   bottom: auto;
   top: 60px; // top: 80px;
+  + .agent-home-content { margin-top: 70px; }
 }
 
 .range-custom {

@@ -211,6 +211,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
 		},
 		templateUrl: 'views/directive/pastjourney-post.html',
 		link : function($scope, element, attrs){
+      $scope.viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 		  $scope.userData = $.jStorage.get("profile");
       $scope.ongoCard = true;
       $scope.flexShow = true;

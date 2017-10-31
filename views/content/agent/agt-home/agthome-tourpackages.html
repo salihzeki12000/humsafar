@@ -258,7 +258,7 @@
                                     <div class="call-btn" ng-click="showContact(tourcard);" ng-if="!template.isMine">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </div>
-                                    <div class="imgfoot-top clearfix">
+                                    <div class="imgfoot-top clearfix" ng-class="{'view-tour': !template.isMine,'':template.isMine}">
                                         <div class="pull-left">
                                             <h4 class="font-sz18 text-capitalize avenir-heavy">{{tourcard.title}}</h4>
                                             <p class="day-night" ng-if="tourcard.nights && tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>

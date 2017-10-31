@@ -56,151 +56,190 @@
  				</div>
  			</div>
  			<!-- past journey videos end-->
- 			<!-- related img if less then 5 -->
- 			<div class="relate-pic related-imgslider" ng-if="(pastStory.photosVideos.length>1)&&(pastStory.photosVideos.length<=5)">
- 				<div class="related-ongo-slider related-past-slider" ng-repeat="relatePic in pastStory.photosVideos track by $index">
- 					<!-- for image  -->					
- 					<img ng-src="{{relatePic.name|uploadpath:120:120:'cover'}}" alt="" class="img-full-sqr img-responsive pointer" ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
- 					ng-click="changeImage($index,'photos')">		
- 					<!-- for image end-->
- 					<!-- for video -->
- 					<img ng-src="{{relatePic.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-full-sqr img-responsive pointer" ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
- 					ng-click="changeImage($index,'videos')">
- 					<!-- for video end-->				
- 				</div>
- 			</div>
- 			<!-- related img if less then 5 end-->
- 			<!-- related img if greater then 5 -->
- 			<div class="related-imgslider" ng-if="pastStory.photosVideos.length>5">
- 				<flex-slider flex-slide="slide in pastStory.photosVideos track by $index" item-width="120"
- 				class="related-slide carousel flex-contain" animation="true" item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
- 				<li>
- 					<div class="related-ongo-slider related-past-slider">
- 						<!-- for image  -->
- 						<img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-full-sqr img-responsive pointer" ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
- 						ng-click="changeImage($index,'videos')" />		
- 						<!-- for image end-->
- 						<!-- for video -->
- 						<img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-full-sqr img-responsive pointer" ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
- 						ng-click="changeImage($index,'photos')" />
- 						<!-- for video end-->		
+ 			<!-- viewport width greater than 480 -->
+ 			<div ng-if="viewportWidth>480">
+ 				<div class="related-imgslider">
+ 					<!-- related img if less then 5-->
+ 					<div class="relate-pic thumbnail-holder" ng-if="(pastStory.photosVideos.length>1)&&(pastStory.photosVideos.length<=4)">
+ 						<div class="related-ongo-slider" ng-repeat="relatePic in pastStory.photosVideos track by $index">
+ 							<img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
+ 							class="img-responsive pointer img-full-sqr"
+ 							ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
+ 							ng-click="changeImage($index,'videos')" />
+ 							<img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt=""
+ 							class="img-responsive pointer img-full-sqr"
+ 							ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
+ 							ng-click="changeImage($index,'photos')" />
+ 						</div>
  					</div>
- 				</li>
- 			</flex-slider>
- 		</div>
- 		<!-- related img if greater then 5 end-->
- 	</div>
- 	<!-- past story middle section main end-->
- 	<!-- past story footer -->
- 	<div class="ongo-card-footer past-card-footer">
- 		<div class="social-field-types">
- 			<div class="user-social-item clearfix">
- 				<div class="pull-left">
- 					<ul>
- 						<li>
- 							<a href="" class="relate" ng-click="likePost(pastStory);">
- 								<i class="fa color-medium-grey card-like-animation" ng-class="pastStory.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound ></i><span></span>
- 								<audio id="like-play">
- 									<source src="img/tiny1.mp3" type="audio/mp3" />
- 								</audio>
- 							</a>
- 						</li>
- 						<li>
- 							<a href="">
- 								<img src="img/comments.png" alt="" height="18" >
- 							</a>
- 						</li>
- 						<li class="relate">
- 							<a href=""  ng-click="editOption(pastStory.share)">
- 								<img src="img/share.png" alt="" height="18" ng-init="pastStory.share={};">
- 							</a>
- 							<div class="share-single-trip" ng-show="pastStory.share.backgroundClick">
- 								<ul>
- 									<li>
- 										<a ng-href="https://www.facebook.com/sharer/sharer.php?u={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
- 										class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a>
- 									</li>
- 									<li>
- 										<a ng-href="https://twitter.com/intent/tweet?url={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
- 										class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a>
- 									</li>
- 									<li>
- 										<a ng-href="https://plus.google.com/share?url=={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
- 										class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a>
- 									</li>
- 									<li>
- 										<a ng-href="http://pinterest.com/pin/create/button/?url={{pastStory.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
- 									</li>
- 									<li>
- 										<a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{pastStory.sharingUrl}}" target="_blank" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a>
- 									</li>
- 									<li><a href="" target="_blank" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
- 								</ul>
- 							</div>
- 						</li>
- 					</ul>
- 				</div>
- 				<div class="pull-right">
- 					<span class="inline-block"
- 					ng-if="pastStory.checkIn && pastStory.checkIn.location!='' && pastStory.review && pastStory.review!=''">
- 					<p class="inline-block avenir-heavy journey-rate color-iphn-gray"><span class="mr5 color-iphn-gray">Rating:</span>
- 						<span class="rated-star color-iphn-gray"><i class="fa fa-star"
- 							ng-repeat="a in getTimes(pastStory.review[0].rating,'marked') track by $index"></i>
- 						</span>
- 						<span class="non-rated-star color-iphn-gray"><i class="fa fa-star-o"
- 							ng-repeat="b in getTimes(pastStory.review[0].rating,'unmarked') track by $index"></i>
- 						</span>
- 					</p>
- 				</span>
- 				<p class="inline-block pointer m-clear journey-rate" ng-click="giveReview(pastStory.checkIn);"
- 				ng-if="pastStory.checkIn && pastStory.checkIn.location!='' && pastStory.review && pastStory.review=='' && isMine">
- 				<i class=" avenir-heavy">Rate This Now</i>
- 			</p>
- 			<div class="options inline-block" ng-if="isMine">
- 				<span class="inline-block pl10 pointer" ng-init="pastStory.edit={};" ng-click="editOption(pastStory.edit);" class="pointer">
- 					<img src="img/options.png" alt="">
- 				</span>
- 				<div class="own-trip" ng-show="pastStory.edit.backgroundClick">
- 					<ul>
- 						<!-- ng if for checkin -->
- 						<li>
- 							<a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Activity / Remove Photos &amp;
- 							Videos</a>
- 						</li>
- 						<li>
- 							<a href="" title="Add Photos & Videos" ng-click="addPhotosVideo();">Add Photos &amp; Videos</a>
- 						</li>
- 						<li>
- 							<a href="" title="Change Date &amp; Time" ng-click="changePostsDate();">Change Date &amp; Time</a>
- 						</li>
- 						<li>
- 							<a href="" title="Delete" ng-click="confirmDelete();">Delete Activity</a>
- 						</li>
- 						<li class="hide"><a href="" title="Copy URL">Copy URL</a></li>
- 					</ul>
- 				</div>
- 				<div class="other-trip hide">
- 					<ul>
- 						<li><a href="" title="Report post">Report post</a></li>
- 						<li><a href="" title="Copy URL">Copy URL</a></li>
- 					</ul>
+ 					<!-- related img end if less then 5-->
+ 					<div ng-if="pastStory.photosVideos.length>4">
+ 						<flex-slider flex-slide="slide in pastStory.photosVideos track by $index" item-width="120" 						class="related-slide carousel flex-contain" animation="true"	item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
+ 							<!-- put/remove item width 99 if needed -->
+ 							<li>
+ 								<div class="related-ongo-slider">
+ 									<!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
+ 									<img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+ 									ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
+ 									ng-click="changeImage($index,'videos')" />
+ 									<img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+ 									ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
+ 									ng-click="changeImage($index,'photos')" />
+ 								</div>
+ 							</li>
+ 						</flex-slider>
+ 					</div>
  				</div>
  			</div>
+ 			<!-- viewport width greater than 480 end-->
+ 			<!-- viewport width less than 480 -->
+ 			<div ng-if="viewportWidth<=480">
+ 				<div class="related-imgslider">
+ 					<!-- related img if less then 5-->
+ 					<div class="relate-pic thumbnail-holder" ng-if="(pastStory.photosVideos.length>1)&&(pastStory.photosVideos.length<=3)">
+ 						<div class="related-ongo-slider" ng-repeat="relatePic in pastStory.photosVideos track by $index">
+ 							<img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
+ 							class="img-responsive pointer img-full-sqr"
+ 							ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
+ 							ng-click="changeImage($index,'videos')">
+ 							<img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt=""
+ 							class="img-responsive pointer img-full-sqr"
+ 							ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
+ 							ng-click="changeImage($index,'photos')">
+ 						</div>
+ 					</div>
+ 					<!-- related img end if less then 5-->
+ 					<div ng-if="pastStory.photosVideos.length>3">
+ 						<flex-slider flex-slide="slide in pastStory.photosVideos track by $index" item-width="120" class="related-slide carousel flex-contain" animation="true" item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
+ 							<!-- put/remove item width 99 if needed -->
+ 							<li>
+ 								<div class="related-ongo-slider">
+ 									<!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
+ 									<img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+ 									ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
+ 									ng-click="changeImage($index,'videos')">
+ 									<img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+ 									ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
+ 									ng-click="changeImage($index,'photos')">
+ 								</div>
+ 							</li>
+ 						</flex-slider>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<!-- viewport width less than 480 end-->
  		</div>
- 	</div>
- 	<div class="social-likes-reviews" ng-if="!(((pastStory.likeCount==0)||(pastStory.likeCount==undefined))&&(pastStory.comment.length==0))">
- 		<div class="clearfix">
- 			<div class="pull-left">
- 				<span class="color-iphn-gray color-blue mr10 card-like avenir-heavy" ng-click="getLikesData({'post':pastStory})">	<i class="fa fa-heart color-iphn-gray mr5"></i><b>{{pastStory.likeCount|filterCount}}</b> {{pastStory.likeCount|singularPlural:'Likes'}}</span>
- 				<span class="color-iphn-gray color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':pastStory});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{pastStory.commentCount|filterCount}}</b> {{pastStory.commentCount|singularPlural:'Comments'}}
- 					<div class="card-comment-dropdown" ng-show="cardCommentList">
+ 		<!-- past story middle section main end-->
+ 		<!-- past story footer -->
+ 		<div class="ongo-card-footer past-card-footer">
+ 			<div class="social-field-types">
+ 				<div class="user-social-item clearfix">
+ 					<div class="pull-left">
  						<ul>
- 							<li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
+ 							<li>
+ 								<a href="" class="relate" ng-click="likePost(pastStory);">
+ 									<i class="fa color-medium-grey card-like-animation" ng-class="pastStory.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'" like-sound ></i><span></span>
+ 									<audio id="like-play">
+ 										<source src="img/tiny1.mp3" type="audio/mp3" />
+ 									</audio>
+ 								</a>
+ 							</li>
+ 							<li>
+ 								<a href="">
+ 									<img src="img/comments.png" alt="" height="18" >
+ 								</a>
+ 							</li>
+ 							<li class="relate">
+ 								<a href=""  ng-click="editOption(pastStory.share)">
+ 									<img src="img/share.png" alt="" height="18" ng-init="pastStory.share={};">
+ 								</a>
+ 								<div class="share-single-trip" ng-show="pastStory.share.backgroundClick">
+ 									<ul>
+ 										<li>
+ 											<a ng-href="https://www.facebook.com/sharer/sharer.php?u={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
+ 											class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a>
+ 										</li>
+ 										<li>
+ 											<a ng-href="https://twitter.com/intent/tweet?url={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
+ 											class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a>
+ 										</li>
+ 										<li>
+ 											<a ng-href="https://plus.google.com/share?url=={{pastStory.sharingUrl}}/&title=TraveLibro" target="_blank"
+ 											class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a>
+ 										</li>
+ 										<li>
+ 											<a ng-href="http://pinterest.com/pin/create/button/?url={{pastStory.sharingUrl}}" target="_blank" class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>
+ 										</li>
+ 										<li>
+ 											<a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{pastStory.sharingUrl}}" target="_blank" class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a>
+ 										</li>
+ 										<li><a href="" target="_blank" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>
+ 									</ul>
+ 								</div>
+ 							</li>
  						</ul>
  					</div>
- 				</span>              
+ 					<div class="pull-right">
+ 						<span class="inline-block"
+ 						ng-if="pastStory.checkIn && pastStory.checkIn.location!='' && pastStory.review && pastStory.review!=''">
+ 						<p class="inline-block avenir-heavy journey-rate color-iphn-gray"><span class="mr5 color-iphn-gray">Rating:</span>
+ 							<span class="rated-star color-iphn-gray"><i class="fa fa-star"
+ 								ng-repeat="a in getTimes(pastStory.review[0].rating,'marked') track by $index"></i>
+ 							</span>
+ 							<span class="non-rated-star color-iphn-gray"><i class="fa fa-star-o"
+ 								ng-repeat="b in getTimes(pastStory.review[0].rating,'unmarked') track by $index"></i>
+ 							</span>
+ 						</p>
+ 					</span>
+ 					<p class="inline-block pointer m-clear journey-rate" ng-click="giveReview(pastStory.checkIn);"
+ 					ng-if="pastStory.checkIn && pastStory.checkIn.location!='' && pastStory.review && pastStory.review=='' && isMine">
+ 					<i class=" avenir-heavy">Rate This Now</i>
+ 				</p>
+ 				<div class="options inline-block" ng-if="isMine">
+ 					<span class="inline-block pl10 pointer" ng-init="pastStory.edit={};" ng-click="editOption(pastStory.edit);" class="pointer">
+ 						<img src="img/options.png" alt="">
+ 					</span>
+ 					<div class="own-trip" ng-show="pastStory.edit.backgroundClick">
+ 						<ul>
+ 							<!-- ng if for checkin -->
+ 							<li>
+ 								<a href="" title="Edit Check In" ng-click="editCheckIn();">Edit Activity / Remove Photos &amp;
+ 								Videos</a>
+ 							</li>
+ 							<li>
+ 								<a href="" title="Add Photos & Videos" ng-click="addPhotosVideo();">Add Photos &amp; Videos</a>
+ 							</li>
+ 							<li>
+ 								<a href="" title="Change Date &amp; Time" ng-click="changePostsDate();">Change Date &amp; Time</a>
+ 							</li>
+ 							<li>
+ 								<a href="" title="Delete" ng-click="confirmDelete();">Delete Activity</a>
+ 							</li>
+ 							<li class="hide"><a href="" title="Copy URL">Copy URL</a></li>
+ 						</ul>
+ 					</div>
+ 					<div class="other-trip hide">
+ 						<ul>
+ 							<li><a href="" title="Report post">Report post</a></li>
+ 							<li><a href="" title="Copy URL">Copy URL</a></li>
+ 						</ul>
+ 					</div>
+ 				</div>
  			</div>
- 			<div class="pull-right">
+ 		</div>
+ 		<div class="social-likes-reviews" ng-if="!(((pastStory.likeCount==0)||(pastStory.likeCount==undefined))&&(pastStory.comment.length==0))">
+ 			<div class="clearfix">
+ 				<div class="pull-left">
+ 					<span class="color-iphn-gray color-blue mr10 card-like avenir-heavy" ng-click="getLikesData({'post':pastStory})">	<i class="fa fa-heart color-iphn-gray mr5"></i><b>{{pastStory.likeCount|filterCount}}</b> {{pastStory.likeCount|singularPlural:'Likes'}}</span>
+ 					<span class="color-iphn-gray color-blue mr10 card-comment avenir-heavy pointer" ng-click="getCommentsData({'post':pastStory});"><img src="img/comments.png" alt="" class="mr5" height="14"><b>{{pastStory.commentCount|filterCount}}</b> {{pastStory.commentCount|singularPlural:'Comments'}}
+ 						<div class="card-comment-dropdown" ng-show="cardCommentList">
+ 							<ul>
+ 								<li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
+ 							</ul>
+ 						</div>
+ 					</span>              
+ 				</div>
+ 				<div class="pull-right">
  				<!-- <div class="ongo-travel-icon hidden-xs">
  					<img src="img/travel.png" alt="" width="15">
  				</div> -->
