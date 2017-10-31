@@ -55,13 +55,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.popularBlogger({
         pagenumber: pageNo
       }, function (data) {
-        console.log('limit data ',data);
+        // console.log('limit data ',data);
         $scope.trendingTravellers = data.data;
       });
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
-        console.log('journeys',data);
+        // console.log('journeys',data);
         $scope.trendingStories = data.data;
       });
     };
@@ -70,7 +70,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $(document).ready(function(){
         //setting auto-height for tab screen
         if(screenWidth >= 768 && screenWidth<screenHeight){
-          console.log('its a tab');
+          // console.log('its a tab');
           var autoHeightElem = angular.element(document.querySelectorAll("[auto-height]"));
           _.each(autoHeightElem, function (elem) {
             $(elem).css('min-height',735);
@@ -79,7 +79,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //setting auto-height for tab screen end
         //start landing page animation
         $('#iphone').on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(e){
-          console.log('here we go');
           $('.iphone-screen').css('display','block');
           $(this).off(e);
         });
@@ -161,7 +160,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $(".know-more-modal").removeClass("show-know-more");
     };
     $scope.go_at = function(section){
-      console.log('worksheet ',$('.worksheet')[0].scrollTop);
+      // console.log('worksheet ',$('.worksheet')[0].scrollTop);
       var extra_space = 0;
       if(section == 'discover' || section == 'capture')
       {extra_space = 130;}
