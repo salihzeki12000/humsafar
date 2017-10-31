@@ -13878,7 +13878,6 @@ video::-webkit-media-controls-fullscreen-button {
     li {
       border: 1px dotted #424242;
       border-right: none;
-      /*margin: -4px;*/
       width: 65px;
       padding: 10px;
     }
@@ -13893,6 +13892,33 @@ video::-webkit-media-controls-fullscreen-button {
       @include animation(fade-now 700ms);
     }
   }
+  /*.list-inline {
+    margin-left: 0;
+    li {
+      padding: 0;
+      border: 1px dotted #000;
+      border-right: none;
+      margin-left: -8px;
+      @include transition(all 300ms linear);
+      i { @include transition(all 300ms linear); }
+      &:hover {
+        @include transition(all 300ms linear);
+        i { 
+          color: #fff; 
+          @include transition(all 300ms linear);
+        }
+      }
+      &:last-child {
+        border-right: 1px dotted #000;
+      }
+      a {
+        width: 65px;
+        height: 65px;
+        display: inline-block;
+        line-height: 65px;
+      }
+    }
+  }*/
 }
 .footer-filler {
   background-image: url('../img/Download.jpg');
