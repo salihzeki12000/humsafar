@@ -8,7 +8,7 @@
       <div class="seemore">
         <div class="know-watch-more text-center" ng-init="viewModal=false" >
           <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
-          <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/222624906?title=0&amp;byline=0&amp;portrait=0"
+          <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
              fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
             <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
           </a>
@@ -24,8 +24,8 @@
         </div>
       </div>
       <div class="download">
-        <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+        <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
       </div>
       <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
         <img src="img/mouse-scroll-grey.png" alt="Travelibro">
@@ -49,8 +49,9 @@
         <div class="trending-travellers">
             <div class="row row-pad">
               <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="photoblogger in trendingTravellers | limitTo:screenWidth">
-                <div class="blogger-cover relate" appear-inscreen>
-                  <div class="gallery-imgholder pointer" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">
+                <div class="blogger-cover relate pointer" appear-inscreen >
+                  <a href="#/users/{{photoblogger.urlSlug}}" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})" target="_blank">
+                  <div class="gallery-imgholder ">
                     <!-- <img ng-src="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}" alt="{{photoblogger.name}}" class="full-width"> -->
                     <fade-img-loading blur="{{photoblogger.profilePicture|uploadpath:10:10:'cover'}}" image="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}"></fade-img-loading>
                   </div>
@@ -84,6 +85,7 @@
                     </div>
                   </div>
                   </div>
+                  </a>
                 </div>
               </div>
             </div>
@@ -131,7 +133,8 @@
                       <!-- post status end -->
                       <!-- post header end -->
                       <!-- post-main-section -->
-                      <div class="post-main-section"  ng-click="routeOngo(post)">
+                      <div class="post-main-section pointer">
+                        <a href="{{post.sharingUrl}}" target="_blank">
                         <div class="relate">
                           <!-- tag on journey -->
                           <!--<div class="tag-ongo-journey">
@@ -302,6 +305,7 @@
                           </div>
                           <!-- post onway journey end-->
                         </div>
+                        </a>
                       </div>
                       <!-- post-main-section end -->
                       <!-- post footer -->
@@ -328,7 +332,7 @@
             <div class="user-display">
               <h2 class="text-heavy">On-The-Go Stories</h2>
               <p class="footer-text">Capture each moment of your journey live On-The-Go to create a stunning timeline with friends and family.</p>
-              <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/222624906?title=0&amp;byline=0&amp;portrait=0"
+              <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
                  fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
                 Watch Video
                 <img src="/img/youtube-symbol.png" width="15px">
@@ -354,8 +358,8 @@
         </div>
         <div class="download">
           <span class="color-blue">Get Started Now</span>
-          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
       </div>
       </div>
       <div id="inspire" class="inspire bottomspace" auto-height>
@@ -376,11 +380,11 @@
                           <i class="fa fa-facebook-square" aria-hidden="true"></i>
                         </a>
                       </li>
-                      <li>
-                        <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">
-                          <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                        </a>
-                      </li>
+                      <!--<li>-->
+                        <!--<a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">-->
+                          <!--<i class="fa fa-whatsapp" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                      <!--</li>-->
                       <li>
                         <a href="https://twitter.com/travelibro/" target="_blank" class="color-iphone-gray">
                           <i class="fa fa-twitter-square" aria-hidden="true"></i>
@@ -448,27 +452,27 @@
               </a>
             </li>
             <li class="facebook">
-              <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">
+              <a ng-href="https://www.facebook.com/sharer/sharer.php?u=https://travelibro.com/" target="_blank" class="color-iphone-gray">
                 <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
             </li>
             <li class="twitter">
-              <a href="https://twitter.com/travelibro/" target="_blank" class="color-iphone-gray">
+              <a ng-href="https://twitter.com/intent/tweet?url=https://travelibro.com/" target="_blank" class="color-iphone-gray">
                 <i class="fa fa-twitter" aria-hidden="true"></i>
               </a>
             </li>
             <li class="google">
-              <a href="https://plus.google.com/+TravelibroApp" target="_blank" class="color-iphone-gray">
+              <a ng-href="https://plus.google.com/share?url=https://travelibro.com/" target="_blank" class="color-iphone-gray">
                 <i class="fa fa-google-plus" aria-hidden="true"></i>
               </a>
             </li>
             <li class="pinterest">
-              <a href="https://in.pinterest.com/travelibro/" target="_blank" class="color-iphone-gray">
+              <a ng-href="http://pinterest.com/pin/create/button/?url=https://travelibro.com/&description=TraveLibro" target="_blank" class="color-iphone-gray">
                 <i class="fa fa-pinterest" aria-hidden="true"></i>
               </a>
             </li>
             <li class="linkedin">
-              <a href="https://www.linkedin.com/company/travelibro-com" target="_blank" class="color-iphone-gray">
+              <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://travelibro.com/&title=TraveLibro&summary=TraveLibro" target="_blank" class="color-iphone-gray">
                 <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
             </li>
@@ -485,8 +489,8 @@
       <div class="filler-text">
         <h1 class="text-heavy">EVERYONE ON TRAVELIBRO IS A STORYTELLER</h1>
         <div class="download">
-          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
         </div>
       </div>
     </div>
@@ -496,14 +500,20 @@
           <ul class="list-unstyled list-inline">
             <li><h4 class="text-heavy">DISCOVER</h4></li>
             <li class="footer-text" ng-repeat="menu in navigation track by $index">
-              <a ui-sref="{{menu.anchor}}" ng-if="menu.anchor">{{menu.name}}</a>
+              <a ui-sref="{{menu.anchor}}" ng-if="menu.anchor">
+                <span ng-if="menu.name=='Popular Bloggers'">Trending Travellers</span>
+                <span ng-if="menu.name=='Popular Journeys'">Trending Stories</span>
+                <span ng-if="menu.name!='Popular Bloggers' && menu.name!='Popular Journeys'">{{menu.name}}</span>
+              </a>
               <a href="{{menu.link}}" ng-if="menu.link">{{menu.name}}</a>
             </li>
           </ul>
         </div>
         <div class="col-md-2 col-sm-4 col-xs-6" ng-repeat="menu in navigation track by $index" ng-if="menu.subnav" ng-class="{'hidden-xs':menu.name=='About Us'}">
           <ul class="list-unstyled list-inline">
-            <li><h4 class="text-heavy">{{menu.name|uppercase}}</h4></li>
+            <li>
+              <h4 class="text-heavy">{{menu.name|uppercase}}</h4>
+            </li>
             <li class="footer-text" ng-repeat="i in menu.subnav track by $index">
               <a ng-if="i.anchor" ui-sref="{{i.anchor}}">{{i.name}}</a>
               <a ng-if="i.link" href="{{i.link}}">{{i.name}}</a>

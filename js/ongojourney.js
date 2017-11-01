@@ -11,7 +11,7 @@ var ongojourney = angular.module('ongojourney', [])
           data: formData
         }, 'allLoader').success(function (data) {
           var journey = data.data;
-          console.log(journey,'date wala data jo aaya wo');
+          // console.log(journey,'date wala data jo aaya wo');
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
           journey.buddiesString = "";

@@ -5,7 +5,7 @@ var backgroundClick = {
     object: undefined,
     close: function (e) {
         try {
-            // console.log(backgroundClick.object.backgroundClick);
+            // //console.log(backgroundClick.object.backgroundClick);
             // if the classes given below is not added in respective div elements, then it will work normally as it was previously
             if ($(e.target).parents().hasClass(backgroundClick.object.innerClass)) {
               return;
@@ -23,16 +23,16 @@ var backgroundClick = {
 
 $(document).ready(function () {
     $("body").click(function (e) {
-        // console.log(backgroundClick.object);
+        // //console.log(backgroundClick.object);
         if (backgroundClick.object) {
             backgroundClick.close(e);
         }
     }).bind('touchmove', function(e) {
-        // console.log(backgroundClick.object);
+        // //console.log(backgroundClick.object);
         backgroundClick.close(e);
     });
   $("#agent-scroll").on('scroll',function (e) {
-    console.log('horizontal scroll',e.currentTarget.scrollLeft);
+    //console.log('horizontal scroll',e.currentTarget.scrollLeft);
     // backgroundClick.close(e);
   });
 });
@@ -40,8 +40,8 @@ $(document).ready(function () {
 
 
 $("body").click(function (e) {
-    // console.log($(e.target).parent().hasClass('drop-content'));
-    // console.log($(e.target).hasClass('toggle-dropDown'));
+    // //console.log($(e.target).parent().hasClass('drop-content'));
+    // //console.log($(e.target).hasClass('toggle-dropDown'));
     if ($(e.target).parent().hasClass('drop-content')) {
         return;
     } else if ($(e.target).hasClass('toggle-dropDown')) {
@@ -73,12 +73,12 @@ var imageTestingCallback = function (dataURI, type) {
     });
     // Blob to File
     // var file = new File([blob], 'photo-' + "1" + '.png');
-    // console.log(file);
+    // //console.log(file);
     // File to FormData
     var formData = new FormData();
-    console.log(formData, "before appending");
+    //console.log(formData, "before appending");
     formData.append('file', bbSetting, 'abcd.png');
-    console.log(formData, "after appending");
+    //console.log(formData, "after appending");
     return formData;
 };
 
@@ -621,13 +621,13 @@ firstapp.directive('scroll', function ($window) {
             var $element = $(element);
             var divslide5 = $('#slide5')[0].scrollHeight;
             var winTop = $(window).scrollTop();
-            console.log(winTop);
-            console.log(divslide5);
+            //console.log(winTop);
+            //console.log(divslide5);
             angular.element($window).bind("scroll", function () {
-                console.log(divslide5 - 1);
+                //console.log(divslide5 - 1);
                 if (winTop > divslide5) {
                     scope.active = true;
-                    console.log("all done");
+                    //console.log("all done");
                 }
             });
         }
@@ -639,7 +639,7 @@ firstapp.directive("scrolladdclass", function ($window) {
         angular.element($window).bind("scroll", function () {
             var windowHeight = $(window).height() - 120;
             if (this.pageYOffset >= windowHeight) {
-                // console.log(windowHeight);
+                // //console.log(windowHeight);
                 element.addClass('addfixed');
             } else {
                 element.removeClass('addfixed');
@@ -653,7 +653,7 @@ firstapp.directive("scrolladd1class", function ($window) {
         angular.element($window).bind("scroll", function () {
             var windowHeight = $(window).height();
             if (this.pageYOffset >= 50) {
-                // console.log(windowHeight);
+                // //console.log(windowHeight);
                 element.addClass('addfixed');
             } else {
                 element.removeClass('addfixed');
@@ -667,7 +667,7 @@ firstapp.directive("scrolladd2class", function ($window) {
         angular.element($window).bind("scroll", function () {
             var windowHeight = $(window).height();
             if (this.pageYOffset >= 370) {
-                // console.log(windowHeight);
+                // //console.log(windowHeight);
                 element.addClass('addfixed2');
             } else {
                 element.removeClass('addfixed2');
@@ -686,19 +686,19 @@ firstapp.directive('scrollTo', function ($location, $anchorScroll) {
         // });
 
         var location = attrs.scrollTo;
-        console.log('scroll to ',location);
+        //console.log('scroll to ',location);
         $location.hash(location);
         // $anchorScroll();
         var b = $('.worksheet').offset().top;
         var a = $('#'+location).offset().top;
-        console.log(a,b);
+        //console.log(a,b);
         if(prev.length >= 2)
           prev.shift();
           prev.push(a);
         $('.worksheet').animate({
           scrollTop: a
         }, 500);
-        console.log('a---',prev);
+        //console.log('a---',prev);
       });
 
     };
@@ -729,7 +729,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                 $scope.allowType = "image/*,application/pdf";
             }
             $scope.showImage = function () {
-                console.log($scope.image);
+                //console.log($scope.image);
             };
             $scope.check = true;
             if (!$scope.type) {
@@ -759,8 +759,8 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                     },36000);
                 } else if (isArr && newVal.length > 0 && newVal[0].file) {
                     $timeout(function () {
-                        console.log(oldVal, newVal);
-                        console.log(newVal.length);
+                        //console.log(oldVal, newVal);
+                        //console.log(newVal.length);
                         _.each(newVal, function (newV, key) {
                             if (newV && newV.file) {
                                 TemplateService.uploadLoader = true;
@@ -841,7 +841,7 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                     // }, 100);
 
                 }).error(function (data) {
-                    console.log(data);
+                    //console.log(data);
                 });
             };
         }
@@ -857,7 +857,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
         },
         link: function ($scope, element, attrs) {
             $scope.showImage = function () {
-                console.log($scope.image);
+                //console.log($scope.image);
             };
             $scope.check = true;
             $scope.length = 0;
@@ -882,15 +882,15 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
             // }
 
             $scope.$watch("image", function (newVal, oldVal) {
-                console.log(newVal);
-                console.log(oldVal);
+                //console.log(newVal);
+                //console.log(oldVal);
                 isArr = _.isArray(newVal);
                 if (!isArr && newVal && newVal.file) {
                     $scope.uploadNow(newVal);
                 } else if (isArr && newVal.length > 0 && newVal[0].file) {
                     $timeout(function () {
-                        console.log(oldVal, newVal);
-                        console.log(newVal.length);
+                        //console.log(oldVal, newVal);
+                        //console.log(newVal.length);
                         $scope.imageDate = newVal[0].file.lastModifiedDate;
                         $scope.length = newVal.length;
                         _.each(newVal, function (newV, key) {
@@ -967,7 +967,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     //    $scope.callback({'data':$scope.model});
                     // }, 100);
                 }).error(function (data) {
-                    console.log(data);
+                    //console.log(data);
                 });
             };
         }
@@ -1180,7 +1180,7 @@ firstapp.filter('kindOfCheckIn', function () {
             default:
             returnVal = "img/icons/smallothers.png";
         }
-        console.log(input, returnVal);
+        //console.log(input, returnVal);
         return returnVal;
     };
 });
@@ -1231,7 +1231,7 @@ firstapp.filter('kindOfReviewCheckIn', function () {
             default:
             returnVal = "img/kindOfReviewCheckIn/grey-others.png";
         }
-        console.log(input, returnVal);
+        //console.log(input, returnVal);
         return returnVal;
     };
 });
@@ -1285,10 +1285,10 @@ firstapp.filter('itineraryType', function () {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         // var itineraryBg = input.length;
-        // console.log(input, itineraryBg);
+        // //console.log(input, itineraryBg);
         // var itineraryGet = getRandomInt(0, itineraryBg - 1);
         // var backImg = input[itineraryGet];
-        // console.log(backImg);
+        // //console.log(backImg);
         var random = getRandomInt(1, 2);
         switch (input) {
             case "adventure":
@@ -1331,7 +1331,7 @@ firstapp.filter('itineraryType', function () {
             returnVal = "img/banner-itinerary/all1.jpg";
             break;
         }
-        console.log(returnVal, 'return wla kya hai');
+        //console.log(returnVal, 'return wla kya hai');
         return returnVal;
     };
 });
@@ -1373,7 +1373,7 @@ firstapp.directive('functionmap', ['$parse', function ($parse) {
                     var ith = 1;
                     var percentage = 0;
                     //manipulating map based on divPositions starts
-                    // console.log(divPositions);
+                    // //console.log(divPositions);
                     _.each(divPositions, function (n, index) {
                         if (n <= currentScroll && divPositions[index + 1] > currentScroll) { //would work for  1st checkIn till second last checkin coz divPositions[index + 1] would return false
                             ith = index;
@@ -1506,9 +1506,9 @@ firstapp.filter('fromCalculation', function () {
 });
 // firstapp.filter('trusted',function () {
 //   return function (url) {
-//     console.log(url,'url');
+//     //console.log(url,'url');
 //     url = url.split("storage.googleapis.com").join("travelibro.com");
-//     console.log(url,'libro');
+//     //console.log(url,'libro');
 //     return url;
 //   };
 // });
@@ -1606,7 +1606,7 @@ firstapp.filter('toCalculation', function () {
 //       element.bind('dragenter', processDragOverOrEnter);
 
 //       return element.bind('drop', function (event) {
-//         console.log(event);
+//         //console.log(event);
 //         var file, name, reader, size, type;
 //         if (event != null) {
 //           event.preventDefault();
@@ -1621,7 +1621,7 @@ firstapp.filter('toCalculation', function () {
 //               }
 //             });
 //           }
-//           console.log(evt.target.files);
+//           //console.log(evt.target.files);
 //         };
 //         file = event.originalEvent.dataTransfer.files[0];
 //         name = file.name;
@@ -1666,10 +1666,10 @@ firstapp.directive("fileread", [function () {
                 reader.onload = function (loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
-                        // console.log(scope.fileread);
+                        // //console.log(scope.fileread);
                     });
                 }
-                console.log(changeEvent.target.files);
+                //console.log(changeEvent.target.files);
                 reader.readAsDataURL(changeEvent.target.files[0]);
             });
         }
@@ -1718,7 +1718,7 @@ firstapp.directive('uiSrefIf', function ($compile) {
             // $compile($element)($scope);
 
             $scope.$watch('if', function (bool) {
-                console.log(bool);
+                //console.log(bool);
                 if (bool) {
                     $element.attr('ui-sref', $scope.val);
                 } else {
@@ -1750,7 +1750,7 @@ firstapp.directive('videoend', [function () {
 firstapp.filter('trafficType', function () {
     return function (input) {
         input = input.trim();
-        console.log(input, 'trafficType');
+        //console.log(input, 'trafficType');
         var returnVal = "";
         switch (input) {
             case "Off Season":
@@ -1770,7 +1770,7 @@ firstapp.filter('trafficType', function () {
 // get attribute in html
 firstapp.filter('safe', function ($sce) {
     return function (input) {
-            // console.log(input,'input');
+            // //console.log(input,'input');
             return $sce.trustAsHtml(input);
         }
     })
@@ -1778,7 +1778,7 @@ firstapp.filter('safe', function ($sce) {
     firstapp.filter('seasonType', function () {
         return function (input) {
             input = input.trim();
-            console.log(input, 'seasonType');
+            //console.log(input, 'seasonType');
             var returnVal = "";
             switch (input) {
                 case "Spring":
