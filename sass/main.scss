@@ -764,7 +764,10 @@ header {
   border-radius: 0;
   margin: 0;
 }
-
+.nav-onhead {
+  height: 60px;
+  padding: 3px 0;
+}
 .hamburger {
   margin: 10px 0;
 
@@ -6950,7 +6953,8 @@ display:none;
         content: "";
         width: 2px;
         height: 80%;
-        border-right: 4px dashed $brand-dark-pink;
+        /*border-right: 4px dashed $brand-dark-pink;*/
+        border-right: 4px dashed #fff;
         position: absolute;
         bottom: 25px;
         left: 50%;
@@ -6961,7 +6965,8 @@ display:none;
         content: '';
         width: 2px;
         height: 70%;
-        border-right: 4px dashed $brand-dark-pink;
+        /*border-right: 4px dashed $brand-dark-pink;*/
+        border-right: 4px dashed #fff;
         position: absolute;
         bottom: -18px;
         left: 50%;
