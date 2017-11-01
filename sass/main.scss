@@ -4982,7 +4982,7 @@ header {
     left: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(0,0,0,0.15);
+    //background-color: rgba(0,0,0,0.15);
   }
 }
 // blog detail end
@@ -13589,7 +13589,7 @@ video::-webkit-media-controls-fullscreen-button {
   min-width: 300px;
   width : 750px;
   //padding-top: 200px;
-  @include animation(fadeIn 2s);
+  @include animation(iphone-fade 2s);
   img {
     width: 100%;
   }
@@ -13608,6 +13608,10 @@ video::-webkit-media-controls-fullscreen-button {
 }
 
 //FADE-IN ANIMATION KEYFRAMES
+@include keyframes(iphone-fade) {
+  from { opacity: 0;transform: translateY(80px);}
+  to   { opacity: 1;transform: translateY(0);}
+}
 @include keyframes(fadeIn) {
   from { opacity: 0;transform: translateY(30px);}
   to   { opacity: 1;transform: translateY(0);}
@@ -13910,8 +13914,8 @@ video::-webkit-media-controls-fullscreen-button {
       i { @include transition(all 300ms linear); }
       &:hover {
         @include transition(all 300ms linear);
-        i { 
-          color: #fff; 
+        i {
+          color: #fff;
           @include transition(all 300ms linear);
         }
       }
@@ -14098,4 +14102,7 @@ video::-webkit-media-controls-fullscreen-button {
   right: 0;
   top: 0;
   margin-top: 8px;
+}
+.nav-onhead {
+  height: 60px;
 }

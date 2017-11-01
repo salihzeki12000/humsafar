@@ -27,7 +27,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
 
-  .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location) {
+  .controller('HomeCtrl', function($scope, TemplateService, NavigationService, $timeout, $stateParams, cfpLoadingBar, $location, $state) {
     //Used to name the .html file
     cfpLoadingBar.start();
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
@@ -55,17 +55,21 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       NavigationService.popularBlogger({
         pagenumber: pageNo
       }, function (data) {
-        // console.log('limit data ',data);
         $scope.trendingTravellers = data.data;
       });
       NavigationService.popularJourney({
         pagenumber: pageNo
       }, function (data) {
-        // console.log('journeys',data);
         $scope.trendingStories = data.data;
       });
     };
     getTrendingData(1);
+    $scope.routeOngo = function (trip) {
+      $state.go('ongojourney', {
+        'id': trip.urlSlug,
+        'urlSlug': trip.user.urlSlug
+      });
+    }
     setTimeout(function(){
       $(document).ready(function(){
         //setting auto-height for tab screen
@@ -160,14 +164,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $(".know-more-modal").removeClass("show-know-more");
     };
     $scope.go_at = function(section){
-      // console.log('worksheet ',$('.worksheet')[0].scrollTop);
       var extra_space = 0;
       if(section == 'discover' || section == 'capture')
       {extra_space = 130;}
       else
       {extra_space = 145;}
       $('.worksheet').animate({
-          scrollTop: ($('.worksheet')[0].scrollTop - extra_space) + $('.'+section).offset().top},
+          scrollTop: ($('.worksheet').scrollTop() - extra_space) + $('.'+section).offset().top},
         'slow');
     };
 
@@ -12485,6 +12488,12 @@ $scope.rateDestination = function(destRate, type) {
     $scope.viewStripe = true;
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   /////////////////////////////////////////////////
+    if($state.current.name == 'home'){
+      $('.travel-bg').css('overflow','hidden');
+    }
+    else {
+      $('.travel-bg').css('overflow','auto');
+    }
     $scope.closeStripe = function(){
       try {
         $scope.viewStripe = false;
