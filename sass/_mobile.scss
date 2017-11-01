@@ -411,8 +411,8 @@
   .day-post-holder {
     background-color: $brand-pink;
   }
-  .add-more-post { 
-    background-color: #fff; 
+  .add-more-post {
+    background-color: #fff;
     &:before, &:after {
       background-color: $brand-pink;
     }
@@ -2211,9 +2211,12 @@
   .addfixed2 .destin-fixednav {
     top: 55px;
   }
-  .blog-itineraries-main, .trending-stories {
+  .blog-itineraries-main {
     margin-bottom: 10px;
     padding-top: 15px;
+  }
+  .trending-stories {
+    margin-bottom: 10px;
   }
   .fp-section,
   .fp-slide,
