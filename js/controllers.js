@@ -2213,8 +2213,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 if (_.isEmpty(line[i])) {
                     line[i] = new google.maps.Polyline({
                         path: [departure, departure],
-                        // strokeColor: "#f2675b", //orange
-                         strokeColor: "#263757", //navy-blue
+                        strokeColor: "#f2675b", //orange
+                         //strokeColor: "#263757", //navy-blue
                         //strokeColor: "#11d3cb", //cyan
                         // strokeOpacity: 1, --for continuous line
                         //   strokeWeight: 3,
@@ -2298,6 +2298,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 };
                 //draw succeeding polyLines end
             };
+            console.log(map,'setting map');
+            map.setZoom(3);
+            console.log(map,'setting map');
         }
     };
     setTimeout(function () {
@@ -10851,8 +10854,8 @@ $scope.rateDestination = function(destRate, type) {
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
               path: [departure, departure],
-              // strokeColor: "#f2675b", //orange
-               strokeColor: "#263757", //navy-blue
+               strokeColor: "#f2675b", //orange
+               //strokeColor: "#263757", //navy-blue
               //strokeColor: "#11d3cb", //cyan-blue
               // strokeOpacity: 1, --for continuous line
               //   strokeWeight: 3,

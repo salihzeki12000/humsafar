@@ -19,6 +19,9 @@
     right: 60px;
     bottom: 150px;
   }
+  .dash-up {
+    height: 27px;
+  }
 }
 
 @media screen and (max-width: 1400px) {
@@ -383,6 +386,9 @@
       h4 {
         color: #fff;
         text-shadow: 2px 2px 2px #020202;
+        &:before, &:after {
+          border-right: 4px dashed #f58b86;
+        }
       }
     }
   }
