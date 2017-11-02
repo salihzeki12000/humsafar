@@ -814,6 +814,9 @@
       min-height: 0;
     }
     #discover {
+      h3 {
+        font-family: AvenirLTStd-Heavy;
+      }
       padding-bottom: 0;
       .trending-travellers .blogger-cover,
       trending-travellers .blogger-cover .gallery-imgholder {
@@ -841,7 +844,7 @@
       }
     }
     .home-landing > .seemore {
-      padding: 8%;
+      padding: 5%;
       img {
         margin: 0;
       }
@@ -2296,6 +2299,11 @@
 
   //new landing page
   .landing-home {
+    .headline {
+      font-family: AvenirLTStd-Medium;
+      font-size: 30px;
+      font-weight: 600;
+    }
     .home-footer .row {
       padding: 20px 30px;
     }
@@ -2531,7 +2539,10 @@
   }
   .know-watch-more {
     img {
-      height: 50px;
+      height: 80px;
+    }
+    a img {
+      height: 78px;
     }
   }
   .modal-descp {
