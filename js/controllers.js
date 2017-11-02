@@ -72,6 +72,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     setTimeout(function(){
       $(document).ready(function(){
+        $(".worksheet").smoothWheel();
         //setting auto-height for tab screen
         if(screenWidth >= 768 && screenWidth<screenHeight){
           // console.log('its a tab');
