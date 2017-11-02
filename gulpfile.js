@@ -28,6 +28,7 @@ var jsArray = [
     // './bower_components/angular-mappy/build/angular-mappy.js',
     './js/mapping.js',
     './js/map_data.js',
+    './js/jquery.smoothwheel.js',
     // './bower_components/angular-mappy/_mapdata.js',
     './bower_components/jquery-bridget/jquery-bridget.js',
     './bower_components/ev-emitter/ev-emitter.js',
