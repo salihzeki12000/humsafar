@@ -10378,14 +10378,18 @@ $scope.rateDestination = function(destRate, type) {
         // for kind of journey
         _.each($scope.pastJourneyArray.kindOfJourney,function(kind){
           var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
-            return kind.captionSend == journeyKind;
+            return kind == journeyKind.captionSend;
           });
+          console.log(getIndex);
           if(getIndex == -1){
+            console.log($scope.journeyType[getIndex],'-1');
+            $scope.journeyType[getIndex].activeClass = "";
           }else {
+            console.log($scope.journeyType[getIndex],'else');
+            $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
         })
         // for kind of journey end
-        console.log($scope.pastJourneyArray.kindOfJourney,'kind');
         if (!$scope.pastJourneyArray.destinationVisited) {
           $scope.pastJourneyArray.destinationVisited = [];
         }
