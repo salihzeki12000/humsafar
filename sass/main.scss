@@ -183,17 +183,14 @@ a.mail-icon:hover {
 }
 // scroll down
 .mouse-scrolldown {
-  //position: absolute;
+  position: absolute;
   bottom: 15px;
-  margin-bottom: 0px;
-  margin-left: 50%;
-  margin-top: 30px;
+  left: 50%;
   @include transform(translateX(-50%));
   @extend .avenir-roman;
   @extend .text-shadow;
   font-size: 12px;
   cursor: pointer;
-
   img {
     width: 15px;
     margin-bottom: 5px;
@@ -13545,8 +13542,17 @@ video::-webkit-media-controls-fullscreen-button {
   background-color: white;
   position: fixed;
   overflow: auto;
+  .mouse-scrolldown {
+    position: static;
+    bottom: 15px;
+    margin-bottom: 0px;
+    margin-left: 50%;
+    margin-top: 30px;
+  }
 }
-
+.home-iframe {
+  .fancybox-skin { background-color: #000;  }
+}
 .home-landing {
   color: #424242;
   //min-height: 100%;
@@ -13644,10 +13650,10 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 2s ease-out);
+  @include animation(swipeOut 300ms ease-out);
 }
 .swipeIn {
-  @include animation(swipeIn 1.5s ease-in);
+  @include animation(swipeIn 300ms ease-in);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -14114,6 +14120,7 @@ video::-webkit-media-controls-fullscreen-button {
   right: 0;
   top: 0;
   margin-top: 8px;
+  font-size: 12px;
 }
 .nav-onhead {
   height: 60px;

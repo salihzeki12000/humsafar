@@ -47,6 +47,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     if(screenWidth >=768 && screenWidth<=991) {
       $scope.screenWidth = 4;
     }
+    $('.fancybox-iframe').parents('.fancybox-skin').css('background-color','black');
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
     };
@@ -2327,55 +2328,67 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.journeyType = [{
         img: "img/itinerary/adventure.png",
         caption: "Adventure",
+        captionSend: 'Adventure',
         width: "25"
+    },{
+        img: "img/itinerary/backpacking.png",
+        caption: "Backpacking",
+        captionSend: "Backpacking",
+        width: "23"
     }, {
         img: "img/itinerary/business.png",
         caption: "Business",
+        captionSend: "Business",
         width: "24"
-    }, {
-        img: "img/itinerary/family.png",
-        caption: "Family",
-        width: "30"
+    },{
+        img: "img/itinerary/religious.png",
+        caption: "Religious",
+        captionSend: "Religious",
+        width: "26"
     }, {
         img: "img/itinerary/romance.png",
-        caption: "Romance",
+        caption: "Romantic",
+        captionSend: "Romance",
         width: "26"
     }, {
         img: "img/itinerary/budget.png",
         caption: "Budget",
+        captionSend: "Budget",
         width: "22"
     }, {
         img: "img/itinerary/luxury.png",
         caption: "Luxury",
+        captionSend: "Luxury",
         width: "21"
     }, {
-        img: "img/itinerary/religious.png",
-        caption: "Religious",
-        width: "26"
-    }, {
+        img: "img/itinerary/family.png",
+        caption: "Family",
+        captionSend: "Family",
+        width: "30"
+    },  {
         img: "img/itinerary/friend.png",
         caption: "Friends",
+        captionSend: "Friends",
         width: "24"
     }, {
-        img: "img/itinerary/shopping-white.png",
-        caption: "Shopping",
-        width: "24"
-    }, {
-        img: "img/itinerary/cap-white.png",
+        img: "img/itinerary/solo-white.png",
         caption: "Solo",
+        captionSend: "Solo",
         width: "35"
     }, {
-        img: "img/itinerary/speaker-white.png",
-        caption: "Festival",
-        width: "29"
+        img: "img/itinerary/betterhalf-white.png",
+        caption: "Better Half",
+        captionSend: "Betterhalf",
+        width: "24"
     }, {
-        img: "img/itinerary/backpacking.png",
-        caption: "Backpacking",
-        width: "23"
+        img: "img/itinerary/colleague-white.png",
+        caption: "Colleague",
+        captionSend: "Colleague",
+        width: "29"
     }];
     // EDIT KIND OF JOURNEY POPUP END
 
-    $scope.selectItinerary = function (val) {
+    $scope.selectItinerary = function (val,type) {
         //console.log(val);
         if ($scope.journeyType[val].activeClass == "active-itinerary") {
             //console.log("inside if");
@@ -2621,7 +2634,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
             OnGoJourney.setJourneyCoverPhoto(formData, callback);
         }
-        // cover photo end
+        //edit journey cover photo end
     $scope.cropCover = function (imgCrop) {
         $scope.showCover = imgCrop;
         $scope.cropImage = true;
@@ -2659,15 +2672,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var modal = "";
 
     $scope.review = {};
-
     $scope.countryReview = function () {
         $scope.reviewCountryCount = 0;
         //console.log($scope.journey);
         var len = $scope.journey.countryVisited.length;
         //console.log(len);
         if (len !== 0 && ($scope.reviewCountryCount < len)) {
-            $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
-            $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+          console.log($scope.reviewCountryCount,'review country count', $scope.journey,'journey');
+          
+          if($scope.journey.review[$scope.reviewCountryCount] && $scope.journey.review[$scope.reviewCountryCount].review){
+              $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
+              $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
+          }
         }
         modal = $uibModal.open({
             animation: true,
@@ -10359,6 +10375,21 @@ $scope.rateDestination = function(destRate, type) {
       }
       pastJourney.getPastJourney(formData, function(pastStoryData) {
         $scope.pastJourneyArray = pastStoryData;
+        // for kind of journey
+        _.each($scope.pastJourneyArray.kindOfJourney,function(kind){
+          var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
+            return kind == journeyKind.captionSend;
+          });
+          console.log(getIndex);
+          if(getIndex == -1){
+            console.log($scope.journeyType[getIndex],'-1');
+            $scope.journeyType[getIndex].activeClass = "";
+          }else {
+            console.log($scope.journeyType[getIndex],'else');
+            $scope.journeyType[getIndex].activeClass = "active-itinerary";
+          }
+        })
+        // for kind of journey end
         if (!$scope.pastJourneyArray.destinationVisited) {
           $scope.pastJourneyArray.destinationVisited = [];
         }
@@ -11182,6 +11213,178 @@ $scope.rateDestination = function(destRate, type) {
 
     };
     // get likes and comment end
+    // EDIT KIND OF JOURNEY POPUP
+    var modalKindof;
+    $scope.editKindOf = function () {
+      $scope.journey = $scope.pastJourneyArray;
+       modalKindof = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/edit-kind-of-journey.html",
+            scope: $scope,
+            backdropClass: "review-backdrop",
+        });
+    };
+
+    $scope.journeyType = [{
+        img: "img/itinerary/adventure.png",
+        caption: "Adventure",
+        captionSend: 'Adventure',
+        width: "25"
+    },{
+        img: "img/itinerary/backpacking.png",
+        caption: "Backpacking",
+        captionSend: "Backpacking",
+        width: "23"
+    }, {
+        img: "img/itinerary/business.png",
+        caption: "Business",
+        captionSend: "Business",
+        width: "24"
+    },{
+        img: "img/itinerary/religious.png",
+        caption: "Religious",
+        captionSend: "Religious",
+        width: "26"
+    }, {
+        img: "img/itinerary/romance.png",
+        caption: "Romantic",
+        captionSend: "Romance",
+        width: "26"
+    }, {
+        img: "img/itinerary/budget.png",
+        caption: "Budget",
+        captionSend: "Budget",
+        width: "22"
+    }, {
+        img: "img/itinerary/luxury.png",
+        caption: "Luxury",
+        captionSend: "Luxury",
+        width: "21"
+    }, {
+        img: "img/itinerary/family.png",
+        caption: "Family",
+        captionSend: "Family",
+        width: "30"
+    },  {
+        img: "img/itinerary/friend.png",
+        caption: "Friends",
+        captionSend: "Friends",
+        width: "24"
+    }, {
+        img: "img/itinerary/solo-white.png",
+        caption: "Solo",
+        captionSend: "Solo",
+        width: "35"
+    }, {
+        img: "img/itinerary/betterhalf-white.png",
+        caption: "Better Half",
+        captionSend: "Betterhalf",
+        width: "24"
+    }, {
+        img: "img/itinerary/colleague-white.png",
+        caption: "Colleague",
+        captionSend: "Colleague",
+        width: "29"
+    }];
+    // EDIT KIND OF JOURNEY POPUP END
+    $scope.kindofJourney = [];
+    
+    $scope.selectItinerary = function(val,type){
+      console.log(type,'type');
+      var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
+        return n == type;
+      })
+        if(kindOfIndex == -1){
+          $scope.kindofJourney.push(type);
+          $scope.journeyType[val].activeClass = "active-itinerary";
+        }else {
+          _.remove($scope.kindofJourney, function(remove){
+            return remove == type;
+          })
+          $scope.journeyType[val].activeClass = "";
+        }
+        console.log($scope.kindofJourney,'journey type');
+    }
+
+    // save kind of journey
+    $scope.saveKindof = function(journeyId){
+      var formData = {
+        _id: journeyId,
+        kindOfJourney: $scope.kindofJourney
+      }
+      var callback = function(data){
+        modalKindof.close();
+      }
+      console.log(formData,'formdata value of kindofJourney');
+      pastJourney.saveKindJourney(formData,callback);
+    }
+    // save kind of journey end
+
+    // edit journey name starts
+    $scope.editName = {};
+    $scope.nameJourney = function (name) {
+      console.log($scope.pastJourneyArray,'past journey array');
+        $scope.journey = $scope.pastJourneyArray;
+        $scope.editName.name = name;
+        modal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/journey-name.html",
+            scope: $scope,
+            backdropClass: "review-backdrop"
+        });
+    };
+    $scope.editJourneyName = function (id, obj) {
+        var formData = {
+            "_id": id,
+            "name": obj.name
+        };
+        var callback = function (name) {
+            $scope.journey.name = name;
+            modal.close();
+        };
+        pastJourney.editJourneyName(formData, callback);
+    };
+    // edit journey name end
+    //edit journey cover photo
+    $scope.coverPhoto = function (id) {
+      console.log($scope.pastJourneyArray,'pastJourneyArray');
+      $scope.journey = $scope.pastJourneyArray;
+        modal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/journey-cover.html",
+            scope: $scope,
+            backdropClass: "review-backdrop",
+            windowClass: "cover-modal"
+        });
+
+        var formData = {
+            "_id": id,
+            "type": "photos"
+        };
+        var callback = function (photos) {
+            $scope.journeyCoverPhotos = photos;
+        };
+        pastJourney.getJourneyCoverPhoto(formData, callback);
+    };
+
+    $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
+            var formData = {
+                "_id": id,
+                "coverPhoto": coverPhoto
+            };
+            var callback = function () {
+                modal.close();
+            }
+            pastJourney.setJourneyCoverPhoto(formData, callback);
+        }
+         $scope.cropCover = function (imgCrop) {
+        $scope.showCover = imgCrop;
+        $scope.cropImage = true;
+    };
+    $scope.viewPrev = function () {
+        $scope.cropImage = false;
+    };
+        //edit journey cover photo end
     // save destination visited data
     $scope.saveDestinationVisited = function() {
       console.log($scope.pastJourneyArray.destinationVisited, 'new array');
@@ -11203,7 +11406,8 @@ $scope.rateDestination = function(destRate, type) {
         console.log(data);
       });
       console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
-    }
+    };
+
     // save destination visited data end
 
     //     initMapGl = function(){

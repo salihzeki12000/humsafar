@@ -26,9 +26,16 @@
 								<div class="start-card-options" ng-click="editOption(pastStory.kindOf);" ng-if="template.isMine">
 									<img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
 									<div class="edit-kind-journey" ng-show="pastStory.kindOf.backgroundClick;">
-										<ul>
-											<!-- <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li> -->
+										<ul class="text-left">
+											<li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(pastJourneyArray._id);">Change Cover Photo</a>
+											</li>
+											<li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Edit Journey Name</a></li>
+											<li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
 											<li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
+											<!-- <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries Visited</a></li> -->
+											<!-- <li ng-if="journey.onGoing == false">
+												<a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+											</li> -->
 										</ul>
 									</div>
 								</div>
@@ -42,7 +49,8 @@
 								<!-- header started end-->
 								<!-- story banner holder -->
 								<div class="banner-imgholder journeybanner-imgholder start-journey">
-									<img src="{{pastJourneyArray.startLocationPic|uploadpath}}" alt="" class="img-responsive">
+									<!-- <img src="{{pastJourneyArray.startLocationPic|uploadpath}}" alt="" class="img-responsive"> -->
+									<img src="{{pastJourneyArray.coverPhoto|uploadpath}}" alt="" class="img-responsive">
 									<!-- past story heading -->
 									<!-- <div class="past-story-heading">
 										<div class="clearfix">

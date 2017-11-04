@@ -112,9 +112,16 @@
               <div class="start-card-options" ng-click="editOption(ongo.kindOf);" ng-if="template.isMine">
                 <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
                 <div class="edit-kind-journey" ng-show="ongo.kindOf.backgroundClick;">
-                  <ul>
+                  <ul class="text-left">
+                    <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(journey._id);">Journey Cover Photo</a>
+                    </li>
+                    <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Journey Name</a></li>
                     <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
                     <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
+                    <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries Visited</a></li>
+                    <li ng-if="journey.onGoing == false">
+                      <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+                    </li>
                   </ul>
                 </div>
               </div>

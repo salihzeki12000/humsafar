@@ -568,7 +568,10 @@ firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function (scope, element, attr) {
+        link: function (scope, element, attr) {            
+            if(attr.ariaHidden){
+                var className = attr.ariaHidden;
+            }
             var $element = $(element);
             var target;
             if (attr.rel) {
@@ -576,15 +579,18 @@ firstapp.directive('fancyboxBox', function ($document) {
             } else {
                 target = element;
             }
-
-            target.fancybox({
+            setTimeout(function(){
+              target.fancybox({
                 openEffect: 'fade',
                 closeEffect: 'fade',
+                wrapCSS: className,
                 closeBtn: true,
                 helpers: {
                     media: {}
                 }
-            });
+              });
+            },2000);
+            
         }
     };
 });
