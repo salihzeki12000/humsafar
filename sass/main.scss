@@ -7059,7 +7059,7 @@ display:none;
 
     a {
       color: #6d6e71;
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 
@@ -13544,7 +13544,9 @@ video::-webkit-media-controls-fullscreen-button {
   position: fixed;
   overflow: auto;
 }
-
+.home-iframe {
+  .fancybox-skin { background-color: #000;  }
+}
 .home-landing {
   color: #424242;
   //min-height: 100%;
@@ -13640,10 +13642,10 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 2s ease-out);
+  @include animation(swipeOut 300ms ease-out);
 }
 .swipeIn {
-  @include animation(swipeIn 1.5s ease-in);
+  @include animation(swipeIn 300ms ease-in);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -14110,6 +14112,7 @@ video::-webkit-media-controls-fullscreen-button {
   right: 0;
   top: 0;
   margin-top: 8px;
+  font-size: 12px;
 }
 .nav-onhead {
   height: 60px;

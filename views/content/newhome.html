@@ -2,141 +2,141 @@
   <div class="landing-home" ng-class="{'know-more-travelibro': viewModal == true,'': viewModal == false}">
     <div class="container-fluid">
       <div class="">
-    <div class="home-landing bottomspace" id="home-landing" auto-height>
-      <h1 class="headline">Turning every Traveller into a Storyteller!</h1>
-      <p class="footer-text">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
-      <div class="seemore">
-        <div class="know-watch-more text-center" ng-init="viewModal=false" >
-          <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
-          <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
-             fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
-          </a>
+        <div class="home-landing bottomspace" id="home-landing" auto-height>
+          <h1 class="headline">Turning every Traveller into a Storyteller!</h1>
+          <p class="footer-text">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
+          <div class="seemore">
+            <div class="know-watch-more text-center" ng-init="viewModal=false" >
+              <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
+              <a class="various fancybox.iframe vimeo" aria-hidden="home-iframe" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
+              fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
+              <img src="img/watch-more-gray.png" alt="Watch More" class="pointer customize-fancybox" height ="86">
+            </a>
+          </div>
+        </div>
+        <div class="iphone-device">
+          <div class="libro-logo-holder">
+            <img src="img/Icon.png" alt="" class="libro-logo">
+          </div>
+          <div class="iphone" id="iphone">
+            <img src="img/iphone-screen.png" alt="" class="iphone-screen" id="iphone-screen">
+            <img src="img/hero_large_2x.png" alt="">
+          </div>
+        </div>
+        <div class="download">
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+        </div>
+        <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
+          <img src="img/mouse-scroll-grey.png" alt="Travelibro">
+          <p>Scroll Down</p>
         </div>
       </div>
-      <div class="iphone-device">
-        <div class="libro-logo-holder">
-          <img src="img/Icon.png" alt="" class="libro-logo">
+      <div class="home-navigation hidden-sm hidden-xs">
+        <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
+          <ul class="sectionScroll">
+            <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
+            <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
+            <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
+            <li ng-click="go_at('relive')"><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
+          </ul>
         </div>
-        <div class="iphone" id="iphone">
-          <img src="img/iphone-screen.png" alt="" class="iphone-screen" id="iphone-screen">
-          <img src="img/hero_large_2x.png" alt="">
-        </div>
       </div>
-      <div class="download">
-        <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
-      </div>
-      <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
-        <img src="img/mouse-scroll-grey.png" alt="Travelibro">
-        <p>Scroll Down</p>
-      </div>
-    </div>
-    <div class="home-navigation hidden-sm hidden-xs">
-      <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
-        <ul class="sectionScroll">
-          <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
-          <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
-          <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
-          <li ng-click="go_at('relive')"><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
-        </ul>
-      </div>
-    </div>
-    <div  class="sections-holder second">
-      <div id="discover" class="discover bottomspace" auto-height>
-        <h2 class="text-heavy color-iphone-gray mobile-headline visible-xs visible-sm">DISCOVER</h2>
-        <h3>Trending Travellers</h3>
-        <div class="trending-travellers">
+      <div  class="sections-holder second">
+        <div id="discover" class="discover bottomspace" auto-height>
+          <h2 class="text-heavy color-iphone-gray mobile-headline visible-xs visible-sm">DISCOVER</h2>
+          <h3>Trending Travellers</h3>
+          <div class="trending-travellers">
             <div class="row row-pad">
               <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="photoblogger in trendingTravellers | limitTo:screenWidth">
                 <div class="blogger-cover relate pointer" appear-inscreen >
                   <a href="#/users/{{photoblogger.urlSlug}}" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})" target="_blank">
-                  <div class="gallery-imgholder ">
-                    <!-- <img ng-src="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}" alt="{{photoblogger.name}}" class="full-width"> -->
-                    <fade-img-loading blur="{{photoblogger.profilePicture|uploadpath:10:10:'cover'}}" image="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}"></fade-img-loading>
-                  </div>
-                  <div class="blogger-details-bg">
-                    <div class="blogger-cont-holder text-center relate">
-                    <h4 class="color-white  fnt-20 pointer avenir-heavy" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">{{photoblogger.name}}</h4>
-                    <h5 class="lives-in color-white " ng-if="photoblogger.homeCity!==''">Lives In : {{photoblogger.homeCity}}</h5>
-                    <div class="bloggerholder-made">
-                      <ul class="list-unstyled list-inline m-clear cfj-holder">
-                        <li class="color-white">
-                          <h4 class="m-clear">{{photoblogger.photos_count}}</h4>
-                          <p class="">Photos</p>
-                        </li>
-                        <li class="color-white">
-                          <h4 class="m-clear">{{photoblogger.videos_count}}</h4>
-                          <p class="">Videos</p>
-                        </li>
-                        <li class="color-white">
-                          <h4 class="m-clear">{{photoblogger.followers_count}}</h4>
-                          <p class="">Followers</p>
-                        </li>
-                        <li class="color-white">
-                          <h4 class="m-clear">{{photoblogger.countriesVisited_count}}</h4>
-                          <p class="">Countries</p>
-                        </li>
-                        <li class="color-white">
-                          <h4 class="m-clear">{{photoblogger.journeysCreated_count}}</h4>
-                          <p class="">Journeys</p>
-                        </li>
-                      </ul>
+                    <div class="gallery-imgholder ">
+                      <!-- <img ng-src="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}" alt="{{photoblogger.name}}" class="full-width"> -->
+                      <fade-img-loading blur="{{photoblogger.profilePicture|uploadpath:10:10:'cover'}}" image="{{photoblogger.profilePicture|uploadpath:400:400:'cover'}}"></fade-img-loading>
                     </div>
-                  </div>
-                  </div>
+                    <div class="blogger-details-bg">
+                      <div class="blogger-cont-holder text-center relate">
+                        <h4 class="color-white  fnt-20 pointer avenir-heavy" ui-sref="mylife({'urlSlug':photoblogger.urlSlug})">{{photoblogger.name}}</h4>
+                        <h5 class="lives-in color-white " ng-if="photoblogger.homeCity!==''">Lives In : {{photoblogger.homeCity}}</h5>
+                        <div class="bloggerholder-made">
+                          <ul class="list-unstyled list-inline m-clear cfj-holder">
+                            <li class="color-white">
+                              <h4 class="m-clear">{{photoblogger.photos_count}}</h4>
+                              <p class="">Photos</p>
+                            </li>
+                            <li class="color-white">
+                              <h4 class="m-clear">{{photoblogger.videos_count}}</h4>
+                              <p class="">Videos</p>
+                            </li>
+                            <li class="color-white">
+                              <h4 class="m-clear">{{photoblogger.followers_count}}</h4>
+                              <p class="">Followers</p>
+                            </li>
+                            <li class="color-white">
+                              <h4 class="m-clear">{{photoblogger.countriesVisited_count}}</h4>
+                              <p class="">Countries</p>
+                            </li>
+                            <li class="color-white">
+                              <h4 class="m-clear">{{photoblogger.journeysCreated_count}}</h4>
+                              <p class="">Journeys</p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        <div>
-          <a href="https://travelibro.com/#/popular-bloggers" ui-sref="popularblogger" target="_blank"><div class="trending-stuff">View Top Trending Travellers<div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
-          <h3>Trending Stories</h3>
-          <div class="popular-journey second trending-stories">
-            <div preserve-order>
-              <div class="row row-pad">
-                <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="post in trendingStories | limitTo:screenWidth">
-                  <div class="activity-post {{post.class}}">
-                    <div class="activity-post-main" appear-inscreen>
-                      <!-- post header -->
-                      <div class="post-header relate">
-                        <div class="inline-block picture-section">
-                          <div class="user-pic pointer" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
-                            <img ng-src="{{post.user.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
+          <div>
+            <a href="https://travelibro.com/#/popular-bloggers" ui-sref="popularblogger" target="_blank"><div class="trending-stuff">View Top Trending Travellers<div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
+            <h3>Trending Stories</h3>
+            <div class="popular-journey second trending-stories">
+              <div preserve-order>
+                <div class="row row-pad">
+                  <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="post in trendingStories | limitTo:screenWidth">
+                    <div class="activity-post {{post.class}}">
+                      <div class="activity-post-main" appear-inscreen>
+                        <!-- post header -->
+                        <div class="post-header relate">
+                          <div class="inline-block picture-section">
+                            <div class="user-pic pointer" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+                              <img ng-src="{{post.user.profilePicture | uploadpath:50:50:'cover'}}" alt="" class="img-responsive">
+                            </div>
                           </div>
-                        </div>
-                        <div class="user-detail clearfix width74 inline-block">
-                          <h5 class="font-bold color-username pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h5>
-                          <div class=" user-more-detail">
-                            <p class="m-clear"><span class=""><i class="fa fa-calendar mr5"></i>{{post.startTime|formatDate:'date'}}</span> | <span class=""><i class="fa fa-clock-o mr5"></i>{{post.startTime|formatDate:'time'}}</span></p>
+                          <div class="user-detail clearfix width74 inline-block">
+                            <h5 class="font-bold color-username pointer m-clear" ng-if="post.user" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h5>
+                            <div class=" user-more-detail">
+                              <p class="m-clear"><span class=""><i class="fa fa-calendar mr5"></i>{{post.startTime|formatDate:'date'}}</span> | <span class=""><i class="fa fa-clock-o mr5"></i>{{post.startTime|formatDate:'time'}}</span></p>
+                            </div>
                           </div>
+                          <!-- post type icon -->
+                          <!-- post type icon end -->
                         </div>
-                        <!-- post type icon -->
-                        <!-- post type icon end -->
-                      </div>
-                      <!-- post status -->
-                      <div class="post-your-status relate">
+                        <!-- post status -->
+                        <div class="post-your-status relate">
 
-                        <p class="your-post" ng-if="post.onGoing==false"><span style="font-weight: 600">{{post.name}}</span> - ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
-                        <p class="your-post" ng-if="post.onGoing==true"><span style="font-weight: 600">Started a Journey</span> - {{post.name}}</p>
+                          <p class="your-post" ng-if="post.onGoing==false"><span style="font-weight: 600">{{post.name}}</span> - ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                          <p class="your-post" ng-if="post.onGoing==true"><span style="font-weight: 600">Started a Journey</span> - {{post.name}}</p>
 
-                        <!-- flag country -->
-                        <div class="flag-section">
-                          <div class="country-visited" ng-repeat="visit in post.countryVisited | limitTo:3 track by $index">
-                            <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
+                          <!-- flag country -->
+                          <div class="flag-section">
+                            <div class="country-visited" ng-repeat="visit in post.countryVisited | limitTo:3 track by $index">
+                              <img ng-src="{{visit.country.flag|uploadpath:30:30:'cover'}}" alt="" height="30">
+                            </div>
+                            <span class="" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
                           </div>
-                          <span class="" ng-if="post.countryVisited.length>3">+{{post.countryVisited.length-3}}</span>
+                          <!-- flag country end -->
                         </div>
-                        <!-- flag country end -->
-                      </div>
-                      <!-- post status end -->
-                      <!-- post header end -->
-                      <!-- post-main-section -->
-                      <div class="post-main-section pointer">
-                        <a href="{{post.sharingUrl}}" target="_blank">
-                        <div class="relate">
-                          <!-- tag on journey -->
+                        <!-- post status end -->
+                        <!-- post header end -->
+                        <!-- post-main-section -->
+                        <div class="post-main-section pointer">
+                          <a href="{{post.sharingUrl}}" target="_blank">
+                            <div class="relate">
+                              <!-- tag on journey -->
                           <!--<div class="tag-ongo-journey">
                             <span class="inline-block color-white">On The Go</span>
                           </div>-->
@@ -164,12 +164,12 @@
                               </li>
                             </flex-slider>
                             <div class="post-rating">
-                        <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </span>
+                              <span class="avenir-heavy color-blue">Rating : <i class="fa fa-star color-pink"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                              </span>
                             </div>
                           </div>
                           <!-- img post slider end -->
@@ -260,148 +260,148 @@
                                       <li>
                                         <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="15"></a>
                                       </li> -->
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- post travelled journey end-->
-                          <!-- post onway journey -->
-                          <div class="onway-journey relate" ng-if="post.onJourney">
-                            <div class="onway-imgholder">
-                              <img ng-src="{{post.imgOnway}}" alt="" class="img-responsive m-center">
-                            </div>
-                            <div class="journey-tag-holder">
-                              <h3 class="m-clear text-capitalize">{{post.onwayTag}}</h3>
-                              <div class="clearfix journey-travelling-type">
-                                <div class="pull-left">
-                                  <div class="journey-type">
-                                    <ul>
-                                      <li>
-                                        <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
-                                      </li>
-                                      <li>
-                                        <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
-                                      </li>
-                                      <li>
-                                        <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
-                                      </li>
                                     </ul>
                                   </div>
                                 </div>
-                                <div class="pull-right">
-                                  <div class="journey-cost">
-                                    <span>{{post.cost}}</span>
-                                  </div>
-                                  <div class="days-spent">
-                                    <p><span class="block">{{post.spendingDay}}</span>Days</p>
-                                  </div>
-                                </div>
                               </div>
                             </div>
                           </div>
-                          <!-- post onway journey end-->
                         </div>
-                        </a>
                       </div>
-                      <!-- post-main-section end -->
-                      <!-- post footer -->
-                      <div class="post-footer" style="height: 15px">
+                      <!-- post travelled journey end-->
+                      <!-- post onway journey -->
+                      <div class="onway-journey relate" ng-if="post.onJourney">
+                        <div class="onway-imgholder">
+                          <img ng-src="{{post.imgOnway}}" alt="" class="img-responsive m-center">
+                        </div>
+                        <div class="journey-tag-holder">
+                          <h3 class="m-clear text-capitalize">{{post.onwayTag}}</h3>
+                          <div class="clearfix journey-travelling-type">
+                            <div class="pull-left">
+                              <div class="journey-type">
+                                <ul>
+                                  <li>
+                                    <a href=""><img ng-src="{{post.itineraryType1}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{post.itineraryType2}}" alt="" height="20"></a>
+                                  </li>
+                                  <li>
+                                    <a href=""><img ng-src="{{post.itineraryType3}}" alt="" height="20"></a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div class="pull-right">
+                              <div class="journey-cost">
+                                <span>{{post.cost}}</span>
+                              </div>
+                              <div class="days-spent">
+                                <p><span class="block">{{post.spendingDay}}</span>Days</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <!-- post footer end -->
+                      <!-- post onway journey end-->
                     </div>
-                  </div>
-                  <!-- activity-post end-->
+                  </a>
                 </div>
+                <!-- post-main-section end -->
+                <!-- post footer -->
+                <div class="post-footer" style="height: 15px">
+                </div>
+                <!-- post footer end -->
               </div>
             </div>
-          </div>
-          <a href="https://travelibro.com/#/popular-journeys" ui-sref="popularjourney" target="_blank"><div class="trending-stuff">View Top Trending Stories <div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
-      </div>
-
-
-      </div>
-      <div id="capture" class="capture bottomspace" auto-height>
-        <h2 class="text-heavy color-iphone-gray mobile-headline text-center visible-xs visible-sm">CAPTURE</h2>
-        <div class="row capture-row row-pad" appear-inscreen>
-          <div class="col-md-4">
-            <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
-            <div class="user-display">
-              <h2 class="text-heavy">On-The-Go Stories</h2>
-              <p class="footer-text">Capture each moment of your journey live On-The-Go to create a stunning timeline with friends and family.</p>
-              <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
-                 fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
-                Watch Video
-                <img src="/img/youtube-symbol.png" width="15px">
-              </a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <img src="/img/Past Stories.png" alt="" class="full-img">
-            <div class="user-display">
-              <h2 class="text-heavy">Past Stories</h2>
-              <p class="footer-text">Its automatic quick and easy. Publish and share your past stories within minutes.</p>
-              <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
-            </div>
-          </div>
-          <div class="col-md-4">
-            <img src="/img/Local Stories.png" alt="" class="full-img">
-            <div class="user-display">
-              <h2 class="text-heavy">Local Stories</h2>
-              <p class="footer-text">Share the love for your city by capturing the favourite moments of your local life to inspire others.</p>
-              <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
-            </div>
+            <!-- activity-post end-->
           </div>
         </div>
-        <div class="download">
-          <span class="color-blue">Get Started Now</span>
-          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
       </div>
-      </div>
-      <div id="inspire" class="inspire bottomspace" auto-height>
-        <h2 class="text-heavy color-iphone-gray text-center mobile-headline visible-xs visible-sm">INSPIRE</h2>
-        <div class="inspire-banner" appear-inscreen>
-          <div class="row">
-            <div class="col-md-8"><img src="/img/Inspire.png" alt="" width="100%"></div>
-            <div class="col-md-4" style="text-align: left">
-              <div class="inspire-text">
-                <h2 class="text-heavy">Inspire others</h2>
-                <p class="footer-text" style="padding-bottom: 15px">with your live travel and local stories.</p>
-                <p class="footer-text">Your followers can view your activities real-time and you can share these stories on other social mediums.</p>
-                <!--<div class="social-icon-menu">-->
-                  <div class="social-icons">
-                    <ul class="list-unstyled list-inline">
-                      <li>
-                        <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">
-                          <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <!--<li>-->
-                        <!--<a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">-->
-                          <!--<i class="fa fa-whatsapp" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                      <!--</li>-->
-                      <li>
-                        <a href="https://twitter.com/travelibro/" target="_blank" class="color-iphone-gray">
-                          <i class="fa fa-twitter-square" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="https://plus.google.com/+TravelibroApp" target="_blank" class="color-iphone-gray">
-                          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="mailto:info@travelibro.com" class="color-iphone-gray">
-                          <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </a>
-                      </li>
-                    </ul>
-                    </div>
+    </div>
+    <a href="https://travelibro.com/#/popular-journeys" ui-sref="popularjourney" target="_blank"><div class="trending-stuff">View Top Trending Stories <div class="menuright-bg"><img src="../img/menu-right-blue.png" width="10px"></div></div></a>
+  </div>
+
+
+</div>
+<div id="capture" class="capture bottomspace" auto-height>
+  <h2 class="text-heavy color-iphone-gray mobile-headline text-center visible-xs visible-sm">CAPTURE</h2>
+  <div class="row capture-row row-pad" appear-inscreen>
+    <div class="col-md-4">
+      <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
+      <div class="user-display">
+        <h2 class="text-heavy">On-The-Go Stories</h2>
+        <p class="footer-text">Capture each moment of your journey live On-The-Go to create a stunning timeline with friends and family.</p>
+        <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
+        fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
+        Watch Video
+        <img src="/img/youtube-symbol.png" width="15px">
+      </a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <img src="/img/Past Stories.png" alt="" class="full-img">
+    <div class="user-display">
+      <h2 class="text-heavy">Past Stories</h2>
+      <p class="footer-text">Its automatic quick and easy. Publish and share your past stories within minutes.</p>
+      <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
+    </div>
+  </div>
+  <div class="col-md-4">
+    <img src="/img/Local Stories.png" alt="" class="full-img">
+    <div class="user-display">
+      <h2 class="text-heavy">Local Stories</h2>
+      <p class="footer-text">Share the love for your city by capturing the favourite moments of your local life to inspire others.</p>
+      <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
+    </div>
+  </div>
+</div>
+<div class="download">
+  <span class="color-blue">Get Started Now</span>
+  <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+  <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro"target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+</div>
+</div>
+<div id="inspire" class="inspire bottomspace" auto-height>
+  <h2 class="text-heavy color-iphone-gray text-center mobile-headline visible-xs visible-sm">INSPIRE</h2>
+  <div class="inspire-banner" appear-inscreen>
+    <div class="row">
+      <div class="col-md-8"><img src="/img/Inspire.png" alt="" width="100%"></div>
+      <div class="col-md-4" style="text-align: left">
+        <div class="inspire-text">
+          <h2 class="text-heavy">Inspire others</h2>
+          <p class="footer-text" style="padding-bottom: 15px">with your live travel and local stories.</p>
+          <p class="footer-text">Your followers can view your activities real-time and you can share these stories on other social mediums.</p>
+          <!--<div class="social-icon-menu">-->
+            <div class="social-icons">
+              <ul class="list-unstyled list-inline">
+                <li>
+                  <a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">
+                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <!--<li>-->
+                  <!--<a href="https://www.facebook.com/travelibro/" target="_blank" class="color-iphone-gray">-->
+                    <!--<i class="fa fa-whatsapp" aria-hidden="true"></i>-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                      <a href="https://twitter.com/travelibro/" target="_blank" class="color-iphone-gray">
+                        <i class="fa fa-twitter-square" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://plus.google.com/+TravelibroApp" target="_blank" class="color-iphone-gray">
+                        <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="mailto:info@travelibro.com" class="color-iphone-gray">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 <!--</div>-->
 
                 <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
@@ -420,7 +420,7 @@
                 <p class="footer-text">Relive a lifetime of all your travel & local memories - past and present stories, photos, videos, reviews and experiences.</p>
                 <!--<span class="color-pink">Watch Video <img src="/img/youtube-symbol.png" width="15px"></span>-->
               </div>
-              </div>
+            </div>
             <div class="col-md-6">
               <div class="relive-mobile-holder">
                 <img src="/img/relive.png" alt="" width="100%">
@@ -484,7 +484,7 @@
           </ul>
         </div>
       </div>
-      </div>
+    </div>
     <div class="footer-filler">
       <div class="filler-text">
         <h1 class="text-heavy">EVERYONE ON TRAVELIBRO IS A STORYTELLER</h1>
@@ -529,52 +529,52 @@
             <!--<li class="footer-text"><a href="">Homestays</a></li>-->
             <!--<li class="footer-text"><a href="">Car Rentals</a></li>-->
             <!--<li class="footer-text"><a href="">Tours & Excursions</a></li>-->
-          <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="col-md-2 hidden-sm hidden-xs">-->
-          <!--<ul class="list-unstyled list-inline">-->
-            <!--<li><h4 class="text-heavy">ABOUT US</h4>-->
-            <!--<li class="footer-text"><a href="">About Travelibro</a></li>-->
-            <!--<li class="footer-text"><a href="">Advertise With Us</a></li>-->
-            <!--<li class="footer-text"><a href="">Contact Us</a></li>-->
-            <!--<li class="footer-text"><a href="">Terms & Conditions</a></li>-->
-            <!--<li class="footer-text"><a href="">Privacy Policy</a></li>-->
-          <!--</ul>-->
-        <!--</div>-->
-        <div class="col-md-6 col-xs-12">
-          <ul class="list-unstyled list-inline">
-            <li><h4 class="text-heavy">THE TRAVEL SOCIAL COMMUNITY</h4>
-            <li class="footer-text">
-              <a href="">
-                We are passionate travellers set our to create a global community of discerning travellers
-                and your feedback would help us achieve this goal. We look forward to your response at
-                info@travelibro.com.
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="copyright pull-right color-white"><p>&copy; 2017 Travelibro Online Pvt. Ltd.</p></div>
-    </div>
-  </div>
-  </div></div>
-</div>
+            <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="col-md-2 hidden-sm hidden-xs">-->
+              <!--<ul class="list-unstyled list-inline">-->
+                <!--<li><h4 class="text-heavy">ABOUT US</h4>-->
+                  <!--<li class="footer-text"><a href="">About Travelibro</a></li>-->
+                  <!--<li class="footer-text"><a href="">Advertise With Us</a></li>-->
+                  <!--<li class="footer-text"><a href="">Contact Us</a></li>-->
+                  <!--<li class="footer-text"><a href="">Terms & Conditions</a></li>-->
+                  <!--<li class="footer-text"><a href="">Privacy Policy</a></li>-->
+                  <!--</ul>-->
+                  <!--</div>-->
+                  <div class="col-md-6 col-xs-12">
+                    <ul class="list-unstyled list-inline">
+                      <li><h4 class="text-heavy">THE TRAVEL SOCIAL COMMUNITY</h4>
+                        <li class="footer-text">
+                          <a href="">
+                            We are passionate travellers set our to create a global community of discerning travellers
+                            and your feedback would help us achieve this goal. We look forward to your response at
+                            info@travelibro.com.
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="copyright pull-right color-white"><p>&copy; 2017 Travelibro Online Pvt. Ltd.</p></div>
+                </div>
+              </div>
+            </div></div>
+          </div>
 
-<div class="know-more-modal">
-  <div class="modal-main">
-    <div class="modal-imgholder"><img src="img/libro-home/login-phone.png" alt="" class="img-responsive"></div>
-    <div class="modal-descp">
-      <div class="close-btn"><i class="fa fa-times pointer" ng-click="closeKnowMore();viewModal=false;"></i></div>
-      <h3 class="avenir-heavy">Capture and Relive Your Travel Stories</h3>
-      <div class="modal-scroll-descp">
-        <p>We have witnessed a change in the way travel experiences are being shared from writing a blog about a holiday to sharing a few selected moments on social media for instant likes and gratification. </p>
-        <p>We believe that this sudden migration has led to a gap in the market, a need to capture and share travel experiences differently. </p>
-        <p>TraveLibro is your own personalised Travel Diary. </p>
-        <p>Now capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
-        <p>Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
-      </div>
-      <h4 class="text-uppercase avenir-heavy">Sign up now to tell your stories differently.</h4>
-      <a href="" ui-sref="login" class="btn btn-pink">Sign Up</a>
-    </div>
-  </div>
-</div>
+          <div class="know-more-modal">
+            <div class="modal-main">
+              <div class="modal-imgholder"><img src="img/libro-home/login-phone.png" alt="" class="img-responsive"></div>
+              <div class="modal-descp">
+                <div class="close-btn"><i class="fa fa-times pointer" ng-click="closeKnowMore();viewModal=false;"></i></div>
+                <h3 class="avenir-heavy">Capture and Relive Your Travel Stories</h3>
+                <div class="modal-scroll-descp">
+                  <p>We have witnessed a change in the way travel experiences are being shared from writing a blog about a holiday to sharing a few selected moments on social media for instant likes and gratification. </p>
+                  <p>We believe that this sudden migration has led to a gap in the market, a need to capture and share travel experiences differently. </p>
+                  <p>TraveLibro is your own personalised Travel Diary. </p>
+                  <p>Now capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
+                  <p>Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
+                </div>
+                <h4 class="text-uppercase avenir-heavy">Sign up now to tell your stories differently.</h4>
+                <a href="" ui-sref="login" class="btn btn-pink">Sign Up</a>
+              </div>
+            </div>
+          </div>

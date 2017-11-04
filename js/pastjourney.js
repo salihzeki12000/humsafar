@@ -129,6 +129,17 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           console.log(data);
         });
       },
+      saveKindJourney:function(formData,callback){
+        TravelibroService.http({
+          url: adminURL + '/draft/editDataWeb',
+          method: "POST",
+          data: formData
+        }).success(function(data){
+          callback();
+        }).error(function(data){
+            console.log(data);
+        });
+      },
       updateBannerDateTime: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/draft/editDataWeb/",

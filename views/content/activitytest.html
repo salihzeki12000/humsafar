@@ -67,12 +67,12 @@
                       </div>-->
                   </div>
               </div>
-              <div class="pull-right activity-see-more .color-darkgrey">
-                <span ng-if="activity.type =='travel-life'" ui-sref="single-notification({'postId': activity._id, 'urlSlug': activity.user.urlSlug})">See more</span>
-                <span ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'" ng-click="routeOngo(activity);">See more</span>
-              </div>
+              <div class="pull-right activity-see-more color-darkgrey">
+                <span ng-if="activity.type =='travel-life'" ui-sref="single-notification({'postId': activity._id, 'urlSlug': activity.user.urlSlug})">See More</span>
+                <span ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'" ng-click="routeOngo(activity);">See More</span>
             </div>
-          <!-- post status -->
+        </div>
+        <!-- post status -->
                                     <!--<div class="post-your-status" ng-if="activity.status">
                     <p class="your-post">
                       <span ng-repeat="tags in activity.hashtag" ng-if="activity.hashtag"><a >{{tags.tag}}</a>,</span>
@@ -115,27 +115,27 @@
                 <div class="relate">
                     <!-- tag on journey -->
                     <div class="tag-ongo-journey pointer" ng-if="activity.type =='travel-life'">
-                <span class="inline-block">Travel Life</span>
-            </div>
-            <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'">
-                <span class="inline-block">Travel Life</span>
-            </div>
-                  <div class="tag-ongo-journey" ng-if="activity.type =='local-life'" ui-sref="single-notification({'postId': activity._id,'urlSlug': activity.user.urlSlug})">
-        <span class="inline-block">Local Life</span>
-    </div>
-    <div class="tag-ongo-journey" ng-if="((activity.type =='editor-blog'))">
-        <span class="inline-block color-blue">Cagtegory</span>
-    </div>
-    <!-- tag on journey end-->
-    <!-- video post -->
-    <div class="video-post relate" ng-if="activity.video">
-        <img src="img/blog/popular-blog.jpg" alt="" class="img-responsive">
-        <div class="youtube-icon get-center">
-            <span><i class="fa fa-youtube-play fa-4x"></i></span>
-        </div>
-    </div>
-    <!-- video post end -->
-    <!-- img post -->
+                        <span class="inline-block">Travel Life</span>
+                    </div>
+                    <div class="tag-ongo-journey pointer" ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'">
+                        <span class="inline-block">Travel Life</span>
+                    </div>
+                    <div class="tag-ongo-journey" ng-if="activity.type =='local-life'" ui-sref="single-notification({'postId': activity._id,'urlSlug': activity.user.urlSlug})">
+                        <span class="inline-block">Local Life</span>
+                    </div>
+                    <div class="tag-ongo-journey" ng-if="((activity.type =='editor-blog'))">
+                        <span class="inline-block color-blue">Cagtegory</span>
+                    </div>
+                    <!-- tag on journey end-->
+                    <!-- video post -->
+                    <div class="video-post relate" ng-if="activity.video">
+                        <img src="img/blog/popular-blog.jpg" alt="" class="img-responsive">
+                        <div class="youtube-icon get-center">
+                            <span><i class="fa fa-youtube-play fa-4x"></i></span>
+                        </div>
+                    </div>
+                    <!-- video post end -->
+                    <!-- img post -->
                                         <!--<div class="post-img relate" ng-if="activity.showMap && activity.imageUrl">
                       <img src="{{activity.imageUrl}}" alt="" class="img-responsive">
                     </div>
