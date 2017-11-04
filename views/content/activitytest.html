@@ -200,7 +200,7 @@
             <!-- img post slider end -->
             <!-- post travelled journey -->
             <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                <div class="travelled-imgholder relate" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
+                <div class="travelled-imgholder relate" ng-class="{'start-journey-map':!activity.coverPhoto}" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
                     <fade-img-loading blur="{{banner|uploadpath:10:10:'cover'}}" image="{{banner|uploadpath:722:750:'cover'}}"></fade-img-loading>
                     <!-- <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center"> -->
                 </div>

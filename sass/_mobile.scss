@@ -825,6 +825,7 @@
     #discover {
       h3 {
         font-family: AvenirLTStd-Heavy;
+        padding-bottom: 0;
       }
       padding-bottom: 0;
       .trending-travellers .blogger-cover,
@@ -947,7 +948,7 @@
       font-size: 15px;
     }
     .home-landing > h1{
-      font-size: 26px;
+      font-size: 24px;
       padding-top : 60px;
     }
     .home-scroll {
@@ -2203,7 +2204,7 @@
     }
   }
   .destination-nav.mustdo-not {
-    top: 55px;
+    top: 110px;
   }
   .btn-destinationfilter {
     padding: 8px 0 0 0;
@@ -2309,8 +2310,8 @@
   //new landing page
   .landing-home {
     .headline {
-      font-family: AvenirLTStd-Medium;
-      font-size: 30px;
+      font-family: AvenirLTStd-Heavy;
+      font-size: 24px;
       font-weight: 600;
     }
     .home-footer .row {

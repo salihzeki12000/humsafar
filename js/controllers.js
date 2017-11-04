@@ -12502,6 +12502,7 @@ $scope.rateDestination = function(destRate, type) {
       try {
         $scope.viewStripe = false;
         var a = document.getElementById('content');
+        $('.destination-nav.mustdo-not').css('top','55px');
         a.style.marginTop = "0px";
       }catch(e){}
     };

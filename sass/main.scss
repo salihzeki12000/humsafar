@@ -183,9 +183,11 @@ a.mail-icon:hover {
 }
 // scroll down
 .mouse-scrolldown {
-  position: absolute;
+  //position: absolute;
   bottom: 15px;
-  left: 50%;
+  margin-bottom: 0px;
+  margin-left: 50%;
+  margin-top: 30px;
   @include transform(translateX(-50%));
   @extend .avenir-roman;
   @extend .text-shadow;
@@ -6219,10 +6221,10 @@ header {
     right: 0;
     bottom: 0;
     left: 0;
-    background: -webkit-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(rgba(0,0,0,0.5), transparent, rgba(0,0,0,0.5)); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(rgba(0,0,0,0.6), transparent, rgba(0,0,0,0.6)); /* Standard syntax (must be last) */
+    background: -webkit-linear-gradient(transparent, rgba(0,0,0,0.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(transparent, rgba(0,0,0,0.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(transparent, rgba(0,0,0,0.5)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(transparent, rgba(0,0,0,0.6)); /* Standard syntax (must be last) */
   }
 }
 .ongo-profile-info {
@@ -7059,7 +7061,7 @@ display:none;
 
     a {
       color: #6d6e71;
-      font-size: 15px;
+      font-size: 14px;
     }
   }
 
@@ -13560,9 +13562,11 @@ video::-webkit-media-controls-fullscreen-button {
   }
     text-align: center;
   h1 {
-    font-family: AvenirLTStd-Light;
-    font-weight: 600;
+    font-family: AvenirLTStd-Heavy;
+    //font-weight: 600;
     padding-top: 80px;
+    font-size: 36px;
+    margin-bottom: 0px;
   }
   h1, p, .seemore {
     @include animation(fadedown 700ms);
@@ -13810,10 +13814,10 @@ video::-webkit-media-controls-fullscreen-button {
   color : white;
   font-family: AvenirLTStd-Heavy;
   font-size: 16px;
+  display: inline-block;
+  text-align: center;
   border-radius: 15px;
   padding: 15px;
-  width: fit-content;
-  width: -moz-fit-content;
   margin: 20px auto 40px;;
 }
 #discover {
@@ -13821,7 +13825,7 @@ video::-webkit-media-controls-fullscreen-button {
   padding-bottom: 50px;
   h3 {
     font-weight: 600;
-    padding-bottom: 0;
+    padding-bottom: 20px;
   }
 }
 .trending-stuff {
@@ -14113,4 +14117,9 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .nav-onhead {
   height: 60px;
+}
+.start-journey-map {
+  fade-img-loading .img-show {
+    width: auto;
+  }
 }
