@@ -1499,6 +1499,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var getOneJourneyCallback = function (journeys) {
         $scope.journey = journeys;
         TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
+        // for kind of journey
+        _.each($scope.journey.kindOfJourney,function(kind){
+          var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
+            return kind == journeyKind.captionSend;
+          });
+          console.log(getIndex);
+          if(getIndex == -1){
+            $scope.journeyType[getIndex].activeClass = "";
+          }else {
+            $scope.journeyType[getIndex].activeClass = "active-itinerary";
+          }
+        })
+        // for kind of journey end
         var postsWithLatLng = [];
         postsWithLatLng = _.filter($scope.journey.post, 'latlong');
         _.each(postsWithLatLng, function (n, $index) {
@@ -2316,8 +2329,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
+    var modalKindof;
     $scope.editKindOf = function () {
-        $uibModal.open({
+      modalKindof =  $uibModal.open({
             animation: true,
             templateUrl: "views/modal/edit-kind-of-journey.html",
             scope: $scope,
@@ -2325,7 +2339,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         });
     };
 
-    $scope.journeyType = [{
+     $scope.journeyType = [{
         img: "img/itinerary/adventure.png",
         caption: "Adventure",
         captionSend: 'Adventure',
@@ -2387,18 +2401,35 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         width: "29"
     }];
     // EDIT KIND OF JOURNEY POPUP END
-
-    $scope.selectItinerary = function (val,type) {
-        //console.log(val);
-        if ($scope.journeyType[val].activeClass == "active-itinerary") {
-            //console.log("inside if");
-            $scope.journeyType[val].activeClass = "";
-        } else {
-            //console.log("inside else");
-            $scope.journeyType[val].activeClass = "active-itinerary";
+$scope.kindofJourney = [];
+    
+    $scope.selectItinerary = function(val,type){
+      var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
+        return n == type;
+      })
+        if(kindOfIndex == -1){
+          $scope.kindofJourney.push(type);
+          $scope.journeyType[val].activeClass = "active-itinerary";
+        }else {
+          _.remove($scope.kindofJourney, function(remove){
+            return remove == type;
+          })
+          $scope.journeyType[val].activeClass = "";
         }
-        //console.log($scope.journeyType[val]);
-    };
+    }
+    // save kind of journey
+    $scope.saveKindof = function(journeyId){
+      var formData = {
+        _id: journeyId,
+        kindOfJourney: $scope.kindofJourney
+      }
+      var callback = function(data){
+        modalKindof.close();
+      }
+      OnGoJourney.saveKindJourney(formData,callback);
+    }
+    // save kind of journey end
+
 
     $scope.viewCardComment = false;
     $scope.getCard = "";
@@ -10382,10 +10413,8 @@ $scope.rateDestination = function(destRate, type) {
           });
           console.log(getIndex);
           if(getIndex == -1){
-            console.log($scope.journeyType[getIndex],'-1');
             $scope.journeyType[getIndex].activeClass = "";
           }else {
-            console.log($scope.journeyType[getIndex],'else');
             $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
         })
@@ -11290,7 +11319,6 @@ $scope.rateDestination = function(destRate, type) {
     $scope.kindofJourney = [];
     
     $scope.selectItinerary = function(val,type){
-      console.log(type,'type');
       var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
         return n == type;
       })
@@ -11303,7 +11331,6 @@ $scope.rateDestination = function(destRate, type) {
           })
           $scope.journeyType[val].activeClass = "";
         }
-        console.log($scope.kindofJourney,'journey type');
     }
 
     // save kind of journey
@@ -11315,7 +11342,6 @@ $scope.rateDestination = function(destRate, type) {
       var callback = function(data){
         modalKindof.close();
       }
-      console.log(formData,'formdata value of kindofJourney');
       pastJourney.saveKindJourney(formData,callback);
     }
     // save kind of journey end
@@ -11407,7 +11433,97 @@ $scope.rateDestination = function(destRate, type) {
       });
       console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
     };
+    // country modal
+    var modal = "";
 
+    $scope.review = {};
+    $scope.countryReview = function () {
+        $scope.reviewCountryCount = 0;
+        //console.log($scope.journey);
+        var len = $scope.pastJourneyArray.countryVisited.length;
+        //console.log(len);
+        if (len !== 0 && ($scope.reviewCountryCount < len)) {
+          console.log($scope.reviewCountryCount,'review country count', $scope.pastJourneyArray,'pastJourneyArray');
+          
+          if($scope.pastJourneyArray.review[$scope.reviewCountryCount] && $scope.pastJourneyArray.review[$scope.reviewCountryCount].review){
+              $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+              $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
+          }
+        }
+        $scope.journey = $scope.pastJourneyArray;
+        modal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/review-country.html",
+            scope: $scope,
+            backdropClass: "review-backdrop",
+        });
+        modal.closed.then(function () {
+
+        })
+    };
+
+    // country modal ends
+
+    $scope.rateThisCountry = function (journeyId, countryId, formData, currentIndex) {
+        //console.log(currentIndex);
+        var result = {
+            journey: journeyId,
+            country: countryId,
+            review: formData.fillMeIn,
+            rating: formData.rate.toString()
+        };
+        var callback = function () {
+            $scope.pastJourneyArray.review[currentIndex].review = result.review;
+            $scope.pastJourneyArray.review[currentIndex].rating = result.rating;
+        };
+        pastJourney.rateThisCountry(result, callback);
+        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+        var len = $scope.pastJourneyArray.countryVisited.length;
+        if ($scope.reviewCountryCount < len) {
+            if (($scope.journey.review.length > $scope.reviewCountryCount)) {
+                $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+                $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
+            } else {
+                $scope.review.fillMeIn = "";
+                $scope.review.rate = 1;
+            }
+        } else {
+            //console.log(modal);
+            modal.close();
+        }
+        //  test=$scope.journey.review[$scope.reviewCountryCount].review
+        // $scope.review.fillM=test;
+        // //console.log($scope.review.fil);
+        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+    };
+    // Rating country ends
+    $scope.hoveringOver = function (value) {
+        $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+    }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+    }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+    }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+    }, {
+        stateOn: 'fa fa-star-o',
+        stateOff: 'fa fa-star'
+    }];
+    $scope.getslide = "travel-out";
+    $scope.openTravelTrip = function () {
+        if ($scope.getslide == "travel-in") {
+            $scope.getslide = "travel-out";
+        } else {
+            $scope.getslide = "travel-in";
+        }
+    };
     // save destination visited data end
 
     //     initMapGl = function(){
