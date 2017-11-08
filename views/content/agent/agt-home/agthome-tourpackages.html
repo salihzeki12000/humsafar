@@ -258,11 +258,11 @@
                                     <div class="call-btn" ng-click="showContact(tourcard);" ng-if="!template.isMine">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
                                     </div>
-                                    <div class="imgfoot-top clearfix" ng-class="{'view-tour': !template.isMine,'':template.isMine}">                               
+                                    <div class="imgfoot-top clearfix" ng-class="{'view-tour': !template.isMine,'':template.isMine}">
                                         <h4 class="font-sz18 text-capitalize avenir-medium">{{tourcard.title|truncate:'90'}}</h4>
                                         <div class="pull-left">
-                                            <p class="day-night" ng-if="tourcard.nights && tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
-                                            <p class="day-night" ng-if="tourcard.hours && tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
+                                            <p class="day-night" ng-if="tourcard.nights || tourcard.days"><span>{{tourcard.nights}} Nights</span> | <span>{{tourcard.days}} Days</span></p>
+                                            <p class="day-night" ng-if="tourcard.hours || tourcard.minutes"><span>{{tourcard.hours}} Hours</span> | <span>{{tourcard.minutes}} Minutes</span></p>
                                             <!-- <p class="font-sz10"><i class="fa fa-calendar"></i><span class="ml5  ng-binding">{{tourcard.createdAt | formatDate:'date' }}</span>                      | <i class="fa fa-clock-o mr5"></i> <span class="ng-binding">{{tourcard.createdAt | formatDate:'time' }}</span></p> -->
                                             <span class="text-right"> - {{tourcard.typeOfHoliday[0]}}</span>
                                             <p class="m-clear" ng-if="template.isLoggedIn && template.isMine">
