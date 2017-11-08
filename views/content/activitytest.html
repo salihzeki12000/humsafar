@@ -492,15 +492,16 @@
             </div>
             <!-- <img ng-src="{{activity.displayPic|uploadpath}}" alt="{{activity.name}} | TravelLibro" class="img-responsive"> -->
             <div class="itinerary-imgfoot tour-imgfoot">
-                <div class="imgfoot-top  clearfix">
+                <div class="imgfoot-top  clearfix view-tour">
+                  <h4 class="avenir-heavy text-capitalize font-sz18 m-clear">{{activity.title|truncate:'90'}}</h4>
                     <div class="pull-left">
-                        <h4 class="avenir-heavy text-capitalize font-sz18 m-clear">{{activity.title}}</h4>
-                        <p class="day-night" ng-if="activity.nights && activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
-                        <p class="day-night" ng-if="activity.hours && activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p>
+                        <p class="day-night" ng-if="activity.nights || activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
+                        <p class="day-night" ng-if="activity.hours || activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p>
+                      <span class="text-right">{{activity.typeOfHoliday[0]}}</span>
                     </div>
                     <div class="pull-right">
                         <p class="font-sz18 m-clear cost-posi">{{activity.currency}} {{activity.price}}</p>
-                        <span class="fz12">{{activity.typeOfHoliday[0]}}</span>
+                        <!--<span class="fz12">{{activity.typeOfHoliday[0]}}</span>-->
                     </div>
                     <div class="tour-btns">
                         <button class="btn btn-pink btn-download" ng-if="activity.pdf"><a class="btn-link" ng-href="{{activity.pdf|downloadLink:'tours&packages':activity._id:activity.title}}" download>Download</a></button>

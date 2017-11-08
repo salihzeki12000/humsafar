@@ -1,7 +1,7 @@
 <div class="agt-home-travelactivity bg-white">
     <div class="" infinite-scroll="getMoreTravelActivity();" infinite-scroll-disabled="scroll.busy">
         <!-- ADD BUTTON -->
-        <div class="add-agentbutton travel-addbtn" ng-class="{'bg-white' : travelActivity.length==0}" ng-if="template.isLoggedIn && template.isMine">
+        <div class="add-agentbutton travel-addbtn" ng-if="template.isLoggedIn && template.isMine">
             <div class="container">
                 <div class="clearfix">
                     <div class="pull-right">
@@ -27,7 +27,7 @@
         </div>
         <!-- ADD BUTTON END -->
         <!-- EMPTY USER INTRO -->
-        <div class="empty-intro emptyuser-travel bg-white avenir-roman" ng-if="!template.isMine && travelActivity.length==0">
+        <div class="empty-intro emptyuser-travel avenir-roman" ng-if="!template.isMine && travelActivity.length==0">
             <div class="container">
                 <div class="row">
                     <div class="col-md-offset-2 col-md-8">
@@ -41,7 +41,7 @@
         </div>
         <!-- EMPTY USER INTRO END -->
         <!-- EMPTY AGENT INTRO -->
-        <div class="empty-intro bg-white" ng-if="travelActivity.length==0 && template.isLoggedIn && template.isMine">
+        <div class="empty-intro" ng-if="travelActivity.length==0 && template.isLoggedIn && template.isMine">
             <div class="text-center avenir-roman">
                 <div class="container">
                     <div class="row">
