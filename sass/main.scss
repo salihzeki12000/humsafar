@@ -14130,3 +14130,15 @@ video::-webkit-media-controls-fullscreen-button {
     width: auto;
   }
 }
+.country-flag {
+  max-width: initial;
+  max-height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}

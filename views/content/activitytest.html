@@ -486,7 +486,7 @@
             </div> -->
             <div class="country-badges">
                 <div class="country-holder" ng-repeat="tourcountryflag in activity.country | limitTo : 3">
-                    <img ng-src="{{tourcountryflag.flag|uploadpath}}" alt="{{tourcountryflag.name}}" class="pointer img-responsive" title="{{tourcountryflag.name}}">
+                    <img ng-src="{{tourcountryflag.flag|uploadpath}}" alt="{{tourcountryflag.name}}" class="country-flag pointer img-responsive" title="{{tourcountryflag.name}}">
                 </div>
                 <span class="country-count color-blue" ng-if="activity.country.length>3">+{{activity.country.length-3}}</span>
             </div>
