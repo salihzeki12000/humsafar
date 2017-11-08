@@ -1498,6 +1498,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var getOneJourneyCallback = function (journeys) {
         $scope.journey = journeys;
+        console.log($scope.journey,'journeyhs',$scope.journey.kindOfJourney,'koj');
         TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
         // for kind of journey
         _.each($scope.journey.kindOfJourney,function(kind){
@@ -1505,9 +1506,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             return kind == journeyKind.captionSend;
           });
           console.log(getIndex);
-          if(getIndex == -1){
-            $scope.journeyType[getIndex].activeClass = "";
-          }else {
+          if(getIndex !== -1){
             $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
         })
@@ -2340,59 +2339,71 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
      $scope.journeyType = [{
+
         img: "img/itinerary/adventure.png",
         caption: "Adventure",
         captionSend: 'Adventure',
+        activeClass : '',
         width: "25"
     },{
         img: "img/itinerary/backpacking.png",
         caption: "Backpacking",
         captionSend: "Backpacking",
+        activeClass : '',
         width: "23"
     }, {
         img: "img/itinerary/business.png",
         caption: "Business",
         captionSend: "Business",
+       activeClass : '',
         width: "24"
     },{
         img: "img/itinerary/religious.png",
         caption: "Religious",
         captionSend: "Religious",
+       activeClass : '',
         width: "26"
     }, {
         img: "img/itinerary/romance.png",
         caption: "Romantic",
         captionSend: "Romance",
+       activeClass : '',
         width: "26"
     }, {
         img: "img/itinerary/budget.png",
         caption: "Budget",
         captionSend: "Budget",
+       activeClass : '',
         width: "22"
     }, {
         img: "img/itinerary/luxury.png",
         caption: "Luxury",
         captionSend: "Luxury",
+       activeClass : '',
         width: "21"
     }, {
         img: "img/itinerary/family.png",
         caption: "Family",
         captionSend: "Family",
+       activeClass : '',
         width: "30"
     },  {
         img: "img/itinerary/friend.png",
         caption: "Friends",
         captionSend: "Friends",
+       activeClass : '',
         width: "24"
     }, {
         img: "img/itinerary/solo-white.png",
         caption: "Solo",
         captionSend: "Solo",
+       activeClass : '',
         width: "35"
     }, {
         img: "img/itinerary/betterhalf-white.png",
         caption: "Better Half",
         captionSend: "Betterhalf",
+       activeClass : '',
         width: "24"
     }, {
         img: "img/itinerary/colleague-white.png",
@@ -2402,7 +2413,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }];
     // EDIT KIND OF JOURNEY POPUP END
 $scope.kindofJourney = [];
-    
+
     $scope.selectItinerary = function(val,type){
       var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
         return n == type;
@@ -2710,7 +2721,7 @@ $scope.kindofJourney = [];
         //console.log(len);
         if (len !== 0 && ($scope.reviewCountryCount < len)) {
           console.log($scope.reviewCountryCount,'review country count', $scope.journey,'journey');
-          
+
           if($scope.journey.review[$scope.reviewCountryCount] && $scope.journey.review[$scope.reviewCountryCount].review){
               $scope.review.fillMeIn = $scope.journey.review[$scope.reviewCountryCount].review;
               $scope.review.rate = $scope.journey.review[$scope.reviewCountryCount].rating;
@@ -10412,9 +10423,7 @@ $scope.rateDestination = function(destRate, type) {
             return kind == journeyKind.captionSend;
           });
           console.log(getIndex);
-          if(getIndex == -1){
-            $scope.journeyType[getIndex].activeClass = "";
-          }else {
+          if(getIndex !== -1){
             $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
         })
@@ -11258,66 +11267,78 @@ $scope.rateDestination = function(destRate, type) {
         img: "img/itinerary/adventure.png",
         caption: "Adventure",
         captionSend: 'Adventure',
+      activeClass : '',
         width: "25"
     },{
         img: "img/itinerary/backpacking.png",
         caption: "Backpacking",
         captionSend: "Backpacking",
+      activeClass : '',
         width: "23"
     }, {
         img: "img/itinerary/business.png",
         caption: "Business",
         captionSend: "Business",
+      activeClass : '',
         width: "24"
     },{
         img: "img/itinerary/religious.png",
         caption: "Religious",
         captionSend: "Religious",
+      activeClass : '',
         width: "26"
     }, {
         img: "img/itinerary/romance.png",
         caption: "Romantic",
         captionSend: "Romance",
+      activeClass : '',
         width: "26"
     }, {
         img: "img/itinerary/budget.png",
         caption: "Budget",
         captionSend: "Budget",
+      activeClass : '',
         width: "22"
     }, {
         img: "img/itinerary/luxury.png",
         caption: "Luxury",
         captionSend: "Luxury",
+      activeClass : '',
         width: "21"
     }, {
         img: "img/itinerary/family.png",
         caption: "Family",
         captionSend: "Family",
+      activeClass : '',
         width: "30"
     },  {
         img: "img/itinerary/friend.png",
         caption: "Friends",
         captionSend: "Friends",
+      activeClass : '',
         width: "24"
     }, {
         img: "img/itinerary/solo-white.png",
         caption: "Solo",
         captionSend: "Solo",
+      activeClass : '',
         width: "35"
     }, {
         img: "img/itinerary/betterhalf-white.png",
         caption: "Better Half",
         captionSend: "Betterhalf",
+      activeClass : '',
         width: "24"
     }, {
         img: "img/itinerary/colleague-white.png",
         caption: "Colleague",
         captionSend: "Colleague",
+      activeClass : '',
         width: "29"
     }];
     // EDIT KIND OF JOURNEY POPUP END
     $scope.kindofJourney = [];
-    
+
     $scope.selectItinerary = function(val,type){
       var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
         return n == type;
@@ -11444,7 +11465,7 @@ $scope.rateDestination = function(destRate, type) {
         //console.log(len);
         if (len !== 0 && ($scope.reviewCountryCount < len)) {
           console.log($scope.reviewCountryCount,'review country count', $scope.pastJourneyArray,'pastJourneyArray');
-          
+
           if($scope.pastJourneyArray.review[$scope.reviewCountryCount] && $scope.pastJourneyArray.review[$scope.reviewCountryCount].review){
               $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
               $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
