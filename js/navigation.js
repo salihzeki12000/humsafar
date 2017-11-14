@@ -1,8 +1,8 @@
 var adminURL = "";
 var allowAccess = "";
 
-adminURL = "https://travelibro.com/api";
-// adminURL = "https://travelibro.wohlig.com/api";
+// adminURL = "https://travelibro.com/api";
+adminURL = "https://travelibro.wohlig.com/api";
 
 var imgurl = adminURL + "/upload/";
 var imgpath = imgurl + "readFile";
@@ -21,12 +21,12 @@ var navigationservice = angular.module('navigationservice', [])
         disabled: true,
         anchor: "destination",
     }, {
-        name: "Popular Journeys",
+        name: "Trending Stories",
         classis: "active",
         disabled: true,
         anchor: "popularjourney",
     }, {
-        name: "Popular Bloggers",
+        name: "Trending Travellers",
         classis: "active",
         disabled: true,
         anchor: "popularblogger",
@@ -387,6 +387,13 @@ var navigationservice = angular.module('navigationservice', [])
         },
         acceptRejectItinerary: function (formData, callback) {
             TravelibroService.post(adminURL + "/itinerary/itineraryStatusWeb", formData).success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                console.log(data);
+            });
+        },
+        getAllPopularJourney: function (formData, callback) {
+            TravelibroService.post(adminURL + "/journey/getPopularJourneyByCategory", formData).success(function (data) {
                 callback(data);
             }).error(function (data) {
                 console.log(data);

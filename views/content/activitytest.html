@@ -442,17 +442,17 @@
                 <div class="clearfix">
                     <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
                         <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-medium-grey mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
-                           <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
-                              <ul>
-                                <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
-                        <img src="img/comments.png" alt="" height="14">
-                        <b class=""> {{activity.commentCount}}</b>
-                        {{activity.commentCount|singularPlural:'Comments'}}
-                    </span>
+                         <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
+                          <ul>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                        </ul>
+                    </div>
+                </span>
+                <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
+                    <img src="img/comments.png" alt="" height="14">
+                    <b class=""> {{activity.commentCount}}</b>
+                    {{activity.commentCount|singularPlural:'Comments'}}
+                </span>
                                                     <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
@@ -494,23 +494,23 @@
             <div class="itinerary-imgfoot tour-imgfoot">
                 <div class="imgfoot-top  clearfix view-tour">
                   <h4 class="avenir-heavy text-capitalize font-sz18 m-clear">{{activity.title|truncate:'90'}}</h4>
-                    <div class="pull-left">
-                        <p class="day-night" ng-if="activity.nights || activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
-                        <p class="day-night" ng-if="activity.hours || activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p>
-                      <span class="text-right">{{activity.typeOfHoliday[0]}}</span>
-                    </div>
-                    <div class="pull-right">
-                        <p class="font-sz18 m-clear cost-posi">{{activity.currency}} {{activity.price}}</p>
-                        <!--<span class="fz12">{{activity.typeOfHoliday[0]}}</span>-->
-                    </div>
-                    <div class="tour-btns">
-                        <button class="btn btn-pink btn-download" ng-if="activity.pdf"><a class="btn-link" ng-href="{{activity.pdf|downloadLink:'tours&packages':activity._id:activity.title}}" download>Download</a></button>
-                        <button class="btn btn-pink btn-book" ng-if="activity.bookingUrl" ng-click="countAdder(activity);"><a class="btn-link" href="{{activity.bookingUrl}}" target="_blank">Book</a></button>
-                    </div>
+                  <div class="pull-left">
+                    <p class="day-night" ng-if="activity.nights || activity.days"><span class="ng-binding">{{activity.nights}} Nights</span> | <span class="ng-binding">{{activity.days}} Days</span></p>
+                    <p class="day-night" ng-if="activity.hours || activity.minutes"><span>{{activity.hours}} Hours</span> | <span>{{activity.minutes}} Minutes</span></p>
+                    <span class="text-right">{{activity.typeOfHoliday[0]}}</span>
+                </div>
+                <div class="pull-right">
+                    <p class="font-sz18 m-clear cost-posi">{{activity.currency}} {{activity.price}}</p>
+                    <!--<span class="fz12">{{activity.typeOfHoliday[0]}}</span>-->
+                </div>
+                <div class="tour-btns">
+                    <button class="btn btn-pink btn-download" ng-if="activity.pdf"><a class="btn-link" ng-href="{{activity.pdf|downloadLink:'tours&packages':activity._id:activity.title}}" download>Download</a></button>
+                    <button class="btn btn-pink btn-book" ng-if="activity.bookingUrl" ng-click="countAdder(activity);"><a class="btn-link" href="{{activity.bookingUrl}}" target="_blank">Book</a></button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- agent tour and package end-->
 <!-- popular travellers and agents -->
