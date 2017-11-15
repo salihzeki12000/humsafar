@@ -2324,7 +2324,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("ongojourney");
     // $scope.menutitle = NavigationService.makeactive("OnGoJourney");
-    TemplateService.title = $scope.menutitle;
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
@@ -2337,6 +2337,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             backdropClass: "review-backdrop",
         });
     };
+
+
+
+
+    
 
      $scope.journeyType = [{
 
