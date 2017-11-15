@@ -2323,7 +2323,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //maps integration ends here
 
     $scope.template = TemplateService.changecontent("ongojourney");
-    $scope.menutitle = NavigationService.makeactive("OnGoJourney");
+    // $scope.menutitle = NavigationService.makeactive("OnGoJourney");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 

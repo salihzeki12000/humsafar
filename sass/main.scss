@@ -13672,10 +13672,10 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 300ms ease-out);
+  @include animation(swipeOut 300ms linear);
 }
 .swipeIn {
-  @include animation(swipeIn 300ms ease-in);
+  @include animation(swipeIn 300ms linear);
 }
 .blue-head {
   background-color: $brand-blue;
