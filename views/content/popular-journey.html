@@ -289,6 +289,9 @@
         </div>
       </div>
       <div class="see-less text-center" ng-if="!allJourney.noButton && allJourney.data.length >= 9">
+        <div class="mt5 mb10" ng-if="template.paginationLoader">
+          <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
+        </div>
         <button class="btn" ng-click="seeMore(allJourney.category,$index);">Load More</button>
       </div>
     </div>
@@ -299,8 +302,5 @@
   </div>
   <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
   <!-- COMMENT LIKE SECTION END -->
-</div>
-<div class="" ng-if="template.paginationLoader">
-  <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
 </div>
 </div>

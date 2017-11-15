@@ -2341,7 +2341,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    
+
 
      $scope.journeyType = [{
 
@@ -2838,7 +2838,7 @@ $scope.kindofJourney = [];
     }
 })
 
-.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, $timeout, $uibModal, $location) {
+.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, LikesAndComments, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3239,7 +3239,7 @@ $scope.kindofJourney = [];
 
 })
 
-.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
+.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3283,8 +3283,15 @@ $scope.kindofJourney = [];
         limit: 9
       }
       NavigationService.getAllPopularJourney(formData,function(data){
+        cfpLoadingBar.start();
+        setTimeout(function(){
+            cfpLoadingBar.complete();
+          },60000);
         if(data.value == true){
           $scope.allPopularJourneys = data.data;
+           setTimeout(function(){
+            cfpLoadingBar.complete();
+          },100);
         }
         console.log($scope.allPopularJourneys,'all journeys');
       })
