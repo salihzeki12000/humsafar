@@ -470,7 +470,9 @@ var navigationservice = angular.module('navigationservice', [])
             var object = {};
             switch (status) {
                 case 1:
-                    formData.website = formData.company.website;
+                    if(formData.company && formData.company.website){
+                        formData.website = formData.company.website;
+                    }
                     console.log('on switch 1');
                     var temp = "";
                     if (userData.homeCity && userData.homeCity.description) {

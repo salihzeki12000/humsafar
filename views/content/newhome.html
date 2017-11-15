@@ -2,51 +2,51 @@
   <div class="landing-home" ng-class="{'know-more-travelibro': viewModal == true,'': viewModal == false}">
     <div class="container-fluid">
       <div class="">
-    <div class="home-landing bottomspace" id="home-landing" auto-height>
-      <h1 class="headline">TURNING EVERY TRAVELLER INTO A STORYTELLER!</h1>
-      <p class="footer-text">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
-      <div class="seemore">
-        <div class="know-watch-more text-center" ng-init="viewModal=false" >
-          <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
-          <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
-             fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
-            <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
-          </a>
+        <div class="home-landing bottomspace" id="home-landing" auto-height>
+          <h1 class="headline">TURNING EVERY TRAVELLER INTO A STORYTELLER!</h1>
+          <p class="footer-text">Discover the best travel stories, capture live journeys on-the-go, inspire other travellers and relive a lifetime of memories.</p>
+          <div class="seemore">
+            <div class="know-watch-more text-center" ng-init="viewModal=false" >
+              <img src="img/know-more-gray.png" alt="Know More" class="pointer" height ="89" ng-click="viewModal=true;openKnowMore();">
+              <a class="various fancybox.iframe vimeo" href="https://player.vimeo.com/video/240817707?title=0&amp;byline=0&amp;portrait=0"
+              fancybox-box width='500' height='281' webkitallowfullscreen mozallowfullscreen allowfullscreen>
+              <img src="img/watch-more-gray.png" alt="Watch More" class="pointer" height ="86">
+            </a>
+          </div>
+        </div>
+        <div class="iphone-device">
+          <div class="libro-logo-holder">
+            <img src="img/Icon.png" alt="" class="libro-logo">
+          </div>
+          <div class="iphone" id="iphone">
+            <img src="img/iphone-screen.png" alt="" class="iphone-screen" id="iphone-screen">
+            <img src="img/hero_large_2x.png" alt="">
+          </div>
+        </div>
+        <div class="download">
+          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
+          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
+        </div>
+        <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
+          <img src="img/mouse-scroll-grey.png" alt="Travelibro">
+          <p>Scroll Down</p>
         </div>
       </div>
-      <div class="iphone-device">
-        <div class="libro-logo-holder">
-          <img src="img/Icon.png" alt="" class="libro-logo">
+      <div class="home-navigation hidden-sm hidden-xs">
+        <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
+          <ul class="sectionScroll">
+            <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
+            <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
+            <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
+            <li ng-click="go_at('relive')"><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
+          </ul>
         </div>
-        <div class="iphone" id="iphone">
-          <img src="img/iphone-screen.png" alt="" class="iphone-screen" id="iphone-screen">
-          <img src="img/hero_large_2x.png" alt="">
-        </div>
       </div>
-      <div class="download">
-        <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
-      </div>
-      <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
-        <img src="img/mouse-scroll-grey.png" alt="Travelibro">
-        <p>Scroll Down</p>
-      </div>
-    </div>
-    <div class="home-navigation hidden-sm hidden-xs">
-      <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
-        <ul class="sectionScroll">
-          <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
-          <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
-          <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
-          <li ng-click="go_at('relive')"><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
-        </ul>
-      </div>
-    </div>
-    <div  class="sections-holder second">
-      <div id="discover" class="discover bottomspace" auto-height>
-        <h2 class="text-heavy color-iphone-gray mobile-headline visible-xs visible-sm">DISCOVER</h2>
-        <h3>Trending Travellers</h3>
-        <div class="trending-travellers">
+      <div  class="sections-holder second">
+        <div id="discover" class="discover bottomspace" auto-height>
+          <h2 class="text-heavy color-iphone-gray mobile-headline visible-xs visible-sm">DISCOVER</h2>
+          <h3>Trending Travellers</h3>
+          <div class="trending-travellers">
             <div class="row row-pad">
               <div class="col-md-4 col-sm-6 m-plr0" ng-repeat="photoblogger in trendingTravellers | limitTo:screenWidth">
                 <div class="blogger-cover relate pointer" appear-inscreen >
@@ -323,6 +323,9 @@
   </div>
 
 
+</div>
+<div id="ongo">
+  <span>scroll</span>
 </div>
 <div id="capture" class="capture bottomspace" auto-height>
   <h2 class="text-heavy color-iphone-gray mobile-headline text-center visible-xs visible-sm">CAPTURE</h2>

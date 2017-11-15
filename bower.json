@@ -57,7 +57,8 @@
     "highcharts-ng": "^0.0.6",
     "highcharts": "^5.0.12",
     "angular-ui-tinymce": "^0.0.19",
-    "mapbox-gl": "^2.0.2"
+    "mapbox-gl": "^2.0.2",
+    "scrollmagic": "https://github.com/janpaepke/ScrollMagic.git#^2.0.5"
   },
   "devDependencies": {
     "angular-translate": "^2.11.0"
