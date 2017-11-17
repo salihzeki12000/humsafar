@@ -21,12 +21,12 @@ var navigationservice = angular.module('navigationservice', [])
         disabled: true,
         anchor: "destination",
     }, {
-        name: "Popular Journeys",
+        name: "Trending Stories",
         classis: "active",
         disabled: true,
         anchor: "popularjourney",
     }, {
-        name: "Popular Bloggers",
+        name: "Trending Travellers",
         classis: "active",
         disabled: true,
         anchor: "popularblogger",
@@ -392,6 +392,13 @@ var navigationservice = angular.module('navigationservice', [])
                 console.log(data);
             });
         },
+        getAllPopularJourney: function (formData, callback) {
+            TravelibroService.post(adminURL + "/journey/getPopularJourneyByCategory", formData).success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                console.log(data);
+            });
+        },
         popularJourney: function (formData, callback) {
             TravelibroService.post(adminURL + "/journey/getPopularJourneyWeb", formData, 'paginationLoad').success(function (data) {
                 callback(data);
@@ -463,7 +470,9 @@ var navigationservice = angular.module('navigationservice', [])
             var object = {};
             switch (status) {
                 case 1:
-                    formData.website = formData.company.website;
+                    if(formData.company && formData.company.website){
+                        formData.website = formData.company.website;
+                    }
                     console.log('on switch 1');
                     var temp = "";
                     if (userData.homeCity && userData.homeCity.description) {

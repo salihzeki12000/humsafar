@@ -4707,6 +4707,17 @@ header {
   }
 }
 
+.see-less {
+  margin: 15px 0 30px;
+  button {
+    background-color: #c2c2c2;
+    color: #fff;
+    border-color: #c2c2c2;
+    &:hover { color: #fff; }
+    &:focus { color: #fff; }
+  }
+}
+
 .categories,
 .facebook,
 .instagram,
@@ -4987,12 +4998,22 @@ header {
     left: 0;
     bottom: 0;
     right: 0;
+    z-index: -1;
     //background-color: rgba(0,0,0,0.15);
   }
 }
 // blog detail end
 // activity
 // post profile pic
+
+/*popular journey*/
+.category-heading h4 {
+  margin: 20px;
+  font-size: 26px;
+  color: #424242;
+}
+
+/*popular journey end*/
 
 .heading-activity {
   margin: 0 0 25px;
@@ -7077,9 +7098,9 @@ display:none;
     max-height: 260px;
     min-height: 200px;
     margin-top: -2px;
+    position: relative;
     background-color: $brand-light-grey;
     overflow: hidden;
-    position: relative;
   }
 
   .travelling-journey-type {
@@ -13651,10 +13672,10 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 300ms ease-out);
+  @include animation(swipeOut 300ms linear);
 }
 .swipeIn {
-  @include animation(swipeIn 300ms ease-in);
+  @include animation(swipeIn 300ms linear);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -13734,6 +13755,7 @@ video::-webkit-media-controls-fullscreen-button {
     display: inline-block;
     padding: 0 10px 0px 1px;
     font-weight: 800;
+    vertical-align: middle;
   }
 }
 .fixed-subnavigation {
@@ -14131,15 +14153,4 @@ video::-webkit-media-controls-fullscreen-button {
     width: auto;
   }
 }
-.country-flag {
-  max-width: initial;
-  max-height: 100%;
-  border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-}
+

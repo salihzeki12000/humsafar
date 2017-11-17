@@ -1063,6 +1063,14 @@
     border-radius: 100%;
   }
 }
+.country-flag {
+  max-width: initial;
+  max-height: 100%;
+  border-radius: 100%;
+  position: absolute;
+  left: 50%;
+  @include transform(translateX(-50%));
+}
 
 .cost-posi {
   position: relative;

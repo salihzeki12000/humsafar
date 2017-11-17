@@ -2323,8 +2323,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //maps integration ends here
 
     $scope.template = TemplateService.changecontent("ongojourney");
-    $scope.menutitle = NavigationService.makeactive("OnGoJourney");
-    TemplateService.title = $scope.menutitle;
+    // $scope.menutitle = NavigationService.makeactive("OnGoJourney");
+    // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
     // EDIT KIND OF JOURNEY POPUP
@@ -2337,6 +2337,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             backdropClass: "review-backdrop",
         });
     };
+
+
+
+
+
 
      $scope.journeyType = [{
 
@@ -2833,7 +2838,7 @@ $scope.kindofJourney = [];
     }
 })
 
-.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, $timeout, $uibModal, $location) {
+.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, LikesAndComments, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3234,7 +3239,7 @@ $scope.kindofJourney = [];
 
 })
 
-.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
+.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3254,6 +3259,8 @@ $scope.kindofJourney = [];
     $scope.customLink = function () {
         window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
     };
+    $scope.pageNumberSingle = 2;
+    $scope.allPopularJourneys = [];
     $scope.postScrollData = {};
     $scope.postScrollData.likePageNumber = 1;
     $scope.postScrollData.busy = false;
@@ -3269,36 +3276,88 @@ $scope.kindofJourney = [];
     setInterval(function () {
         $scope.paginationLoader = TemplateService.paginationLoader;
     }, 300);
-    $scope.getPopularJourney = function (pageNo) {
-        NavigationService.popularJourney({
-            pagenumber: pageNo
-        }, function (data) {
-            $scope.scroll.busy = false;
-            if (data.data.length == 0) {
-                $scope.scroll.stopCallingApi = true;
-            } else {
-                _.each(data.data, function (newArr) {
-                        $scope.popularJourneyData.push(newArr);
-                        newArr.user.following = newArr.following;
-                    })
-                    // $scope.scroll.busy = false;
-            }
-            // $scope.scroll.busy = true;
-            // _.each(data.data, function (n) {
-            //   n.user.following = n.following;
-            // })
-        });
-    };
-    $scope.getPopularJourney($scope.pagenumber);
 
-    $scope.getMoreJourney = function () {
-        $scope.scroll.busy = true;
-        // $scope.pagenumber++;
-        //console.log($scope.pagenumber, 'pagenum yo');
-        if ($scope.scroll.stopCallingApi == false) {
-            $scope.getPopularJourney(++$scope.pagenumber);
+    // get all popular journey
+    $scope.popularAllJourney = function(){
+      var  formData = {
+        limit: 9
+      }
+      NavigationService.getAllPopularJourney(formData,function(data){
+        cfpLoadingBar.start();
+        setTimeout(function(){
+            cfpLoadingBar.complete();
+          },60000);
+        if(data.value == true){
+          $scope.allPopularJourneys = data.data;
+           setTimeout(function(){
+            cfpLoadingBar.complete();
+          },100);
         }
+        console.log($scope.allPopularJourneys,'all journeys');
+      })
     };
+    $scope.popularAllJourney();
+    // get all popular journey end
+
+    // view more 
+    $scope.viewButton = true;
+    $scope.listIndex = -1;
+    $scope.seeMore = function(category,index){
+      if($scope.listIndex == index) {
+        $scope.listIndex = -1;      
+      }else {
+        $scope.listIndex = index;
+      }
+      var formData = {
+        type: category,
+        limit: 9,
+        pagenumber: $scope.pageNumberSingle
+      }
+      NavigationService.popularJourney(formData,function(data){
+        if(data.value){
+          if(data.data.length == 0){
+            $scope.allPopularJourneys[index].noButton = true;
+          }else {
+            $scope.pageNumberSingle = $scope.pageNumberSingle + 1;
+            _.each(data.data, function(newArr){
+              $scope.allPopularJourneys[index].data.push(newArr);
+            })  
+            console.log($scope.allPopularJourneys,'all');
+          }
+          
+        }
+      })
+    }
+    // view more end
+
+    // $scope.getPopularJourney = function (pageNo) {
+    //     NavigationService.popularJourney({
+    //         pagenumber: pageNo
+    //     }, function (data) {
+    //         $scope.scroll.busy = false;
+    //         if (data.data.length == 0) {
+    //             $scope.scroll.stopCallingApi = true;
+    //         } else {
+    //             _.each(data.data, function (newArr) {
+    //                     $scope.popularJourneyData.push(newArr);
+    //                     newArr.user.following = newArr.following;
+    //                 })
+    //                 // $scope.scroll.busy = false;
+    //         }
+    //         // $scope.scroll.busy = true;
+    //         // _.each(data.data, function (n) {
+    //         //   n.user.following = n.following;
+    //         // })
+    //     });
+    // };
+    // $scope.getPopularJourney($scope.pagenumber);
+
+    // $scope.getMoreJourney = function () {
+    //     $scope.scroll.busy = true;
+    //     if ($scope.scroll.stopCallingApi == false) {
+    //         $scope.getPopularJourney(++$scope.pagenumber);
+    //     }
+    // };
 
     // COMMENT LIKE SECTION FUNCTIONS
     $scope.likeUnlikeActivity = function (post) {
