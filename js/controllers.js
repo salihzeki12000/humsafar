@@ -109,6 +109,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
           }
           //end blue navbar on scroll
+          var fixedHeader = $('.home-navigation').offset();
+          console.log(fixedHeader,'what is offset');
           var firstHeight = $('.worksheet').height();
           if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
             $("#navigation").removeClass("submenu");
@@ -1378,6 +1380,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.loadmoreOption = true;
     }else{
       $scope.loadmoreOption = false;
+      $('.ongo-journey-main').css('margin-top','70px');
     }
     if ($.jStorage.get("isLoggedIn")) {
         $scope.isLoggedIn = true;
@@ -3299,12 +3302,12 @@ $scope.kindofJourney = [];
     $scope.popularAllJourney();
     // get all popular journey end
 
-    // view more 
+    // view more
     $scope.viewButton = true;
     $scope.listIndex = -1;
     $scope.seeMore = function(category,index){
       if($scope.listIndex == index) {
-        $scope.listIndex = -1;      
+        $scope.listIndex = -1;
       }else {
         $scope.listIndex = index;
       }
@@ -3321,10 +3324,10 @@ $scope.kindofJourney = [];
             $scope.pageNumberSingle = $scope.pageNumberSingle + 1;
             _.each(data.data, function(newArr){
               $scope.allPopularJourneys[index].data.push(newArr);
-            })  
+            })
             console.log($scope.allPopularJourneys,'all');
           }
-          
+
         }
       })
     }

@@ -13672,10 +13672,10 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 300ms linear);
+  @include animation(swipeOut 300ms ease-in);
 }
 .swipeIn {
-  @include animation(swipeIn 300ms linear);
+  @include animation(swipeIn 300ms ease-in);
 }
 .blue-head {
   background-color: $brand-blue;
@@ -13987,8 +13987,9 @@ video::-webkit-media-controls-fullscreen-button {
 .home-footer {
   background-color: $brand-blue;
   overflow: hidden;
+  color: #9698a9;
   a, a:focus {
-    color: white;
+    color: #9698a9;
   }
   li {
     display: block;
@@ -13997,8 +13998,8 @@ video::-webkit-media-controls-fullscreen-button {
   .row {
     padding: 20px 50px;
   }
-  .color-white {
-    opacity: 0.5;
+  a:hover {
+    color: white;
   }
 }
 .sections-holder {
@@ -14136,6 +14137,7 @@ video::-webkit-media-controls-fullscreen-button {
   font-family: AvenirLTStd-Heavy;
   font-size: 16px;
   margin-right: 10px;
+  color: #9698a9;
 }
 .activity-see-more {
   font-weight: 500;
@@ -14153,4 +14155,3 @@ video::-webkit-media-controls-fullscreen-button {
     width: auto;
   }
 }
-
