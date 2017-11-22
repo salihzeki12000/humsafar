@@ -73,7 +73,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     setTimeout(function(){
       $(document).ready(function(){
-        $(".worksheet").smoothWheel();
+        // $(".worksheet").smoothWheel();
+        var headerFixed = $('.home-navigation').offset().top;
+        var agentRegisterSec = $('.register-as-partner').offset().top;
         //setting auto-height for tab screen
         if(screenWidth >= 768 && screenWidth<screenHeight){
           // console.log('its a tab');
@@ -95,66 +97,163 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $(this).off(e);
             });
         //end landing page animation
+        $(document).scroll(function(){
+          // console.log($(document).scrollTop(),'qwerty',headerFixed,'headerFixed',agentRegisterSec,'agent');
+           if($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec){
+            $('header').css({
+              'transform':'translateY(-80px)',
+              'transition': 'transform 300ms linear'
+            });
+             $('.home-navigate').addClass('fixed-subnavigation');
+             // navigation menu active             
+             if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.discover1').addClass('active-homenav');
+             }else if( $(document).scrollTop() >= $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80 ){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.capture1').addClass('active-homenav');
+             }else if( $(document).scrollTop() >= $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80 ){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.inspire1').addClass('active-homenav');
+             }else if( $(document).scrollTop() >= $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80 ){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.relive1').addClass('active-homenav');
+             }
+             // navigation menu active end
+            }else if($(document).scrollTop() > agentRegisterSec - 20){
+              $('header').css({
+              'transform':'translateY(0)',
+              'transition': 'transform 300ms linear'
+            });
+              $('.home-navigate').removeClass('fixed-subnavigation');
+              $('.take-scroll').removeClass('active-homenav');
+            }else {
+             $('header').css({
+              'transform':'translateY(0)',
+              'transition': 'transform 300ms linear'
+            });
+              $('.home-navigate').removeClass('fixed-subnavigation');
+              $('.take-scroll').removeClass('active-homenav');
+            }
 
-        $('.worksheet').scroll(function(){
-          //start blue navbar on scroll
-          if(screenWidth<=480) {
-            if ($('.worksheet').scrollTop() < 3) {
-              $("#nav-onhead").removeClass('blue-head');
-              $(".activeNavbar").removeClass('blue-head');
+
+            // mobile naviagtion
+            var iphoneHeight = $('.iphone-fix').innerHeight();
+             $('.mobilecontent-view').css('height',iphoneHeight);
+            // console.log($('.mobile-fixed').offset().top,'offset');
+            if($(document).scrollTop() >= $('.mobile-fixed').offset().top - 120 && $(document).scrollTop() <= $('#inspire').offset().top){
+              // console.log('if amit');
+              $('.mobile-view').addClass('mob-fixed');              
+            }else{
+              // console.log('else amit');
+              $('.mobile-view').removeClass('mob-fixed');             
             }
-            else {
-              $("#nav-onhead").addClass('blue-head');
-              $(".activeNavbar").addClass('blue-head');
+            console.log($(document).scrollTop(),'scroll value');
+            console.log($('.second-screen').offset().top,'second-screen');
+            // $()
+            // all screen div window height rehna chahiye i.e window height and ye working
+            if($(document).scrollTop() >= $('.second-screen').offset().top + 10 && $(document).scrollTop() <= $('.third-screen').offset().top){
+              $('.second-screen').addClass('second-active');              
+            }else if($(document).scrollTop() >= $('.third-screen').offset().top + 10 && $(document).scrollTop() <= $('.fourth-screen').offset().top){
+              $('.second-screen').removeClass('second-active');
+              $('.third-screen').addClass('third-active');
+            }else if($(document).scrollTop() >= $('.fourth-screen').offset().top + 10 && $(document).scrollTop() <= $('.fivth-screen').offset().top){
+               $('.third-screen').removeClass('third-active');
+              $('.fourth-screen').addClass('fourth-active');
+            }else if($(document).scrollTop() >= $('.fivth-screen').offset().top + 10 && $(document).scrollTop() <= $('.sixth-screen').offset().top){
+               $('.fourth-screen').removeClass('fourth-active');
+              $('.fivth-screen').addClass('fivth-active');
+            }else if($(document).scrollTop() >= $('.sixth-screen').offset().top + 10 && $(document).scrollTop() <= $('.seventh-screen').offset().top){
+               $('.fivth-screen').removeClass('fivth-active');
+              $('.sixth-screen').addClass('sixth-active');
+            }else if($(document).scrollTop() >= $('.seventh-screen').offset().top + 10 && $(document).scrollTop() <= $('.capture-row').offset().top){
+               $('.sixth-screen').removeClass('sixth-active');
+              $('.seventh-screen').addClass('seventh-active');
+            }else{
+              $('.second-screen').removeClass('second-active');
+              $('.third-screen').removeClass('third-active');
+              $('.fourth-screen').removeClass('fourth-active');
+              $('.fivth-screen').removeClass('fivth-active');
+              $('.sixth-screen').removeClass('sixth-active');
+              $('.seventh-screen').removeClass('seventh-active');
+              // $('.second-screen').removeClass('active');
+              // $('.second-screen').css('background','transparent');
+              // $('.second-screen .second-view').css({
+              //   'position':'static',
+              //   'top':'auto',
+              //   'left':'auto',
+              //   'margin-top': '0',
+              //   'margin-left': '0',
+              //   'transform':'initial',
+              //   'width':'auto'
+              // });
+              // $('.second-screen .mob-screen-img').css({
+              //   'position':'absolute',
+              //   'top':'50%',
+              //   'left':'45%',
+              //   'transform':'translate(-45%,-50%)'
+              // });
             }
-          }
-          //end blue navbar on scroll
-          var firstHeight = $('.worksheet').height();
-          if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
-            $("#navigation").removeClass("submenu");
-            $("#navigation").addClass("fixed-subnavigation sectionStripe");
-            if(screenWidth>991){
-              $(".libro-header, .loggedin-header").removeClass("swipeIn");
-              $(".libro-header, .loggedin-header").addClass("swipeOut");
-              $("header").css({'opacity':0});
-              $timeout(function(){
-                $("header").css({'z-index':-10});
-              },200)
-            }
-          }
-          else {
-            $("#navigation").removeClass("fixed-subnavigation sectionStripe");
-            $("#navigation").addClass("submenu");
-            if($(".libro-header").hasClass("swipeOut") || $(".loggedin-header").hasClass("swipeOut")){
-              $(".libro-header, .loggedin-header").addClass("swipeIn");
-            }
-            $(".libro-header, .loggedin-header").removeClass("swipeOut");
-            $("header").css({'z-index':16,'opacity':1});
-          }
+            // console.log($(document).scrollTop(),'scroll value', $('.iphone-fix').offset().top,'iphone ka offset',$('.iphone-fix').innerHeight(),'inner height',$('.iphone-fix').offset().top + $('.iphone-fix').innerHeight(),'totalvalue');
+            // mobile naviagtion end
+          // //start blue navbar on scroll
+          // if(screenWidth<=480) {
+          //   if ($('.worksheet').scrollTop() < 3) {
+          //     $("#nav-onhead").removeClass('blue-head');
+          //     $(".activeNavbar").removeClass('blue-head');
+          //   }
+          //   else {
+          //     $("#nav-onhead").addClass('blue-head');
+          //     $(".activeNavbar").addClass('blue-head');
+          //   }
+          // }
+          // //end blue navbar on scroll
+          // var firstHeight = $('.worksheet').height();
+          // if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
+          //   $("#navigation").removeClass("submenu");
+          //   $("#navigation").addClass("fixed-subnavigation sectionStripe");
+          //   if(screenWidth>991){
+          //     $(".libro-header, .loggedin-header").removeClass("swipeIn");
+          //     $(".libro-header, .loggedin-header").addClass("swipeOut");
+          //     $("header").css({'opacity':0});
+          //     $timeout(function(){
+          //       $("header").css({'z-index':-10});
+          //     },200)
+          //   }
+          // }
+          // else {
+          //   $("#navigation").removeClass("fixed-subnavigation sectionStripe");
+          //   $("#navigation").addClass("submenu");
+          //   if($(".libro-header").hasClass("swipeOut") || $(".loggedin-header").hasClass("swipeOut")){
+          //     $(".libro-header, .loggedin-header").addClass("swipeIn");
+          //   }
+          //   $(".libro-header, .loggedin-header").removeClass("swipeOut");
+          //   $("header").css({'z-index':16,'opacity':1});
+          // }
 
           //end blue navbar
           //change active section anchor color
-          var $div = $('.worksheet').offset().top + 250;
-          if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
-            $('.discover1').css('color', '#424242');
-          }else {
-            $('.discover1').css('color', '#eeeeee');
-          }
-          if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
-            $('.capture1').css('color', '#424242');
-          }else {
-            $('.capture1').css('color', '#eeeeee');
-          }
-          if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
-            $('.inspire1').css('color', '#424242');
-          }else {
-            $('.inspire1').css('color', '#eeeeee');
-          }
-          if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
-            $('.relive1').css('color', '#424242');
-          }else {
-            $('.relive1').css('color', '#eeeeee');
-          }
+          // var $div = $('.worksheet').offset().top + 250;
+          // if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
+          //   $('.discover1').css('color', '#424242');
+          // }else {
+          //   $('.discover1').css('color', '#eeeeee');
+          // }
+          // if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
+          //   $('.capture1').css('color', '#424242');
+          // }else {
+          //   $('.capture1').css('color', '#eeeeee');
+          // }
+          // if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
+          //   $('.inspire1').css('color', '#424242');
+          // }else {
+          //   $('.inspire1').css('color', '#eeeeee');
+          // }
+          // if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
+          //   $('.relive1').css('color', '#424242');
+          // }else {
+          //   $('.relive1').css('color', '#eeeeee');
+          // }
 
         });
       })
@@ -166,378 +265,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $(".know-more-modal").removeClass("show-know-more");
     };
     $scope.go_at = function(section){
-      var extra_space = 0;
-      if(section == 'discover' || section == 'capture')
-      {extra_space = 130;}
-      else
-      {extra_space = 145;}
-      $('.worksheet').animate({
-          scrollTop: ($('.worksheet').scrollTop() - extra_space) + $('.'+section).offset().top},
-        'slow');
-    };
-
-    // $scope.videoPlay = [{
-    //   videourl: "",
-    //   vimeourl: "",
-    //   imgurl: "img/libro-home/transparent-home.png",
-    //   id: "0"
-    // }, {
-    //   videourl: "img/libro-home/videos/travellife.mp4",
-    //   vimeourl: "https://player.vimeo.com/video/207906141",
-    //   imgurl: "img/libro-home/videos/travel-life.jpg",
-    //   id: "1"
-    // }, {
-    //   videourl: "img/libro-home/videos/locallife.mp4",
-    //   vimeourl: "https://player.vimeo.com/video/207905802",
-    //   imgurl: "img/libro-home/videos/local-life.jpg",
-    //   id: "2"
-    // }, {
-    //   videourl: "img/libro-home/videos/mylife.mp4",
-    //   vimeourl: "https://player.vimeo.com/video/207906010",
-    //   imgurl: "img/libro-home/videos/my-life.jpg",
-    //   id: "3"
-    // }, {
-    //   videourl: "",
-    //   vimeourl: "",
-    //   imgurl: "img/libro-home/transparent-home.png",
-    //   id: "4"
-    // }];
-    // abc = $scope;
-    // $scope.section = {
-    //   one: "views/section/mainhome.html",
-    //   two: "views/section/travellife.html",
-    //   three: "views/section/locallife.html",
-    //   four: "views/section/mylife.html",
-    //   five: "views/section/share.html",
-    // };
-    // $scope.changePage = function(text) {
-    //   // //console.log(text);
-    //   var length = $(".fp-section").length;
-    //   $timeout(function() {
-    //     $('.scene').parallax();
-    //     swiper = new Swiper('.swiper-container', {
-    //       pagination: '.swiper-pagination',
-    //       direction: 'vertical',
-    //       slidesPerView: 1,
-    //       paginationClickable: true,
-    //       spaceBetween: 0,
-    //       mousewheelControl: false,
-    //       mousewheelForceToAxis: false,
-    //       keyboardControl: false,
-    //       parallax: true,
-    //       hashnav: true
-    //     });
-    //   }, 500);
-    //   if (length === 0) {
-    //     $('.fullpage').fullpage({
-    //       //Navigation
-    //       onLeave: function(index, nextIndex, direction) {
-    //         $timeout(function() {
-    //           $('.scene').parallax();
-    //           swiper = new Swiper('.swiper-container', {
-    //             pagination: '.swiper-pagination',
-    //             direction: 'vertical',
-    //             slidesPerView: 1,
-    //             paginationClickable: true,
-    //             spaceBetween: 0,
-    //             mousewheelControl: false,
-    //             mousewheelForceToAxis: false,
-    //             keyboardControl: false,
-    //             parallax: true,
-    //             hashnav: true
-    //           });
-    //           swiper.slideTo(nextIndex - 1);
-    //           if ($(window).width() >= 767) {
-    //             for (i = 1; i < 4; i++) {
-    //               if (i == nextIndex - 1) {
-    //                 $('#video' + i).get(0).load();
-    //                 $('#video' + i).get(0).play();
-    //               } else {
-    //                 $('#video' + i).get(0).pause();
-    //               }
-    //             }
-    //           }
-    //         }, 500);
-    //       }
-    //     });
-    //   }
-    //
-    //   // //console.log(text);
-    //   $scope.homeval = text;
-    //   switch (text) {
-    //     case "share":
-    //       $.fn.fullpage.moveTo(5);
-    //       break;
-    //     case "mylife":
-    //       $.fn.fullpage.moveTo(4);
-    //       break;
-    //     case "locallife":
-    //       $.fn.fullpage.moveTo(3);
-    //       break;
-    //     case "travellife":
-    //       $.fn.fullpage.moveTo(2);
-    //       break;
-    //     case "home":
-    //       $.fn.fullpage.moveTo(1);
-    //       break;
-    //     default:
-    //       $.fn.fullpage.moveTo(1);
-    //       break;
-    //   }
-    // };
-    // $(window).load(function() {
-    //   document.getElementById('movie1').play();
-    //   if ($(window).width() < 767) {
-    //     $('video').remove();
-    //   }
-    // });
-    // setTimeout(function() {
-    //
-    //
-    // }, 500);
-    //
-    // $scope.$on('$viewContentLoaded', function() {
-    //   $timeout(function() {
-    //     $('body').addClass('fp-');
-    //     $scope.changePage($stateParams.id);
-    //   }, 1000);
-    // });
-    // cfpLoadingBar.complete();
-    // $scope.audioStatus = {
-    //   on: true
-    // }
-    // $scope.muteVolume = function() {
-    //   for (i = 1; i <= 3; i++) {
-    //     if ($("#video" + i)[0].muted) {
-    //       $("#video" + i)[0].muted = false;
-    //       $scope.audioStatus = {
-    //         on: true
-    //       }
-    //     } else {
-    //       $("#video" + i)[0].muted = true;
-    //       $scope.audioStatus = {}
-    //     }
-    //   }
-    // }
-    // $timeout(function() {
-    //   if ((navigator.platform.indexOf("iPhone") != -1) ||
-    //     (navigator.platform.indexOf("iPod") != -1) ||
-    //     (navigator.platform.indexOf("iPad") != -1)) {
-    //     $(".download-app").addClass("hide");
-    //   }
-    // }, 200);
-    // $scope.customLink = function() {
-    //   window.open("https://play.google.com/store/apps/details?id=com.ascra.app.travellibro");
-    // };
-
-//      var firstMobSlide;
-//     var secondMobSlide;
-//     var thirdMobSlide;
-//     var screenFirst;
-//     var screenSecond;
-//     var screenThird;
-//     // animation functions 
-//     (function($){
-//       var windowheight =  window.innerHeight,
-//       firstMobSlide = $('.mobile-screen-one'),
-//       secondMobSlide = $('.mobile-screen-sec'),
-//       thirdMobSlide = $('.mobile-screen-third'),
-//       screenFirst = $('.screen-first'),
-//       screenSecond = $('.screen-second'),
-//       screenThird = $('.screen-third');
-//       console.log(firstMobSlide,'firstMobSlide');
-//     })(jQuery);
-//     // init
-//     var ctrl = new ScrollMagic.Controller({
-//       globalSceneOptions: {
-//         triggerHook: 'onLeave'
-//       }
-//     });
- 
-//     // Create scene
-//     $(".section-view").each(function() { 
-//       console.log('amit');
-//     new ScrollMagic.Scene({
-//       triggerElement: this,
-//       duration: '50%'
-//     })
-//     .setPin(this)
-//     .addTo(ctrl);
-//     });
-//     var iphoneContentHat = new TimelineMax();
-//      iphoneContentHat       
-//       .to(firstMobSlide, 1, {yPercent: -50, ease: Power4.easeOut})
-//       .fromTo(secondMobSlide, 1, {yPercent: 20, autoAlpha: 0, scale: 0.8}, {yPercent: 0, autoAlpha: 1, scale: 1, ease: Power4.easeOut}, '0')
-//       .fromTo(thirdMobSlide, 1, {autoAlpha: 0}, '-=0.3');
- 
-//       new ScrollMagic.Scene({
-//       offset: windowheight*0.6,
-//       triggerElement: $('body')[0],
-//       duration: '80%'
-//     })
-//     .setTween(iphoneContentHat)
-//     .addTo(ctrl);
-
-//     var iphoneContent1Tl = new TimelineMax();
-//     iphoneContent1Tl       
-//     .to(screenFirst, 0.3, {yPercent: -30, autoAlpha: 0, ease: Power4.easeInOut})
-//     .fromTo(screenSecond, 1, {yPercent: 20, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, ease: Power4.easeInOut})
-//     .from(screenThird, 1, {autoAlpha: 0}, '-=0.7');
- 
-//     new ScrollMagic.Scene({
-//       triggerElement: $('.innerS2 h2')[0],
-//       duration: '50%'
-//     })
-//     .setTween(iphoneContent1Tl)
-//     .addTo(ctrl);
- 
-//   var iphoneContent2Tl = new TimelineMax();
-//   iphoneContent2Tl       
-//     .to($screenB, 0.3, {yPercent: -30, autoAlpha: 0, ease: Power4.easeInOut})
-//     .fromTo($screenC, 1, {yPercent: 20, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, ease: Power4.easeInOut})
-//     .from($innerS4, 1, {autoAlpha: 0}, '-=0.7');
- 
-//   new ScrollMagic.Scene({
-//     triggerElement: $('.innerS3 h2')[0],
-//     duration: '50%'
-//   })
-// .setTween(iphoneContent2Tl)
-// .addTo(ctrl);
-var wh = window.innerHeight,
-  $iphone = $('.iphone'),
-  $innerS1 = $('.innerS1'),
-  $innerS2 = $('.innerS2'),
-  $innerS3 = $('.innerS3'),
-  $innerS4 = $('.innerS4'),
-  $screenHat = $('.screenHat'),
-  $screenA = $('.screenA'),
-  $screenB = $('.screenB'),
-  $screenC = $('.screenC');
-
-  // init
-  var ctrl = new ScrollMagic.Controller({
-      globalSceneOptions: {
-          triggerHook: 'onLeave'
+      console.log(section);
+      // var extra_space = 0;
+      // if(section == 'discover' || section == 'capture')
+      // {extra_space = 130;}
+      // else
+      // {extra_space = 145;}
+      // $('.worksheet').animate({
+      //     scrollTop: ($('.worksheet').scrollTop() - extra_space) + $('.'+section).offset().top},
+      //   'slow');
+      if(section == 'discover'){
+        // $(document).animate({
+        //   scrollTop: discoverScroll
+        // },100);
+        $(document).scrollTop($('#discover').offset().top);
+      }else if(section == 'capture'){
+        console.log('capture');
+        console.log(captureScroll,'captureScroll');
+        // $(document).animate({
+        //   scrollTop: captureScroll
+        // },100);
+        $(document).scrollTop($('#capture').offset().top);
       }
-  });
-
-  // Create scene
-  $("section").each(function() {
-    
-    new ScrollMagic.Scene({
-      triggerElement: this,
-      duration: '50%'
-    })
-    .setPin(this)
-    .addTo(ctrl);
-   
-  });
-
-  // iPhone intro animation Tween
-  /*
-  var iphoneIntro = TweenMax.from($iphone, 1, {
-    yPercent: 50,
-    xPercent: 100,
-    ease: Cubic.easeOut
-  });
-  */
-
-  // iPhone intro animation Timeline
-  var iphoneIntroTl = new TimelineMax();
-  iphoneIntroTl
-    .from($iphone, 1, {yPercent: 50,xPercent: 100, ease: Power4.easeInOut})
-    .to($innerS1, 0.5, {opacity: 0, yPercent: -5, scale: 0.98}, '0');
-
-  // iPhone back to stylesheet position
-  new ScrollMagic.Scene({
-    duration: '70%'
-  })
-  .setTween(iphoneIntroTl)
-  .triggerElement($('body')[0])
-  .addTo(ctrl);
-  // iPhone intro animation Tween
-var iphoneIntro = TweenMax.from($iphone, 1, {
-    yPercent: 50,
-    xPercent: 100,
-    ease: Cubic.easeOut
-});
-// iPhone back to stylesheet position
-new ScrollMagic.Scene({
-    duration: '70%'
-})
-.setTween(iphoneIntro)
-.triggerElement($('body')[0])
-.addTo(ctrl);
-// iPhone back to stylesheet position
-new ScrollMagic.Scene({
-    duration: '70%'
-})
-.setTween(iphoneIntroTl)
-.triggerElement($('body')[0])
-.addTo(ctrl);
-var iphoneIntroTl = new TimelineMax();
-iphoneIntroTl
-    .from($iphone, 1, {yPercent: 50,xPercent: 100, ease: Power4.easeInOut})
-    .to($innerS1, 0.5, {opacity: 0, yPercent: -5, scale: 0.98}, '0');
+    };
   
-  // Animate the hat up, letter A in and fade in content of section 2
-  var iphoneContentHat = new TimelineMax();
-  iphoneContentHat    
-    .to($screenHat, 1, {yPercent: -50, ease: Power4.easeOut})
-    .fromTo($screenA, 1, {yPercent: 20, autoAlpha: 0, scale: 0.8}, {yPercent: 0, autoAlpha: 1, scale: 1, ease: Power4.easeOut}, '0')
-    .from($innerS2, 1, {autoAlpha: 0}, '-=0.3');
-
-  new ScrollMagic.Scene({
-    offset: wh*0.6,
-    triggerElement: $('body')[0],
-    duration: '80%'
-  })
-  .setTween(iphoneContentHat)
-  .addIndicators()
-  .addTo(ctrl);
-
-  // Animate letter A out, letter B in and fade in content of section 3
-  var iphoneContent1Tl = new TimelineMax();
-  iphoneContent1Tl    
-    .to($screenA, 0.3, {yPercent: -30, autoAlpha: 0, ease: Power4.easeInOut})
-    .fromTo($screenB, 1, {yPercent: 20, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, ease: Power4.easeInOut})
-    .from($innerS3, 1, {autoAlpha: 0}, '-=0.7');
-
-  new ScrollMagic.Scene({
-    triggerElement: $('.innerS2 h2')[0],
-    duration: '50%'
-  })
-  .setTween(iphoneContent1Tl)
-  .addTo(ctrl);
-
-  // Animate letter B out, letter C in and fade in content of section 4
-  var iphoneContent2Tl = new TimelineMax();
-  iphoneContent2Tl    
-    .to($screenB, 0.3, {yPercent: -30, autoAlpha: 0, ease: Power4.easeInOut})
-    .fromTo($screenC, 1, {yPercent: 20, autoAlpha: 0}, {yPercent: 0, autoAlpha: 1, ease: Power4.easeInOut})
-    .from($innerS4, 1, {autoAlpha: 0}, '-=0.7');
-
-  new ScrollMagic.Scene({
-    triggerElement: $('.innerS3 h2')[0],
-    duration: '50%'
-  })
-  .setTween(iphoneContent2Tl)
-  .addTo(ctrl);
-    // animation functions end 
-
-    // var controllerScroll = new ScrollMagic.Controller();
-    // var mobileHolder = $('.mobileHolder');
-    // $(document).ready(function(){
-    //   var scene = new ScrollMagic.Scene({
-    //     triggerElement: "#mobileHolder",
-    //     duration: 70,
-    //     reverse: true
-    //   })
-    //   .setTween(mobileHolder,1,{yPercent: 50,xPercent: 100, ease: Power4.easeInOut},{yPercent: 50,xPercent: 100, ease: Power4.easeInOut})
-    //   .setPin('#mobile')
-    //   .addIndicators({name: "phone (duration: 00)"}) // add indicators (requires plugin)
-    //   .addTo(controllerScroll);
-    // });
   })
 
   .controller('LoginCtrl', function($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
@@ -13094,12 +12845,12 @@ $scope.rateDestination = function(destRate, type) {
     $scope.viewStripe = true;
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   /////////////////////////////////////////////////
-    if($state.current.name == 'home'){
-      $('.travel-bg').css('overflow','hidden');
-    }
-    else {
-      $('.travel-bg').css('overflow','auto');
-    }
+    // if($state.current.name == 'home'){
+    //   $('.travel-bg').css('overflow','hidden');
+    // }
+    // else {
+    //   $('.travel-bg').css('overflow','auto');
+    // }
     $scope.closeStripe = function(){
       try {
         $scope.viewStripe = false;

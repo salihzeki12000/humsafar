@@ -32,7 +32,7 @@
           <p>Scroll Down</p>
         </div>
       </div>
-      <div id="ongo">
+      <div id="ongo" hidden>
         <section id="one">
           <div class="inner innerS1">
             <h1>Simple ScrollMagic Tutorial</h1>
@@ -75,10 +75,9 @@
             <p class="screen screenC">C</p>
           </div>
         </section>
-
       </div>
       <div class="home-navigation hidden-sm hidden-xs">
-        <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
+        <div class="submenu hidden-sm hidden-xs home-navigate" role="navigation" id="navigation">
           <ul class="sectionScroll">
             <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
             <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
@@ -372,6 +371,125 @@
 
 <div id="capture" class="capture bottomspace" auto-height>
   <h2 class="text-heavy color-iphone-gray mobile-headline text-center visible-xs visible-sm">CAPTURE</h2>
+  <!-- mobile section -->
+  <div class="container-fluid">
+    <div class="heading-capture text-center">
+      <h4>Live On The Go Stories - Solo or Group</h4>
+      <p>Capture moments of your journey live on the go together to create shared memories.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6 ">
+        <div class="mobile-view">          
+          <div class="mobile-fixed">
+            <div class="iphone-fix">
+              <img src="img/iphone-black.png" alt="" class="img-responsive">
+            </div>            
+            <img src="img/mob-screen1.png" alt="" class="img-responsive mob-screen-img">
+            <!-- <div class="mob-img">
+              <img src="img/mob-screen2.png" alt="" class="img-responsive mob-screen-img mob-two">
+              <img src="img/mob-screen3.png" alt="" class="img-responsive mob-screen-img mob-three">
+              <img src="img/mob-screen4.png" alt="" class="img-responsive mob-screen-img mob-fourth">
+              <img src="img/mob-screen5.png" alt="" class="img-responsive mob-screen-img mob-fivth">
+              <img src="img/mob-screen6.png" alt="" class="img-responsive mob-screen-img mob-sixth">
+              <img src="img/mob-screen7.png" alt="" class="img-responsive mob-screen-img mob-seventh">
+            </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        <div class="mobilecontent-view">
+          <img src="img/mob-content1.png" alt="" class="img-responsive mob-content-img">
+        </div>
+      </div>
+    </div>
+    <div class="second-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="mobfix-size">
+            <div class="second-view get-center">
+              <img src="img/mob-screen2.png" alt="" class="img-responsive mob-screen-img">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="second-content get-center">
+            <img src="img/mob-content2.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="third-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="third-view get-center">
+            <img src="img/mob-screen3.png" alt="" class="img-responsive mob-screen-img">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="third-content get-center">
+            <img src="img/mob-content3.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fourth-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="fourth-view get-center">
+            <img src="img/mob-screen4.png" alt="" class="img-responsive mob-screen-img">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="fourth-content get-center">
+            <img src="img/mob-content4.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fivth-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="fivth-view get-center">
+            <img src="img/mob-screen5.png" alt="" class="img-responsive mob-screen-img">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="fivth-content get-center">
+            <img src="img/mob-content5.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sixth-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="sixth-view get-center">
+            <img src="img/mob-screen6.png" alt="" class="img-responsive mob-screen-img">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="sixth-content get-center">
+            <img src="img/mob-content6.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="seventh-screen common-view">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="seventh-view get-center">
+            <img src="img/mob-screen7.png" alt="" class="img-responsive mob-screen-img">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="seventh-content get-center">
+            <img src="img/mob-content7.png" alt="" class="img-responsive mob-content-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- mobile section end-->
   <div class="row capture-row row-pad" appear-inscreen>
     <div class="col-md-4">
       <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
