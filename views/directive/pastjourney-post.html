@@ -274,14 +274,14 @@
 		<!-- <span class="add-more-post" ng-click="addMorePost();">
 			<i class="fa fa-plus color-white"></i>
 		</span> -->
-		<p class="color-white postto-day mt10 avenir-roman pointer" ng-click="addMorePost();">Add More Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span></p>
+		<p class="color-white postto-day mt10 avenir-roman pointer" ng-click="addMorePost(pastStory._id);">Add More Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span></p>
 	</div>
 </div>
 <!-- add new card end--> 
 <!-- add-date -->
 <div class="color-white add-day-post add-post" ng-if="pastStory.type=='addDays' && isMine" >
 	<!-- <p>Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</p> -->
-	<div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost();">
+	<div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost(pastStory._id);">
 		<span class="add-more-post">
 			<!-- <i class="fa fa-plus color-white"></i> -->
 		</span>
