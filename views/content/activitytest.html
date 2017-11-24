@@ -59,8 +59,8 @@
                 <div class="clearfix user-more-detail">
                     <div class="pull-left">
                         <p class="m-clear" class="text-uppercase">
-                            <span ng-if="activity.type=='ended-journey'"><i class="fa fa-calendar mr5"></i>{{activity.endTime|formatDate:'date'}}</span> <span ng-if="activity.type!='ended-journey'"><i class="fa fa-calendar mr5"></i>{{activity.startTime|formatDate:'date'}}</span> | <span ng-if="activity.type=='ended-journey'" class="text-uppercase"><i class="fa fa-clock-o mr5"></i>{{activity.endTime|formatDate:'time'}}</span> <span ng-if="activity.type!='ended-journey'"><i class="fa fa-clock-o mr5"></i>{{activity.startTime|formatDate:'time'}}</span></p>
-                        </div>
+                          <span ng-if="activity.type=='ended-journey'">{{activity.endTime|formatDate:'shortDate'}}</span> <span ng-if="activity.type!='ended-journey'">{{activity.startTime|formatDate:'shortDate'}}</span></p>
+                    </div>
                         <div class="pull-right" ng-if="activity.owner._id!=userData._id">
                                                 <!--<div class="follow-or-following pointer" ng-click="followFollowing(activity.owner)">
                           <span class="color-dark-blue ml5">{{activity.owner.following|followFollowingStatus}}</span>
@@ -450,7 +450,7 @@
                 </span>
                 <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
                     <img src="img/comments.png" alt="" height="14">
-                    <b class=""> {{activity.commentCount}}</b>
+                    <b class="" ng-if="activity.commentCount!=0"> {{activity.commentCount}}</b>
                     {{activity.commentCount|singularPlural:'Comments'}}
                 </span>
                                                     <!-- <span class="color-blue">
