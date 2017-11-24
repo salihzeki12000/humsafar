@@ -10453,6 +10453,14 @@ $scope.rateDestination = function(destRate, type) {
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if(vw <= 480){
+      $scope.loadmoreOption = true;
+    }else{
+      $scope.loadmoreOption = false;
+      $('.ongo-journey-main').css('margin-top','70px');
+    }
 
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
@@ -10465,7 +10473,9 @@ $scope.rateDestination = function(destRate, type) {
       $scope.isLoggedIn = false;
       $scope.isMine = false;
     }
-
+ $scope.loadmore = function(){
+      $scope.loadmoreOption = false;
+    };
     function calcWidth() {
       var width = $(window).width();
       var percent = 40;
@@ -10584,10 +10594,15 @@ $scope.rateDestination = function(destRate, type) {
           centers.unshift(obj);
         } else {}
         console.log(centers);
-        initMap();
+        initMap(); 
+        NavigationService.getProfile($scope.pastJourneyArray.user.urlSlug, function (data, status) {
+          $scope.userData = data.data;
+        }, function (err) {
+          //console.log(err);
+        });    
       }, function(error) {
         console.log(error);
-      })
+      })      
     }
     $scope.getPastJourney();
     //maps integration starts here
@@ -11765,8 +11780,7 @@ $scope.rateDestination = function(destRate, type) {
 
     // setTimeout(function(){
     //   initMapGl();
-    // },1000);
-
+    // },1000);      
     $scope.editOption = function(model) {
       $timeout(function() {
         model.backgroundClick = true;
@@ -11774,6 +11788,15 @@ $scope.rateDestination = function(destRate, type) {
       }, 200);
       backgroundClick.scope = $scope;
     };
+      $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          //console.log("error updating data");
+        }
+      });
+    }
   })
   .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file

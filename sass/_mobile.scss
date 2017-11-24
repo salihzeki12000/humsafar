@@ -2497,7 +2497,8 @@
       height: 100%;
       img {
         height: auto;
-        width: 100%;
+        /*width: 100%;*/
+        width: auto;
         position: static;
         @include transform(translate(0));
       }
