@@ -101,11 +101,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           if(screenWidth<=480) {
             if ($('.worksheet').scrollTop() < 3) {
               $("#nav-onhead").removeClass('blue-head');
-              $(".activeNavbar").removeClass('blue-head');
+              $("#navi").removeClass('blue-head');
             }
             else {
               $("#nav-onhead").addClass('blue-head');
-              $(".activeNavbar").addClass('blue-head');
+              $("#navi").addClass('blue-head');
             }
           }
           //end blue navbar on scroll
@@ -346,6 +346,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentSignup = false;
     $scope.alreadyExist = false;
     $scope.password = {};
+    $scope.userSignUpForm = {};
 
     $scope.initialiseError = function() {
       $scope.showError = {
@@ -523,16 +524,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
-    $scope.submit = function() {
-      //console.log("sndasdjsdjsa", $scope.formData);
-      NavigationService.oldUsersLogin($scope.formData, function(succ1) {
+    $scope.submit = function(formData) {
+      console.log("sndasdjsdjsa", formData);
+      NavigationService.oldUsersLogin(formData, function(succ1) {
+        console.log('1 ',succ1);
         if (succ1.value) {
-          //console.log(succ1);
           NavigationService.getAccessToken(function(succ2) {
-            //console.log(succ2);
+            console.log('2 access token ',succ2);
             // $.jStorage.set("accessToken", succ2.accessToken);
             if (succ2.accessToken && succ2.accessToken !== "") {
+              console.log('3');
               NavigationService.getProfile("", function(succ3) {
+                console.log('4 profile ',succ3);
                 if (succ3.data && succ3.data.type == 'User') {
                   $.jStorage.set("accessToken", succ2.accessToken);
                   $.jStorage.set("isLoggedIn", false);
@@ -564,7 +567,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+    $scope.registerAsUser = function(formData) {
+      NavigationService.registerAsUser(formData, function(data) {
+        console.log('resp ',data);
+        if (data.value) {
 
+          // $scope.alreadyExist = false;
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          // $scope.alreadyExist = true;
+          $scope.showError.show = true;
+          if (data.data == "Registered as User") {
+            $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner";
+          } else {
+            $scope.showError.msg = "Email already exists as Partner";
+          }
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+
+      });
+      console.log('user ',$scope.userSignUpForm);
+    }
     //Agent Section
     // AGENT LOGIN SIGN UP TOGGLE
     $scope.toggleAgentSign = function() {
@@ -602,6 +632,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       });
     }
+    $scope.loginAsUser = function(formData) {
+      NavigationService.loginAsUser(formData, function(data) {
+        if (data.value) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          $scope.showError.show = true;
+          $scope.showError.msg = "Incorrect Email or Password";
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+      });
+    };
     $scope.loginAsAgent = function(formData) {
       NavigationService.loginAsAgent(formData, function(data) {
         if (data.value) {
@@ -773,6 +821,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showUserError = "";
     $scope.showImageLoader = false;
     $scope.viewBlob = false;
+    $scope.profile.isVerified?$scope.goNext=3:$scope.goNext=0;
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
@@ -813,18 +862,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getClass = "";
     $scope.viewNext = 1;
-    $scope.goNext = function (val) {
-        if (val == 1) {
-            $scope.viewNext = 1;
-            $scope.getClass = "swiper-slide-active";
-        } else if (val == 2) {
-            $scope.viewNext = 2;
-            $scope.getClass2 = "swiper-slide-active";
+    // $scope.goNext = function (val) {
+    //     if (val == 1) {
+    //         $scope.viewNext = 1;
+    //         $scope.getClass = "swiper-slide-active";
+    //     } else if (val == 2) {
+    //         $scope.viewNext = 2;
+    //         $scope.getClass2 = "swiper-slide-active";
+    //     }
+    //
+    // };
+
+    $scope.submitOtp = function (obj) {
+      var otp = (obj.a).concat(obj.b, obj.c, obj.d);
+      console.log('otp ',otp);
+      $scope.showConfirmation = true;
+      NavigationService.verifyOtp(otp, function (data) {
+        if (data.value) {
+          $scope.userData.isVerified = true;
+          $.jStorage.set("isVerified", true);
+          $scope.goNext = 1;
+        } else {
+          $scope.goNext = 2;
         }
-
+      });
     };
-
-
+    $scope.requestOtp = function () {
+      NavigationService.requestOtp(function (data) {
+        if (data.value) {
+          $scope.showConfirmation = true;
+          $timeout(function () {
+            $scope.showConfirmation = false;
+          }, 3500);
+        }
+      });
+    }
     $scope.changeGender = function (val, name) {
         $scope.gender = val;
         $scope.userData.gender = name;
@@ -8958,7 +9030,7 @@ $scope.rateDestination = function(destRate, type) {
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.userData = $.jStorage.get("profile");
     $scope.activeMenu = $stateParams.active;
     setInterval(function () {
@@ -12894,6 +12966,8 @@ $scope.rateDestination = function(destRate, type) {
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.viewStripe = true;
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   /////////////////////////////////////////////////
     if($state.current.name == 'home'){
       $('.travel-bg').css('overflow','hidden');
@@ -12912,6 +12986,23 @@ $scope.rateDestination = function(destRate, type) {
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
     }, 300);
+
+    //navbar color toggle on scroll
+  $(window).scroll(function() {
+    //start blue navbar on scroll
+    var count = 0;
+    console.log(count+1);
+    if (screenWidth <= 480) {
+      if ($(window).scrollTop() < 3) {
+        $("#nav-onhead").removeClass('blue-head');
+        $("#navi").removeClass('blue-head');
+      }
+      else {
+        $("#nav-onhead").addClass('blue-head');
+        $("#navi").addClass('blue-head');
+      }
+    }
+  });
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
