@@ -1,66 +1,111 @@
+<!-- <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide  {{getClass}}">
+              <div class="bg-white get-width m-center">
+                <div class="verification-complete" ng-show="viewNext==1">
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Verification</h3>
+                    <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
+                    <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(2)" >Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide {{getClass2}} {{getClass}}">
+              <div class="bg-white get-width m-center">
+                <div class="nationality">
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Nationality</h3>
+                    <div class="select-your-nation">
+                      <div class="search-nation">
+                        <input type="text" class="form-control avenir-roman" placeholder="Search" ng-click="showNation = (showNation == true)?false:true;" ng-model="searchNation">
+                      </div>
+                      <ul class="avenir-roman bg-dark-blue" ng-show="showNation">
+                        <li ng-repeat="nation in nationality | filter:searchNation track by $index">
+                          <div class="nation-select relate">
+                            <input type="radio" id="{{nation.name}}" name="nation" />
+                            <label for="{{nation.name}}">
+                              <img ng-src="{{nation.img}}" alt="" class="img-responsive inline-block mr10">
+                              <span class="color-white">{{nation.name}}</span>
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext(1)">Previous</button>
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(3)">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="bg-white get-width m-center">
+                <div class="city">
+                  <div class="text-center">
+                    <h3 class="color-blue avenir-black">Where Do You Live?</h3>
+                    <div class="select-your-nation select-your-city">
+                      <div class="search-nation select-city">
+                        <input type="text" class="form-control avenir-roman" placeholder="City" ng-click="showCity = (showCity == true)?false:true;" ng-model="searchCity">
+                      </div>
+                      <ul class="avenir-roman bg-dark-blue" ng-show="showCity">
+                        <li ng-repeat="nation in nationality | filter:searchCity track by $index">
+                          <div class="nation-select relate">
+                            <input type="radio" id="city{{nation.name}}" name="nation" />
+                            <label for="city{{nation.name}}">
+                              <span class="color-white">{{nation.name}}</span>
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="button-panel clearfix">
+                      <button class="btn btn-blue-outline btn-more pull-left" ng-click="goNext(2)">Previous</button>
+                      <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext(4)">Next</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div> -->
+<!-- upar wala bus check karne k liye hai asliii wala code neeche hai -->
 <div class="container">
   <div class="login-process">
     <div class="row">
       <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
-        <div class="verification bg-white reg-steps" ng-show="goNext==0">
+        <!-- <div class="verification">
           <div class="text-center">
-            <h3 class="color-blue avenir-heavy">Verification</h3>
-            <p>A 4-digit Verification code has been sent
-              <br> to your registered email address</p>
-            <form name="otp" ng-submit="submitOtp(verify)">
-              <div class="veri-box">
-                <input type="text" name="a" class="veri-code-box form-control" maxlength="1" ng-model="verify.a" required>
-                <input type="text" name="b" class="veri-code-box form-control" maxlength="1" ng-model="verify.b" required>
-                <input type="text" name="c" class="veri-code-box form-control" maxlength="1" ng-model="verify.c" required>
-                <input type="text" name="d" class="veri-code-box form-control" maxlength="1" ng-model="verify.d" required>
-              </div>
-              <p>If you haven't recieved a verification code yet,
-                <br> Click here to
-                <a class="color-blue" ng-click="requestOtp()">
-                  <u>Re-send</u>
-                </a>
-              </p>
-              <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
-                Verification code sent successfully.
-              </p>
-              <div class="marg-tp30 clearfix">
-                <input type="submit" class="btn btn-blue-outline btn-more" ng-disabled="otp.a.$invalid || otp.b.$invalid || otp.c.$invalid || otp.d.$invalid">
-                </button>
-              </div>
-            </form>
+            <h3 class="color-blue">Verification</h3>
+            <p>A 4-digit Verification code has been sent to your registered email address.</p>
+            <div class="put-code">
+              <form action="">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+              </form>
+            </div>
+            <p>If you haven’t received a verification code yet, <span>Click here to <a href="">Re-send</a></span></p>
+            <button class="btn btn-blue-outline">Submit</button>
           </div>
-        </div>
-        <div class="verification-complete bg-white reg-steps" ng-show="goNext==1">
+        </div> -->
+        <!--<div class="verification-complete" ng-show="goNext==1">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Verification</h3>
               <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center">
               <p class="color-blue avenir-roman">Your account has been <span class="block">successfully verified</span></p>
               <div class="button-panel clearfix">
-                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=3">Next</button>
+                <button class="btn btn-blue-outline btn-more pull-right" ng-click="goNext=2">Next</button>
               </div>
             </div>
-          </div>
-        <div class="background-login">
-          <div class="verification-complete bg-white reg-steps" ng-show="goNext==2">
-            <div class="text-center">
-              <h3 class="color-blue avenir-heavy">Verification Code Error</h3>
-              <p class="color-pink">Incorrect Verification Code entered.
-                <br> Kindly re-enter the correct code.</p>
-              <!-- <img src="img/verified.png" alt="Verified" class="mt20 mb20 img-responsive m-center"> -->
-              <p class="color-blue avenir-roman">Click here to
-                <a class="color-blue" ng-click="requestOtp()">
-                  <u>Re-send</u>
-                </a> Verification Code</p>
-              <p class="m-clear color-dark-cyan" ng-if="showConfirmation">
-                Verification code sent successfully.
-              </p>
-              <div class="veri-error-btn text-center">
-                <!--button-panel-->
-                <button class="btn btn-more btn-pink" ng-click="goNext=0">Close</button>
-              </div>
-            </div>
-          </div>
-          <div class="nationality" ng-show="" hidden>
+          </div>-->
+        <div class="background-login" ng-init="goNext=3">
+          <!-- <div class="nationality" ng-show="goNext==2" hidden>
             <div class="text-center">
               <h3 class="color-blue avenir-black">Country of Origin</h3>
               <div class="select-your-nation">
@@ -77,7 +122,7 @@
                 <button class="btn btn-outline-blue btn-more pull-right" ng-click="goNext=3" ng-disabled="!userData.homeCountry">Next</button>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="city" ng-show="goNext==3">
             <div class="text-center">
               <h3 class="color-blue avenir-black">Where Do You Live ?</h3>

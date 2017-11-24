@@ -138,8 +138,8 @@ a {
   border-color: rgba(0, 0, 0, 0);
   padding: 0;
   .logo-size {
-    width: 100px;
-    margin-top: 6px;
+    width: 110px;
+    margin-top: 3px;
   }
 }
 
@@ -558,7 +558,7 @@ a.color-white {
     z-index: 111;
     position: relative;
     padding: 0 10px;
-    margin-top: -4px;
+    margin-top: 0px;
     &:hover .icon-bar {
       background-color: darken(white, 10%);
     }
@@ -992,7 +992,7 @@ a.color-white {
 }
 
 .login-signup {
-  padding: 3px 0;
+  padding: 10px 0 10px;
   ul {
     margin: 0;
     li {

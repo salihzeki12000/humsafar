@@ -748,25 +748,24 @@ header {
   top: 0;
   left: 0;
   z-index: 15;
-  //background-color: $brand-dark-blue;
+  background-color: $brand-dark-blue;
   @include transition(all 100ms linear);
   //    &.nav-up {
   //    @include transform(translateY(-100%));
   // }
-  //&.addfixed {
-  //  @extend .bg-dark-blue;
-  //}
+  &.addfixed {
+    @extend .bg-dark-blue;
+  }
 }
 
 .navbar {
   border: none;
   border-radius: 0;
-  //margin: 0;
+  margin: 0;
 }
 .nav-onhead {
-  height: 45px;
+  height: 60px;
   padding: 3px 0;
-  background-color: $brand-dark-blue;
 }
 .hamburger {
   margin: 10px 0;
@@ -923,16 +922,14 @@ header {
 }
 
 .user-img {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 42px;
   border: 2px solid #424242;
   border-radius: 15px;
   overflow: hidden;
   background-color: $brand-light-grey;
 }
-.header-left, .user-detail {
-  margin-top: -3px;
-}
+
 // end header
 // Set Profile process
 
@@ -13517,8 +13514,7 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .loggedin-header {
     .navbar {
-      height: 45px;
-      background-color: $brand-dark-blue;
+      height: 60px;
       .row {
         margin-top: 10px;
       }
@@ -13682,7 +13678,7 @@ video::-webkit-media-controls-fullscreen-button {
   @include animation(swipeIn 300ms ease-in);
 }
 .blue-head {
-  background-color: $brand-dark-blue !important;
+  background-color: $brand-blue;
   @include animation(fade-now 1s);
 }
 @include keyframes(fade-now) {
@@ -14152,33 +14148,10 @@ video::-webkit-media-controls-fullscreen-button {
   font-size: 12px;
 }
 .nav-onhead {
-  //height: 45px;
+  height: 60px;
 }
 .start-journey-map {
   fade-img-loading .img-show {
     width: auto;
   }
-}
-.mobile-codes {
-  width: 100%;
-  #phone2 {
-    color: #fff;
-  }
-  .agentcompany-phone {
-    margin-bottom: -5px;
-  }
-  .intl-tel-input .selected-flag .arrow {
-    border-top: 4px solid #ffffff;
-  }
-  .agent-cmpny-inputholder:before,
-  .agent-cmpny-inputholder:after {
-    width: 0px;
-  }
-}
-
-.login-process {
-  margin-top : 100px;
-}
-.reg-steps {
-  padding: 20px;
 }
