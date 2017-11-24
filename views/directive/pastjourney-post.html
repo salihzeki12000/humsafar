@@ -2,7 +2,7 @@
  <!-- All the classes are of journey but extra classes has been added to every element with the journey class -->
  <!-- note end -->
  <div class="past-journey-holder" ng-class="{'highlighted-post': pastJourneyArray.journeyHighLight==pastStory._id && pastStory.type!='addDays', '': pastJourneyArray.journeyHighLight!==pastStory._id}">
- 	<div class="dash-up"></div>
+ 	<div class="dash-up" ng-hide="!pastStory.type=='travel-life' && !pastStory.type=='addDays"></div>
  	<div id="{{pastStory._id}}" class="pastjourney-main ongo-journey-card" ng-if="pastStory.type=='travel-life'" ng-class="{'hasLatLng':pastStory.latlong && pastStory.latlong.lat}">
  		<!-- past story header -->
  		<div class="past-story-header ongo-card-header">
@@ -274,14 +274,14 @@
 		<!-- <span class="add-more-post" ng-click="addMorePost();">
 			<i class="fa fa-plus color-white"></i>
 		</span> -->
-		<p class="color-white postto-day mt10 avenir-roman pointer" ng-click="addMorePost();">Add More Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span></p>
+		<p class="color-white postto-day mt10 avenir-roman pointer" ng-click="addMorePost(pastStory._id);">Add More Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span></p>
 	</div>
 </div>
 <!-- add new card end--> 
 <!-- add-date -->
 <div class="color-white add-day-post add-post" ng-if="pastStory.type=='addDays' && isMine" >
 	<!-- <p>Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</p> -->
-	<div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost();">
+	<div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost(pastStory._id);">
 		<span class="add-more-post">
 			<!-- <i class="fa fa-plus color-white"></i> -->
 		</span>

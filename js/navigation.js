@@ -555,12 +555,58 @@ var navigationservice = angular.module('navigationservice', [])
             });
         },
         oldUsersLogin: function (formData, callback) {
+          console.log(formData);
             TravelibroService.http({
                 url: adminURL + "/user/loginWeb",
                 data: formData,
                 method: "POST"
             }).success(callback).error(function (data) {
                 console.log(data);
+            });
+        },
+        verifyOtp: function (otp, callback) {
+          console.log('yes otp REST called');
+          var format = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+          if (otp.length == 4 && !(format.test(otp))) {
+            TravelibroService.http({
+              url: adminURL + "/user/verifyOtpWeb",
+              data: {
+                otp: otp
+              },
+              method: "POST"
+            }).success(function (data) {
+              console.log('data in navignt ',data);
+              callback(data);
+            },function (err){
+              console.log(err);
+            });
+          } else {
+            return callback({
+              'value': false
+            });
+          }
+        },
+        requestOtp: function (callback) {
+          TravelibroService.http({
+            url: adminURL + "/user/requestOtp",
+            method: "POST"
+          }).success(function (data) {
+            callback(data);
+          });
+        },
+        registerAsUser: function (formData, callback) {
+            console.log('----- ',formData);
+            // formData.accessToken = "Ob3m4K6ka7Iw39Mc";
+            TravelibroService.http({
+                url: adminURL + "/user/signUpWeb",
+                data: formData,
+                method: "POST"
+            },'allLoader').success(function (data) {
+                if (data.value) {
+                    callback(data);
+                } else {
+                    callback(data);
+                }
             });
         },
         registerAsAgent: function (formData, callback) {
@@ -581,6 +627,15 @@ var navigationservice = angular.module('navigationservice', [])
         loginAsAgent: function (formData, callback) {
             TravelibroService.http({
                 url: adminURL + "/agent/loginWeb",
+                data: formData,
+                method: "POST"
+            }).success(function (data) {
+                callback(data);
+            });
+        },
+        loginAsUser: function (formData, callback) {
+            TravelibroService.http({
+                url: adminURL + "/user/loginWeb",
                 data: formData,
                 method: "POST"
             }).success(function (data) {

@@ -748,24 +748,25 @@ header {
   top: 0;
   left: 0;
   z-index: 15;
-  background-color: $brand-dark-blue;
+  //background-color: $brand-dark-blue;
   @include transition(all 100ms linear);
   //    &.nav-up {
   //    @include transform(translateY(-100%));
   // }
-  &.addfixed {
-    @extend .bg-dark-blue;
-  }
+  //&.addfixed {
+  //  @extend .bg-dark-blue;
+  //}
 }
 
 .navbar {
   border: none;
   border-radius: 0;
-  margin: 0;
+  //margin: 0;
 }
 .nav-onhead {
-  height: 60px;
+  height: 45px;
   padding: 3px 0;
+  background-color: $brand-dark-blue;
 }
 .hamburger {
   margin: 10px 0;
@@ -922,14 +923,16 @@ header {
 }
 
 .user-img {
-  width: 40px;
-  height: 42px;
+  width: 38px;
+  height: 38px;
   border: 2px solid #424242;
   border-radius: 15px;
   overflow: hidden;
   background-color: $brand-light-grey;
 }
-
+.header-left, .user-detail {
+  margin-top: -3px;
+}
 // end header
 // Set Profile process
 
@@ -6079,7 +6082,7 @@ header {
 }
 
 .user-img-ongo {
-  width: 32px;
+  width: 34px;
   height: 34px;
   border: 1px solid #868686;
   border-radius: 12px;
@@ -13514,7 +13517,8 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .loggedin-header {
     .navbar {
-      height: 60px;
+      height: 45px;
+      background-color: $brand-dark-blue;
       .row {
         margin-top: 10px;
       }
@@ -13672,13 +13676,13 @@ video::-webkit-media-controls-fullscreen-button {
   display: none;
 }
 .swipeOut {
-  @include animation(swipeOut 300ms linear);
+  @include animation(swipeOut 300ms ease-in);
 }
 .swipeIn {
-  @include animation(swipeIn 300ms linear);
+  @include animation(swipeIn 300ms ease-in);
 }
 .blue-head {
-  background-color: $brand-blue;
+  background-color: $brand-dark-blue !important;
   @include animation(fade-now 1s);
 }
 @include keyframes(fade-now) {
@@ -14088,8 +14092,9 @@ video::-webkit-media-controls-fullscreen-button {
 .home-footer {
   background-color: $brand-blue;
   overflow: hidden;
+  color: #9698a9;
   a, a:focus {
-    color: white;
+    color: #9698a9;
   }
   li {
     display: block;
@@ -14098,8 +14103,8 @@ video::-webkit-media-controls-fullscreen-button {
   .row {
     padding: 20px 50px;
   }
-  .color-white {
-    opacity: 0.5;
+  a:hover {
+    color: white;
   }
 }
 .sections-holder {
@@ -14237,6 +14242,7 @@ video::-webkit-media-controls-fullscreen-button {
   font-family: AvenirLTStd-Heavy;
   font-size: 16px;
   margin-right: 10px;
+  color: #9698a9;
 }
 .activity-see-more {
   font-weight: 500;
@@ -14247,11 +14253,33 @@ video::-webkit-media-controls-fullscreen-button {
   font-size: 12px;
 }
 .nav-onhead {
-  height: 60px;
+  //height: 45px;
 }
 .start-journey-map {
   fade-img-loading .img-show {
     width: auto;
   }
 }
+.mobile-codes {
+  width: 100%;
+  #phone2 {
+    color: #fff;
+  }
+  .agentcompany-phone {
+    margin-bottom: -5px;
+  }
+  .intl-tel-input .selected-flag .arrow {
+    border-top: 4px solid #ffffff;
+  }
+  .agent-cmpny-inputholder:before,
+  .agent-cmpny-inputholder:after {
+    width: 0px;
+  }
+}
 
+.login-process {
+  margin-top : 100px;
+}
+.reg-steps {
+  padding: 20px;
+}

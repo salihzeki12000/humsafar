@@ -263,21 +263,21 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="social-likes-reviews" ng-if="!(((categoryList.likeCount==0)||(categoryList.likeCount==undefined))&&(categoryList.commentCount==0))">
+                    <div class="social-likes-reviews" ng-if="!(((categoryList.likeCount==0)||(categoryList.likeCount==undefined))&&(categoryList.commentCount==0))">
                       <div class="clearfix">
                         <div class="pull-left">
                           <span class="color-darkgrey mr10 pointer" ng-click="getLikesData(categoryList);"><i class="fa fa-heart color-grey mr5"></i><b class="">{{categoryList.likeCount}}</b>  {{categoryList.likeCount|singularPlural:'Likes'}}</span>
-                          <span class="color-blue">
+                          <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white">
-                          354 Reviews (4.5/5)</span>
-                          <span class="color-darkgrey pointer" ng-click="getCommentsData(categoryList)">
+                          354 Reviews (4.5/5)</span> -->
+                          <!-- <span class="color-darkgrey pointer" ng-click="getCommentsData(categoryList)">
                             <img src="img/comments.png" alt="" height="13" class="v-top comment-gray">
                             <b class="">
-                            {{categoryList.commentCount}} </b> {{categoryList.commentCount |singularPlural:'Comments'}}</span>
+                            {{categoryList.commentCount}} </b> {{categoryList.commentCount |singularPlural:'Comments'}}</span> -->
                           </div>
                         </div>
-                      </div> -->
+                      </div>
                     </div>
                   </div>
                   <!-- post footer end -->
@@ -289,6 +289,9 @@
         </div>
       </div>
       <div class="see-less text-center" ng-if="!allJourney.noButton && allJourney.data.length >= 9">
+        <div class="mt5 mb10" ng-if="template.paginationLoader">
+          <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
+        </div>
         <button class="btn" ng-click="seeMore(allJourney.category,$index);">Load More</button>
       </div>
     </div>
@@ -299,8 +302,5 @@
   </div>
   <div class="backdrop-close" ng-class="{'view-backdrop':viewCardComment==true || viewCardLike==true,'':viewCardComment==false || viewCardLike==false}" ng-click="closeBackDrop();"></div>
   <!-- COMMENT LIKE SECTION END -->
-</div>
-<div class="" ng-if="template.paginationLoader">
-  <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
 </div>
 </div>

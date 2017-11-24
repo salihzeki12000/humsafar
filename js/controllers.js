@@ -98,6 +98,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
         //end landing page animation
         $(document).scroll(function(){
+            if(screenWidth<=480) {
+              if ($(document).scrollTop() < 3) {
+                $("#nav-onhead").removeClass('blue-head');
+                $("#navi").removeClass('blue-head');
+              }
+              else {
+                $("#nav-onhead").addClass('blue-head');
+                $("#navi").addClass('blue-head');
+              }
+            }
           // console.log($(document).scrollTop(),'qwerty',headerFixed,'headerFixed',agentRegisterSec,'agent');
            if($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec){
             $('header').css({
@@ -105,7 +115,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               'transition': 'transform 300ms linear'
             });
              $('.home-navigate').addClass('fixed-subnavigation');
-             // navigation menu active             
+             // navigation menu active
              if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.discover1').addClass('active-homenav');
@@ -143,17 +153,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // console.log($('.mobile-fixed').offset().top,'offset');
             if($(document).scrollTop() >= $('.mobile-fixed').offset().top - 120 && $(document).scrollTop() <= $('#inspire').offset().top){
               // console.log('if amit');
-              $('.mobile-view').addClass('mob-fixed');              
+              $('.mobile-view').addClass('mob-fixed');
             }else{
               // console.log('else amit');
-              $('.mobile-view').removeClass('mob-fixed');             
+              $('.mobile-view').removeClass('mob-fixed');
             }
             console.log($(document).scrollTop(),'scroll value');
             console.log($('.second-screen').offset().top,'second-screen');
             // $()
             // all screen div window height rehna chahiye i.e window height and ye working
             if($(document).scrollTop() >= $('.second-screen').offset().top + 10 && $(document).scrollTop() <= $('.third-screen').offset().top){
-              $('.second-screen').addClass('second-active');              
+              $('.second-screen').addClass('second-active');
             }else if($(document).scrollTop() >= $('.third-screen').offset().top + 10 && $(document).scrollTop() <= $('.fourth-screen').offset().top){
               $('.second-screen').removeClass('second-active');
               $('.third-screen').addClass('third-active');
@@ -288,7 +298,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $(document).scrollTop($('#capture').offset().top);
       }
     };
-  
+
   })
 
   .controller('LoginCtrl', function($scope, TemplateService, NavigationService, Agent, cfpLoadingBar, $timeout, $uibModal, $interval, $state, $http) {
@@ -304,6 +314,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.agentSignup = false;
     $scope.alreadyExist = false;
     $scope.password = {};
+    $scope.userSignUpForm = {};
 
     $scope.initialiseError = function() {
       $scope.showError = {
@@ -481,16 +492,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
-    $scope.submit = function() {
-      //console.log("sndasdjsdjsa", $scope.formData);
-      NavigationService.oldUsersLogin($scope.formData, function(succ1) {
+    $scope.submit = function(formData) {
+      console.log("sndasdjsdjsa", formData);
+      NavigationService.oldUsersLogin(formData, function(succ1) {
+        console.log('1 ',succ1);
         if (succ1.value) {
-          //console.log(succ1);
           NavigationService.getAccessToken(function(succ2) {
-            //console.log(succ2);
+            console.log('2 access token ',succ2);
             // $.jStorage.set("accessToken", succ2.accessToken);
             if (succ2.accessToken && succ2.accessToken !== "") {
+              console.log('3');
               NavigationService.getProfile("", function(succ3) {
+                console.log('4 profile ',succ3);
                 if (succ3.data && succ3.data.type == 'User') {
                   $.jStorage.set("accessToken", succ2.accessToken);
                   $.jStorage.set("isLoggedIn", false);
@@ -522,7 +535,34 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
+    $scope.registerAsUser = function(formData) {
+      NavigationService.registerAsUser(formData, function(data) {
+        console.log('resp ',data);
+        if (data.value) {
 
+          // $scope.alreadyExist = false;
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          // $scope.alreadyExist = true;
+          $scope.showError.show = true;
+          if (data.data == "Registered as User") {
+            $scope.showError.msg = "Email already registered as a user. Register with an alternate email address to login as Partner";
+          } else {
+            $scope.showError.msg = "Email already exists as Partner";
+          }
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+
+      });
+      console.log('user ',$scope.userSignUpForm);
+    }
     //Agent Section
     // AGENT LOGIN SIGN UP TOGGLE
     $scope.toggleAgentSign = function() {
@@ -560,6 +600,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       });
     }
+    $scope.loginAsUser = function(formData) {
+      NavigationService.loginAsUser(formData, function(data) {
+        if (data.value) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
+            //console.log(err);
+          });
+        } else {
+          $scope.showError.show = true;
+          $scope.showError.msg = "Incorrect Email or Password";
+          $timeout(function() {
+            $scope.showError = {
+              show: "",
+              msg: ""
+            };
+          }, 10000);
+        }
+      });
+    };
     $scope.loginAsAgent = function(formData) {
       NavigationService.loginAsAgent(formData, function(data) {
         if (data.value) {
@@ -731,6 +789,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.showUserError = "";
     $scope.showImageLoader = false;
     $scope.viewBlob = false;
+    $scope.profile.isVerified?$scope.goNext=3:$scope.goNext=0;
     if ($scope.profile && $scope.profile.profilePicture) {
         NavigationService.getImageFromServer($scope.profile.profilePicture, function (data) {
             // $scope.myImage=data;
@@ -771,18 +830,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.getClass = "";
     $scope.viewNext = 1;
-    $scope.goNext = function (val) {
-        if (val == 1) {
-            $scope.viewNext = 1;
-            $scope.getClass = "swiper-slide-active";
-        } else if (val == 2) {
-            $scope.viewNext = 2;
-            $scope.getClass2 = "swiper-slide-active";
+    // $scope.goNext = function (val) {
+    //     if (val == 1) {
+    //         $scope.viewNext = 1;
+    //         $scope.getClass = "swiper-slide-active";
+    //     } else if (val == 2) {
+    //         $scope.viewNext = 2;
+    //         $scope.getClass2 = "swiper-slide-active";
+    //     }
+    //
+    // };
+
+    $scope.submitOtp = function (obj) {
+      var otp = (obj.a).concat(obj.b, obj.c, obj.d);
+      console.log('otp ',otp);
+      $scope.showConfirmation = true;
+      NavigationService.verifyOtp(otp, function (data) {
+        if (data.value) {
+          $scope.userData.isVerified = true;
+          $.jStorage.set("isVerified", true);
+          $scope.goNext = 1;
+        } else {
+          $scope.goNext = 2;
         }
-
+      });
     };
-
-
+    $scope.requestOtp = function () {
+      NavigationService.requestOtp(function (data) {
+        if (data.value) {
+          $scope.showConfirmation = true;
+          $timeout(function () {
+            $scope.showConfirmation = false;
+          }, 3500);
+        }
+      });
+    }
     $scope.changeGender = function (val, name) {
         $scope.gender = val;
         $scope.userData.gender = name;
@@ -1338,6 +1420,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.loadmoreOption = true;
     }else{
       $scope.loadmoreOption = false;
+      $('.ongo-journey-main').css('margin-top','70px');
     }
     if ($.jStorage.get("isLoggedIn")) {
         $scope.isLoggedIn = true;
@@ -2301,7 +2384,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 
 
-    
+
 
      $scope.journeyType = [{
 
@@ -2798,7 +2881,7 @@ $scope.kindofJourney = [];
     }
 })
 
-.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService, LikesAndComments, $timeout, $uibModal, $location) {
+.controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, LikesAndComments, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3199,7 +3282,7 @@ $scope.kindofJourney = [];
 
 })
 
-.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService, $timeout, $uibModal, $location) {
+.controller('PopularJourneyCtrl', function ($scope, $state, TemplateService, LikesAndComments, NavigationService,cfpLoadingBar, $timeout, $uibModal, $location) {
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
@@ -3243,8 +3326,15 @@ $scope.kindofJourney = [];
         limit: 9
       }
       NavigationService.getAllPopularJourney(formData,function(data){
+        cfpLoadingBar.start();
+        setTimeout(function(){
+            cfpLoadingBar.complete();
+          },60000);
         if(data.value == true){
           $scope.allPopularJourneys = data.data;
+           setTimeout(function(){
+            cfpLoadingBar.complete();
+          },100);
         }
         console.log($scope.allPopularJourneys,'all journeys');
       })
@@ -3252,12 +3342,12 @@ $scope.kindofJourney = [];
     $scope.popularAllJourney();
     // get all popular journey end
 
-    // view more 
+    // view more
     $scope.viewButton = true;
     $scope.listIndex = -1;
     $scope.seeMore = function(category,index){
       if($scope.listIndex == index) {
-        $scope.listIndex = -1;      
+        $scope.listIndex = -1;
       }else {
         $scope.listIndex = index;
       }
@@ -3274,10 +3364,10 @@ $scope.kindofJourney = [];
             $scope.pageNumberSingle = $scope.pageNumberSingle + 1;
             _.each(data.data, function(newArr){
               $scope.allPopularJourneys[index].data.push(newArr);
-            })  
+            })
             console.log($scope.allPopularJourneys,'all');
           }
-          
+
         }
       })
     }
@@ -8908,7 +8998,7 @@ $scope.rateDestination = function(destRate, type) {
     $scope.menutitle = NavigationService.makeactive("ProfileList");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.userData = $.jStorage.get("profile");
     $scope.activeMenu = $stateParams.active;
     setInterval(function () {
@@ -10331,6 +10421,14 @@ $scope.rateDestination = function(destRate, type) {
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if(vw <= 480){
+      $scope.loadmoreOption = true;
+    }else{
+      $scope.loadmoreOption = false;
+      $('.ongo-journey-main').css('margin-top','70px');
+    }
 
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
@@ -10343,7 +10441,9 @@ $scope.rateDestination = function(destRate, type) {
       $scope.isLoggedIn = false;
       $scope.isMine = false;
     }
-
+ $scope.loadmore = function(){
+      $scope.loadmoreOption = false;
+    };
     function calcWidth() {
       var width = $(window).width();
       var percent = 40;
@@ -10463,6 +10563,11 @@ $scope.rateDestination = function(destRate, type) {
         } else {}
         console.log(centers);
         initMap();
+        NavigationService.getProfile($scope.pastJourneyArray.user.urlSlug, function (data, status) {
+          $scope.userData = data.data;
+        }, function (err) {
+          //console.log(err);
+        });
       }, function(error) {
         console.log(error);
       })
@@ -11644,7 +11749,6 @@ $scope.rateDestination = function(destRate, type) {
     // setTimeout(function(){
     //   initMapGl();
     // },1000);
-
     $scope.editOption = function(model) {
       $timeout(function() {
         model.backgroundClick = true;
@@ -11652,6 +11756,15 @@ $scope.rateDestination = function(destRate, type) {
       }, 200);
       backgroundClick.scope = $scope;
     };
+      $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          //console.log("error updating data");
+        }
+      });
+    }
   })
   .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -12844,6 +12957,8 @@ $scope.rateDestination = function(destRate, type) {
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.viewStripe = true;
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   /////////////////////////////////////////////////
     // if($state.current.name == 'home'){
     //   $('.travel-bg').css('overflow','hidden');
@@ -12862,6 +12977,23 @@ $scope.rateDestination = function(destRate, type) {
     setInterval(function () {
         $scope.searchHeaderLoad = TemplateService.searchHeaderLoad;
     }, 300);
+
+    //navbar color toggle on scroll
+  $(window).scroll(function() {
+    //start blue navbar on scroll
+    var count = 0;
+    console.log(count+1);
+    if (screenWidth <= 480) {
+      if ($(window).scrollTop() < 3) {
+        $("#nav-onhead").removeClass('blue-head');
+        $("#navi").removeClass('blue-head');
+      }
+      else {
+        $("#nav-onhead").addClass('blue-head');
+        $("#navi").addClass('blue-head');
+      }
+    }
+  });
 
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {

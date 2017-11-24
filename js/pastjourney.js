@@ -861,14 +861,18 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
       }
       // delete past journey card end     
       // add more post 
-      $scope.addMorePost = function(){
-        console.log($scope.pastStory.UTCModified,'what is utc');
-        $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).startOf('day').toDate();
+      $scope.addMorePost = function(id){
+        console.log($scope.pastStory.UTCModified,'what is utc',id,'id',moment($scope.pastStory.UTCModified));  
+        if(id){
+          $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).add(2,'seconds').format();
+        }else{
+          $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).startOf('day').toDate();
+        }
         // $scope.pastStory = {};
         $scope.pastStory.checkIn = {};
         $scope.pastStory.thoughts = "";
         $scope.ongo = $scope.pastStory;
-        console.log($scope.pastStory.UTCModified,'what is utc new');
+        // console.log($scope.pastStory.UTCModified,'what is utc new');
         
         var modal = "";
         modal = $uibModal.open({

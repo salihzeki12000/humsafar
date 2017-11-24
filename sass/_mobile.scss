@@ -22,6 +22,9 @@
   .dash-up {
     height: 27px;
   }
+  .android-ios img{
+    height: 60vh;
+  }
 }
 
 @media screen and (max-width: 1400px) {
@@ -790,6 +793,14 @@
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
   /*new landing page*/
+  .header .loggedin-header .navbar,
+  .nav-onhead {
+    height: 60px;
+    background-color: transparent;
+  }
+  .login-signup {
+    padding: 10px 0;
+  }
   .worksheet {
     -webkit-overflow-scrolling: touch !important;
   }
@@ -1081,7 +1092,7 @@
     }
   } //libro-header
   .libro-header .navbar-default .navbar-toggle {
-    margin-top: 2px;
+    margin-top: 0px;
     left: 20px;
   }
   .navbar-default .navbar-toggle {
@@ -2486,7 +2497,8 @@
       height: 100%;
       img {
         height: auto;
-        width: 100%;
+        /*width: 100%;*/
+        width: auto;
         position: static;
         @include transform(translate(0));
       }
@@ -2741,7 +2753,7 @@
   .libro-header {
     padding: 0;
     .navbar-default .navbar-toggle {
-      margin-top: 2px;
+      //margin-top: 2px;
       left: 20px;
     }
   }
