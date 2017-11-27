@@ -10369,7 +10369,7 @@ $scope.rateDestination = function(destRate, type) {
     // month array end
 
   })
-  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments, $http, $uibModal,$filter) {
+  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments,$window, $http, $uibModal,$filter) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
@@ -10487,8 +10487,9 @@ $scope.rateDestination = function(destRate, type) {
         // 'urlSlug': 'paris-2018'
         'urlSlug': $stateParams.id
       }
-      pastJourney.getPastJourney(formData, function(pastStoryData) {
+      pastJourney.getPastJourney(formData, function(pastStoryData,lastPostDate) {
         $scope.pastJourneyArray = pastStoryData;
+        $scope.pastJourneyArray.lastPostDate = lastPostDate;
         // for kind of journey
         _.each($scope.pastJourneyArray.kindOfJourney,function(kind){
           var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
@@ -11137,7 +11138,7 @@ $scope.rateDestination = function(destRate, type) {
         var formData = {
           "urlSlug": $scope.pastJourneyArray.urlSlug
         }
-        pastJourney.getPastJourney(formData, function(pastStoryData) {
+        pastJourney.getPastJourney(formData, function(pastStoryData,lastPostDate) {
           $scope.pastJourneyArray.startTime = pastStoryData.startTime;
           modal.close();
           //console.log(journeys);
@@ -11561,6 +11562,69 @@ $scope.rateDestination = function(destRate, type) {
     };
 
     // country modal ends
+    // change end date
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeEndDate = function () {
+      $scope.journey = $scope.pastJourneyArray;
+        //console.log("end journey Date");
+        $scope.isPostDate = false;
+        $scope.isBanner = false;
+        $scope.isEndDate = true;
+        date = $scope.journey.endTime;
+        var d = new Date(date);
+        var hh = d.getHours();
+        if (hh > 12) {
+            hh = hh - 12;
+            $scope.time.am_pm = "PM";
+        } else {
+            $scope.time.am_pm = "AM";
+        }
+        $scope.time.hour = hh;
+        $scope.time.min = d.getMinutes();
+        $scope.datetime.dt = d;
+
+        console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified,'ktya hai date');
+        console.log(moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(10, 'days'));
+        $scope.options = {
+            // minDate: new Date(date),
+            // maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+            minDate: $scope.pastJourneyArray.lastPostDate,
+            maxDate: moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(6, 'months'),
+            showWeeks: false
+        };
+        modal = $uibModal.open({
+            animation: true,
+            templateUrl: "views/modal/date-time.html",
+            scope: $scope,
+            backdropClass: "review-backdrop",
+        })
+    };
+    $scope.endJourneyDate = function (id, formData, dt) {
+      console.log($scope.journey,'journey');
+        //console.log(dt);
+        var date = $filter('formatDateCalender')(dt);
+        var time = $filter('formatTimeCalender')(formData);
+        var result = {};
+        var callback = function (data) {
+            var formData = {
+                "urlSlug": $scope.journey.urlSlug
+            }
+            pastJourney.getPastJourney(formData, function (journeys,lastPostDate) {
+                $scope.journey.endTime = journeys.endTime;
+                modal.close();                
+                $window.location.reload();
+                //console.log(journeys);
+            }, function (err) {
+                //console.log(err);
+            });
+        }
+        result.user = $scope.journey.user._id;
+        result._id = id;
+        result.endTime = new Date(date + " " + time);
+        pastJourney.endDateJourney(result, callback);
+    };
+    // change end date end
 
     $scope.rateThisCountry = function (journeyId, countryId, formData, currentIndex) {
         //console.log(currentIndex);

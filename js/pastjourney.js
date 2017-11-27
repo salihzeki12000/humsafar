@@ -20,6 +20,7 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           data: formData
         }, 'allLoader').success(function (data) {
           var journey = data.data;
+          var lastPostUtc = journey.post[journey.post.length - 1].UTCModified;
           var allPastPost = [];
           var dateJourneyDifference = moment(journey.endTime).diff(moment(journey.startTime),'days');
           _.times(dateJourneyDifference+1,function(day){
@@ -70,7 +71,7 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           } else {
             journey.startJourneyString = "Trip Traveller - " + "<a href='/users/" + journey.user.urlSlug + "'>" + journey.user.name.bold() + "</a>";
           }
-          callback(journey);
+          callback(journey,lastPostUtc);
         }).error(function (data) {
           console.log(data);
         });
