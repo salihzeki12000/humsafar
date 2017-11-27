@@ -663,17 +663,24 @@ a.color-white {
         opacity: 1;
 
         &:before {
-          font-size: 24px;
+          font-size: 34px;
           color: #fff;
+          font-family: FontAwesome;
         }
       }
 
       .flex-prev {
         left: 10px;
+        &:before {
+          content: "\f104";
+        }
       }
 
       .flex-next {
         right: 10px;
+        &:before {
+          content: "\f105";
+        }
       }
     }
 
@@ -787,11 +794,12 @@ a.color-white {
         margin: 0;
 
         &:before {
+          font-family: "FontAwesome";
           color: #fff;
           display: block;
           text-align: center;
           width: 100%;
-          font-size: 24px;
+          font-size: 35px;
           height: 100%;
           text-shadow: none;
           position: absolute;
@@ -802,10 +810,16 @@ a.color-white {
 
       .flex-next {
         right: -10px;
+        &:before {
+          content: "\f105";
+        }
       }
 
       .flex-prev {
         left: -20px;
+        &:before {
+          content: "\f104";
+        }
       }
     }
 
