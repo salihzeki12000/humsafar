@@ -13833,101 +13833,72 @@ video::-webkit-media-controls-fullscreen-button {
   @include transition(all 300ms linear);
 }
 /*mobile view*/
-/*.mobile-view {
+.mobile-view {
+  width: 100%;
+  /*height: 100vh;*/ /*if not window height worked uncomment this*/
+  position: relative;
+  top: 0; 
+  left: 0;
+}
+.mobile-fixed, .mobilecontent-view {
   width: 50%;
-  float: left;
+  height: 100%;
+  display: inline-block;
+  position: relative;
 }
 .mobilecontent-view {
-  width: 50%;
-  float: left;
-}*/
-.mobilecontent-view {
-  position: relative;
-  img {
-    @extend.get-center;
-  }
-}
-.second-screen, .third-screen, .fourth-screen, .fivth-screen, .sixth-screen, .seventh-screen {
-  position: relative;
-  /*height: calc(100vh - 200px); */
-  height: 100vh;
-  text-align: center;
-  div { height: 100%; }
-  .get-center {
-    height: auto;
-  }
+  margin-left: -4px;
 }
 .iphone-fix {
-  position: relative;
-  top: 20%;
-  left: -7%;
-  img {
-    margin: 0 auto;
-    /*height: calc(100vh - 200px);*/
-    height: 437px;
-  }
-  + .mob-screen-img {
-    left: 42%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  &:after {
+    content: '';
+    width: 100%;
+    height: 150px;
+    position: fixed;
+    bottom: -105px;
+    left: 0;
+    background-color: #fff;
+    z-index: -1;
   }
 }
-.second-view, .third-view, .fourth-view, .fivth-view, .sixth-view, .seventh-view {
+.common-view {
   width: 100%;
-  height: 100%;
+  /*height: 100vh;*/ /*if not window height worked uncomment this*/
+  position: relative; 
+  top: 0;
 }
-.mob-screen-img {
-    /*margin-left: 7px;*/
-    width: 195px;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    @include transform(translate(-45%,-50%));
+.mobile-section, .content-section {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  > div { 
+    height: auto; 
+    top: 65%;
+  }
+}
+.content-section {
+  margin-left: -4px;
+}
+.iphone-fix {
+  img {
+    width: 214px;
+  }
 }
 .mob-content-img {
   width: 200px;
 }
-.mob-fixed {
-  height: 100vh;
-  .iphone-fix {
-    position: fixed;
-    top: 20%;
-    left: 17%;
-    z-index: 22;
-     + .mob-screen-img {
-    position: fixed;
-    left: 18%;
-    top: 26%;
-    transform: initial;
-    margin-left: -4px;
-    margin-top: 8px;
-    }
-  }
+.mob-screen-img {
+  width: 195px;
 }
-/*.mobile-view {
-  height: 100vh;
-  .mobile-fixed {
-    position: fixed;
-    opacity: 0;
-  }
-}*/
-.mobfix-size {
-  width: 214px;
-}
-.second-active, .third-active, .fourth-active, .fivth-active, .sixth-active, .seventh-active {
-  .second-view, .third-view, .fourth-view, .fivth-view, .sixth-view, .seventh-view {
-     position:fixed;
-     top:26%;
-     left:18%;
-     margin-top: 10px;
-     margin-left: -4px;
-     transform:initial;
-     width:auto;
-  }
-  .mob-screen-img {
-    position:static;
-    top:auto;
-    left:auto;
-    transform:initial;
-  }
+.capture-row {
+  background-color: #fff;
+  position: relative;
+  z-index: 21;
 }
 /*mobile view end*/
 .relive-mobile-holder {

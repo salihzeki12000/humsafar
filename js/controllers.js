@@ -51,6 +51,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
     };
+    
     //get popular user details
     var getTrendingData = function (pageNo) {
       NavigationService.popularBlogger({
@@ -73,7 +74,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     setTimeout(function(){
       $(document).ready(function(){
-        // $(".worksheet").smoothWheel();
+        // $(document).smoothWheel();
+        $('.common-view').css('height',$(window).height());
+        $('.mobile-view').css('height',$(window).height());
         var headerFixed = $('.home-navigation').offset().top;
         var agentRegisterSec = $('.register-as-partner').offset().top;
         //setting auto-height for tab screen
@@ -96,7 +99,44 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $(this).css('opacity','1');
               $(this).off(e);
             });
-        //end landing page animation
+        //end landing page animation        
+        
+        $('.iphone-fix:after').css('height', $('.mobile-view').height() - 500);
+        // on mouse dropdown scroll
+        $('.mouse-scrolldown').click(function(){
+          $('html').animate({
+            scrollTop: $('#discover').offset().top
+          })
+        });
+        // on mouse dropdown scroll end
+        // scroll on nav
+        $('.take-scroll').click(function(){
+          var scrollValue = $(this).attr('href');
+          if(scrollValue == '#discover'){
+              console.log('first');
+              $('html').animate({
+              scrollTop: $('#discover').offset().top
+            },1000);
+          }else if(scrollValue == '#capture'){
+               console.log('sec');
+               $('html').animate({
+              scrollTop: $('#capture').offset().top
+            },1000);
+          }else if(scrollValue == '#inspire'){
+              console.log('third');
+              $('html').animate({
+              scrollTop: $('#inspire').offset().top
+            },1000);
+          }else if(scrollValue == '#relive'){
+              console.log('fourth');
+              $('html').animate({
+              scrollTop: $('#relive ').offset().top
+            },1000);
+          }else {
+            
+          }
+        });
+        // scroll on nav end
         $(document).scroll(function(){
             if(screenWidth<=480) {
               if ($(document).scrollTop() < 3) {
@@ -145,101 +185,135 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('.home-navigate').removeClass('fixed-subnavigation');
               $('.take-scroll').removeClass('active-homenav');
             }
-
-
-            // mobile naviagtion
-            var iphoneHeight = $('.iphone-fix').innerHeight();
-             $('.mobilecontent-view').css('height',iphoneHeight);
-            // console.log($('.mobile-fixed').offset().top,'offset');
-            if($(document).scrollTop() >= $('.mobile-fixed').offset().top - 120 && $(document).scrollTop() <= $('#inspire').offset().top){
-              // console.log('if amit');
-              $('.mobile-view').addClass('mob-fixed');
-            }else{
-              // console.log('else amit');
-              $('.mobile-view').removeClass('mob-fixed');
-            }
-            console.log($(document).scrollTop(),'scroll value');
-            console.log($('.second-screen').offset().top,'second-screen');
-            // $()
-            // all screen div window height rehna chahiye i.e window height and ye working
-            if($(document).scrollTop() >= $('.second-screen').offset().top + 10 && $(document).scrollTop() <= $('.third-screen').offset().top){
-              $('.second-screen').addClass('second-active');
-            }else if($(document).scrollTop() >= $('.third-screen').offset().top + 10 && $(document).scrollTop() <= $('.fourth-screen').offset().top){
-              $('.second-screen').removeClass('second-active');
-              $('.third-screen').addClass('third-active');
-            }else if($(document).scrollTop() >= $('.fourth-screen').offset().top + 10 && $(document).scrollTop() <= $('.fivth-screen').offset().top){
-               $('.third-screen').removeClass('third-active');
-              $('.fourth-screen').addClass('fourth-active');
-            }else if($(document).scrollTop() >= $('.fivth-screen').offset().top + 10 && $(document).scrollTop() <= $('.sixth-screen').offset().top){
-               $('.fourth-screen').removeClass('fourth-active');
-              $('.fivth-screen').addClass('fivth-active');
-            }else if($(document).scrollTop() >= $('.sixth-screen').offset().top + 10 && $(document).scrollTop() <= $('.seventh-screen').offset().top){
-               $('.fivth-screen').removeClass('fivth-active');
-              $('.sixth-screen').addClass('sixth-active');
-            }else if($(document).scrollTop() >= $('.seventh-screen').offset().top + 10 && $(document).scrollTop() <= $('.capture-row').offset().top){
-               $('.sixth-screen').removeClass('sixth-active');
-              $('.seventh-screen').addClass('seventh-active');
-            }else{
-              $('.second-screen').removeClass('second-active');
-              $('.third-screen').removeClass('third-active');
-              $('.fourth-screen').removeClass('fourth-active');
-              $('.fivth-screen').removeClass('fivth-active');
-              $('.sixth-screen').removeClass('sixth-active');
-              $('.seventh-screen').removeClass('seventh-active');
-              // $('.second-screen').removeClass('active');
-              // $('.second-screen').css('background','transparent');
-              // $('.second-screen .second-view').css({
-              //   'position':'static',
-              //   'top':'auto',
-              //   'left':'auto',
-              //   'margin-top': '0',
-              //   'margin-left': '0',
-              //   'transform':'initial',
-              //   'width':'auto'
-              // });
-              // $('.second-screen .mob-screen-img').css({
-              //   'position':'absolute',
-              //   'top':'50%',
-              //   'left':'45%',
-              //   'transform':'translate(-45%,-50%)'
-              // });
-            }
-            // console.log($(document).scrollTop(),'scroll value', $('.iphone-fix').offset().top,'iphone ka offset',$('.iphone-fix').innerHeight(),'inner height',$('.iphone-fix').offset().top + $('.iphone-fix').innerHeight(),'totalvalue');
             // mobile naviagtion end
-          // //start blue navbar on scroll
-          // if(screenWidth<=480) {
-          //   if ($('.worksheet').scrollTop() < 3) {
-          //     $("#nav-onhead").removeClass('blue-head');
-          //     $(".activeNavbar").removeClass('blue-head');
-          //   }
-          //   else {
-          //     $("#nav-onhead").addClass('blue-head');
-          //     $(".activeNavbar").addClass('blue-head');
-          //   }
-          // }
-          // //end blue navbar on scroll
-          // var firstHeight = $('.worksheet').height();
-          // if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
-          //   $("#navigation").removeClass("submenu");
-          //   $("#navigation").addClass("fixed-subnavigation sectionStripe");
-          //   if(screenWidth>991){
-          //     $(".libro-header, .loggedin-header").removeClass("swipeIn");
-          //     $(".libro-header, .loggedin-header").addClass("swipeOut");
-          //     $("header").css({'opacity':0});
-          //     $timeout(function(){
-          //       $("header").css({'z-index':-10});
-          //     },200)
-          //   }
-          // }
-          // else {
-          //   $("#navigation").removeClass("fixed-subnavigation sectionStripe");
-          //   $("#navigation").addClass("submenu");
-          //   if($(".libro-header").hasClass("swipeOut") || $(".loggedin-header").hasClass("swipeOut")){
-          //     $(".libro-header, .loggedin-header").addClass("swipeIn");
-          //   }
-          //   $(".libro-header, .loggedin-header").removeClass("swipeOut");
-          //   $("header").css({'z-index':16,'opacity':1});
-          // }
+            // on scroll function fixing the elements            
+          if($(document).scrollTop() >= $('.mobile-view').offset().top){
+            $('.iphone-fix').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%',
+              'z-index':'20'
+            });
+            $('.first-fix').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+          }else{
+              $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.second-screen').offset().top){
+              $('.second-screen .second-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.second-screen .second-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.third-screen').offset().top){
+              $('.third-screen .third-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.third-screen .third-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.fourth-screen').offset().top){
+              $('.fourth-screen .fourth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.fourth-screen .fourth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.fivth-screen').offset().top){
+              $('.fivth-screen .fivth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.fivth-screen .fivth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.sixth-screen').offset().top){
+              $('.sixth-screen .sixth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.sixth-screen .sixth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            if($(document).scrollTop() >= $('.seventh-screen').offset().top){
+              $('.seventh-screen .seventh-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'27%'
+            })
+            }else{
+              $('.seventh-screen .seventh-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              })
+            }
+            // remove fixed part
+
+            if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
+              $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.mobile-section .get-center').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.capture-row').css('z-index','1');
+            }else {
+              $('.capture-row').css('z-index','21');
+            }
+            // remove fixed part end
+
+            // on scroll function fixing the elements end
 
           //end blue navbar
           //change active section anchor color
@@ -264,7 +338,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           // }else {
           //   $('.relive1').css('color', '#eeeeee');
           // }
-
         });
       })
     },2000);
@@ -273,31 +346,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     $scope.closeKnowMore = function(){
       $(".know-more-modal").removeClass("show-know-more");
-    };
-    $scope.go_at = function(section){
-      console.log(section);
-      // var extra_space = 0;
-      // if(section == 'discover' || section == 'capture')
-      // {extra_space = 130;}
-      // else
-      // {extra_space = 145;}
-      // $('.worksheet').animate({
-      //     scrollTop: ($('.worksheet').scrollTop() - extra_space) + $('.'+section).offset().top},
-      //   'slow');
-      if(section == 'discover'){
-        // $(document).animate({
-        //   scrollTop: discoverScroll
-        // },100);
-        $(document).scrollTop($('#discover').offset().top);
-      }else if(section == 'capture'){
-        console.log('capture');
-        console.log(captureScroll,'captureScroll');
-        // $(document).animate({
-        //   scrollTop: captureScroll
-        // },100);
-        $(document).scrollTop($('#capture').offset().top);
-      }
-    };
+    };   
+    // $scope.go_at = function(section){
+    //   console.log(section);      
+    //   if(section == 'discover'){
+    //     $(document).animate({
+    //       scrollTop: $('#discover').offset().top
+    //     },100);
+    //   }else if(section == 'capture'){
+    //     $(document).animate({
+    //       scrollTop: $('#capture').offset().top
+    //     },100);
+    //   }else if(section == 'inspire'){
+    //     $(document).animate({
+    //       scrollTop: $('#inspire').offset().top
+    //     },100);
+    //   }else if(section == 'relive'){
+    //     console.log('relive');
+    //     $(document).animate({
+    //       scrollTop: $('#relive').offset().top
+    //     },100);
+    //   }
+    // };
 
   })
 
