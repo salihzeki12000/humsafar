@@ -73,10 +73,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       });
     }
     setTimeout(function(){
-      $(document).ready(function(){
-        // $(document).smoothWheel();
+      $(document).ready(function(){        
         $('.common-view').css('height',$(window).height());
         $('.mobile-view').css('height',$(window).height());
+        // smooth scroll 
+        $('html').smoothWheel();
+        // smooth scroll end
         var headerFixed = $('.home-navigation').offset().top;
         var agentRegisterSec = $('.register-as-partner').offset().top;
         //setting auto-height for tab screen
@@ -133,7 +135,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               scrollTop: $('#relive ').offset().top
             },1000);
           }else {
-            
+
           }
         });
         // scroll on nav end
