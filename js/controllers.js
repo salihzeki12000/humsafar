@@ -11178,13 +11178,7 @@ $scope.rateDestination = function(destRate, type) {
 
       // adding and removing country end
     }
-    $scope.deleteVisited = function(index,country) {
-      console.log(country,'what is country',$scope.countries,'what was old');
-      // $scope.pastJourneyArray.destinationVisited[index] = [];
-      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
-      $scope.countries.push(country.country);
-      console.log($scope.countries,'what is new country');
-    }
+
     console.log($scope.pastDestination, 'what is pastDestination');
     // add destination end
     // get country data
@@ -11532,6 +11526,16 @@ $scope.rateDestination = function(destRate, type) {
       });
       console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
     };
+    // delete destinationVisited
+        $scope.deleteVisited = function(index,country) {
+      console.log(country,'what is country',$scope.countries,'what was old');
+      // $scope.pastJourneyArray.destinationVisited[index] = [];
+      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
+      $scope.countries.push(country.country);
+      console.log($scope.countries,'what is new country');
+      $scope.saveDestinationVisited();
+    }
+    // delete destinationVisited end
     // country modal
     var modal = "";
 
