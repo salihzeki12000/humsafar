@@ -73,8 +73,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     setTimeout(function(){
       $(document).ready(function(){
-        // $(".worksheet").smoothWheel();
-        var headerFixed = $('.home-navigation').offset().top;
+        // $("body").smoothWheel();
+        var headerFix000ed = $('.home-navigation').offset().top;
         var agentRegisterSec = $('.register-as-partner').offset().top;
         //setting auto-height for tab screen
         if(screenWidth >= 768 && screenWidth<screenHeight){
@@ -5915,7 +5915,9 @@ $scope.rateDestination = function(destRate, type) {
         profileMain: "views/content/myLife/profile.html",
         innerView: allMyLife[0]
     };
-
+    // $scope.tripName = '';
+    // $scope.startDate = '';
+    // $scope.endDate = '';
     $scope.viewTab = 1;
     $scope.isMine = $.jStorage.get("isMine");
     var pageNo = 0;
@@ -5944,8 +5946,37 @@ $scope.rateDestination = function(destRate, type) {
     $scope.mapPathData = window._mapPathData;
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
 
+  $scope.format = 'dd-MM-yyyy';
+  $scope.open1 = function () {
+    $scope.popup1.opened = true;
+    showWeeks = false;
+  };
+  $scope.popup1 = {
+    opened: false
+  };
+  $scope.dateOptions = {
+    // "initDate": $scope.userData.dob,
+    showWeeks: false
+  }
 
-    $scope.reviewAll = {
+  $scope.open2 = function () {
+    $scope.popup2.opened = true;
+    showWeeks = false;
+  };
+  $scope.popup2 = {
+    opened: false
+  };
+  $scope.dateOptions = {
+    // "initDate": $scope.userData.dob,
+    showWeeks: false
+  };
+
+  $scope.createDraft = function(formData){
+    console.log(formData);
+  };
+
+
+  $scope.reviewAll = {
         "arr": [],
         "scrollBusy": false,
         "stopCallingApi": false,
@@ -7969,6 +8000,19 @@ $scope.rateDestination = function(destRate, type) {
     $scope.menutitle = NavigationService.makeactive("Drafts");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.format = 'dd-MM-yyyy';
+    $scope.open1 = function () {
+      $scope.popup1.opened = true;
+      showWeeks = false;
+    };
+    $scope.popup1 = {
+      opened: false
+    };
+    $scope.dateOptions = {
+      "initDate": $scope.userData.dob,
+      showWeeks: false
+    }
+
 
   })
 
@@ -12981,8 +13025,6 @@ $scope.rateDestination = function(destRate, type) {
     //navbar color toggle on scroll
   $(window).scroll(function() {
     //start blue navbar on scroll
-    var count = 0;
-    console.log(count+1);
     if (screenWidth <= 480) {
       if ($(window).scrollTop() < 3) {
         $("#nav-onhead").removeClass('blue-head');

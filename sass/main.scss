@@ -614,7 +614,7 @@ textarea {
 // bg classes
 
 .bg-white {
-  background-color: rgba(255, 255, 255, 0.90);
+  background-color: rgba(255, 255, 255, 1);
 }
 
 .bg-black {
@@ -3623,6 +3623,43 @@ header {
     }
   }
 }
+
+.drafts-active {
+  ul {
+    li {
+      &:first-child .tab-heading {
+        //padding: 10px 20px;
+        //margin: 10px 0 0 2px;
+        padding: 6px 20px;
+        margin: 15px -15px 0 0;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        z-index: 1;
+      }
+
+      &:nth-child(2) .tab-heading {
+        padding: 11px 20px;
+        margin: 10px 0 0 2px;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        z-index: 2;
+      }
+
+      &:nth-child(3) .tab-heading {
+        padding: 15px 20px;
+        margin: 6px 0 0 -18px;
+        @include background(linear-gradient(to left, #e85a4d, #f05b4d));
+        z-index: 3;
+      }
+
+      &:nth-child(4) .tab-heading {
+        padding: 20px;
+        margin: 0 0 0 -18px;
+        z-index: 4;
+        background: $brand-pink;
+      }
+    }
+  }
+}
+
 
 .list-travel-view {
   // display: inline-block;
@@ -12593,7 +12630,7 @@ display:none;
 .map-journey {
   width: 100%;
   height: 100%;
-  margin-top: 60px;
+  margin-top: 45px;
   padding-left: 650px;
   position: fixed;
   top: 0;
@@ -14282,4 +14319,74 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .reg-steps {
   padding: 20px;
+}
+.or-dash {
+  color: white;
+  text-align: center;
+  padding: 30px 0 10px;
+}
+.hr {
+  display: inline-block;
+  width: 35%;
+  border-bottom: 1px solid white;
+  opacity: 0.3;
+  margin-bottom: 5px;
+}
+.hr-left {
+  margin-right: 15px;
+}
+.hr-right {
+  margin-left: 15px;
+}
+.drafts-list {
+  margin-top: 50px;
+}
+.new-draft {
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f8;
+  height: 50px;
+  width: 240px;
+  padding: 0 20px;
+  color: #10d0d2;
+  font-size: 18px;
+  display: inline-block;
+}
+.draft-inputholder input{
+  display: inline-block;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f8;
+  height: 50px;
+  width: 240px;
+  color: #10d0d2;
+  font-size: 18px;
+}
+.drafts-view {
+  text-align: center;
+}
+.draft-group {
+  padding: 0 10px 30px;
+  display: inline-block;
+}
+.addBtn {
+  background-color: #f0f0f8;
+  width: 120px;
+  border-radius: 100px;
+  margin: auto;
+  border: none;
+}
+.fa-add {
+  color: $brand-pink;
+  font-size: 35px;
+  padding: 40px;
+}
+.add-draft {
+  padding-top: 20px;
+  p {
+    padding-top: 15px;
+  }
+}
+.addBtn:disabled {
+  opacity: 0.5;
 }

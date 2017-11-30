@@ -15,10 +15,23 @@
       <div class="col-md-5">
         <div class="login-ht">
           <div class="full-width get-center">
-            <!-- pt30 -->
             <div class="partnerlogin-title text-center mb10">
               <h3 class="avenir-medium color-white m-clear">Capture And Relive Your Travel Stories</h3>
             </div>
+            <div class="social-login-btn">
+              <a class="facebook-login-btn" ng-click="socialLogin('loginFacebook')">
+                <i class="fa fa-facebook"></i>
+                <span>Continue With Facebook</span>
+              </a>
+              <a class="google-login-btn" ng-click="socialLogin('loginGoogle')">
+                <i class="fa fa-google-plus"></i>
+                <span>Continue With Google</span>
+              </a>
+            </div>
+            <div class="or-dash">
+              <div class="hr hr-left"></div>OR<div class="hr hr-right"></div>
+            </div>
+            <!-- pt30 -->
             <div class="login-signup-tab" ng-init="indextab=1">
               <uib-tabset active="indextab">
                 <!-- active="activeJustified" -->
@@ -187,16 +200,6 @@
             <!--</button>-->
             <!--</div>-->
             <!--</form> &ndash;&gt;-->
-            <div class="social-login-btn">
-              <a class="facebook-login-btn" ng-click="socialLogin('loginFacebook')">
-                <i class="fa fa-facebook"></i>
-                <span>Continue With Facebook</span>
-              </a>
-              <a class="google-login-btn" ng-click="socialLogin('loginGoogle')">
-                <i class="fa fa-google-plus"></i>
-                <span>Continue With Google</span>
-              </a>
-            </div>
           </div>
           <!--&lt;!&ndash; <div class="social-login pt10" hidden>-->
           <!--<ul class="unstyled-list list-inline color-white avenir-roman">-->

@@ -26,10 +26,6 @@
                   <div class="col-md-offset-1 col-md-10">
                     <h3 class="color-pink text-center createdraft-heading">Wherever you go it becomes a part of your story.</h3>
                     <p class="text-center createdraft-text">The past story feature allows you to view and publish an automated timeline view of your past trips. Add quick thoughts and reviews to make your story more personalished. Quickly upload photos and videos of a trip to see the magic unfold</p>
-                    <div class="upload-drafts text-center">
-                      <upload-image  ng-model="moments" ng-callback="uploadDrafts(data,length,date)" multiple="true"></upload-image>
-                      <span>Upload Moments</span>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -37,60 +33,30 @@
             <!-- create new drafts end-->
             <!-- drafts cards -->
             <div class="drafts-list">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="drafts-card relate">
-                      <img src="img/banner-itinerary/all1.jpg" alt="" class="img-responsive">
-                      <div class="delete-draftcard">
-                        <span class="i fa fa-trash-o color-white pointer"></span>
-                      </div>
-                      <div class="draft-card-detail get-center full-width color-white text-center">
-                        <span class="icon"><i class="fa fa-magic"></i></span>
-                        <p>
-                          <span class="">Edit,</span>
-                          <span class="">Preview,</span>
-                          <span class="">Publish</span>
-                        </p>
-                        <h4 class="draft-title">Your Greece Story</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="drafts-card relate">
-                      <img src="img/banner-itinerary/all1.jpg" alt="" class="img-responsive">
-                      <div class="delete-draftcard">
-                        <span class="i fa fa-trash-o color-white pointer"></span>
-                      </div>
-                      <div class="draft-card-detail get-center full-width color-white text-center">
-                        <span class="icon"><i class="fa fa-magic"></i></span>
-                        <p>
-                          <span class="">Edit,</span>
-                          <span class="">Preview,</span>
-                          <span class="">Publish</span>
-                        </p>
-                        <h4 class="draft-title">Your Paris Story</h4>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="drafts-card relate">
-                      <img src="img/banner-itinerary/all1.jpg" alt="" class="img-responsive">
-                      <div class="delete-draftcard">
-                        <span class="i fa fa-trash-o color-white pointer"></span>
-                      </div>
-                      <div class="draft-card-detail get-center full-width color-white text-center">
-                        <span class="icon"><i class="fa fa-magic"></i></span>
-                        <p>
-                          <span class="">Edit,</span>
-                          <span class="">Preview,</span>
-                          <span class="">Publish</span>
-                        </p>
-                        <h4 class="draft-title">Your London Story</h4>
-                      </div>
-                    </div>
-                  </div>
+              <form name="newDraft" ng-submit="createDraft(draft)">
+                <div class="draft-group">
+                  <label>Trip Name :</label>
+                  <input type="text" class="new-draft form-control" ng-model="draft.tripName" required/>
                 </div>
+                <div class="draft-group ">
+                  <label>From :</label>
+                  <span class="draft-inputholder setting-datepicker">
+                    <input type="text" placeholder="Start Date" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" ng-model="draft.startDate" name="start-date" required/>
+                  </span>
+                </div>
+                <div class="draft-group ">
+                  <label>To :</label>
+                  <span class="draft-inputholder setting-datepicker">
+                    <input type="text" placeholder="End Date" class="form-control text-center detail-date" ng-click="open2();" uib-datepicker-popup="{{format}}" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" ng-model="draft.endDate" name="end-date" required/>
+                  </span>
+                </div>
+                <div class="add-draft">
+                  <button type="submit" class="addBtn" ng-disabled="newDraft.$invalid">
+                    <i class="fa fa-plus fa-add" aria-hidden="true"></i>
+                  </button>
+                  <p>Upload A Past Story</p>
+                </div>
+              </form>
               </div>
             </div>
             <!-- drafts cards end-->
