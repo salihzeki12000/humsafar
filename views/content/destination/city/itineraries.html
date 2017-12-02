@@ -129,10 +129,10 @@
             </div>
             <div class="onway-journey relate pointer" ng-init="itinerary=post.type=='quick-itinerary'?'userquickitinerary':'userdetailitinerary'">
                 <div class="itinerary-creator-detail">
-                    <div class="editor-logo user-logo pointer v-mid" ui-sref="mylife({'urlSlug':post.user.urlSlug})">
+                    <div class="editor-logo user-logo pointer v-mid"  ui-sref="{{itinerary}}({'urlSlug':post.user.urlSlug,'id':post.urlSlug})">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="full-width">
                     </div>
-                    <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer" ui-sref="mylife({'urlSlug':post.user.urlSlug})">{{post.user.name}}</h4>
+                    <h4 class="font-bold color-dark-blue m-clear heading-name text-capitalize pointer"  ui-sref="{{itinerary}}({'urlSlug':post.user.urlSlug,'id':post.urlSlug})">{{post.user.name}}</h4>
                 </div>
                 <div class="onway-imgholder pointer" ui-sref="{{itinerary}}({'urlSlug':post.user.urlSlug,'id':post.urlSlug})">
                     <img ng-src="{{post.coverPhoto|uploadpath:370:340:'cover'}}" alt="" class="full-width m-center">

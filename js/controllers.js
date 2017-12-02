@@ -13496,7 +13496,7 @@ $scope.rateDestination = function(destRate, type) {
             }
         });
         // on keyup / change flag: reset
-        telInput.on("keyup change", reset);
+        telInput.on("keyup change", reset);       
     }
 
     //about textarea counter

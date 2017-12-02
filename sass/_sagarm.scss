@@ -189,6 +189,15 @@
     }
   }
 }
+.agentcompany-phone {
+  .error {
+    border-bottom: 1px solid $brand-pink;
+    &:before,
+    &:after {
+      background-color: $brand-pink;
+    }
+  }
+}
 .business-model {
   .ui-select-multiple.ui-select-bootstrap .ui-select-search{
      min-width: 210px;
