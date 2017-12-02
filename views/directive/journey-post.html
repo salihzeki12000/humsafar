@@ -64,22 +64,57 @@ ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
       <div class="video-ongo-journey relate {{removeVideoButton}}"
       ng-if="ongo.videos.length>0 && ongo.onDisplay=='videos'">
       <!-- ng-click="playVideo(ongo._id,$parent.index);" -->
-      <video id="{{ongo._id}}_{{index}}" poster="{{ongo.photosVideos[index].thumbnail|uploadpath}}"
-      controls="controls" width="550" preload="auto">
-      <source src="{{ongo.photosVideos[index].name|trusted}}" type="video/mp4">
-      </video>
-      <div class="youtube-icon get-center" hidden>
-        <!-- <span><i class="fa fa-youtube-play fa-4x color-pink"></i></span> -->
-        <img src="img/ongojourney/play-journey.png" alt="Play Journey" width="40" class="img-responsive">
+      <video id="{{ongo._id}}_{{index}}" class="video-js vjs-default-skin" poster="{{ongo.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550" preload="auto" crossorigin="anonymous"  vjs-video>
+        <source ng-src="{{ongo.photosVideos[index].name|trusted}}" type="video/mp4" >
+        </video>
+        <div class="youtube-icon get-center" hidden>
+          <!-- <span><i class="fa fa-youtube-play fa-4x color-pink"></i></span> -->
+          <img src="img/ongojourney/play-journey.png" alt="Play Journey" width="40" class="img-responsive">
+        </div>
+      </div>
+      <!-- ongo img end-->
+
+      <!-- related img if more then 5 then slider-->
+      <div ng-if="viewportWidth>480">
+        <div class="related-imgslider">
+          <!-- related img if less then 5-->
+          <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=4)">
+            <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
+              <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
+              class="img-responsive pointer img-full-sqr"
+              ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+              ng-click="changeImage($index,'videos')">
+              <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt=""
+              class="img-responsive pointer img-full-sqr"
+              ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+              ng-click="changeImage($index,'photos')">
+            </div>
+          </div>
+          <!-- related img end if less then 5-->
+          <div ng-if="ongo.photosVideos.length>4">
+            <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120"
+            class="related-slide carousel flex-contain" animation="true"
+            item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
+            <!-- put/remove item width 99 if needed -->
+            <li>
+              <div class="related-ongo-slider">
+                <!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
+                <img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+                ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
+                ng-click="changeImage($index,'videos')">
+                <img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
+                ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
+                ng-click="changeImage($index,'photos')">
+              </div>
+            </li>
+          </flex-slider>
+        </div>
       </div>
     </div>
-    <!-- ongo img end-->
-
-    <!-- related img if more then 5 then slider-->
-    <div ng-if="viewportWidth>480">
+    <div ng-if="viewportWidth<=480">
       <div class="related-imgslider">
         <!-- related img if less then 5-->
-        <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=4)">
+        <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=3)">
           <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
             <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
             class="img-responsive pointer img-full-sqr"
@@ -92,7 +127,7 @@ ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
           </div>
         </div>
         <!-- related img end if less then 5-->
-        <div ng-if="ongo.photosVideos.length>4">
+        <div ng-if="ongo.photosVideos.length>3">
           <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120"
           class="related-slide carousel flex-contain" animation="true"
           item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
@@ -112,45 +147,9 @@ ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
       </div>
     </div>
   </div>
-  <div ng-if="viewportWidth<=480">
-    <div class="related-imgslider">
-      <!-- related img if less then 5-->
-      <div class="relate-pic thumbnail-holder" ng-if="(ongo.photosVideos.length>1)&&(ongo.photosVideos.length<=3)">
-        <div class="related-ongo-slider" ng-repeat="relatePic in ongo.photosVideos track by $index">
-          <img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
-          class="img-responsive pointer img-full-sqr"
-          ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
-          ng-click="changeImage($index,'videos')">
-          <img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt=""
-          class="img-responsive pointer img-full-sqr"
-          ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
-          ng-click="changeImage($index,'photos')">
-        </div>
-      </div>
-      <!-- related img end if less then 5-->
-      <div ng-if="ongo.photosVideos.length>3">
-        <flex-slider flex-slide="slide in ongo.photosVideos track by $index" item-width="120"
-        class="related-slide carousel flex-contain" animation="true"
-        item-margin="1" control-nav="false" animationLoop="false" slideshow="false">
-        <!-- put/remove item width 99 if needed -->
-        <li>
-          <div class="related-ongo-slider">
-            <!--<img ng-src="{{slide.name|uploadpath:99:99:'cover'}}" alt="" class="img-responsive pointer">-->
-            <img ng-src="{{slide.thumbnail|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
-            ng-if="ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail"
-            ng-click="changeImage($index,'videos')">
-            <img ng-src="{{slide.name|uploadpath:120:120:'cover'}}" alt="" class="img-responsive pointer"
-            ng-if="!(ongo.photosVideos[$index] && ongo.photosVideos[$index].thumbnail)"
-            ng-click="changeImage($index,'photos')">
-          </div>
-        </li>
-      </flex-slider>
-    </div>
-  </div>
-</div>
 
-<!-- related img end if more then 5 then slider-->
-<!-- ongo journey video -->
+  <!-- related img end if more then 5 then slider-->
+  <!-- ongo journey video -->
       <!--<div class="" ng-if="ongo.videos.length>0">
       <div class="video-ongo-journey relate {{removeVideoButton}}" ng-click="playVideo(ongo._id,$parent.index);">
         <video id="{{ongo._id}}_{{index}}" poster="{{ongo.videos[index].thumbnail|uploadpath}}" controls="controls" width="550">

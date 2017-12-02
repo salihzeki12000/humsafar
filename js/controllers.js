@@ -22,7 +22,7 @@ var mapGl;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput','vjs.video'])
   .run(['$anchorScroll', function($anchorScroll) {
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
@@ -72,12 +72,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'urlSlug': trip.user.urlSlug
       });
     }
-    setTimeout(function(){
+    setTimeout(function(){      
       $(document).ready(function(){        
+        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);      
         $('.common-view').css('height',$(window).height());
         $('.mobile-view').css('height',$(window).height());
-        // smooth scroll 
-        $('html').smoothWheel();
+        // smooth scroll
+      if(isChrome){
+        $('html').smoothWheel({speed: 100});
+      }else if(isSafari){
+         $('body').smoothWheel({speed: 100});
+      }
+      var mobileWhite = $('.mobile-view').height() - 520;
+      console.log(mobileWhite,'mobile');
+      $('.whitespace').css({
+        'height' : mobileWhite,
+        'bottom' : +-+mobileWhite + 10
+      });
+        // $('html').css('-webkit-overflow-scrolling','touch');
         // smooth scroll end
         var headerFixed = $('.home-navigation').offset().top;
         var agentRegisterSec = $('.register-as-partner').offset().top;
@@ -193,103 +206,113 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $('.iphone-fix').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%',
+              'left':'34%',
               'z-index':'20'
             });
             $('.first-fix').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
           }else{
               $('.iphone-fix').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               });
               $('.first-fix').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.second-screen').offset().top){
               $('.second-screen .second-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
             }else{
               $('.second-screen .second-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.third-screen').offset().top){
               $('.third-screen .third-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
             }else{
               $('.third-screen .third-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.fourth-screen').offset().top){
               $('.fourth-screen .fourth-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
             }else{
               $('.fourth-screen .fourth-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.fivth-screen').offset().top){
               $('.fivth-screen .fivth-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
             }else{
               $('.fivth-screen .fivth-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.sixth-screen').offset().top){
               $('.sixth-screen .sixth-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
+              'left':'34%'
             })
             }else{
               $('.sixth-screen .sixth-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
+                'left':'65%'
               })
             }
             if($(document).scrollTop() >= $('.seventh-screen').offset().top){
               $('.seventh-screen .seventh-view').css({
               'position':'fixed',
               'top':'50%',
-              'left':'27%'
-            })
+              'left':'34%'
+            });
+              $('.seventh-content').css({
+                'position': 'fixed',
+                'top': '50%',
+                'left': '66%'
+              });
             }else{
               $('.seventh-screen .seventh-view').css({
                 'position':'absolute',
                 'top':'50%',
-                'left':'50%'
-              })
+                'left':'65%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
+              });
             }
             // remove fixed part
 
@@ -308,6 +331,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 'position':'absolute',
                 'top':'50%',
                 'left':'50%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
               });
               $('.capture-row').css('z-index','1');
             }else {
