@@ -2414,6 +2414,11 @@
     padding-top: 0;
     //    margin-top: -5px;
   }
+  .no-login {
+    p {
+      font-size: 12px;
+    }
+  }
   .flex-direction-nav a.flex-next,
   .flex-direction-nav a.flex-prev {
     display: none;

@@ -300,63 +300,61 @@
 					</div>
 					<!--trip traveller buddies end-->
 					<!-- past journey card -->
-					<div class="past-journey-card functionmap" ng-if="pastJourneyArray.post">
-						<past-journey-card is-mine="template.isMine" ng-class="{'hideSpan':loadmoreOption}" is-logged-in="isLoggedIn" json="pastJourneyArray" post="pastStory" ng-repeat="pastStory in pastJourneyArray.post track by $index" get-likes-data="getLikesData(post)" get-comments-data="getCommentsData(post)" close-back-drop="closeBackDrop()" template="template" ></past-journey-card>
-						<!-- past story-end -->						
-						<!-- ongo journey end -->
-					</div>
-					<!-- past journey card end-->
-
-					<!-- ongo journey-end -->
-					<div class="ongo-journey-end past-journey-end" ng-hide="loadmoreOption" ng-if="pastJourneyArray.onGoing==false">
-						<div class="journey-end text-center relate">
-							<h4 class="color-pink avenir-heavy">{{pastStory.location}}</h4>
-							<p class="m-clear color-pink avenir-heavy">
-								<!-- <i class="fa fa-calendar mr5"></i> -->
-								<span class="mr5">{{pastJourneyArray.endTime|formatDate: 'date'}}</span>
-								<span class="mr5">|</span>
-								<!-- <i class="fa fa-clock-o mr5"></i> -->
-								<span class="mr5">{{pastJourneyArray.endTime|formatDate: 'time'}}</span></p>
-								<div class="end-strip options pointer" ng-init="pastStory.lastDate = {};">
-									<img src="img/options.png" alt="" ng-click="editOption(pastStory.lastDate);">
-									<div class="own-trip" ng-show="pastStory.lastDate.backgroundClick;">
-										<ul class="text-left">
-											<li>
-												<a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
-											</li>
-										</ul>
+					<div class="" ng-if="isLoggedIn">
+						<div class="past-journey-card functionmap" ng-if="pastJourneyArray.post">
+							<past-journey-card is-mine="template.isMine" ng-class="{'hideSpan':loadmoreOption}" is-logged-in="isLoggedIn" json="pastJourneyArray" post="pastStory" ng-repeat="pastStory in pastJourneyArray.post track by $index" get-likes-data="getLikesData(post)" get-comments-data="getCommentsData(post)" close-back-drop="closeBackDrop()" template="template" ></past-journey-card>
+							<!-- past story-end -->						
+							<!-- ongo journey end -->
+						</div>
+						<!-- past journey card end-->
+						<div class="ongo-journey-end past-journey-end" ng-if="pastJourneyArray.onGoing==false">
+							<div class="journey-end text-center relate">
+								<h4 class="color-pink avenir-heavy">{{pastStory.location}}</h4>
+								<p class="m-clear color-pink avenir-heavy">
+									<!-- <i class="fa fa-calendar mr5"></i> -->
+									<span class="mr5">{{pastJourneyArray.endTime|formatDate: 'date'}}</span>
+									<span class="mr5">|</span>
+									<!-- <i class="fa fa-clock-o mr5"></i> -->
+									<span class="mr5">{{pastJourneyArray.endTime|formatDate: 'time'}}</span></p>
+									<div class="end-strip options pointer" ng-init="pastStory.lastDate = {};">
+										<img src="img/options.png" alt="" ng-click="editOption(pastStory.lastDate);">
+										<div class="own-trip" ng-show="pastStory.lastDate.backgroundClick;">
+											<ul class="text-left">
+												<li>
+													<a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="end-journey-flag text-center">
-								<img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
-								<span class="color-white jenna-font">until we meet again!</span>
-							</div>
+								<div class="end-journey-flag text-center">
+									<img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
+									<span class="color-white jenna-font">until we meet again!</span>
+								</div>
+							</div>							
 						</div>
 						<!-- ongo journey end -->
-						<div class="loadmore" style="padding: 0 10px 30px 10px">
-							<button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
-							<div class="take-me-to-thestories"s>
+						<div class="loadmore" ng-if="!isLoggedIn">
+							<!-- <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button> -->
+							<div class="take-me-to-thestories">
 								<div style="overflow: hidden;border-radius: 8px">
 									<div class="row">
 										<a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
-										<a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
+										<a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 downloadapp-btn"><span class="explore-more">Download App</span></div></a>
+										<a href="" ui-sref="login" ng-click="viewLoginJourney();"><div class="col-xs-4 login-journey-btn" style="border: none;"><span class="explore-more">Login</span></div></a>
+										<!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
 										<a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
-											<span>Share</span>
-											<span class="explore-more">
-												Past Stories
-											</span>
-										</div></a>
-									</div>
-								</div>									
+											<span>Share</span><span class="explore-more">Past Stories</span></div></a> -->
+										</div>
+									</div>									
+								</div>
 							</div>
-						</div>
-					</section>
-					<!-- past story main end -->
+						</section>
+						<!-- past story main end -->
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="" ng-if="postScrollData.viewList">
-			<comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
-			list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
-		</div>
+			<div class="" ng-if="postScrollData.viewList">
+				<comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData" view-card-comment="viewCardComment" view-card-like='viewCardLike'
+				list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard" show-like-show='showLikeShow'></comment-like-section>
+			</div>

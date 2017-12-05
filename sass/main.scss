@@ -13444,6 +13444,23 @@ header {
     margin-top: 20px;
     display: inline-block
   }
+  .no-login {
+    margin-bottom: 25px;
+    p {
+      font-size: 15px;
+    }
+  }
+  .downloadapp-btn, .login-journey-btn {
+    background-color: $brand-blue;
+    color: white;
+    text-align: center;
+    border-right: 1px solid #69708a;
+    height: 55px;
+    span {
+      display: block;
+      padding: 21px 0 4px 0;
+    }
+  }
   .hideSpan{
     display: none;
   }
@@ -13454,7 +13471,8 @@ header {
     display: block;
   }
   .loadmore {
-    display: none;
+    /*display: none;*/
+    padding: 0 10px 30px 10px;
   }
   .loadmore > button{
     width: 100%;

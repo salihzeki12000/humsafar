@@ -239,7 +239,7 @@
             </div>
             <!-- journey tab view end -->
             <!-- card-ongo-main -->
-            <div class="relate">
+            <div class="relate" ng-if="isLoggedIn">
               <div class="dot-line"></div>
               <div class="card-relate-holder functionmap" ng-if="journey.post">
                 <journey-post ng-repeat="ongo in journey.post track by $index" ng-class="{'hideSpan':loadmoreOption}" post="ongo" is-mine="template.isMine" is-logged-in="isLoggedIn" json=journey
@@ -248,7 +248,7 @@
               </journey-post>
             </div>
             <!-- ongo journey-end -->
-            <div class="ongo-journey-end" ng-hide="loadmoreOption" ng-if="journey.onGoing==false">
+            <div class="ongo-journey-end" ng-if="journey.onGoing==false">
               <div class="journey-end text-center">
                 <h4 class="color-pink avenir-heavy">{{ongo.location}}</h4>
                 <p class="m-clear color-pink avenir-heavy">
@@ -263,57 +263,40 @@
                   <span class="color-white jenna-font">until we meet again!</span>
                 </div>
               </div>
-              <!-- ongo journey end -->
-              <div class="loadmore" style="padding: 0 10px 30px 10px">
-                <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
-                <div class="take-me-to-thestories"s>
-                  <div style="overflow: hidden;border-radius: 8px">
-                    <div class="row">
-                      <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
-                      <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a>
-                      <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
-                        <span>Share</span>
-                        <span class="explore-more">
-                          Past Stories
-                        </span>
-                      </div></a>
-                    </div>
-                  </div>
-                  <!--<div class="share-dropdown" ng-show="ongo.shareJrny.backgroundClick">-->
-                    <!--<ul>-->
-                      <!--<li><a ng-href="https://www.facebook.com/sharer/sharer.php?u={{journey.sharingUrl}}/&title=TraveLibro"-->
-                       <!--target="_blank"-->
-                       <!--class="fb-icon"><i class="fa fa-facebook-square fa-2x"></i></a></li>-->
-                       <!--<li><a ng-href="https://twitter.com/intent/tweet?url={{journey.sharingUrl}}/&title=TraveLibro"-->
-                         <!--target="_blank"-->
-                         <!--class="twi-icon"><i class="fa fa-twitter-square fa-2x"></i></a></li>-->
-                         <!--<li><a ng-href="https://plus.google.com/share?url=={{journey.sharingUrl}}/&title=TraveLibro"-->
-                           <!--target="_blank"-->
-                           <!--class="google-icon"><i class="fa fa-google-plus-square fa-2x"></i></a></li>-->
-                           <!--<li>-->
-                            <!--<a ng-href="http://pinterest.com/pin/create/button/?url={{journey.sharingUrl}}" target="_blank"-->
-                             <!--class="pin-icon"><i class="fa fa-pinterest-square fa-2x"></i></a>-->
-                             <!--</li>-->
-                             <!--<li><a ng-href="http://www.linkedin.com/shareArticle?mini=true&url={{journey.sharingUrl}}"-->
-                               <!--target="_blank"-->
-                               <!--class="linkedin-icon"><i class="fa fa-linkedin-square fa-2x"></i></a></li>-->
-                               <!--<li><a href="" class="mail-icon"><i class="fa fa-envelope-square fa-2x"></i></a></li>-->
-                               <!--</ul>-->
-                               <!--</div>-->
-                             </div>
-                           </div>
-                         </div>
-                       </div>
-                       <div class="" ng-if="postScrollData.viewList">
-                        <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
-                        view-card-comment="viewCardComment" view-card-like='viewCardLike'
-                        list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
-                        show-like-show='showLikeShow'></comment-like-section>
+              <!-- ongo journey end -->  
+            </div>
+            <!-- if not login -->
+            <div class="loadmore" ng-if="!isLoggedIn">
+              <div class="no-login">
+                <p class="text-center avenir-roman color-white">TraveLibro boasts of a community of nomads, wanderers, explorers and storytellers.  We bring to you visual travel stories highlighting the entire experience on a trip by the best global travel bloggers and photographers. Discover these travel stories by destinations or interest to help inspire your future travels.</p>
+                <p class="text-center avenir-roman color-white">Download App or Login to view real stories by real people.</p>
+              </div>
+              <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
+              <div class="take-me-to-thestories">
+                <div style="overflow: hidden; border-radius: 8px">
+                  <div class="row">
+                    <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
+                    <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 downloadapp-btn"><span class="explore-more">Download App</span></div></a>
+                    <a href="" ui-sref="login" ng-click="viewLoginJourney();"><div class="col-xs-4 login-journey-btn" style="border: none;"><span class="explore-more">Login</span></div></a>
+                    <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a> -->
+                      <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
+                        <span>Share</span><span class="explore-more">Past Stories</span></div></a> -->
                       </div>
-                    </div>
+                    </div> 
                   </div>
-                  <!-- map -->
-                  <!-- map end -->
                 </div>
+                <!-- if not login end-->
+              </div>
+              <div class="" ng-if="postScrollData.viewList">
+                <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
+                view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
+                show-like-show='showLikeShow'></comment-like-section>
               </div>
             </div>
+          </div>
+          <!-- map -->
+          <!-- map end -->
+        </div>
+      </div>
+    </div>

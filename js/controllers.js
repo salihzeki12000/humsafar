@@ -401,9 +401,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                       urlSlug: slug
                     });
                   } else {
-                    $state.go("agent-home", {
+                    if($.jStorage.get('journeyUrl')){
+                      window.location = $.jStorage.get('journeyUrl');
+                    }else {
+                       $state.go("agent-home", {
                       urlSlug: slug
                     });
+                    }                   
                   }
                 }
               } else {
@@ -473,10 +477,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 window.location = $.jStorage.get("url") + "?accessToken=" + $.jStorage.get("accessToken");
               } else {
                 if ($.jStorage.get("profile").type == "User") {
-                  $state.go("mylife", {
-                    name: 'journey',
-                    urlSlug: slug
-                  });
+                 // if condition for viewing journey with outlog and redirected
+                  if($.jStorage.get('journeyUrl')){
+                    window.location = $.jStorage.get('journeyUrl');
+                  }else {
+                     $state.go("mylife", {
+                      name: 'journey',
+                      urlSlug: slug
+                     });
+                   }                 
                 } else {
                   $state.go("agent-login", {
                     urlSlug: slug
@@ -518,9 +527,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
 
-    $scope.socialLogin = function(loginTo) {
-      ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
-      stopinterval = $interval(callAtIntervaltwitter, 2000);
+    $scope.socialLogin = function(loginTo) {         
+       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
+       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
     $scope.submit = function() {
@@ -1369,19 +1378,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
 })
 
-.controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http) {
+.controller('OnGoJourneyCtrl', function ($scope, TemplateService, NavigationService, cfpLoadingBar, $timeout, $uibModal, $interval, OnGoJourney, LikesAndComments, $state, $stateParams, $filter, $http,$location) {
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
     var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if(vw <= 480){
-      $scope.loadmoreOption = true;
-    }else{
-      $scope.loadmoreOption = false;
-      $('.ongo-journey-main').css('margin-top','70px');
-    }
+    // if(vw <= 480){
+    //   $scope.loadmoreOption = true;
+    // }else{
+    //   $scope.loadmoreOption = false;
+    //   $('.ongo-journey-main').css('margin-top','70px');
+    // }
     if ($.jStorage.get("isLoggedIn")) {
         $scope.isLoggedIn = true;
         if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
@@ -1393,9 +1402,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $scope.isLoggedIn = false;
         $scope.isMine = false;
     }
-    $scope.loadmore = function(){
-      $scope.loadmoreOption = false;
-    };
+    // $scope.loadmore = function(){
+    //   $scope.loadmoreOption = false;
+    // };
   // PROFILE LIST REDIRECT
   $scope.profileListRedirect = function (pageStyle, activeUrlSlug) {
     // //console.log('bantas ',activeUrlSlug);
@@ -2838,7 +2847,14 @@ $scope.kindofJourney = [];
           //console.log("error updating data");
         }
       });
+    };
+
+    // login and then redirect to same journey
+    $scope.viewLoginJourney = function(){
+      var currentUrl = $location.$$path;
+      $.jStorage.set('journeyUrl',currentUrl);
     }
+    // login and then redirect to same journey end
 })
 
 .controller('PopularBloggerCtrl', function ($scope, $state, TemplateService, NavigationService,cfpLoadingBar, LikesAndComments, $timeout, $uibModal, $location) {
@@ -10383,12 +10399,12 @@ $scope.rateDestination = function(destRate, type) {
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
     var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if(vw <= 480){
-      $scope.loadmoreOption = true;
-    }else{
-      $scope.loadmoreOption = false;
-      $('.ongo-journey-main').css('margin-top','70px');
-    }
+    // if(vw <= 480){
+    //   $scope.loadmoreOption = true;
+    // }else{
+    //   $scope.loadmoreOption = false;
+    //   $('.ongo-journey-main').css('margin-top','70px');
+    // }
 
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
@@ -10401,9 +10417,9 @@ $scope.rateDestination = function(destRate, type) {
       $scope.isLoggedIn = false;
       $scope.isMine = false;
     }
- $scope.loadmore = function(){
-      $scope.loadmoreOption = false;
-    };
+ // $scope.loadmore = function(){
+ //      $scope.loadmoreOption = false;
+ //    };
     function calcWidth() {
       var width = $(window).width();
       var percent = 40;
@@ -12141,7 +12157,12 @@ $scope.rateDestination = function(destRate, type) {
     }, {
         img: "img/itinerary/itinerary1.jpg",
     }, ];
-
+      // login and then redirect to same journey
+    $scope.viewLoginJourney = function(){
+      var currentUrl = $location.$$path;
+      $.jStorage.set('journeyUrl',currentUrl);
+    }
+    // login and then redirect to same journey end
 })
 
 .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary, $state) {
@@ -18419,6 +18440,7 @@ $scope.rateDestination = function(destRate, type) {
     };
 
     $scope.socialLogin = function (loginTo) {
+      console.log('ye wala hai kya');
         var userId = $.jStorage.get("oldUserData")._id;
         ref = window.open(adminURL + "/user/" + loginTo + "OldUser?userId=" + userId, '_blank', 'location=no');
         //console.log(ref);
