@@ -237,7 +237,7 @@
  								<li ng-repeat="listComments in uniqueArr"><a href="">{{listComments.user.name}}</a></li>
  							</ul>
  						</div>
- 					</span>              
+ 					</span>
  				</div>
  				<div class="pull-right">
  				<!-- <div class="ongo-travel-icon hidden-xs">
@@ -247,7 +247,7 @@
  		</div>
  	</div>
  </div>
-</div> 					
+</div>
 <!-- past story footer end-->
 </div>
 </div>
@@ -267,7 +267,7 @@
 <!-- on go journey-change end -->
 <!-- close comment wala backdrop div -->
 <div class="close-comment-backdrop" ng-click="closeBackDrop();"></div>
-<!-- close comment wala backdrop div end-->	
+<!-- close comment wala backdrop div end-->
 <!-- add new card -->
 <div class="add-card-post add-post" ng-if="pastStory.type=='travel-life' && isMine">
 	<div class="text-center" ng-if="pastStory.showAddMore">
@@ -277,15 +277,15 @@
 		<p class="color-white postto-day mt10 avenir-roman pointer" ng-click="addMorePost(pastStory._id);">Add More Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span></p>
 	</div>
 </div>
-<!-- add new card end--> 
+<!-- add new card end-->
 <!-- add-date -->
 <div class="color-white add-day-post add-post" ng-if="pastStory.type=='addDays' && isMine" >
 	<!-- <p>Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</p> -->
-	<div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost(pastStory._id);">
+    <div class="day-post-holder pointer" ng-if="pastStory.showAddMore" ng-click="addMorePost(pastStory._id);">
 		<span class="add-more-post">
 			<!-- <i class="fa fa-plus color-white"></i> -->
 		</span>
 		<p class="color-white mt10 avenir-roman">Add Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span> <span class="block"> {{pastStory.UTCModified|formatDate:'date'}}</span></p>
 	</div>
 </div>
-<!-- add-date end-->	
+<!-- add-date end-->

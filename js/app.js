@@ -363,6 +363,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             templateUrl: "views/template.html",
             controller: 'PastStoryCtrl'
         })
+        .state('drafts', {
+            url: "/users/:urlSlug/drafts/:draftSlug",
+            templateUrl: "views/template.html",
+            controller: 'newdraftsCtrl'
+        })
         .state('editoritinerary', {
             url: "/editor-itinerary",
             templateUrl: "views/template.html",
@@ -568,7 +573,7 @@ firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function (scope, element, attr) {            
+        link: function (scope, element, attr) {
             if(attr.ariaHidden){
                 var className = attr.ariaHidden;
             }
@@ -590,7 +595,7 @@ firstapp.directive('fancyboxBox', function ($document) {
                 }
               });
             },2000);
-            
+
         }
     };
 });

@@ -5895,7 +5895,7 @@ $scope.rateDestination = function(destRate, type) {
     })
 })
 
-.controller('MylifeCtrl', function ($scope, $state, $stateParams, TemplateService, NavigationService, cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, LikesAndComments, $anchorScroll, anchorSmoothScroll, $location) {
+.controller('MylifeCtrl', function ($scope, $state, $stateParams, TemplateService, shareDataService, NavigationService, cfpLoadingBar, TravelibroService, $timeout, $uibModal, $location, $filter, MyLife, OnGoJourney, localLife, pastJourney, LikesAndComments, $anchorScroll, anchorSmoothScroll, $location) {
     //Used to name the .html file
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
@@ -5970,9 +5970,29 @@ $scope.rateDestination = function(destRate, type) {
     // "initDate": $scope.userData.dob,
     showWeeks: false
   };
-
+  var profile = $.jStorage.get("profile");
+  $scope.getDraftsIfAny = function(){
+    var formData = {
+      'pagenumber':1
+    };
+    pastJourney.getDrafts(formData, function(data){
+      console.log(data);
+    })
+  };
   $scope.createDraft = function(formData){
+    // formData.user = $.jStorage.get("profile")._id;
     console.log(formData);
+    pastJourney.createDraft(formData, function(data){
+      console.log(data);
+      if(data.value){
+        $state.go('drafts', {
+          'id': data.data._id,
+          'draftSlug': data.data.urlSlug,
+          'urlSlug': profile.urlSlug
+        });
+      }
+    })
+
   };
 
 
@@ -6246,7 +6266,6 @@ $scope.rateDestination = function(destRate, type) {
             $scope.data = otherData;
         }, 100);
     };
-
     var getAllCountries = function (countries) {
         $scope.nationality = countries;
         $scope.getMap();
@@ -6328,7 +6347,41 @@ $scope.rateDestination = function(destRate, type) {
             }
         });
     };
+    // var selectedCity = $scope.draft.startLocation;
+    // $scope.draft.startLocation = {
+    //   "description": selectedCity
+    // };
 
+    // page 1 integration starts
+    // gets all the cities starts
+    var getAllCities = function (data, status) {
+      if (data.value) {
+        $scope.cities = data.data.predictions;
+      } else {
+        //console.log("Eroor Fetching Data");
+      }
+    };
+    $scope.searchByKey = function (searchCity) {
+      // cfpLoadingBar.start();
+      NavigationService.getAllCities({
+        "search": searchCity
+      }, getAllCities, function (err) {
+        //console.log(err);
+      });
+      // cfpLoadingBar.complete();
+    };
+    //End-Of get all the cities ends
+    //get all countries
+    var getAllCountries = function (data, status) {
+      if (data.value) {
+        $scope.nationality = data.data;
+      } else {
+        //console.log("Error Fetching Data");
+      }
+    };
+    NavigationService.getAllCountries(getAllCountries, function (err) {
+      //console.log(err);
+    });
     $scope.clearAllSelected = function (visited) {
         $scope.visited = [];
     };
@@ -10453,7 +10506,753 @@ $scope.rateDestination = function(destRate, type) {
     // month array end
 
   })
-  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments, $http, $uibModal,$filter) {
+  .controller('newdraftsCtrl', function($scope, TemplateService, TravelibroService, shareDataService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments,$window, $http, $uibModal,$filter) {
+    $scope.template = TemplateService.changecontent("newDraft");
+    $scope.menutitle = NavigationService.makeactive("Drafts");
+    TemplateService.title = $scope.menutitle;
+    $scope.navigation = NavigationService.getnav();
+    var profile = $.jStorage.get("profile");
+
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if(vw <= 480){
+      $scope.loadmoreOption = true;
+    }else{
+      $scope.loadmoreOption = false;
+      $('.ongo-journey-main').css('margin-top','70px');
+    }
+    if ($.jStorage.get("isLoggedIn")) {
+      $scope.isLoggedIn = true;
+      if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
+        $scope.isMine = true;
+      } else {
+        $scope.isMine = false;
+      }
+    } else {
+      $scope.isLoggedIn = false;
+      $scope.isMine = false;
+    }
+    $scope.loadmore = function(){
+      $scope.loadmoreOption = false;
+    };
+    var formData = {
+      "urlSlug": $stateParams.draftSlug
+    };
+    pastJourney.getDrafts({pagenumber:1}, function(data){
+      console.log('created drafts ',data);
+    });
+    $scope.getBlankPastJourney = function() {
+      pastJourney.getOneDraft(formData, function(pastStoryData,lastPostDate) {
+        console.log('yo ',pastStoryData,lastPostDate);
+        $scope.pastJourneyArray = pastStoryData;
+        $scope.pastJourneyArray.lastPostDate = lastPostDate;
+        // for kind of journey
+        _.each($scope.pastJourneyArray.kindOfJourney,function(kind){
+          var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
+            return kind == journeyKind.captionSend;
+          });
+          console.log(getIndex);
+          if(getIndex !== -1){
+            $scope.journeyType[getIndex].activeClass = "active-itinerary";
+          }
+        })
+        // for kind of journey end
+        if (!$scope.pastJourneyArray.destinationVisited) {
+          $scope.pastJourneyArray.destinationVisited = [];
+        }
+        var postsWithLatLng = [];
+        postsWithLatLng = _.filter($scope.pastJourneyArray.post, 'latlong');
+        _.each(postsWithLatLng, function(n, $index) {
+          if (n && n.latlong && n.latlong.lat && n.latlong.long) {
+            centers[$index] = {
+              "lat": parseFloat(n.latlong.lat),
+              "lng": parseFloat(n.latlong.long)
+            };
+          } else {}
+        });
+        if (pastStoryData && pastStoryData.location && pastStoryData.location.lat) {
+          console.log('when is comes');
+          var obj = {
+            "lat": parseFloat(pastStoryData.location.lat),
+            "lng": parseFloat(pastStoryData.location.long)
+          }
+          centers.unshift(obj);
+        } else {}
+        console.log(centers);
+        initMap();
+        NavigationService.getProfile($scope.pastJourneyArray.user.urlSlug, function (data, status) {
+          $scope.userData = data.data;
+        }, function (err) {
+          //console.log(err);
+        });
+      }, function(error) {
+        console.log(error);
+      })
+    };
+    $scope.getBlankPastJourney();
+    $scope.time = {};
+    $scope.datetime = {};
+
+    $scope.changeBannerDate = function() {
+      $scope.journey = $scope.pastJourneyArray;
+      $scope.ongo = $scope.pastStory;
+      console.log($scope.pastJourneyArray,'pastJourneyarry');
+      //console.log("Banner Date");
+      $scope.isPostDate = false;
+      $scope.isBannerDate = true;
+      date = $scope.pastJourneyArray.startTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+
+      //console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified);
+      $scope.options = {
+        minDate: new Date(1 / 1 / 1970),
+        maxDate: new Date($scope.pastJourneyArray.post[$scope.pastJourneyArray.post.length - 1].UTCModified),
+        showWeeks: false
+      };
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+
+    $scope.updateBannerDateTime = function(id, formData, dt) {
+      //console.log(dt);
+      console.log(id,'id');
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function(data) {
+        var formData = {
+          "urlSlug": $scope.pastJourneyArray.urlSlug
+        }
+        pastJourney.getPastJourney(formData, function(pastStoryData,lastPostDate) {
+          $scope.pastJourneyArray.startTime = pastStoryData.startTime;
+          modal.close();
+          //console.log(journeys);
+        }, function(err) {
+          //console.log(err);
+        });
+      }
+      result._id = id;
+      result.startTime = new Date(date + " " + time);
+      pastJourney.updateBannerDateTime(result, callback);
+    };
+    //change banner date and time ends
+    $scope.viewEdit = function(index) {
+      console.log(index);
+      if ($scope.showEdit == index) {
+        $scope.showEdit = -1;
+      } else {
+        $scope.showEdit = index;
+      }
+    }
+    // add destination
+    console.log($scope.pastDestination, 'before function');
+    $scope.addDestination = function(destinationData) {
+      $scope.pastJourneyArray.destinationVisited.push(destinationData);
+      console.log($scope.pastJourneyArray.destinationVisited.length-1);
+      console.log($scope.pastJourneyArray.destinationVisited,'destinationVisited',$scope.countries,'countries');
+      $scope.showEdit = $scope.pastJourneyArray.destinationVisited.length-1;
+
+      // adding and removing country
+      _.each($scope.pastJourneyArray.destinationVisited, function(destVisit){
+        console.log(destVisit,'index');
+        _.remove($scope.countries, function(country){
+          return country._id == destVisit.country._id;
+        })
+        console.log($scope.countries,'country');
+      });
+
+      // adding and removing country end
+    }
+
+    console.log($scope.pastDestination, 'what is pastDestination');
+    // add destination end
+    // get country data
+    var countriesCallback = function(data) {
+      // countries = data.data;
+      // var countries = _.differenceBy(countries,'name');
+      $scope.countries = data.data;
+      // $scope.currency = data.data;
+    };
+
+    NavigationService.getAllCountries(countriesCallback, function() {
+      console.log("error getting data");
+    });
+    // country replace
+    console.log($scope.pastJourneyArray, 'what is country');
+    $scope.countryReplace = function(destinationData, index, countryData) {
+      console.log(destinationData, 'what is country data', index);
+      $scope.pastJourneyArray.destinationVisited[index].country = destinationData.country;
+      $scope.pastJourneyArray.destinationVisited[index].cityVisited = [];
+      console.log($scope.pastJourneyArray.destinationVisited, 'new country Data');
+    };
+    // console.log($scope.pastJourneyArray.destinationVisited, 'destiantion visited all data');
+    // country replace end
+
+    $scope.getCityVisited = function(countryId, searchKey) {
+      console.log(countryId, 'what is country id', searchKey, 'what is search key');
+      var formData = {
+        country: countryId,
+        search: searchKey
+      }
+      var str = searchKey;
+      console.log(str);
+      $scope.cities = [];
+      if (str && str.length > 3) {
+        NavigationService.searchCityByCountry(formData, function(data) {
+          $scope.cities = data.data;
+          // cities = data.data;
+          // var cities = _.differenceBy(cities, cityVisited, 'name');
+          // $scope.cities = cities;
+        });
+      }
+    }
+    // get country data end
+    // get likes and comment
+
+
+    $scope.getCommentsData = function(pastStory) {
+      console.log(pastStory, 'pastStory');
+      $scope.post = pastStory;
+      $scope.previousId;
+      $scope.viewCardLike = false;
+      $scope.postScrollData.type = pastStory.type;
+      $scope.postScrollData._id = pastStory._id;
+      var callback = function(data) {
+        $scope.uniqueArr = [];
+        $scope.listOfComments = data.data;
+        $scope.postScrollData.viewList = true;
+        $scope.uniqueArr = _.uniqBy($scope.listOfComments.comment, 'user._id');
+      }
+      if ($scope.previousId != $scope.post._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfComments = [];
+        $scope.viewCardComment = true;
+        $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+        $scope.getCard = "view-whole-card";
+        LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+      } else {
+        if ($scope.viewCardComment) {
+          $scope.viewCardComment = false;
+          $scope.pastJourneyArray.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.comment.text = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardComment = true;
+          // $scope.focus('enterComment');
+          $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+          $scope.getCard = "view-whole-card";
+          LikesAndComments.getComments(pastStory.type, $scope.post._id, $scope.postScrollData.likePageNumber, callback);
+        }
+      }
+      $scope.previousId = $scope.post._id;
+    };
+    $scope.getLikesData = function(pastStory) {
+      console.log('post ka click', pastStory);
+      $scope.postScrollData.type = pastStory.type;
+      $scope.postScrollData._id = pastStory._id;
+      $scope.viewCardComment = false;
+      var callback = function(data) {
+        $scope.postScrollData.viewList = true;
+        $scope.listOfLikes = data.data;
+        console.log($scope.listOfLikes);
+      };
+      if ($scope.previousLikeId != pastStory._id) {
+        // $scope.focus('enterComment');
+        $scope.listOfLikes = [];
+        $scope.viewCardLike = true;
+        $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+        $scope.showLikeShow = "show-like-side-sec";
+        LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+      } else {
+        if ($scope.viewCardLike) {
+          $scope.viewCardLike = false;
+          $scope.journey.journeyHighLight = "";
+          $scope.getCard = "";
+          $scope.showLikeShow = "";
+        } else {
+          $scope.listOfComments = [];
+          $scope.viewCardLike = true;
+          // $scope.focus('enterComment');
+          $scope.pastJourneyArray.journeyHighLight = pastStory._id;
+          $scope.showLikeShow = "show-like-side-sec";
+          LikesAndComments.getLikes(pastStory.type, pastStory._id, $scope.postScrollData.likePageNumber, callback);
+        }
+      }
+      $scope.previousLikeId = pastStory._id;
+    };
+
+    $scope.closeBackDrop = function() {
+      console.log('close');
+      $scope.viewCardComment = false;
+      $scope.viewCardLike = false;
+      $scope.pastJourneyArray.journeyHighLight = "";
+      $scope.getCard = "";
+      $scope.comment.text = "";
+      $scope.showLikeShow = "";
+      $scope.listOfLikes = [];
+      $scope.listOfComments = [];
+      $scope.postScrollData.likePageNumber = 1;
+      $scope.postScrollData.busy = false;
+      $scope.postScrollData.stopCallingApi = false;
+      console.log($scope.postScrollData, 'post scroll data');
+      $timeout(function() {
+        $scope.postScrollData.likePageNumber = 1;
+        $scope.listOfLikes = [];
+        $scope.listOfComments = [];
+        $scope.postScrollData.busy = false;
+        $scope.postScrollData.stopCallingApi = false;
+        $scope.postScrollData.viewList = false;
+        console.log($scope.postScrollData, 'console wla post scroll data');
+      }, 100);
+
+    };
+    // get likes and comment end
+    // EDIT KIND OF JOURNEY POPUP
+    var modalKindof;
+    $scope.editKindOf = function () {
+      $scope.journey = $scope.pastJourneyArray;
+      modalKindof = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/edit-kind-of-journey.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      });
+    };
+
+    $scope.journeyType = [{
+      img: "img/itinerary/adventure.png",
+      caption: "Adventure",
+      captionSend: 'Adventure',
+      activeClass : '',
+      width: "25"
+    },{
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      captionSend: "Backpacking",
+      activeClass : '',
+      width: "23"
+    }, {
+      img: "img/itinerary/business.png",
+      caption: "Business",
+      captionSend: "Business",
+      activeClass : '',
+      width: "24"
+    },{
+      img: "img/itinerary/religious.png",
+      caption: "Religious",
+      captionSend: "Religious",
+      activeClass : '',
+      width: "26"
+    }, {
+      img: "img/itinerary/romance.png",
+      caption: "Romantic",
+      captionSend: "Romance",
+      activeClass : '',
+      width: "26"
+    }, {
+      img: "img/itinerary/budget.png",
+      caption: "Budget",
+      captionSend: "Budget",
+      activeClass : '',
+      width: "22"
+    }, {
+      img: "img/itinerary/luxury.png",
+      caption: "Luxury",
+      captionSend: "Luxury",
+      activeClass : '',
+      width: "21"
+    }, {
+      img: "img/itinerary/family.png",
+      caption: "Family",
+      captionSend: "Family",
+      activeClass : '',
+      width: "30"
+    },  {
+      img: "img/itinerary/friend.png",
+      caption: "Friends",
+      captionSend: "Friends",
+      activeClass : '',
+      width: "24"
+    }, {
+      img: "img/itinerary/solo-white.png",
+      caption: "Solo",
+      captionSend: "Solo",
+      activeClass : '',
+      width: "35"
+    }, {
+      img: "img/itinerary/betterhalf-white.png",
+      caption: "Better Half",
+      captionSend: "Betterhalf",
+      activeClass : '',
+      width: "24"
+    }, {
+      img: "img/itinerary/colleague-white.png",
+      caption: "Colleague",
+      captionSend: "Colleague",
+      activeClass : '',
+      width: "29"
+    }];
+    // EDIT KIND OF JOURNEY POPUP END
+    $scope.kindofJourney = [];
+
+    $scope.selectItinerary = function(val,type){
+      var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
+        return n == type;
+      })
+      if(kindOfIndex == -1){
+        $scope.kindofJourney.push(type);
+        $scope.journeyType[val].activeClass = "active-itinerary";
+      }else {
+        _.remove($scope.kindofJourney, function(remove){
+          return remove == type;
+        })
+        $scope.journeyType[val].activeClass = "";
+      }
+    }
+
+    // save kind of journey
+    $scope.saveKindof = function(journeyId){
+      var formData = {
+        _id: journeyId,
+        kindOfJourney: $scope.kindofJourney
+      }
+      var callback = function(data){
+        modalKindof.close();
+      }
+      pastJourney.saveKindJourney(formData,callback);
+    }
+    // save kind of journey end
+
+    // edit journey name starts
+    $scope.editName = {};
+    $scope.nameJourney = function (name) {
+      console.log($scope.pastJourneyArray,'past journey array');
+      $scope.journey = $scope.pastJourneyArray;
+      $scope.editName.name = name;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-name.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      });
+    };
+    $scope.editJourneyName = function (id, obj) {
+      var formData = {
+        "_id": id,
+        "name": obj.name
+      };
+      var callback = function (name) {
+        $scope.journey.name = name;
+        modal.close();
+      };
+      pastJourney.editJourneyName(formData, callback);
+    };
+    // edit journey name end
+    //edit journey cover photo
+    $scope.coverPhoto = function (id) {
+      console.log($scope.pastJourneyArray,'pastJourneyArray');
+      $scope.journey = $scope.pastJourneyArray;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-cover.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+        windowClass: "cover-modal"
+      });
+
+      var formData = {
+        "_id": id,
+        "type": "photos"
+      };
+      var callback = function (photos) {
+        $scope.journeyCoverPhotos = photos;
+      };
+      pastJourney.getJourneyCoverPhoto(formData, callback);
+    };
+
+    $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
+      var formData = {
+        "_id": id,
+        "coverPhoto": coverPhoto
+      };
+      var callback = function () {
+        modal.close();
+      }
+      pastJourney.setJourneyCoverPhoto(formData, callback);
+    }
+    $scope.cropCover = function (imgCrop) {
+      $scope.showCover = imgCrop;
+      $scope.cropImage = true;
+    };
+    $scope.viewPrev = function () {
+      $scope.cropImage = false;
+    };
+    //edit journey cover photo end
+    // save destination visited data
+    $scope.saveDestinationVisited = function() {
+      console.log($scope.pastJourneyArray.destinationVisited, 'new array');
+      var formData = {
+        'destinationVisited': $scope.pastJourneyArray.destinationVisited,
+        '_id': $scope.pastJourneyArray._id
+      };
+      console.log(formData, 'destinationVisited');
+      TravelibroService.http({
+        url: adminURL + "/draft/editDataWeb",
+        method: "POST",
+        data: formData
+      }).success(function(data) {
+        console.log(data);
+        if(data.value==true){
+          $scope.showEdit = -1;
+        }
+      }).error(function(data) {
+        console.log(data);
+      });
+      console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
+    };
+    // delete destinationVisited
+    $scope.deleteVisited = function(index,country) {
+      console.log(country,'what is country',$scope.countries,'what was old');
+      // $scope.pastJourneyArray.destinationVisited[index] = [];
+      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
+      $scope.countries.push(country.country);
+      console.log($scope.countries,'what is new country');
+      $scope.saveDestinationVisited();
+    }
+    // delete destinationVisited end
+    // country modal
+    var modal = "";
+
+    $scope.review = {};
+    $scope.countryReview = function () {
+      $scope.reviewCountryCount = 0;
+      //console.log($scope.journey);
+      var len = $scope.pastJourneyArray.countryVisited.length;
+      //console.log(len);
+      if (len !== 0 && ($scope.reviewCountryCount < len)) {
+        console.log($scope.reviewCountryCount,'review country count', $scope.pastJourneyArray,'pastJourneyArray');
+
+        if($scope.pastJourneyArray.review[$scope.reviewCountryCount] && $scope.pastJourneyArray.review[$scope.reviewCountryCount].review){
+          $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
+        }
+      }
+      $scope.journey = $scope.pastJourneyArray;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-country.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      });
+      modal.closed.then(function () {
+
+      })
+    };
+
+    // country modal ends
+    // change end date
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeEndDate = function () {
+      $scope.journey = $scope.pastJourneyArray;
+      //console.log("end journey Date");
+      $scope.isPostDate = false;
+      $scope.isBanner = false;
+      $scope.isEndDate = true;
+      date = $scope.journey.endTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+
+      // console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified,'ktya hai date');
+      // console.log(moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(10, 'days'));
+      $scope.options = {
+        // minDate: new Date(date),
+        // maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+        minDate: $scope.pastJourneyArray.lastPostDate,
+        maxDate: $scope.journey.post.length!=0?moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(6, 'months'):null,
+        showWeeks: false
+      };
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+    $scope.endJourneyDate = function (id, formData, dt) {
+      console.log($scope.journey,'journey');
+      //console.log(dt);
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function (data) {
+        var formData = {
+          "urlSlug": $scope.journey.urlSlug
+        }
+        pastJourney.getPastJourney(formData, function (journeys,lastPostDate) {
+          $scope.journey.endTime = journeys.endTime;
+          modal.close();
+          $window.location.reload();
+          //console.log(journeys);
+        }, function (err) {
+          //console.log(err);
+        });
+      }
+      result.user = $scope.journey.user._id;
+      result._id = id;
+      result.endTime = new Date(date + " " + time);
+      pastJourney.endDateJourney(result, callback);
+    };
+    // change end date end
+
+    $scope.rateThisCountry = function (journeyId, countryId, formData, currentIndex) {
+      //console.log(currentIndex);
+      var result = {
+        journey: journeyId,
+        country: countryId,
+        review: formData.fillMeIn,
+        rating: formData.rate.toString()
+      };
+      var callback = function () {
+        $scope.pastJourneyArray.review[currentIndex].review = result.review;
+        $scope.pastJourneyArray.review[currentIndex].rating = result.rating;
+      };
+      pastJourney.rateThisCountry(result, callback);
+      $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+      var len = $scope.pastJourneyArray.countryVisited.length;
+      if ($scope.reviewCountryCount < len) {
+        if (($scope.journey.review.length > $scope.reviewCountryCount)) {
+          $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
+        } else {
+          $scope.review.fillMeIn = "";
+          $scope.review.rate = 1;
+        }
+      } else {
+        //console.log(modal);
+        modal.close();
+      }
+      //  test=$scope.journey.review[$scope.reviewCountryCount].review
+      // $scope.review.fillM=test;
+      // //console.log($scope.review.fil);
+      // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+    };
+    // Rating country ends
+    $scope.hoveringOver = function (value) {
+      $scope.overStar = value;
+    };
+    $scope.ratingStates = [{
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }, {
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
+    }];
+    $scope.getslide = "travel-out";
+    $scope.openTravelTrip = function () {
+      if ($scope.getslide == "travel-in") {
+        $scope.getslide = "travel-out";
+      } else {
+        $scope.getslide = "travel-in";
+      }
+    };
+    // save destination visited data end
+
+      $scope.editOption = function(model) {
+      $timeout(function() {
+        model.backgroundClick = true;
+        backgroundClick.object = model;
+      }, 200);
+      backgroundClick.scope = $scope;
+    };
+    $scope.followFollowing = function (user) {
+      LikesAndComments.followUnFollow(user, function (data) {
+        if (data.value) {
+          user.following = data.data.responseValue;
+        } else {
+          //console.log("error updating data");
+        }
+      });
+    };
+    var selectedCity = $scope.startLocationSet;
+    $scope.startLocationSet = {
+      "description": selectedCity,
+      "id": null
+    };
+
+    // page 1 integration starts
+    // gets all the cities starts
+    var getAllCities = function (data, status) {
+      if (data.value) {
+        $scope.cities = data.data.predictions;
+        console.log('data came ',data);
+      } else {
+        //console.log("Eroor Fetching Data");
+      }
+    };
+    $scope.searchByKey = function (searchCity) {
+      // cfpLoadingBar.start();
+      NavigationService.getAllCities({
+        "search": searchCity
+      }, getAllCities, function (err) {
+        //console.log(err);
+      });
+      // cfpLoadingBar.complete();
+    };
+    //End-Of get all the cities ends
+    var select = {};
+    $scope.setLocation = function(selected){
+      if(selected!=null || selected!="") {
+        _.forEach($scope.cities, function (city) {
+          if (city.description === selected) {
+            console.log(city);
+            select = city;
+          }
+        });
+        pastJourney.getLatLong({"placeId":select.place_id},function(data){
+          console.log('lat long ',data);
+        })
+      }
+    }
+  })
+  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, shareDataService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments,$window, $http, $uibModal,$filter) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
@@ -10473,7 +11272,6 @@ $scope.rateDestination = function(destRate, type) {
       $scope.loadmoreOption = false;
       $('.ongo-journey-main').css('margin-top','70px');
     }
-
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
@@ -10485,7 +11283,7 @@ $scope.rateDestination = function(destRate, type) {
       $scope.isLoggedIn = false;
       $scope.isMine = false;
     }
- $scope.loadmore = function(){
+    $scope.loadmore = function(){
       $scope.loadmoreOption = false;
     };
     function calcWidth() {
@@ -10571,8 +11369,9 @@ $scope.rateDestination = function(destRate, type) {
         // 'urlSlug': 'paris-2018'
         'urlSlug': $stateParams.id
       }
-      pastJourney.getPastJourney(formData, function(pastStoryData) {
+      pastJourney.getPastJourney(formData, function(pastStoryData,lastPostDate) {
         $scope.pastJourneyArray = pastStoryData;
+        $scope.pastJourneyArray.lastPostDate = lastPostDate;
         // for kind of journey
         _.each($scope.pastJourneyArray.kindOfJourney,function(kind){
           var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
@@ -10619,299 +11418,299 @@ $scope.rateDestination = function(destRate, type) {
     $scope.getPastJourney();
     //maps integration starts here
     var mapStyle = [
-    {
+      {
         "featureType": "administrative",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#d6e2e6"
-            }
+          {
+            "color": "#d6e2e6"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "administrative",
         "elementType": "geometry.stroke",
         "stylers": [
-            {
-                "color": "#cfd4d5"
-            }
+          {
+            "color": "#cfd4d5"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "administrative",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#7492a8"
-            }
+          {
+            "color": "#7492a8"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "administrative.neighborhood",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "lightness": 25
-            }
+          {
+            "lightness": 25
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "landscape.man_made",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#dde2e3"
-            }
+          {
+            "color": "#dde2e3"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "landscape.man_made",
         "elementType": "geometry.stroke",
         "stylers": [
-            {
-                "color": "#cfd4d5"
-            }
+          {
+            "color": "#cfd4d5"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "landscape.natural",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#dde2e3"
-            }
+          {
+            "color": "#dde2e3"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "landscape.natural",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#7492a8"
-            }
+          {
+            "color": "#7492a8"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "landscape.natural.terrain",
         "elementType": "all",
         "stylers": [
-            {
-                "visibility": "off"
-            }
+          {
+            "visibility": "off"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#dde2e3"
-            }
+          {
+            "color": "#dde2e3"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#588ca4"
-            }
+          {
+            "color": "#588ca4"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi",
         "elementType": "labels.icon",
         "stylers": [
-            {
-                "saturation": -100
-            }
+          {
+            "saturation": -100
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi.park",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#a9de83"
-            }
+          {
+            "color": "#a9de83"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi.park",
         "elementType": "geometry.stroke",
         "stylers": [
-            {
-                "color": "#bae6a1"
-            }
+          {
+            "color": "#bae6a1"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi.sports_complex",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#c6e8b3"
-            }
+          {
+            "color": "#c6e8b3"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "poi.sports_complex",
         "elementType": "geometry.stroke",
         "stylers": [
-            {
-                "color": "#bae6a1"
-            }
+          {
+            "color": "#bae6a1"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#41626b"
-            }
+          {
+            "color": "#41626b"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road",
         "elementType": "labels.icon",
         "stylers": [
-            {
-                "saturation": -45
-            },
-            {
-                "lightness": 10
-            },
-            {
-                "visibility": "on"
-            }
+          {
+            "saturation": -45
+          },
+          {
+            "lightness": 10
+          },
+          {
+            "visibility": "on"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.highway",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#c1d1d6"
-            }
+          {
+            "color": "#c1d1d6"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.highway",
         "elementType": "geometry.stroke",
         "stylers": [
-            {
-                "color": "#a6b5bb"
-            }
+          {
+            "color": "#a6b5bb"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.highway",
         "elementType": "labels.icon",
         "stylers": [
-            {
-                "visibility": "on"
-            }
+          {
+            "visibility": "on"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.highway.controlled_access",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#9fb6bd"
-            }
+          {
+            "color": "#9fb6bd"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.arterial",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#ffffff"
-            }
+          {
+            "color": "#ffffff"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "road.local",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#ffffff"
-            }
+          {
+            "color": "#ffffff"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit",
         "elementType": "labels.icon",
         "stylers": [
-            {
-                "saturation": -70
-            }
+          {
+            "saturation": -70
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit.line",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#b4cbd4"
-            }
+          {
+            "color": "#b4cbd4"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit.line",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#588ca4"
-            }
+          {
+            "color": "#588ca4"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit.station",
         "elementType": "all",
         "stylers": [
-            {
-                "visibility": "off"
-            }
+          {
+            "visibility": "off"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit.station",
         "elementType": "labels.text.fill",
         "stylers": [
-            {
-                "color": "#008cb5"
-            },
-            {
-                "visibility": "on"
-            }
+          {
+            "color": "#008cb5"
+          },
+          {
+            "visibility": "on"
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "transit.station.airport",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": -5
-            }
+          {
+            "saturation": -100
+          },
+          {
+            "lightness": -5
+          }
         ]
-    },
-    {
+      },
+      {
         "featureType": "water",
         "elementType": "geometry.fill",
         "stylers": [
-            {
-                "color": "#a6cbe3"
-                // "color": "#2c3757"
-            }
+          {
+            "color": "#a6cbe3"
+            // "color": "#2c3757"
+          }
         ]
-    }
-]
+      }
+    ]
 
 
     line = _.map(centers, function() {
@@ -11085,8 +11884,8 @@ $scope.rateDestination = function(destRate, type) {
           if (_.isEmpty(line[i])) {
             line[i] = new google.maps.Polyline({
               path: [departure, departure],
-               strokeColor: "#f2675b", //orange
-               //strokeColor: "#263757", //navy-blue
+              strokeColor: "#f2675b", //orange
+              //strokeColor: "#263757", //navy-blue
               //strokeColor: "#11d3cb", //cyan-blue
               // strokeOpacity: 1, --for continuous line
               //   strokeWeight: 3,
@@ -11221,7 +12020,7 @@ $scope.rateDestination = function(destRate, type) {
         var formData = {
           "urlSlug": $scope.pastJourneyArray.urlSlug
         }
-        pastJourney.getPastJourney(formData, function(pastStoryData) {
+        pastJourney.getPastJourney(formData, function(pastStoryData,lastPostDate) {
           $scope.pastJourneyArray.startTime = pastStoryData.startTime;
           modal.close();
           //console.log(journeys);
@@ -11261,13 +12060,7 @@ $scope.rateDestination = function(destRate, type) {
 
       // adding and removing country end
     }
-    $scope.deleteVisited = function(index,country) {
-      console.log(country,'what is country',$scope.countries,'what was old');
-      // $scope.pastJourneyArray.destinationVisited[index] = [];
-      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
-      $scope.countries.push(country.country);
-      console.log($scope.countries,'what is new country');
-    }
+
     console.log($scope.pastDestination, 'what is pastDestination');
     // add destination end
     // get country data
@@ -11416,86 +12209,86 @@ $scope.rateDestination = function(destRate, type) {
     var modalKindof;
     $scope.editKindOf = function () {
       $scope.journey = $scope.pastJourneyArray;
-       modalKindof = $uibModal.open({
-            animation: true,
-            templateUrl: "views/modal/edit-kind-of-journey.html",
-            scope: $scope,
-            backdropClass: "review-backdrop",
-        });
+      modalKindof = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/edit-kind-of-journey.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      });
     };
 
     $scope.journeyType = [{
-        img: "img/itinerary/adventure.png",
-        caption: "Adventure",
-        captionSend: 'Adventure',
+      img: "img/itinerary/adventure.png",
+      caption: "Adventure",
+      captionSend: 'Adventure',
       activeClass : '',
-        width: "25"
+      width: "25"
     },{
-        img: "img/itinerary/backpacking.png",
-        caption: "Backpacking",
-        captionSend: "Backpacking",
+      img: "img/itinerary/backpacking.png",
+      caption: "Backpacking",
+      captionSend: "Backpacking",
       activeClass : '',
-        width: "23"
+      width: "23"
     }, {
-        img: "img/itinerary/business.png",
-        caption: "Business",
-        captionSend: "Business",
+      img: "img/itinerary/business.png",
+      caption: "Business",
+      captionSend: "Business",
       activeClass : '',
-        width: "24"
+      width: "24"
     },{
-        img: "img/itinerary/religious.png",
-        caption: "Religious",
-        captionSend: "Religious",
+      img: "img/itinerary/religious.png",
+      caption: "Religious",
+      captionSend: "Religious",
       activeClass : '',
-        width: "26"
+      width: "26"
     }, {
-        img: "img/itinerary/romance.png",
-        caption: "Romantic",
-        captionSend: "Romance",
+      img: "img/itinerary/romance.png",
+      caption: "Romantic",
+      captionSend: "Romance",
       activeClass : '',
-        width: "26"
+      width: "26"
     }, {
-        img: "img/itinerary/budget.png",
-        caption: "Budget",
-        captionSend: "Budget",
+      img: "img/itinerary/budget.png",
+      caption: "Budget",
+      captionSend: "Budget",
       activeClass : '',
-        width: "22"
+      width: "22"
     }, {
-        img: "img/itinerary/luxury.png",
-        caption: "Luxury",
-        captionSend: "Luxury",
+      img: "img/itinerary/luxury.png",
+      caption: "Luxury",
+      captionSend: "Luxury",
       activeClass : '',
-        width: "21"
+      width: "21"
     }, {
-        img: "img/itinerary/family.png",
-        caption: "Family",
-        captionSend: "Family",
+      img: "img/itinerary/family.png",
+      caption: "Family",
+      captionSend: "Family",
       activeClass : '',
-        width: "30"
+      width: "30"
     },  {
-        img: "img/itinerary/friend.png",
-        caption: "Friends",
-        captionSend: "Friends",
+      img: "img/itinerary/friend.png",
+      caption: "Friends",
+      captionSend: "Friends",
       activeClass : '',
-        width: "24"
+      width: "24"
     }, {
-        img: "img/itinerary/solo-white.png",
-        caption: "Solo",
-        captionSend: "Solo",
+      img: "img/itinerary/solo-white.png",
+      caption: "Solo",
+      captionSend: "Solo",
       activeClass : '',
-        width: "35"
+      width: "35"
     }, {
-        img: "img/itinerary/betterhalf-white.png",
-        caption: "Better Half",
-        captionSend: "Betterhalf",
+      img: "img/itinerary/betterhalf-white.png",
+      caption: "Better Half",
+      captionSend: "Betterhalf",
       activeClass : '',
-        width: "24"
+      width: "24"
     }, {
-        img: "img/itinerary/colleague-white.png",
-        caption: "Colleague",
-        captionSend: "Colleague",
+      img: "img/itinerary/colleague-white.png",
+      caption: "Colleague",
+      captionSend: "Colleague",
       activeClass : '',
-        width: "29"
+      width: "29"
     }];
     // EDIT KIND OF JOURNEY POPUP END
     $scope.kindofJourney = [];
@@ -11504,15 +12297,15 @@ $scope.rateDestination = function(destRate, type) {
       var kindOfIndex = _.findIndex($scope.kindofJourney, function(n){
         return n == type;
       })
-        if(kindOfIndex == -1){
-          $scope.kindofJourney.push(type);
-          $scope.journeyType[val].activeClass = "active-itinerary";
-        }else {
-          _.remove($scope.kindofJourney, function(remove){
-            return remove == type;
-          })
-          $scope.journeyType[val].activeClass = "";
-        }
+      if(kindOfIndex == -1){
+        $scope.kindofJourney.push(type);
+        $scope.journeyType[val].activeClass = "active-itinerary";
+      }else {
+        _.remove($scope.kindofJourney, function(remove){
+          return remove == type;
+        })
+        $scope.journeyType[val].activeClass = "";
+      }
     }
 
     // save kind of journey
@@ -11532,67 +12325,67 @@ $scope.rateDestination = function(destRate, type) {
     $scope.editName = {};
     $scope.nameJourney = function (name) {
       console.log($scope.pastJourneyArray,'past journey array');
-        $scope.journey = $scope.pastJourneyArray;
-        $scope.editName.name = name;
-        modal = $uibModal.open({
-            animation: true,
-            templateUrl: "views/modal/journey-name.html",
-            scope: $scope,
-            backdropClass: "review-backdrop"
-        });
+      $scope.journey = $scope.pastJourneyArray;
+      $scope.editName.name = name;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-name.html",
+        scope: $scope,
+        backdropClass: "review-backdrop"
+      });
     };
     $scope.editJourneyName = function (id, obj) {
-        var formData = {
-            "_id": id,
-            "name": obj.name
-        };
-        var callback = function (name) {
-            $scope.journey.name = name;
-            modal.close();
-        };
-        pastJourney.editJourneyName(formData, callback);
+      var formData = {
+        "_id": id,
+        "name": obj.name
+      };
+      var callback = function (name) {
+        $scope.journey.name = name;
+        modal.close();
+      };
+      pastJourney.editJourneyName(formData, callback);
     };
     // edit journey name end
     //edit journey cover photo
     $scope.coverPhoto = function (id) {
       console.log($scope.pastJourneyArray,'pastJourneyArray');
       $scope.journey = $scope.pastJourneyArray;
-        modal = $uibModal.open({
-            animation: true,
-            templateUrl: "views/modal/journey-cover.html",
-            scope: $scope,
-            backdropClass: "review-backdrop",
-            windowClass: "cover-modal"
-        });
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/journey-cover.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+        windowClass: "cover-modal"
+      });
 
-        var formData = {
-            "_id": id,
-            "type": "photos"
-        };
-        var callback = function (photos) {
-            $scope.journeyCoverPhotos = photos;
-        };
-        pastJourney.getJourneyCoverPhoto(formData, callback);
+      var formData = {
+        "_id": id,
+        "type": "photos"
+      };
+      var callback = function (photos) {
+        $scope.journeyCoverPhotos = photos;
+      };
+      pastJourney.getJourneyCoverPhoto(formData, callback);
     };
 
     $scope.setJourneyCoverPhoto = function (id, coverPhoto) {
-            var formData = {
-                "_id": id,
-                "coverPhoto": coverPhoto
-            };
-            var callback = function () {
-                modal.close();
-            }
-            pastJourney.setJourneyCoverPhoto(formData, callback);
-        }
-         $scope.cropCover = function (imgCrop) {
-        $scope.showCover = imgCrop;
-        $scope.cropImage = true;
+      var formData = {
+        "_id": id,
+        "coverPhoto": coverPhoto
+      };
+      var callback = function () {
+        modal.close();
+      }
+      pastJourney.setJourneyCoverPhoto(formData, callback);
+    }
+    $scope.cropCover = function (imgCrop) {
+      $scope.showCover = imgCrop;
+      $scope.cropImage = true;
     };
     $scope.viewPrev = function () {
-        $scope.cropImage = false;
+      $scope.cropImage = false;
     };
-        //edit journey cover photo end
+    //edit journey cover photo end
     // save destination visited data
     $scope.saveDestinationVisited = function() {
       console.log($scope.pastJourneyArray.destinationVisited, 'new array');
@@ -11615,96 +12408,169 @@ $scope.rateDestination = function(destRate, type) {
       });
       console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
     };
+    // delete destinationVisited
+    $scope.deleteVisited = function(index,country) {
+      console.log(country,'what is country',$scope.countries,'what was old');
+      // $scope.pastJourneyArray.destinationVisited[index] = [];
+      $scope.pastJourneyArray.destinationVisited.splice(index, 1);
+      $scope.countries.push(country.country);
+      console.log($scope.countries,'what is new country');
+      $scope.saveDestinationVisited();
+    }
+    // delete destinationVisited end
     // country modal
     var modal = "";
 
     $scope.review = {};
     $scope.countryReview = function () {
-        $scope.reviewCountryCount = 0;
-        //console.log($scope.journey);
-        var len = $scope.pastJourneyArray.countryVisited.length;
-        //console.log(len);
-        if (len !== 0 && ($scope.reviewCountryCount < len)) {
-          console.log($scope.reviewCountryCount,'review country count', $scope.pastJourneyArray,'pastJourneyArray');
+      $scope.reviewCountryCount = 0;
+      //console.log($scope.journey);
+      var len = $scope.pastJourneyArray.countryVisited.length;
+      //console.log(len);
+      if (len !== 0 && ($scope.reviewCountryCount < len)) {
+        console.log($scope.reviewCountryCount,'review country count', $scope.pastJourneyArray,'pastJourneyArray');
 
-          if($scope.pastJourneyArray.review[$scope.reviewCountryCount] && $scope.pastJourneyArray.review[$scope.reviewCountryCount].review){
-              $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
-              $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
-          }
+        if($scope.pastJourneyArray.review[$scope.reviewCountryCount] && $scope.pastJourneyArray.review[$scope.reviewCountryCount].review){
+          $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
         }
-        $scope.journey = $scope.pastJourneyArray;
-        modal = $uibModal.open({
-            animation: true,
-            templateUrl: "views/modal/review-country.html",
-            scope: $scope,
-            backdropClass: "review-backdrop",
-        });
-        modal.closed.then(function () {
+      }
+      $scope.journey = $scope.pastJourneyArray;
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/review-country.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      });
+      modal.closed.then(function () {
 
-        })
+      })
     };
 
     // country modal ends
+    // change end date
+    $scope.time = {};
+    $scope.datetime = {};
+    $scope.changeEndDate = function () {
+      $scope.journey = $scope.pastJourneyArray;
+      //console.log("end journey Date");
+      $scope.isPostDate = false;
+      $scope.isBanner = false;
+      $scope.isEndDate = true;
+      date = $scope.journey.endTime;
+      var d = new Date(date);
+      var hh = d.getHours();
+      if (hh > 12) {
+        hh = hh - 12;
+        $scope.time.am_pm = "PM";
+      } else {
+        $scope.time.am_pm = "AM";
+      }
+      $scope.time.hour = hh;
+      $scope.time.min = d.getMinutes();
+      $scope.datetime.dt = d;
+
+      // console.log($scope.journey.post[$scope.journey.post.length - 1].UTCModified,'ktya hai date');
+      // console.log(moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(10, 'days'));
+      $scope.options = {
+        // minDate: new Date(date),
+        // maxDate: new Date($scope.journey.post[$scope.journey.post.length - 1].UTCModified),
+        minDate: $scope.pastJourneyArray.lastPostDate,
+        maxDate: $scope.journey.post.length!=0?moment($scope.journey.post[$scope.journey.post.length - 1].UTCModified).add(6, 'months'):null,
+        showWeeks: false
+      };
+      modal = $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/date-time.html",
+        scope: $scope,
+        backdropClass: "review-backdrop",
+      })
+    };
+    $scope.endJourneyDate = function (id, formData, dt) {
+      console.log($scope.journey,'journey');
+      //console.log(dt);
+      var date = $filter('formatDateCalender')(dt);
+      var time = $filter('formatTimeCalender')(formData);
+      var result = {};
+      var callback = function (data) {
+        var formData = {
+          "urlSlug": $scope.journey.urlSlug
+        }
+        pastJourney.getPastJourney(formData, function (journeys,lastPostDate) {
+          $scope.journey.endTime = journeys.endTime;
+          modal.close();
+          $window.location.reload();
+          //console.log(journeys);
+        }, function (err) {
+          //console.log(err);
+        });
+      }
+      result.user = $scope.journey.user._id;
+      result._id = id;
+      result.endTime = new Date(date + " " + time);
+      pastJourney.endDateJourney(result, callback);
+    };
+    // change end date end
 
     $scope.rateThisCountry = function (journeyId, countryId, formData, currentIndex) {
-        //console.log(currentIndex);
-        var result = {
-            journey: journeyId,
-            country: countryId,
-            review: formData.fillMeIn,
-            rating: formData.rate.toString()
-        };
-        var callback = function () {
-            $scope.pastJourneyArray.review[currentIndex].review = result.review;
-            $scope.pastJourneyArray.review[currentIndex].rating = result.rating;
-        };
-        pastJourney.rateThisCountry(result, callback);
-        $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
-        var len = $scope.pastJourneyArray.countryVisited.length;
-        if ($scope.reviewCountryCount < len) {
-            if (($scope.journey.review.length > $scope.reviewCountryCount)) {
-                $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
-                $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
-            } else {
-                $scope.review.fillMeIn = "";
-                $scope.review.rate = 1;
-            }
+      //console.log(currentIndex);
+      var result = {
+        journey: journeyId,
+        country: countryId,
+        review: formData.fillMeIn,
+        rating: formData.rate.toString()
+      };
+      var callback = function () {
+        $scope.pastJourneyArray.review[currentIndex].review = result.review;
+        $scope.pastJourneyArray.review[currentIndex].rating = result.rating;
+      };
+      pastJourney.rateThisCountry(result, callback);
+      $scope.reviewCountryCount = $scope.reviewCountryCount + 1;
+      var len = $scope.pastJourneyArray.countryVisited.length;
+      if ($scope.reviewCountryCount < len) {
+        if (($scope.journey.review.length > $scope.reviewCountryCount)) {
+          $scope.review.fillMeIn = $scope.pastJourneyArray.review[$scope.reviewCountryCount].review;
+          $scope.review.rate = $scope.pastJourneyArray.review[$scope.reviewCountryCount].rating;
         } else {
-            //console.log(modal);
-            modal.close();
+          $scope.review.fillMeIn = "";
+          $scope.review.rate = 1;
         }
-        //  test=$scope.journey.review[$scope.reviewCountryCount].review
-        // $scope.review.fillM=test;
-        // //console.log($scope.review.fil);
-        // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
+      } else {
+        //console.log(modal);
+        modal.close();
+      }
+      //  test=$scope.journey.review[$scope.reviewCountryCount].review
+      // $scope.review.fillM=test;
+      // //console.log($scope.review.fil);
+      // $scope.review.fillMeIn=$scope.journey.review[$scope.reviewCountryCount].review;
     };
     // Rating country ends
     $scope.hoveringOver = function (value) {
-        $scope.overStar = value;
+      $scope.overStar = value;
     };
     $scope.ratingStates = [{
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
     }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
     }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
     }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
     }, {
-        stateOn: 'fa fa-star-o',
-        stateOff: 'fa fa-star'
+      stateOn: 'fa fa-star-o',
+      stateOff: 'fa fa-star'
     }];
     $scope.getslide = "travel-out";
     $scope.openTravelTrip = function () {
-        if ($scope.getslide == "travel-in") {
-            $scope.getslide = "travel-out";
-        } else {
-            $scope.getslide = "travel-in";
-        }
+      if ($scope.getslide == "travel-in") {
+        $scope.getslide = "travel-out";
+      } else {
+        $scope.getslide = "travel-in";
+      }
     };
     // save destination visited data end
 
@@ -11800,7 +12666,7 @@ $scope.rateDestination = function(destRate, type) {
       }, 200);
       backgroundClick.scope = $scope;
     };
-      $scope.followFollowing = function (user) {
+    $scope.followFollowing = function (user) {
       LikesAndComments.followUnFollow(user, function (data) {
         if (data.value) {
           user.following = data.data.responseValue;
@@ -11810,6 +12676,7 @@ $scope.rateDestination = function(destRate, type) {
       });
     }
   })
+
   .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
 

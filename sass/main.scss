@@ -14368,6 +14368,19 @@ video::-webkit-media-controls-fullscreen-button {
 .draft-group {
   padding: 0 10px 30px;
   display: inline-block;
+  .ui-select-container {
+    display: inline-block;
+    .ui-select-toggle, .ui-select-search {
+      display: inline-block;
+      border: none;
+      border-radius: 5px;
+      background-color: #f0f0f8;
+      height: 50px;
+      width: 240px;
+      color: #10d0d2;
+      font-size: 18px;
+    }
+  }
 }
 .addBtn {
   background-color: #f0f0f8;
@@ -14389,4 +14402,63 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .addBtn:disabled {
   opacity: 0.5;
+}
+.end-strip {
+  display: inline-block;
+}
+.journey-end > p {
+  display: inline-block;
+}
+.drafts {
+  margin-top: 45px;
+  //background-color: rgba(255,255,255,0.8);
+  .main-paststory{
+    margin: auto;
+  }
+  .started-journey-card {
+    margin-top: 30px;
+  }
+}
+.startLoc {
+  //text-align: center;
+  p {
+    padding-top: 10px;
+  }
+  .ui-select-container {
+    margin-top: 6px;
+    background-color: transparent;
+    color: white;
+  }
+  .ui-select-container .ui-select-match .ui-select-toggle,
+  .ui-select-container input {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid white;
+    color: #ffffff;
+  }
+  .location {
+    margin-top: 5px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+  }
+  .location:hover {
+    background-color: #ffffff;
+    color: $brand-pink;
+  }
+  .ui-select-placeholder {
+    color: #ffffff;
+  }
+}
+.setLocation {
+  width: 45px;
+  height: 45px;
+  border: 2px solid white;
+  border-radius: 25px;
+  font-size: 20px;
+  background-color: transparent;
+  i {
+    padding-top: 7px;
+  }
 }
