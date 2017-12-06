@@ -2851,7 +2851,7 @@ $scope.kindofJourney = [];
 
     // login and then redirect to same journey
     $scope.viewLoginJourney = function(){
-      console.log($.jStorage.get('journeyUrl'),'ongojourney url mai kya hai',$location,'location ongo');
+      // console.log($.jStorage.get('journeyUrl'),'ongojourney url mai kya hai',$location,'location ongo');
       var currentUrl = $location.$$path;
       $.jStorage.set('journeyUrl',currentUrl);
     }
@@ -11812,7 +11812,7 @@ $scope.rateDestination = function(destRate, type) {
     }
       // login and then redirect to same journey
     $scope.viewLoginJourney = function(){
-      console.log($.jStorage.get('journeyUrl'),'journey url mai kya hai',$location,'location');
+      // console.log($.jStorage.get('journeyUrl'),'journey url mai kya hai',$location,'location');
       var currentUrl = $location.$$path;
       $.jStorage.set('journeyUrl',currentUrl);
     }
