@@ -2276,52 +2276,54 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 // i=currennt card comming from bottom / arrival card
                 //value=true for identifyng current departure and arrival
                 //flag=true only when percentComplete reaches 100
-                var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-                var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-                step = 0;
-                var linesCount = line.length - 1;
-                try {
-                  for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
-                    if ((value == true) && (percentComplete < 100)) {
-                      if (markerCount == i) {
-                        markers[markerCount].setIcon("");
-                        if (markers[markerCount].map == null) {
-                          markers[markerCount].setMap(map);
+                if(centers && centers.length > 0){
+                  var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+                  var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+                  step = 0;
+                  var linesCount = line.length - 1;
+                  try {
+                    for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
+                      if ((value == true) && (percentComplete < 100)) {
+                        if (markerCount == i) {
+                          markers[markerCount].setIcon("");
+                          if (markers[markerCount].map == null) {
+                            markers[markerCount].setMap(map);
+                          }
+                          ;
+                          markers[markerCount].setIcon("img/maps/green-marker.png");
+                        } else if (markerCount >= i) {
+                          markers[markerCount].setMap(null);
+                        } else if ((markerCount <= i)) {
+                          if (markers[markerCount].map == null) {
+                            markers[markerCount].setMap(map);
+                          }
+                          ;
+                          markers[markerCount].setIcon("img/maps/small-marker.png");
                         }
-                        ;
-                        markers[markerCount].setIcon("img/maps/green-marker.png");
-                      } else if (markerCount >= i) {
-                        markers[markerCount].setMap(null);
-                      } else if ((markerCount <= i)) {
-                        if (markers[markerCount].map == null) {
-                          markers[markerCount].setMap(map);
-                        }
-                        ;
-                        markers[markerCount].setIcon("img/maps/small-marker.png");
+                      } else {
+                        break;
                       }
-                    } else {
-                      break;
                     }
-                  }
-                }catch(e){}
-                redLineDraw(i, departure, arrival, percentComplete, value, flag);
+                  }catch(e){}
+                  redLineDraw(i, departure, arrival, percentComplete, value, flag);
 
-                //clearPolyLines starts
-                while ((linesCount >= (i + 1)) && (value)) {
-                    if (!_.isEmpty(line[linesCount])) {
-                        line[linesCount].setMap(null);
-                        markers[linesCount].setMap(null);
-                        line[linesCount] = {};
-                    };
-                    linesCount--;
-                };
-                //clearPolyLines ends
+                  //clearPolyLines starts
+                  while ((linesCount >= (i + 1)) && (value)) {
+                      if (!_.isEmpty(line[linesCount])) {
+                          line[linesCount].setMap(null);
+                          markers[linesCount].setMap(null);
+                          line[linesCount] = {};
+                      };
+                      linesCount--;
+                  };
+                  //clearPolyLines ends
 
-                //draw succeeding polyLines starts
-                if (i > 1) {
-                    pointsForLine(i - 1, 100);
-                    count = centers.length;
-                };
+                  //draw succeeding polyLines starts
+                  if (i > 1) {
+                      pointsForLine(i - 1, 100);
+                      count = centers.length;
+                  };
+                }
                 //draw succeeding polyLines end
             };
             // console.log(map,'setting map');
@@ -11056,50 +11058,52 @@ $scope.rateDestination = function(destRate, type) {
           // i=currennt card comming from bottom / arrival card
           //value=true for identifyng current departure and arrival
           //flag=true only when percentComplete reaches 100
-          var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
-          var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
-          step = 0;
-          var linesCount = line.length - 1;
-          try {
-            for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
-              if ((value == true) && (percentComplete < 100)) {
-                if (markerCount == i) {
-                  markers[markerCount].setIcon("");
-                  if (markers[markerCount].map == null) {
-                    markers[markerCount].setMap(map);
-                  };
-                  markers[markerCount].setIcon("img/maps/green-marker.png");
-                } else if (markerCount >= i) {
-                  markers[markerCount].setMap(null);
-                } else if ((markerCount <= i)) {
-                  if (markers[markerCount].map == null) {
-                    markers[markerCount].setMap(map);
-                  };
-                  markers[markerCount].setIcon("img/maps/small-marker.png");
+          if(centers && centers.length > 0){
+            var departure = new google.maps.LatLng(centers[i - 1].lat, centers[i - 1].lng); //Set to whatever lat/lng you need for your departure location
+            var arrival = new google.maps.LatLng(centers[i].lat, centers[i].lng); //Set to whatever lat/lng you need for your arrival locationlat:
+            step = 0;
+            var linesCount = line.length - 1;
+            try {
+              for (markerCount = markers.length - 1; markerCount > 0; markerCount--) {
+                if ((value == true) && (percentComplete < 100)) {
+                  if (markerCount == i) {
+                    markers[markerCount].setIcon("");
+                    if (markers[markerCount].map == null) {
+                      markers[markerCount].setMap(map);
+                    };
+                    markers[markerCount].setIcon("img/maps/green-marker.png");
+                  } else if (markerCount >= i) {
+                    markers[markerCount].setMap(null);
+                  } else if ((markerCount <= i)) {
+                    if (markers[markerCount].map == null) {
+                      markers[markerCount].setMap(map);
+                    };
+                    markers[markerCount].setIcon("img/maps/small-marker.png");
+                  }
+                } else {
+                  break;
                 }
-              } else {
-                break;
               }
-            }
-          } catch (e) {}
-          redLineDraw(i, departure, arrival, percentComplete, value, flag);
+            } catch (e) {}
+            redLineDraw(i, departure, arrival, percentComplete, value, flag);
 
-          //clearPolyLines starts
-          while ((linesCount >= (i + 1)) && (value)) {
-            if (!_.isEmpty(line[linesCount])) {
-              line[linesCount].setMap(null);
-              markers[linesCount].setMap(null);
-              line[linesCount] = {};
+            //clearPolyLines starts
+            while ((linesCount >= (i + 1)) && (value)) {
+              if (!_.isEmpty(line[linesCount])) {
+                line[linesCount].setMap(null);
+                markers[linesCount].setMap(null);
+                line[linesCount] = {};
+              };
+              linesCount--;
             };
-            linesCount--;
-          };
-          //clearPolyLines ends
+            //clearPolyLines ends
 
-          //draw succeeding polyLines starts
-          if (i > 1) {
-            pointsForLine(i - 1, 100);
-            count = centers.length;
-          };
+            //draw succeeding polyLines starts
+            if (i > 1) {
+              pointsForLine(i - 1, 100);
+              count = centers.length;
+            };
+          }
           //draw succeeding polyLines end
         };
       }
