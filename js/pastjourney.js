@@ -138,6 +138,17 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           console.log(data);
         });
       },
+      deleteJourney : function(formData,callback){
+        TravelibroService.http({
+          url: adminURL + "/journey/deleteJourneyWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
 		  getLatLong: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/card/getGooglePlaceDetail",
@@ -156,6 +167,17 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           data: formData
         }).success(function (data) {
           callback(formData.name)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      setStartLocation: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/draft/editDataWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
         }).error(function (data) {
           console.log(data);
         });

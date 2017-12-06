@@ -5924,6 +5924,7 @@ $scope.rateDestination = function(destRate, type) {
     $scope.scroll = {
         busy: false
     };
+    $scope.ownerProfile = $stateParams.urlSlug===$.jStorage.get("profile").urlSlug;
     $scope.travelLife = [];
     var allowAccess = false;
     $scope.allowAccess = allowAccess;
@@ -5945,8 +5946,8 @@ $scope.rateDestination = function(destRate, type) {
     $scope.reviewView = 1;
     $scope.mapPathData = window._mapPathData;
     $scope.heatmapColors = ['#2c3757', '#ff6759'];
-
-  $scope.format = 'dd-MM-yyyy';
+    $scope.nodrafts = true;
+    $scope.format = 'dd-MM-yyyy';
   $scope.open1 = function () {
     $scope.popup1.opened = true;
     showWeeks = false;
@@ -5971,14 +5972,7 @@ $scope.rateDestination = function(destRate, type) {
     showWeeks: false
   };
   var profile = $.jStorage.get("profile");
-  $scope.getDraftsIfAny = function(){
-    var formData = {
-      'pagenumber':1
-    };
-    pastJourney.getDrafts(formData, function(data){
-      console.log(data);
-    })
-  };
+
   $scope.createDraft = function(formData){
     // formData.user = $.jStorage.get("profile")._id;
     console.log(formData);
@@ -5994,7 +5988,6 @@ $scope.rateDestination = function(destRate, type) {
     })
 
   };
-
 
   $scope.reviewAll = {
         "arr": [],
@@ -6611,13 +6604,18 @@ $scope.rateDestination = function(destRate, type) {
             'id': journey.urlSlug,
             'urlSlug': journey.user.urlSlug
           });
-        } else {
+        }
+      } else if (journey.draft === true && journey.status === false) {
+            $state.go('drafts', {
+              'draftSlug': journey.urlSlug,
+              'urlSlug': profile.urlSlug
+            });
+          } else {
           $state.go('ongojourney', {
             'id': journey.urlSlug,
             'urlSlug': journey.user.urlSlug
           });
         }
-      }
     };
     // routing to on-the-go,detailed-iti,quick-iti ends here
 
@@ -6653,6 +6651,26 @@ $scope.rateDestination = function(destRate, type) {
         "scrollBusy": false,
         "stopCallingApi": false,
         "type": "local-life"
+    };
+    $scope.deleteDraft = function(id){
+      var formData = {
+        '_id': id
+      };
+      pastJourney.deleteJourney(formData, function(data){
+        console.log(data);
+        location.reload();
+      })
+    }
+    var getDrafts = function (){
+        var formData = {
+          'pagenumber':1
+        };
+        pastJourney.getDrafts(formData, function(data){
+          if(data.length > 0)
+            $scope.nodrafts = false;
+          $scope.draftCreated = data;
+          console.log(data);
+        })
     };
     var getMoments = function () {
         $scope.allMoments.scrollBusy = true;
@@ -7269,6 +7287,14 @@ $scope.rateDestination = function(destRate, type) {
             // $location.hash("reviews");
             // anchorSmoothScroll.scrollTo("reviews");
             break;
+        case "drafts":
+            getDrafts();
+            //console.log("scrolling to reviews");
+            $scope.myLife.innerView = allMyLife[3];
+            smoothScroll($state.params.name);
+            // $location.hash("reviews");
+            // anchorSmoothScroll.scrollTo("reviews");
+            break;
         case "holidayplanner":
             $scope.myLife.innerView = allMyLife[3];
             break;
@@ -7298,6 +7324,13 @@ $scope.rateDestination = function(destRate, type) {
                 //   $stateParams.name = "reviews";
                 url = "reviews";
                 getReviews();
+                //   anchorSmoothScroll.scrollTo(url);
+                break;
+          case 3:
+                //console.log("reviews m hu bhai");
+                //   $stateParams.name = "reviews";
+                url = "drafts";
+                getDrafts();
                 //   anchorSmoothScroll.scrollTo(url);
                 break;
         }
@@ -10547,7 +10580,6 @@ $scope.rateDestination = function(destRate, type) {
     });
     $scope.getBlankPastJourney = function() {
       pastJourney.getOneDraft(formData, function(pastStoryData,lastPostDate) {
-        console.log('yo ',pastStoryData,lastPostDate);
         $scope.pastJourneyArray = pastStoryData;
         $scope.pastJourneyArray.lastPostDate = lastPostDate;
         // for kind of journey
@@ -10555,7 +10587,7 @@ $scope.rateDestination = function(destRate, type) {
           var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
             return kind == journeyKind.captionSend;
           });
-          console.log(getIndex);
+          // console.log(getIndex);
           if(getIndex !== -1){
             $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
@@ -11248,6 +11280,27 @@ $scope.rateDestination = function(destRate, type) {
         });
         pastJourney.getLatLong({"placeId":select.place_id},function(data){
           console.log('lat long ',data);
+          var loc = data;
+          var locationData = {
+            location : {}
+          };
+          locationData.location.lat = loc.lat;
+          locationData.location.long = loc.long;
+          locationData._id = $scope.pastJourneyArray._id;
+          locationData.startLocation = loc.cityName;
+          var destination = [{
+            country : {
+              '_id': loc.country,
+              'name': loc.countryName
+            },
+            cityVisited: [{'_id':loc.city, 'name':loc.cityName}]
+          }]
+          locationData.destinationVisited = destination;
+          console.log('we r sending ',locationData);
+          pastJourney.setStartLocation(locationData, function(data){
+            console.log('loc set ',data);
+            $window.location.reload();
+          })
         })
       }
     }
