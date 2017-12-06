@@ -268,14 +268,14 @@
             <!-- if not login -->
             <div class="loadmore" ng-if="!isLoggedIn">
               <div class="no-login">
-                <p class="text-center avenir-roman color-white">TraveLibro boasts of a community of nomads, wanderers, explorers and storytellers.  We bring to you visual travel stories highlighting the entire experience on a trip by the best global travel bloggers and photographers. Discover these travel stories by destinations or interest to help inspire your future travels.</p>
+                <p class="text-justify avenir-roman color-white">TraveLibro boasts of a community of nomads, wanderers, explorers and storytellers.  We bring to you visual travel stories highlighting the entire experience of a trip by the best global travel bloggers and photographers. Discover these travel stories by destinations or interest to help inspire your future travels.</p>
                 <p class="text-center avenir-roman color-white">Download App or Login to view real stories by real people.</p>
               </div>
               <!-- <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button> -->
               <div class="take-me-to-thestories">
                 <div style="overflow: hidden; border-radius: 8px">
                   <div class="row">
-                    <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 explore-stories"><span>Explore</span><span class="explore-more">Trending Stories</span></div></a>
+                    <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 trending-journey-story"><span class="explore-more">Trending Stories</span></div></a>
                     <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 downloadapp-btn"><span class="explore-more">Download App</span></div></a>
                     <a href="" ui-sref="login" ng-click="viewLoginJourney();"><div class="col-xs-4 login-journey-btn" style="border: none;"><span class="explore-more">Login</span></div></a>
                     <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a> -->

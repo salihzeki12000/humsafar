@@ -13308,10 +13308,7 @@ header {
   }
   // single post local and travel end
   // destination homestay end
-  @import "_sagarmobile.scss";
-  @import "fancybox-override";
-  @import "animation";
-  @import "mobile.scss"; // header { display: none; }
+  /*header { display: none; }*/
   // travelibro loader
 
   .travelibro-loader {
@@ -13445,20 +13442,24 @@ header {
     display: inline-block
   }
   .no-login {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: $brand-blue;
     margin-bottom: 25px;
     p {
       font-size: 15px;
     }
   }
-  .downloadapp-btn, .login-journey-btn {
-    background-color: $brand-blue;
+  .trending-journey-story, .downloadapp-btn, .login-journey-btn {
+    background-color: $brand-pink; 
     color: white;
     text-align: center;
-    border-right: 1px solid #69708a;
+    border-right: 1px solid #fff;
     height: 55px;
     span {
+      font-size: 14px;
       display: block;
-      padding: 21px 0 4px 0;
+      padding: 18px 0 4px 0;
     }
   }
   .hideSpan{
@@ -13484,7 +13485,7 @@ header {
   }
   .take-me-to-thestories {
     width: 100%;
-    background-color: $brand-dark-blue;
+    background-color: $brand-pink;
     border-radius: 6px;
     overflow: visible;
     position: relative;
@@ -14195,3 +14196,7 @@ header {
     }
   }
 
+  @import "_sagarmobile.scss";
+  @import "fancybox-override";
+  @import "animation";
+  @import "mobile.scss";

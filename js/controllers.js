@@ -2851,6 +2851,7 @@ $scope.kindofJourney = [];
 
     // login and then redirect to same journey
     $scope.viewLoginJourney = function(){
+      console.log($.jStorage.get('journeyUrl'),'ongojourney url mai kya hai',$location,'location ongo');
       var currentUrl = $location.$$path;
       $.jStorage.set('journeyUrl',currentUrl);
     }
@@ -10385,7 +10386,7 @@ $scope.rateDestination = function(destRate, type) {
     // month array end
 
   })
-  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments,$window, $http, $uibModal,$filter) {
+  .controller('PastStoryCtrl', function($scope, TemplateService, TravelibroService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments,$window, $http, $uibModal,$filter,$location) {
     //Used to name the .html file
 
     $scope.template = TemplateService.changecontent("past-story");
@@ -11809,6 +11810,13 @@ $scope.rateDestination = function(destRate, type) {
         }
       });
     }
+      // login and then redirect to same journey
+    $scope.viewLoginJourney = function(){
+      console.log($.jStorage.get('journeyUrl'),'journey url mai kya hai',$location,'location');
+      var currentUrl = $location.$$path;
+      $.jStorage.set('journeyUrl',currentUrl);
+    }
+    // login and then redirect to same journey end
   })
   .controller('EditorItineraryCtrl', function($scope, TemplateService, NavigationService, $timeout) {
     //Used to name the .html file
@@ -12157,12 +12165,7 @@ $scope.rateDestination = function(destRate, type) {
     }, {
         img: "img/itinerary/itinerary1.jpg",
     }, ];
-      // login and then redirect to same journey
-    $scope.viewLoginJourney = function(){
-      var currentUrl = $location.$$path;
-      $.jStorage.set('journeyUrl',currentUrl);
-    }
-    // login and then redirect to same journey end
+    
 })
 
 .controller('UserQuickItineraryCtrl', function ($scope, TemplateService, NavigationService, LikesAndComments, $timeout, $stateParams, $uibModal, Itinerary, $state) {
