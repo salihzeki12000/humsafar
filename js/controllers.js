@@ -171,16 +171,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             });
              $('.home-navigate').addClass('fixed-subnavigation');
              // navigation menu active
-             if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
+             if( $(document).scrollTop() >= $('#discover') && $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.discover1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#capture') && $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.capture1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#inspire') && $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.inspire1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#relive') && $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.relive1').addClass('active-homenav');
              }
@@ -13328,7 +13328,7 @@ $scope.rateDestination = function(destRate, type) {
                 }
             }
             $('.search-result-dropdown').scrollTop(0);
-            $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
+            $('.search-result-dropdown').scrollTop($('.search-option.active') && $('.search-option.active').offset().top - $('.search-result-dropdown').height());
         }
         // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
         //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
