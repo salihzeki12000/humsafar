@@ -4,33 +4,33 @@
     <div class="get-center country-title">
       <h4 class="color-white title-head">Popular Itineraries</h4>
     </div>
- <div ng-include="template.footer" class="template footer"></div>
+    <div ng-include="template.footer" class="template footer"></div>
     <div class="mouse-scrolldown color-white text-center" ng-click="scrollDown();">
       <img src="img/mouse-scroll.png" alt="Travelibro">
       <p>Scroll Down</p>
     </div>
   </div>
 </div>
-<div class="popular-itinerarypage">
+<div class="popular-itinerarypage bg-white">
   <div class="container m-plr0">
-  <div class="popular-itinerary second">
-           <!-- other itineraries main -->
-      <div class="other-itineraries-main">
-        <div class="blog-popular-itineraries" infinite-scroll="getMoreItinerary()" infinite-scroll-disabled="scroll.busy">
-            <div masonry preserve-order class="blog-itineraries-main">
-              <div class="row m-m0">
-                <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
-                  <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
-                    <div class="travel-journey-heading relate">
-                      <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
-                      <!-- flag section -->
-                      <div class="flag-section">
-                        <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">
-                          <img ng-src="{{country.country.flag|uploadpath}}" alt="" height="30">
-                          <span class="" ng-if="post.country.length > 3">+4</span>
-                        </div>
-                      </div>
-                      <!-- flag section end-->
+    <div class="popular-itinerary second">
+     <!-- other itineraries main -->
+     <div class="other-itineraries-main">
+      <div class="blog-popular-itineraries" infinite-scroll="getMoreItinerary()" infinite-scroll-disabled="scroll.busy">
+        <div masonry preserve-order class="blog-itineraries-main">
+          <div class="row m-m0">
+            <div class="masonry-brick travelLife col-md-4 col-sm-6 m-plr0" ng-repeat="post in popularIternaryData track by $index" >
+              <div class="travel-life-part bg-white blog-post {{post.type}} avenir-roman overflow" ng-if="post.type=='quick-itinerary' || post.type=='detail-itinerary'">
+                <div class="travel-journey-heading relate">
+                  <p>{{post.name}} ({{post.duration}} {{post.duration|singularPlural:'Days'}})</p>
+                  <!-- flag section -->
+                  <div class="flag-section">
+                    <div class="country-visited" ng-repeat="country in post.countryVisited track by $index">
+                      <img ng-src="{{country.country.flag|uploadpath}}" alt="" height="30">
+                      <span class="" ng-if="post.country.length > 3">+4</span>
+                    </div>
+                  </div>
+                  <!-- flag section end-->
                       <!-- <div class="editor-logo user-logo pointer" ng-if="post.itineraryBy=='Admin'">
                         <img ng-src="{{post.user.profilePicture|uploadpath:45:45:'cover'}}" alt="{{post.user.name}}" class="img-responsive">
                       </div>
@@ -108,44 +108,44 @@
                         <div class="pull-left">
                           <ul>
                             <li ng-click="likeUnlikeActivity(post);" like-sound><a href="" class="relate pointer"><i class="fa color-medium-grey" ng-class="post.likeDone ? 'fa-heart like-animate' : 'fa-heart-o'"></i>
-                          <span></span>
-                          <audio id="like-play">
-                            <source src="img/tiny1.mp3" type="audio/mp3">
-                          </audio>
-                        </a></li>
-                            <li class="pointer" ng-click="getCommentsData(post)">
-                              <a href=""><img src="img/comments.png" alt="" height="18"></a>
-                            </li>
+                              <span></span>
+                              <audio id="like-play">
+                                <source src="img/tiny1.mp3" type="audio/mp3">
+                                </audio>
+                              </a></li>
+                              <li class="pointer" ng-click="getCommentsData(post)">
+                                <a href=""><img src="img/comments.png" alt="" height="18"></a>
+                              </li>
                             <!-- <li>
                             <a href=""><img src="img/reviews.png" alt="" height="18"></a>
                           </li> -->
-                            <li>
-                              <a class="pointer" ng-click="sharePost(post.sharingUrl)"><img src="img/share.png" alt="" height="18"></a>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="pull-right">
-                          <div class="relate" ng-init="post.option={}">
-                            <span class="pointer" ng-click="editOption(post.option)">
-                              <img src="img/options.png" alt="" class="pointer">
-                            </span>
-                            <div class="activity-edit-option" ng-show="post.option.backgroundClick">
-                              <ul>
-                                <li class="pointer" ng-if="post.user._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div pointer">This activity will be hidden from all your followers "Activity Feed".</span>                                </span>
-                                </li>
-                                <li class="pointer" ng-if="post.user._id!=userData._id" ng-click="openThankYouModal();">Report</li>
-                              </ul>
-                            </div>
+                          <li>
+                            <a class="pointer" ng-click="sharePost(post.sharingUrl)"><img src="img/share.png" alt="" height="18"></a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="pull-right">
+                        <div class="relate" ng-init="post.option={}">
+                          <span class="pointer" ng-click="editOption(post.option)">
+                            <img src="img/options.png" alt="" class="pointer">
+                          </span>
+                          <div class="activity-edit-option" ng-show="post.option.backgroundClick">
+                            <ul>
+                              <li class="pointer" ng-if="post.user._id==userData._id">Hide From All Activity Feed <span class="hide-hover">? <span class="info-div pointer">This activity will be hidden from all your followers "Activity Feed".</span>                                </span>
+                              </li>
+                              <li class="pointer" ng-if="post.user._id!=userData._id" ng-click="openThankYouModal();">Report</li>
+                            </ul>
                           </div>
                         </div>
                       </div>
-                      <div class="social-likes-reviews avenir-roman">
-                        <div class="clearfix">
-                          <div class="pull-left">
-                            <span class="color-medium-grey mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-medium-grey mr5"></i><b class="">{{post.likeCount}}</b> Likes</span>
-                            <span class="color-medium-grey mr10 pointer" ng-click="getCommentsData(post)">
-                              <img src="img/comments.png" alt="" height="14" class="">
-                              <b class=""> {{post.commentCount}} </b> Comments </span>
+                    </div>
+                    <div class="social-likes-reviews avenir-roman">
+                      <div class="clearfix">
+                        <div class="pull-left">
+                          <span class="color-medium-grey mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-medium-grey mr5"></i><b class="">{{post.likeCount}}</b> Likes</span>
+                          <span class="color-medium-grey mr10 pointer" ng-click="getCommentsData(post)">
+                            <img src="img/comments.png" alt="" height="14" class="">
+                            <b class=""> {{post.commentCount}} </b> Comments </span>
                             <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                           </div>
                           <!-- <div class="pull-right">
@@ -155,9 +155,9 @@
                       </div>
                     </div>
                   </div>
-                  </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
         <!-- COMMENT LIKE SECTION -->
@@ -168,9 +168,9 @@
         <!-- COMMENT LIKE SECTION END -->
       </div>
       <!-- other itineraries main end-->
+    </div>
+    <div class="" ng-if="template.paginationLoader">
+      <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
+    </div>
   </div>
-<div class="" ng-if="template.paginationLoader">
-    <img src="img/page.svg" alt="" class="m-center img-responsive" width="25px">
-</div>
-</div>
 

@@ -48,8 +48,8 @@
  			<!-- past journey images -->
  			<!-- past journey videos -->
  			<div class="video-ongo-journey video-past-journey relate" ng-if="pastStory.videos.length>0 && pastStory.onDisplay == 'videos'">
- 				<video id="{{pastStory._id}}_{{index}}"  poster="{{pastStory.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550" preload="auto">
- 					<source src="{{pastStory.photosVideos[index].name|trusted}}" type="video/mp4" />
+ 				<video class="video-js vjs-default-skin"  poster="{{pastStory.photosVideos[index].thumbnail|uploadpath}}" controls="controls" width="550" preload="auto" ng-src="{{pastStory.photosVideos[index].name|trusted}}" vjs-video>
+ 					<source ng-src="{{pastStory.photosVideos[index].name|trusted}}" type="video/mp4" />
  				</video>
  				<div class="youtube-icon get-center" hidden>
  					<img src="img/ongojourney/play-journey.png" alt="Play Journey" width="40" class="img-responsive" />
@@ -65,11 +65,11 @@
  							<img ng-src="{{relatePic.thumbnail|uploadpath:99:99:'cover'}}" alt=""
  							class="img-responsive pointer img-full-sqr"
  							ng-if="pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail"
- 							ng-click="changeImage($index,'videos')" />
+ 							ng-click="changeImage($index,'videos')">
  							<img ng-src="{{relatePic.name|uploadpath:99:99:'cover'}}" alt=""
  							class="img-responsive pointer img-full-sqr"
  							ng-if="!(pastStory.photosVideos[$index] && pastStory.photosVideos[$index].thumbnail)"
- 							ng-click="changeImage($index,'photos')" />
+ 							ng-click="changeImage($index,'photos')">
  						</div>
  					</div>
  					<!-- related img end if less then 5-->

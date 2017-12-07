@@ -156,11 +156,11 @@
                     <!-- photos end-->
                     <!-- video -->
                     <div class="video-sec" ng-if="activity.videos.length>0 && activity.display==='video' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
-                        <div class="post-img card-imgholder pointer relate" ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)">
-                            <video poster="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls="controls" width="100%" preload="auto">
-                                <source src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" type="video/mp4">
+                        <div class="post-img card-imgholder pointer relate">
+                            <video class="video-js vjs-default-skin" poster="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls width="100%" ng-src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" preload="auto" ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)" vjs-video>
+                                <source ng-src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" type="video/mp4">
                                 </video>
-                                                    <!-- <div class="youtube-icon get-center">
+                            <!-- <div class="youtube-icon get-center">
                           <span><i class="fa fa-youtube-play fa-4x color-white"></i></span>
                       </div> -->
                   </div>
@@ -200,7 +200,7 @@
             <!-- img post slider end -->
             <!-- post travelled journey -->
             <div class="travelled-journey" ng-if="activity.type=='on-the-go-journey' || activity.type=='ended-journey'">
-                <div class="travelled-imgholder relate" ng-class="{'start-journey-map':!activity.coverPhoto}" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
+                <div class="travelled-imgholder relate" ng-class="{'start-journey-map':!activity.coverPhoto || activity.coverPhoto.startsWith('https')}" ng-init="banner=activity.coverPhoto && activity.coverPhoto!=''?activity.coverPhoto:activity.startLocationPic" ng-click="routeOngo(activity)">
                     <fade-img-loading blur="{{banner|uploadpath:10:10:'cover'}}" image="{{banner|uploadpath:722:750:'cover'}}"></fade-img-loading>
                     <!-- <img ng-src="{{banner|uploadpath:722:750:'cover'}}" alt="" class="img-responsive m-center"> -->
                 </div>
@@ -331,8 +331,8 @@
                         <img ng-src="{{activity.photos[0].name|uploadpath}}" alt="" class="img-responsive">
                     </div>
                     <div class="album-videoholder" ng-if="activity.videos!=''">
-                        <video poster="{{activity.videos[0].thumbnail|uploadpath}}" controls="controls" style="object-fit: cover; width: 100%; max-height: 300px;">
-                            <source src="{{activity.videos[0].name|trusted}}" type="video/mp4">
+                        <video class="video-js vjs-default-skin" poster="{{activity.videos[0].thumbnail|uploadpath}}" controls="controls" ng-src="{{activity.videos[0].name|trusted}}" vjs-video style=" width: 100%; max-height: 300px;">
+                            <source ng-src="{{activity.videos[0].name|trusted}}" type="video/mp4">
                             </video>
                         </div>
                     </div>
@@ -442,17 +442,17 @@
                 <div class="clearfix">
                     <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
                         <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-medium-grey mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
-                           <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
-                              <ul>
-                                <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
-                        <img src="img/comments.png" alt="" height="14">
-                        <b class="" ng-if="activity.commentCount!=0"> {{activity.commentCount}}</b>
-                        {{activity.commentCount|singularPlural:'Comments'}}
-                    </span>
+                         <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
+                          <ul>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                        </ul>
+                    </div>
+                </span>
+                <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)">
+                    <img src="img/comments.png" alt="" height="14">
+                    <b class="" ng-if="activity.commentCount!=0"> {{activity.commentCount}}</b>
+                    {{activity.commentCount|singularPlural:'Comments'}}
+                </span>
                                                     <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">

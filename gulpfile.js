@@ -71,6 +71,8 @@ var jsArray = [
     './js/travelibroservice.js',
     './js/agent.js',
     './js/anchorSmoothScroll.js',
+    './bower_components/video.js/dist/video.js',
+    './bower_components/vjs-video/dist/vjs-video.js',
     //please do not change it
     './w/js/templates.js',
 

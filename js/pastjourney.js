@@ -20,7 +20,13 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           data: formData
         }, 'allLoader').success(function (data) {
           var journey = data.data;
-          var lastPostUtc = journey.post[journey.post.length - 1].UTCModified;
+          var lastPostUtc;
+          if(journey.post && journey.post.length >= 1) {
+            lastPostUtc = journey.post[journey.post.length - 1].UTCModified;
+          }else {
+            lastPostUtc = journey.startTime;
+          }
+
           var allPastPost = [];
           var dateJourneyDifference = moment(journey.endTime).diff(moment(journey.startTime),'days');
           _.times(dateJourneyDifference+1,function(day){

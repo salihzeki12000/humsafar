@@ -316,7 +316,7 @@
 									<span class="mr5">|</span>
 									<!-- <i class="fa fa-clock-o mr5"></i> -->
 									<span class="mr5">{{pastJourneyArray.endTime|formatDate: 'time'}}</span></p>
-									<div class="end-strip options pointer" ng-init="pastStory.lastDate = {};">
+									<div class="end-strip options pointer" ng-if="isMine" ng-init="pastStory.lastDate = {};">
 										<img src="img/options.png" alt="" ng-click="editOption(pastStory.lastDate);">
 										<div class="own-trip" ng-show="pastStory.lastDate.backgroundClick;">
 											<ul class="text-left">
