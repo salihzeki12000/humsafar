@@ -3,6 +3,7 @@
  <!-- note end -->
  <div class="past-journey-holder" ng-class="{'highlighted-post': pastJourneyArray.journeyHighLight==pastStory._id && pastStory.type!='addDays', '': pastJourneyArray.journeyHighLight!==pastStory._id}">
  	<div class="dash-up" ng-hide="!pastStory.type=='travel-life' && !pastStory.type=='addDays"></div>
+   <div id="cardBoard">
  	<div id="{{pastStory._id}}" class="pastjourney-main ongo-journey-card" ng-if="pastStory.type=='travel-life'" ng-class="{'hasLatLng':pastStory.latlong && pastStory.latlong.lat}">
  		<!-- past story header -->
  		<div class="past-story-header ongo-card-header">
@@ -250,7 +251,8 @@
 </div>
 <!-- past story footer end-->
 </div>
-</div>
+   </div>
+ </div>
 <!--on go journey-change -->
 <div class="ongo-journey-change text-center" ng-if="pastStory.type=='cityChange'">
 	<div class="journey-change">

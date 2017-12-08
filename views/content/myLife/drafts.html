@@ -66,6 +66,15 @@
             <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
               <div masonry preserve-order>
                 <div class="row" style="background-color: #fff">
+                  <div class="masonry-brick col-lg-4 col-md-6 col-sm-6 addBrick pointer" ng-click="addNewDraft()">
+                    <div class="journey-masonry-brick">
+                      <div class="travelled-imgholder add-draft"><div class="newDraft">
+                          <i class="fa fa-plus fa-add" aria-hidden="true"></i>
+                        <p>Upload A Past Story</p>
+                      </div></div>
+                    </div>
+                    </div>
+                  </div>
                   <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in  draftCreated  track by $index">
                     <!--journey card -->
                     <div class="journey-masonry-brick" ng-if="life.draft">
@@ -97,6 +106,11 @@
                               <div class="pull-right delete-draft pointer"><i class="fa fa-trash-o color-white" ng-click="deleteDraft(life._id)"></i></div>
                               <div class="color-white life-details">{{life.name}}</div>
                               <button class="btn pointer" ng-click="routeTO(life)">Edit & Publish</button>
+                              <div class="days">
+                                <span>{{life.duration}}</span>
+                                <span ng-if="life.duration>1">Days</span>
+                                <span ng-if="life.duration==1">Day</span>
+                              </div>
                             </div>
                             <fade-img-loading blur="{{life.coverPhoto|uploadpath:10:10:'cover'}}" image="{{life.coverPhoto|uploadpath:722:750:'cover'}}" >
                             </fade-img-loading>

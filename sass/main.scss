@@ -14418,6 +14418,12 @@ video::-webkit-media-controls-fullscreen-button {
   .started-journey-card {
     margin-top: 30px;
   }
+  .ongo-journey-card,
+  .day-post-holder,
+  .postto-day,
+  .journey-end {
+    box-shadow: 5px 5px 30px rgba(0,0,0,.35);
+  }
 }
 .startLoc {
   //text-align: center;
@@ -14487,4 +14493,67 @@ video::-webkit-media-controls-fullscreen-button {
     padding: 8px;
     font-size: 18px;
   }
+}
+.draft-list-popup {
+  color: #ffffff;
+}
+.days {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  color: white;
+  span:first-child {
+    display: block;
+    font-size: 30px;
+    text-shadow: 1px 1px 2px black;
+  }
+}
+
+.addBrick {
+  text-align: center;
+  .add-draft i {
+    font-size: 70px;
+    padding:  0;
+  }
+}
+.newDraft {
+  margin-top: 35%;
+}
+.base {
+
+}
+.save-publish {
+  margin-top: 10px;
+  .btn {
+    background-color: transparent;
+    color: #ef645e;
+    border: 2px solid #ef645e;
+    height: 40px;
+    width: 150px;
+    font-weight: 600;
+  }
+  .publish {
+    background-color: $brand-pink;
+    color: #ffffff;
+    margin-left: 10px;
+  }
+}
+.none {
+  display: none;
+}
+.conten-container {
+  position: fixed;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  padding: 0 20px;
+}
+.draftMain {
+  margin: auto;
+}
+.shadow-box {
+  box-shadow: 5px 5px 30px rgba(0,0,0,.35);
+}
+.draftBackground {
+  background-color: rgba(0,0,0,0.3);
 }

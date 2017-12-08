@@ -55,6 +55,10 @@
 }
 
 @media screen and (max-width: 1204px) {
+  .addBrick .newDraft {
+    margin-top: 20%;
+  }
+
   .inspire-banner, .relive-banner {
     height: auto !important;
   }
@@ -305,6 +309,10 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .addBrick .newDraft {
+    margin-top: 25%;
+  }
+
   #discover {
     .popular-user {
       margin: 0 3%;
@@ -792,6 +800,10 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  .addBrick .newDraft {
+    margin-top: 40%;
+  }
+
   /*new landing page*/
   .header .loggedin-header .navbar,
   .nav-onhead {
