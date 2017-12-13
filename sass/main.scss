@@ -12581,9 +12581,6 @@ display:none;
 }
 // modal share end
 // Notify end
-@import "sohan.scss";
-@import "fancybox-override";
-@import "sagarm.scss";
 
 #map {
   width: 100%;
@@ -13297,10 +13294,8 @@ ng-map {
 }
 // single post local and travel end
 // destination homestay end
-@import "_sagarmobile.scss";
-@import "fancybox-override";
-@import "animation";
-@import "mobile.scss"; // header { display: none; }
+ 
+// header { display: none; }
 // travelibro loader
 
 .travelibro-loader {
@@ -13419,7 +13414,7 @@ video::-webkit-media-controls-fullscreen-button {
   width: 100%;
   bottom: 0;
   position: fixed;
-  z-index: 10;
+  z-index: 14;
 }
 .color-footer-text {
   color : #157efc;
@@ -14271,3 +14266,10 @@ video::-webkit-media-controls-fullscreen-button {
 .reg-steps {
   padding: 20px;
 }
+
+@import "sohan.scss";
+@import "sagarm.scss";
+@import "_sagarmobile.scss";
+@import "fancybox-override";
+@import "animation";
+@import "mobile.scss";

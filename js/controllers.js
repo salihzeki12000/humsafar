@@ -50,8 +50,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $('.fancybox-iframe').parents('.fancybox-skin').css('background-color','black');
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
-    };
-    
+    };    
     //get popular user details
     var getTrendingData = function (pageNo) {
       NavigationService.popularBlogger({
@@ -79,17 +78,33 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         $('.common-view').css('height',$(window).height());
         $('.mobile-view').css('height',$(window).height());
         // smooth scroll
-      if(isChrome){
-        $('html').smoothWheel({speed: 100});
-      }else if(isSafari){
-         $('body').smoothWheel({speed: 100});
-      }
+        if(isChrome){
+          $('html').smoothWheel({speed: 100});
+        }else if(isSafari){
+          $('body').smoothWheel({speed: 100});
+        }       
       var mobileWhite = $('.mobile-view').height() - 520;
       console.log(mobileWhite,'mobile');
       $('.whitespace').css({
         'height' : mobileWhite,
         'bottom' : +-+mobileWhite + 10
       });
+      // for mobile
+      if($(window).width() <= 767){
+      $('.common-view').css('height','auto');
+      $('.mobile-view').css('height','auto');
+      $('.mobile-fixed').css('height',$(window).height());
+      $('.mobilecontent-view').css('height',$(window).height());
+      $('.mobile-section').css('height',$(window).height());
+      $('.content-section').css('height',$(window).height());
+      var mobileWhite = $('.mobile-view').height() - 380;
+      console.log(mobileWhite,'mobile');
+      $('.whitespace').css({
+        'height' : mobileWhite,
+        'bottom' : +-+mobileWhite + 10
+      });
+    }
+      // for mobile end
         // $('html').css('-webkit-overflow-scrolling','touch');
         // smooth scroll end
         var headerFixed = $('.home-navigation').offset().top;
@@ -163,6 +178,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 $("#navi").addClass('blue-head');
               }
             }
+          // start of scroll function for only home ctrl // remove if not needed this if cond
+         if($state && $state.current.controller == "HomeCtrl"){         
           // console.log($(document).scrollTop(),'qwerty',headerFixed,'headerFixed',agentRegisterSec,'agent');
            if($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec){
             $('header').css({
@@ -207,7 +224,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               'position':'fixed',
               'top':'50%',
               'left':'34%',
-              'z-index':'20'
+              'z-index':'14'
             });
             $('.first-fix').css({
               'position':'fixed',
@@ -344,30 +361,45 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // remove fixed part end
 
             // on scroll function fixing the elements end
-
-          //end blue navbar
-          //change active section anchor color
-          // var $div = $('.worksheet').offset().top + 250;
-          // if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
-          //   $('.discover1').css('color', '#424242');
-          // }else {
-          //   $('.discover1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
-          //   $('.capture1').css('color', '#424242');
-          // }else {
-          //   $('.capture1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
-          //   $('.inspire1').css('color', '#424242');
-          // }else {
-          //   $('.inspire1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
-          //   $('.relive1').css('color', '#424242');
-          // }else {
-          //   $('.relive1').css('color', '#eeeeee');
-          // }
+            // in mobile scrolling
+            if($(window).width() <= 767){
+              if($(document).scrollTop() >= $('.seventh-screen').offset().top){
+                 $('.seventh-content').css('position','absolute');
+              }
+              // fix content on scroll seventh section
+              if($(document).scrollTop() >= $('.seventh-screen .content-section').offset().top){
+                $('.seventh-content').css('position','fixed');
+              }
+              // fix content on scroll seventh section end
+              if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
+                 $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.mobile-section .get-center').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
+              });
+              $('.capture-row').css('z-index','1');
+              }else {
+              $('.capture-row').css('z-index','21');
+              }
+            }
+            // in mobile scrolling end
+           }
+           // end of scroll function for only home ctrl
         });
       })
     },2000);
@@ -3123,7 +3155,6 @@ $scope.kindofJourney = [];
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
-
     $scope.template = TemplateService.changecontent("popular-itinerary");
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
     TemplateService.title = "Popular Itineraries - TraveLibro";
@@ -13082,7 +13113,7 @@ $scope.rateDestination = function(destRate, type) {
   $(window).scroll(function() {
     //start blue navbar on scroll
     var count = 0;
-    console.log(count+1);
+    // console.log(count+1);
     if (screenWidth <= 480) {
       if ($(window).scrollTop() < 3) {
         $("#nav-onhead").removeClass('blue-head');
