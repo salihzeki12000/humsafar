@@ -800,6 +800,15 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  .past-story .autosave {
+    margin-top: 60px;
+  }
+  .draftContainer {
+    padding: 0;
+  }
+  .draftContainer .travelled-imgholder {
+    min-height: 90vw;
+  }
   .addBrick .newDraft {
     margin-top: 40%;
   }
@@ -2329,7 +2338,10 @@
   #content {
     margin-top: 50px;
   }
-
+  .autosave {
+    font-size: 10px;
+    margin-top: 60px;
+  }
   //new landing page
   .landing-home {
     .headline {

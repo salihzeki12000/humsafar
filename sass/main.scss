@@ -14524,7 +14524,8 @@ video::-webkit-media-controls-fullscreen-button {
 
 }
 .save-publish {
-  margin-top: 10px;
+  position: absolute;
+  right: 10px;
   .btn {
     background-color: transparent;
     color: #ef645e;
@@ -14536,7 +14537,7 @@ video::-webkit-media-controls-fullscreen-button {
   .publish {
     background-color: $brand-pink;
     color: #ffffff;
-    margin-left: 10px;
+    margin-left: 8px;
   }
 }
 .none {
@@ -14556,4 +14557,29 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .draftBackground {
   background-color: rgba(0,0,0,0.3);
+}
+.errorMsgDraft {
+  padding-top: 10px;
+  color: darkred;
+}
+.startLoc .ui-select-container .ui-select-match .ui-select-toggle:focus {
+  background-color: transparent;
+}
+.draftJourney .save-publish{
+  padding-top: 20px;
+  position: relative;
+  width: 100%;
+  margin-left: 10px;
+  .btn {
+    width: 48%;
+  }
+}
+.modal-backdrop {
+  @include filter(blur(7px));
+}
+.autosave {
+  text-align: center;
+  margin-top: 50px;
+  background-color: rgba(0,0,0,0.7);
+  padding: 7px 0;
 }

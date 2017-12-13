@@ -1,7 +1,7 @@
 <div class="profile-main">
   <!-- <div class="" ng-include="profile.profileMain"></div> -->
   <div class="drafts-main">
-    <div class="container-fluid">
+    <div class="container-fluid m-p0">
       <div class="all-profile-detail">
         <div class="bg-white">
           <!-- tabs -->
@@ -14,7 +14,7 @@
               <li><a href="" class="tab-heading" ng-click="getTab(0)">Journey</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(1)">Moments</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(2)">Reviews</a></li>
-              <li ng-if="ownerProfile"><a href="" class="tab-heading" ng-click="getTab(3)">Drafts</a></li>
+              <li ng-if="ownerProfile"><a href="" class="tab-heading" ng-click="getTab(3)">Untold</a></li>
             </ul>
           </div>
           <!-- end tabs -->
@@ -61,11 +61,12 @@
 
             </div>
             <!--drafts card start-->
-          <div class="container draftContainer" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+          <div class="container draftContainer"
+               ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
 
             <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
               <div masonry preserve-order>
-                <div class="row" style="background-color: #fff">
+                <div class="row" style="background-color: #fff" ng-if="!nodrafts">
                   <div class="masonry-brick col-lg-4 col-md-6 col-sm-6 addBrick pointer" ng-click="addNewDraft()">
                     <div class="journey-masonry-brick">
                       <div class="travelled-imgholder add-draft"><div class="newDraft">

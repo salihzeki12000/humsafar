@@ -196,7 +196,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             reloadOnSearch: false
         })
         .state('mylife1', {
-            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews|drafts)}",
+            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews|untold)}",
             templateUrl: "views/template.html",
             controller: 'MylifeCtrl',
             reloadOnSearch: false
@@ -364,7 +364,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             controller: 'PastStoryCtrl'
         })
         .state('drafts', {
-            url: "/users/:urlSlug/drafts/:draftSlug",
+            url: "/users/:urlSlug/untold/:draftSlug",
             templateUrl: "views/template.html",
             controller: 'newdraftsCtrl'
         })

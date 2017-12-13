@@ -6676,7 +6676,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log(data);
         location.reload();
       })
-
     };
     $scope.deleteDraft = function (id) {
       $scope.deleteId = id;
@@ -6686,7 +6685,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         scope: $scope,
         windowTopClass: "notify-popup"
       });
-
     };
     var getDrafts = function () {
       var formData = {
@@ -7324,7 +7322,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // $location.hash("reviews");
         // anchorSmoothScroll.scrollTo("reviews");
         break;
-      case "drafts":
+      case "untold":
         getDrafts();
         console.log($state.params.name);
         $scope.myLife.innerView = allMyLife[3];
@@ -7364,7 +7362,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         case 3:
           //console.log("reviews m hu bhai");
           //   $stateParams.name = "reviews";
-          url = "drafts";
+          url = "untold";
           getDrafts();
           //   anchorSmoothScroll.scrollTo(url);
           break;
@@ -7940,7 +7938,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // $location.hash("reviews");
             // anchorSmoothScroll.scrollTo("reviews");
             break;
-          case "drafts":
+          case "untold":
             getReviews();
             //console.log("scrolling to reviews");
             $scope.myLife.innerView = allMyLife[3];
@@ -10596,13 +10594,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // month array end
 
   })
-  .controller('newdraftsCtrl', function ($scope, TemplateService, TravelibroService, shareDataService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments, $window, $http, $uibModal, $filter) {
+  .controller('newdraftsCtrl', function ($scope, TemplateService, TravelibroService, shareDataService, NavigationService, pastJourney, $timeout, $stateParams, $state, LikesAndComments, $window, $http, $uibModal, $filter, $location) {
     $scope.template = TemplateService.changecontent("newDraft");
     $scope.menutitle = NavigationService.makeactive("Drafts");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     var profile = $.jStorage.get("profile");
-
+    $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published';
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -10615,14 +10613,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.loadmoreOption = false;
       $('.ongo-journey-main').css('margin-top', '70px');
     }
-    if(vw < 1200) {
-      $scope.widthScreen = false;
-      $scope.showDetails = true;
-    }
-    else {
-      $("#cardBoard").addClass("shadow-box");
-      $scope.widthScreen = true;
-      $scope.showDetails = false;
+    if(vw <= 767) {
+      $("#navi").css('height','110px');
     }
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
@@ -10733,7 +10725,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.updateBannerDateTime = function (id, formData, dt) {
       //console.log(dt);
-      console.log(id, 'id');
       var date = $filter('formatDateCalender')(dt);
       var time = $filter('formatTimeCalender')(formData);
       var result = {};
@@ -11139,6 +11130,49 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.saveDestinationVisited();
     }
     // delete destinationVisited end
+    $scope.publishDraft = function(){
+      if($scope.pastJourneyArray.startLocation == null || $scope.pastJourneyArray.startLocation=="") {
+        $scope.msg = "*Cannot publish story without Start Location";
+        $timeout(function(){
+          $scope.msg = null;
+        },5000);
+      }
+      else {
+        console.log($scope.pastJourneyArray);
+        pastJourney.publishDraft($scope.pastJourneyArray, function(data){
+          console.log('draft has been published ',data);
+          // $state.go('paststory',{
+          //   "urlSlug": $.jStorage.get("profile").urlSlug,
+          //   "id" : $scope.pastJourneyArray.urlSlug
+          // })
+          if(data.value) {
+            var user = $.jStorage.get("profile").urlSlug;
+            $location.path("/users/" + user + "/past-story/" + $scope.pastJourneyArray.urlSlug).replace().reload(false);
+          }
+        })
+      }
+    };
+    $scope.deleteDraft = function (id) {
+      $scope.deleteId = id;
+      $uibModal.open({
+        animation: true,
+        templateUrl: "views/modal/delete-draft.html",
+        scope: $scope,
+        windowTopClass: "notify-popup"
+      });
+    };
+    $scope.deleteDraftNow = function (id) {
+      var formData = {
+        '_id': id
+      };
+      pastJourney.deleteJourney(formData, function (data) {
+        var user = $.jStorage.get("profile").urlSlug;
+        if(data.value) {
+          $location.path("/users/" + user + "/untold").replace().reload(false);
+        }
+      })
+
+    };
     // country modal
     var modal = "";
 

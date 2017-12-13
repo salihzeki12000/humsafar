@@ -171,6 +171,17 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           console.log(data);
         });
       },
+      publishDraft: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/draft/publishDraft",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
       setStartLocation: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/draft/editDataWeb",
