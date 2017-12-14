@@ -126,10 +126,10 @@
 <div class="activity-container destination-itinerary-holder">
     <div class="empty-travel-journey color-white" ng-if="countryDestIti.length == 0">
         <div class="empty-ongo text-center">
-            <p class="empty-descp color-white">We are yet to experience this country and give you our take on the best way to explore it.</p>
-            <p class="empty-descp color-white">
+            <p class="empty-descp color-dark-blue">We are yet to experience this country and give you our take on the best way to explore it.</p>
+            <p class="empty-descp color-dark-blue">
                 If you have visited this Country or in fact live there, do fill us in with your recommendations at
-                <a href="mailto:info@travelibro.com" class="color-white">info@travelibro.com</a>.
+                <a href="mailto:info@travelibro.com" class="color-dark-blue">info@travelibro.com</a>.
             </p>
         </div>
     </div>
@@ -251,7 +251,7 @@
             <div class="clearfix">
                 <div class="pull-left">
                     <span class="color-medium-grey mr10 pointer" ng-click="getLikesData(post);"><i class="fa fa-heart color-medium-grey mr5"></i><b class="">{{post.likeCount}}</b> Likes</span>
-                    <span class="color-medium-grey mr10 pointer" ng-click="getCommentsData(post)"> <img src="img/comments.png" alt="" height="14"> <b> {{post.commentCount}} </b> Comments</span>
+                    <span class="color-medium-grey mr10 pointer" ng-click="getCommentsData(post)" ng-if="post.commentCount > 0"> <img src="img/comments.png" alt="" height="14"> <b> {{post.commentCount}} </b> Comments</span>
                     <!-- <span class="color-blue"><img src="img/reviews.png" alt="" height="15" class="mr5 v-top">{{post.userReviewCount}} Reviews ({{post.userReviewCount}}/5)</span> -->
                 </div>
                                         <!--<div class="pull-right">
