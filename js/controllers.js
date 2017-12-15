@@ -15,19 +15,16 @@ var pointsForLine = function () {
 var line = [];
 var markers = [];
 var travelPath;
-var initMapGl = function () {
-};
-var initMap = function () {
-};
-var setMarker = function () {
-};
+var initMapGl = function() {};
+var initMap = function() {};
+var setMarker = function() {};
 var map;
 var mapGl;
 var center = {};
 var centers = [];
 markers[0] = {};
-angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput'])
-  .run(['$anchorScroll', function ($anchorScroll) {
+angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojourney', 'locallife', 'itinerary', 'agent', 'commontask', 'anchorSmoothScroll', 'activity', 'pastjourney', 'infinite-scroll', 'navigationservice', 'travelibroservice', 'cfp.loadingBar', 'ui.bootstrap', 'ui.select', 'ngAnimate', 'ngSanitize', 'angular-flexslider', 'angularFileUpload', 'ngImgCrop', 'mappy', 'wu.masonry', 'ngScrollbar', 'ksSwiper', 'ui.tinymce', 'ngFadeImgLoading', 'internationalPhoneNumber', 'ngIntlTelInput','vjs.video'])
+  .run(['$anchorScroll', function($anchorScroll) {
     $anchorScroll.yOffset = 50; // always scroll by 50 extra pixels
   }])
 
@@ -75,10 +72,43 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'urlSlug': trip.user.urlSlug
       });
     }
-    setTimeout(function () {
-      $(document).ready(function () {
-        // $("body").smoothWheel();
-        var headerFix000ed = $('.home-navigation').offset().top;
+    setTimeout(function(){
+      $(document).ready(function(){
+        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+        $('.common-view').css('height',$(window).height());
+        $('.mobile-view').css('height',$(window).height());
+        // smooth scroll
+        if(isChrome){
+          $('html').smoothWheel({speed: 100});
+        }else if(isSafari){
+          $('body').smoothWheel({speed: 100});
+        }
+      var mobileWhite = $('.mobile-view').height() - 520;
+      console.log(mobileWhite,'mobile');
+      $('.whitespace').css({
+        'height' : mobileWhite,
+        'bottom' : +-+mobileWhite + 10
+      });
+      // for mobile
+      if($(window).width() <= 767){
+      $('.common-view').css('height','auto');
+      $('.mobile-view').css('height','auto');
+      $('.mobile-fixed').css('height',$(window).height());
+      $('.mobilecontent-view').css('height',$(window).height());
+      $('.mobile-section').css('height',$(window).height());
+      $('.content-section').css('height',$(window).height());
+      var mobileWhite = $('.mobile-view').height() - 380;
+      console.log(mobileWhite,'mobile');
+      $('.whitespace').css({
+        'height' : mobileWhite,
+        'bottom' : +-+mobileWhite + 10
+      });
+    }
+      // for mobile end
+        // $('html').css('-webkit-overflow-scrolling','touch');
+        // smooth scroll end
+        var headerFixed = $('.home-navigation').offset().top;
         var agentRegisterSec = $('.register-as-partner').offset().top;
         //setting auto-height for tab screen
         if (screenWidth >= 768 && screenWidth < screenHeight) {
@@ -101,174 +131,276 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $(this).off(e);
             });
         //end landing page animation
-        $(document).scroll(function () {
-          if (screenWidth <= 480) {
-            if ($(document).scrollTop() < 3) {
-              $("#nav-onhead").removeClass('blue-head');
-              $("#navi").removeClass('blue-head');
-            }
-            else {
-              $("#nav-onhead").addClass('blue-head');
-              $("#navi").addClass('blue-head');
-            }
+
+        $('.iphone-fix:after').css('height', $('.mobile-view').height() - 500);
+        // on mouse dropdown scroll
+        $('.mouse-scrolldown').click(function(){
+          $('html').animate({
+            scrollTop: $('#discover').offset().top
+          })
+        });
+        // on mouse dropdown scroll end
+        // scroll on nav
+        $('.take-scroll').click(function(){
+          var scrollValue = $(this).attr('href');
+          if(scrollValue == '#discover'){
+              console.log('first');
+              $('html').animate({
+              scrollTop: $('#discover').offset().top
+            },1000);
+          }else if(scrollValue == '#capture'){
+               console.log('sec');
+               $('html').animate({
+              scrollTop: $('#capture').offset().top
+            },1000);
+          }else if(scrollValue == '#inspire'){
+              console.log('third');
+              $('html').animate({
+              scrollTop: $('#inspire').offset().top
+            },1000);
+          }else if(scrollValue == '#relive'){
+              console.log('fourth');
+              $('html').animate({
+              scrollTop: $('#relive ').offset().top
+            },1000);
+          }else {
+
           }
+        });
+        // scroll on nav end
+        $(document).scroll(function(){
+            if(screenWidth<=480) {
+              if ($(document).scrollTop() < 3) {
+                $("#nav-onhead").removeClass('blue-head');
+                $("#navi").removeClass('blue-head');
+              }
+              else {
+                $("#nav-onhead").addClass('blue-head');
+                $("#navi").addClass('blue-head');
+              }
+            }
+          // start of scroll function for only home ctrl // remove if not needed this if cond
+         if($state && $state.current.controller == "HomeCtrl"){
           // console.log($(document).scrollTop(),'qwerty',headerFixed,'headerFixed',agentRegisterSec,'agent');
-          if ($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec) {
+           if($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec){
             $('header').css({
-              'transform': 'translateY(-80px)',
+              'transform':'translateY(-80px)',
               'transition': 'transform 300ms linear'
             });
-            $('.home-navigate').addClass('fixed-subnavigation');
-            // navigation menu active
-            if ($(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80) {
+             $('.home-navigate').addClass('fixed-subnavigation');
+             // navigation menu active
+             if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.discover1').addClass('active-homenav');
-            } else if ($(document).scrollTop() >= $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80) {
+             }else if( $(document).scrollTop() >= $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.capture1').addClass('active-homenav');
-            } else if ($(document).scrollTop() >= $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80) {
+             }else if( $(document).scrollTop() >= $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.inspire1').addClass('active-homenav');
-            } else if ($(document).scrollTop() >= $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80) {
+             }else if( $(document).scrollTop() >= $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.relive1').addClass('active-homenav');
+             }
+             // navigation menu active end
+            }else if($(document).scrollTop() > agentRegisterSec - 20){
+              $('header').css({
+              'transform':'translateY(0)',
+              'transition': 'transform 300ms linear'
+            });
+              $('.home-navigate').removeClass('fixed-subnavigation');
+              $('.take-scroll').removeClass('active-homenav');
+            }else {
+             $('header').css({
+              'transform':'translateY(0)',
+              'transition': 'transform 300ms linear'
+            });
+              $('.home-navigate').removeClass('fixed-subnavigation');
+              $('.take-scroll').removeClass('active-homenav');
             }
-            // navigation menu active end
-          } else if ($(document).scrollTop() > agentRegisterSec - 20) {
-            $('header').css({
-              'transform': 'translateY(0)',
-              'transition': 'transform 300ms linear'
+            // mobile naviagtion end
+            // on scroll function fixing the elements
+          if($(document).scrollTop() >= $('.mobile-view').offset().top){
+            $('.iphone-fix').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%',
+              'z-index':'14'
             });
-            $('.home-navigate').removeClass('fixed-subnavigation');
-            $('.take-scroll').removeClass('active-homenav');
-          } else {
-            $('header').css({
-              'transform': 'translateY(0)',
-              'transition': 'transform 300ms linear'
+            $('.first-fix').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+          }else{
+              $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.second-screen').offset().top){
+              $('.second-screen .second-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+            }else{
+              $('.second-screen .second-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.third-screen').offset().top){
+              $('.third-screen .third-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+            }else{
+              $('.third-screen .third-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.fourth-screen').offset().top){
+              $('.fourth-screen .fourth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+            }else{
+              $('.fourth-screen .fourth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.fivth-screen').offset().top){
+              $('.fivth-screen .fivth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+            }else{
+              $('.fivth-screen .fivth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.sixth-screen').offset().top){
+              $('.sixth-screen .sixth-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
+            })
+            }else{
+              $('.sixth-screen .sixth-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              })
+            }
+            if($(document).scrollTop() >= $('.seventh-screen').offset().top){
+              $('.seventh-screen .seventh-view').css({
+              'position':'fixed',
+              'top':'50%',
+              'left':'34%'
             });
-            $('.home-navigate').removeClass('fixed-subnavigation');
-            $('.take-scroll').removeClass('active-homenav');
-          }
+              $('.seventh-content').css({
+                'position': 'fixed',
+                'top': '50%',
+                'left': '66%'
+              });
+            }else{
+              $('.seventh-screen .seventh-view').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'65%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
+              });
+            }
+            // remove fixed part
 
+            if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
+              $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.mobile-section .get-center').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
+              });
+              $('.capture-row').css('z-index','1');
+            }else {
+              $('.capture-row').css('z-index','21');
+            }
+            // remove fixed part end
 
-          // mobile naviagtion
-          var iphoneHeight = $('.iphone-fix').innerHeight();
-          $('.mobilecontent-view').css('height', iphoneHeight);
-          // console.log($('.mobile-fixed').offset().top,'offset');
-          if ($(document).scrollTop() >= $('.mobile-fixed').offset().top - 120 && $(document).scrollTop() <= $('#inspire').offset().top) {
-            // console.log('if amit');
-            $('.mobile-view').addClass('mob-fixed');
-          } else {
-            // console.log('else amit');
-            $('.mobile-view').removeClass('mob-fixed');
-          }
-          console.log($(document).scrollTop(), 'scroll value');
-          console.log($('.second-screen').offset().top, 'second-screen');
-          // $()
-          // all screen div window height rehna chahiye i.e window height and ye working
-          if ($(document).scrollTop() >= $('.second-screen').offset().top + 10 && $(document).scrollTop() <= $('.third-screen').offset().top) {
-            $('.second-screen').addClass('second-active');
-          } else if ($(document).scrollTop() >= $('.third-screen').offset().top + 10 && $(document).scrollTop() <= $('.fourth-screen').offset().top) {
-            $('.second-screen').removeClass('second-active');
-            $('.third-screen').addClass('third-active');
-          } else if ($(document).scrollTop() >= $('.fourth-screen').offset().top + 10 && $(document).scrollTop() <= $('.fivth-screen').offset().top) {
-            $('.third-screen').removeClass('third-active');
-            $('.fourth-screen').addClass('fourth-active');
-          } else if ($(document).scrollTop() >= $('.fivth-screen').offset().top + 10 && $(document).scrollTop() <= $('.sixth-screen').offset().top) {
-            $('.fourth-screen').removeClass('fourth-active');
-            $('.fivth-screen').addClass('fivth-active');
-          } else if ($(document).scrollTop() >= $('.sixth-screen').offset().top + 10 && $(document).scrollTop() <= $('.seventh-screen').offset().top) {
-            $('.fivth-screen').removeClass('fivth-active');
-            $('.sixth-screen').addClass('sixth-active');
-          } else if ($(document).scrollTop() >= $('.seventh-screen').offset().top + 10 && $(document).scrollTop() <= $('.capture-row').offset().top) {
-            $('.sixth-screen').removeClass('sixth-active');
-            $('.seventh-screen').addClass('seventh-active');
-          } else {
-            $('.second-screen').removeClass('second-active');
-            $('.third-screen').removeClass('third-active');
-            $('.fourth-screen').removeClass('fourth-active');
-            $('.fivth-screen').removeClass('fivth-active');
-            $('.sixth-screen').removeClass('sixth-active');
-            $('.seventh-screen').removeClass('seventh-active');
-            // $('.second-screen').removeClass('active');
-            // $('.second-screen').css('background','transparent');
-            // $('.second-screen .second-view').css({
-            //   'position':'static',
-            //   'top':'auto',
-            //   'left':'auto',
-            //   'margin-top': '0',
-            //   'margin-left': '0',
-            //   'transform':'initial',
-            //   'width':'auto'
-            // });
-            // $('.second-screen .mob-screen-img').css({
-            //   'position':'absolute',
-            //   'top':'50%',
-            //   'left':'45%',
-            //   'transform':'translate(-45%,-50%)'
-            // });
-          }
-          // console.log($(document).scrollTop(),'scroll value', $('.iphone-fix').offset().top,'iphone ka offset',$('.iphone-fix').innerHeight(),'inner height',$('.iphone-fix').offset().top + $('.iphone-fix').innerHeight(),'totalvalue');
-          // mobile naviagtion end
-          // //start blue navbar on scroll
-          // if(screenWidth<=480) {
-          //   if ($('.worksheet').scrollTop() < 3) {
-          //     $("#nav-onhead").removeClass('blue-head');
-          //     $(".activeNavbar").removeClass('blue-head');
-          //   }
-          //   else {
-          //     $("#nav-onhead").addClass('blue-head');
-          //     $(".activeNavbar").addClass('blue-head');
-          //   }
-          // }
-          // //end blue navbar on scroll
-          // var firstHeight = $('.worksheet').height();
-          // if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
-          //   $("#navigation").removeClass("submenu");
-          //   $("#navigation").addClass("fixed-subnavigation sectionStripe");
-          //   if(screenWidth>991){
-          //     $(".libro-header, .loggedin-header").removeClass("swipeIn");
-          //     $(".libro-header, .loggedin-header").addClass("swipeOut");
-          //     $("header").css({'opacity':0});
-          //     $timeout(function(){
-          //       $("header").css({'z-index':-10});
-          //     },200)
-          //   }
-          // }
-          // else {
-          //   $("#navigation").removeClass("fixed-subnavigation sectionStripe");
-          //   $("#navigation").addClass("submenu");
-          //   if($(".libro-header").hasClass("swipeOut") || $(".loggedin-header").hasClass("swipeOut")){
-          //     $(".libro-header, .loggedin-header").addClass("swipeIn");
-          //   }
-          //   $(".libro-header, .loggedin-header").removeClass("swipeOut");
-          //   $("header").css({'z-index':16,'opacity':1});
-          // }
-
-          //end blue navbar
-          //change active section anchor color
-          // var $div = $('.worksheet').offset().top + 250;
-          // if($div >= $(".discover").offset().top && $div < $(".discover").offset().top+$(".discover").height()) {
-          //   $('.discover1').css('color', '#424242');
-          // }else {
-          //   $('.discover1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".capture").offset().top && $div < $(".capture").offset().top+$(".capture").height()) {
-          //   $('.capture1').css('color', '#424242');
-          // }else {
-          //   $('.capture1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".inspire").offset().top && $div < $(".inspire").offset().top+$(".inspire").height()) {
-          //   $('.inspire1').css('color', '#424242');
-          // }else {
-          //   $('.inspire1').css('color', '#eeeeee');
-          // }
-          // if($div >= $(".relive").offset().top && $div < $(".relive").offset().top+$(".relive").height()) {
-          //   $('.relive1').css('color', '#424242');
-          // }else {
-          //   $('.relive1').css('color', '#eeeeee');
-          // }
-
+            // on scroll function fixing the elements end
+            // in mobile scrolling
+            if($(window).width() <= 767){
+              if($(document).scrollTop() >= $('.seventh-screen').offset().top){
+                 $('.seventh-content').css('position','absolute');
+              }
+              // fix content on scroll seventh section
+              if($(document).scrollTop() >= $('.seventh-screen .content-section').offset().top){
+                $('.seventh-content').css('position','fixed');
+              }
+              // fix content on scroll seventh section end
+              if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
+                 $('.iphone-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.mobile-section .get-center').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.first-fix').css({
+                'position':'absolute',
+                'top':'50%',
+                'left':'50%'
+              });
+              $('.seventh-content').css({
+                'position': 'absolute',
+                'top': '50%',
+                'left': '35%'
+              });
+              $('.capture-row').css('z-index','1');
+              }else {
+              $('.capture-row').css('z-index','21');
+              }
+            }
+            // in mobile scrolling end
+           }
+           // end of scroll function for only home ctrl
         });
       })
     }, 2000);
@@ -278,30 +410,27 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeKnowMore = function () {
       $(".know-more-modal").removeClass("show-know-more");
     };
-    $scope.go_at = function (section) {
-      console.log(section);
-      // var extra_space = 0;
-      // if(section == 'discover' || section == 'capture')
-      // {extra_space = 130;}
-      // else
-      // {extra_space = 145;}
-      // $('.worksheet').animate({
-      //     scrollTop: ($('.worksheet').scrollTop() - extra_space) + $('.'+section).offset().top},
-      //   'slow');
-      if (section == 'discover') {
-        // $(document).animate({
-        //   scrollTop: discoverScroll
-        // },100);
-        $(document).scrollTop($('#discover').offset().top);
-      } else if (section == 'capture') {
-        console.log('capture');
-        console.log(captureScroll, 'captureScroll');
-        // $(document).animate({
-        //   scrollTop: captureScroll
-        // },100);
-        $(document).scrollTop($('#capture').offset().top);
-      }
-    };
+    // $scope.go_at = function(section){
+    //   console.log(section);
+    //   if(section == 'discover'){
+    //     $(document).animate({
+    //       scrollTop: $('#discover').offset().top
+    //     },100);
+    //   }else if(section == 'capture'){
+    //     $(document).animate({
+    //       scrollTop: $('#capture').offset().top
+    //     },100);
+    //   }else if(section == 'inspire'){
+    //     $(document).animate({
+    //       scrollTop: $('#inspire').offset().top
+    //     },100);
+    //   }else if(section == 'relive'){
+    //     console.log('relive');
+    //     $(document).animate({
+    //       scrollTop: $('#relive').offset().top
+    //     },100);
+    //   }
+    // };
 
   })
 
@@ -328,19 +457,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.initialiseError();
 
-    $scope.bookingLink = function () {
+    $scope.bookingLink = function() {
       window.location.href = "https://travelibro.com/bookings/";
     }
     if (typeof $.fn.fullpage.destroy == 'function') {
       $.fn.fullpage.destroy('all');
     }
 
-    $(window).load(function () {
+    $(window).load(function() {
       // //console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
     });
 
-    $scope.openalreadyexist = function (size) {
+    $scope.openalreadyexist = function(size) {
       $uibModal.open({
         animation: true,
         templateUrl: 'views/modal/alreadyexist.html',
@@ -350,10 +479,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         size: "sm"
       });
     };
-    var setLoginVariables = function (data, type) {
+    var setLoginVariables = function(data, type) {
       $.jStorage.set("accessToken", data.accessToken);
       if (data.type == "TravelAgent") {
-        NavigationService.getAgentsProfile("", function (data1) {
+        NavigationService.getAgentsProfile("", function(data1) {
           if (data1.data._id && data1.data.type == 'TravelAgent') {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data1.data);
@@ -396,18 +525,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 windowClass: "report-modal",
                 backdrop: "static"
               });
-              $scope.changePassword = function () {
+              $scope.changePassword = function() {
                 if ($scope.password.passChange) {
                   if ($scope.password.newPassword === $scope.password.confirmPassword) {
                     delete $scope.password.confirmPassword;
-                    Agent.changePassword($scope.password, function (data) {
+                    Agent.changePassword($scope.password, function(data) {
                       if (data.value === true) {
                         modalPas.close();
                         callSetting();
                       } else {
                         $scope.password.status = true;
                         $scope.password.msg = "*Old Password Mismatch.";
-                        $timeout(function () {
+                        $timeout(function() {
                           $scope.password.status = false;
                         }, 10000);
                       }
@@ -415,7 +544,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   } else {
                     $scope.password.status = true;
                     $scope.password.msg = "*New Password Mismatch.";
-                    $timeout(function () {
+                    $timeout(function() {
                       $scope.password.status = false;
                     }, 10000);
                   }
@@ -426,13 +555,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             } else {
               callSetting();
             }
-          } else {
-          }
-        }, function (err) {
+          } else {}
+        }, function(err) {
           //console.log(err);
         });
       } else if (data.type == "User") {
-        NavigationService.getProfile("", function (data1) {
+        NavigationService.getProfile("", function(data1) {
           if (data1.data._id) {
             $.jStorage.set("isLoggedIn", true);
             $.jStorage.set("profile", data1.data);
@@ -463,16 +591,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 urlSlug: slug
               });
             }
-          } else {
-          }
-        }, function (err) {
+          } else {}
+        }, function(err) {
           //console.log(err);
         });
       }
     }
 
     var ref = "";
-    var checktwitter = function (data, status) { //for getting accessToken
+    var checktwitter = function(data, status) { //for getting accessToken
       var repdata = {};
       if (ref.closed) {
         $interval.cancel(stopinterval);
@@ -487,30 +614,30 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
 
-    var callAtIntervaltwitter = function () {
-      NavigationService.getAccessToken(checktwitter, function (err) {
+    var callAtIntervaltwitter = function() {
+      NavigationService.getAccessToken(checktwitter, function(err) {
         //console.log(err);
       });
     };
 
 
-    $scope.socialLogin = function (loginTo) {
+    $scope.socialLogin = function(loginTo) {
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
 
-    $scope.submit = function (formData) {
+    $scope.submit = function(formData) {
       console.log("sndasdjsdjsa", formData);
-      NavigationService.oldUsersLogin(formData, function (succ1) {
-        console.log('1 ', succ1);
+      NavigationService.oldUsersLogin(formData, function(succ1) {
+        console.log('1 ',succ1);
         if (succ1.value) {
-          NavigationService.getAccessToken(function (succ2) {
-            console.log('2 access token ', succ2);
+          NavigationService.getAccessToken(function(succ2) {
+            console.log('2 access token ',succ2);
             // $.jStorage.set("accessToken", succ2.accessToken);
             if (succ2.accessToken && succ2.accessToken !== "") {
               console.log('3');
-              NavigationService.getProfile("", function (succ3) {
-                console.log('4 profile ', succ3);
+              NavigationService.getProfile("", function(succ3) {
+                console.log('4 profile ',succ3);
                 if (succ3.data && succ3.data.type == 'User') {
                   $.jStorage.set("accessToken", succ2.accessToken);
                   $.jStorage.set("isLoggedIn", false);
@@ -525,13 +652,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                   $scope.showError.show = true;
                   $scope.showError.msg = 'Theres Another Page For Partners';
                 }
-              }, function (err3) {
+              }, function(err3) {
                 //console.log(err3);
               });
             } else {
 
             }
-          }, function (err2) {
+          }, function(err2) {
             //console.log(err2);
           });
         } else {
@@ -542,13 +669,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
-    $scope.registerAsUser = function (formData) {
-      NavigationService.registerAsUser(formData, function (data) {
-        console.log('resp ', data);
+    $scope.registerAsUser = function(formData) {
+      NavigationService.registerAsUser(formData, function(data) {
+        console.log('resp ',data);
         if (data.value) {
 
           // $scope.alreadyExist = false;
-          NavigationService.getAccessToken(setLoginVariables, function (err) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
             //console.log(err);
           });
         } else {
@@ -559,7 +686,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
             $scope.showError.msg = "Email already exists as Partner";
           }
-          $timeout(function () {
+          $timeout(function() {
             $scope.showError = {
               show: "",
               msg: ""
@@ -568,11 +695,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
 
       });
-      console.log('user ', $scope.userSignUpForm);
+      console.log('user ',$scope.userSignUpForm);
     }
     //Agent Section
     // AGENT LOGIN SIGN UP TOGGLE
-    $scope.toggleAgentSign = function () {
+    $scope.toggleAgentSign = function() {
       if ($scope.agentSignup == false) {
         $scope.agentSignup = true;
       } else {
@@ -582,11 +709,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // AGENT LOGIN SIGN UP TOGGLE END
     $scope.agentLoginForm = {};
     $scope.agentSignUpForm = {};
-    $scope.registerAsAgent = function (formData) {
-      NavigationService.registerAsAgent(formData, function (data) {
+    $scope.registerAsAgent = function(formData) {
+      NavigationService.registerAsAgent(formData, function(data) {
         if (data.value) {
           // $scope.alreadyExist = false;
-          NavigationService.getAccessToken(setLoginVariables, function (err) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
             //console.log(err);
           });
         } else {
@@ -597,7 +724,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           } else {
             $scope.showError.msg = "Email already exists as Partner";
           }
-          $timeout(function () {
+          $timeout(function() {
             $scope.showError = {
               show: "",
               msg: ""
@@ -607,16 +734,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
       });
     }
-    $scope.loginAsUser = function (formData) {
-      NavigationService.loginAsUser(formData, function (data) {
+    $scope.loginAsUser = function(formData) {
+      NavigationService.loginAsUser(formData, function(data) {
         if (data.value) {
-          NavigationService.getAccessToken(setLoginVariables, function (err) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
             //console.log(err);
           });
         } else {
           $scope.showError.show = true;
           $scope.showError.msg = "Incorrect Email or Password";
-          $timeout(function () {
+          $timeout(function() {
             $scope.showError = {
               show: "",
               msg: ""
@@ -625,16 +752,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }
       });
     };
-    $scope.loginAsAgent = function (formData) {
-      NavigationService.loginAsAgent(formData, function (data) {
+    $scope.loginAsAgent = function(formData) {
+      NavigationService.loginAsAgent(formData, function(data) {
         if (data.value) {
-          NavigationService.getAccessToken(setLoginVariables, function (err) {
+          NavigationService.getAccessToken(setLoginVariables, function(err) {
             //console.log(err);
           });
         } else {
           $scope.showError.show = true;
           $scope.showError.msg = "Incorrect Email or Password";
-          $timeout(function () {
+          $timeout(function() {
             $scope.showError = {
               show: "",
               msg: ""
@@ -645,15 +772,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
     if ($.jStorage.get("profile") && $.jStorage.get("profile").urlSlug) {
       if ($.jStorage.get("profile").type === "User") {
-        $state.go("mylife", {urlSlug: $.jStorage.get("profile").urlSlug});
+        $state.go("mylife", { urlSlug: $.jStorage.get("profile").urlSlug });
       } else {
-        $state.go("agent-home-without", {urlSlug: $.jStorage.get("profile").urlSlug});
+        $state.go("agent-home-without", { urlSlug: $.jStorage.get("profile").urlSlug });
       }
     }
     //Agent Section End
   })
 
-  .controller('ForgotPasswordEmailCtrl', function ($scope, TemplateService, NavigationService, $timeout, $uibModal) {
+  .controller('ForgotPasswordEmailCtrl', function($scope, TemplateService, NavigationService, $timeout, $uibModal) {
     //Used to name the .html file
 
     //console.log("Testing //consoles");
@@ -673,15 +800,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       status: "",
       msg: ""
     };
-    $scope.editUserData = function (obj) {
-      NavigationService.sendOtpToReset(obj.email, function (data) {
+    $scope.editUserData = function(obj) {
+      NavigationService.sendOtpToReset(obj.email, function(data) {
         if (data.value) {
           $scope.resend = true;
           $scope.showErr = {
             status: true,
             msg: "Email sent successfully."
           };
-          $timeout(function () {
+          $timeout(function() {
             $scope.showErr = {
               status: "",
               msg: ""
@@ -3036,7 +3163,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //Used to name the .html file
 
     // //console.log("Testing //consoles");
-
     $scope.template = TemplateService.changecontent("popular-itinerary");
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
     TemplateService.title = "Popular Itineraries - TraveLibro";
@@ -14280,51 +14406,51 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     };
     $scope.mouseDown = function (e) {
-      $('.search-result-dropdown').scrollTop(0);
-      //console.log(e);
-      if (e.keyCode === 40) {
-        $('.search-option.active').focus();
-        if ($('.search-option.active').parent().children(':last-child').hasClass('active')) {
-          $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
-        } else {
-          $('.search-option.active').removeClass('active').next().addClass('active');
+            $('.search-result-dropdown').scrollTop(0);
+            //console.log(e);
+            if (e.keyCode === 40) {
+                $('.search-option.active').focus();
+                if ($('.search-option.active').parent().children(':last-child').hasClass('active')) {
+                    $('.search-option.active').removeClass('active').parent().parent().next().children(':last-child').children(':first-child').addClass('active');
+                } else {
+                    $('.search-option.active').removeClass('active').next().addClass('active');
+                }
+            } else if (e.keyCode === 38) {
+                if ($('.search-option.active').parent().children(':first-child').hasClass('active')) {
+                    $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
+                } else if ($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')) {
+                    return false;
+                    //console.log('amit');
+                    $('.search-result-dropdown').scrollTop(0);
+                } else {
+                    $('.search-option.active').removeClass('active').prev().addClass('active');
+                    //console.log('amit2')
+                }
+            } else if (e.keyCode === 13) {
+                var redirectLink = $('.search-option.active').children().attr('href');
+                window.open(redirectLink, '_self');
+                if ($('.search-option.active').parents('.search-itinerary-drop')) {
+                    var urlSlug = $('.search-option.active').children().children().attr('aria-label');
+                    var userUrlSlug = $('.search-option.active').children().children().attr('id');
+                    if ($('.search-option.active').children().children().attr('alt') == "quick-itinerary") {
+                        $state.go('userquickitinerary', {
+                            'id': urlSlug,
+                            'urlSlug': userUrlSlug
+                        })
+                    } else {
+                        $state.go('userdetailitinerary', {
+                            'id': urlSlug,
+                            'urlSlug': userUrlSlug
+                        })
+                    }
+                }
+            }
+            $('.search-result-dropdown').scrollTop(0);
+            $('.search-result-dropdown').scrollTop($('.search-option.active') && $('.search-option.active').offset().top - $('.search-result-dropdown').height());
         }
-      } else if (e.keyCode === 38) {
-        if ($('.search-option.active').parent().children(':first-child').hasClass('active')) {
-          $('.search-option.active').removeClass('active').parent().parent().prev().children(':last-child').children(':last-child').addClass('active');
-        } else if ($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')) {
-          return false;
-          //console.log('amit');
-          $('.search-result-dropdown').scrollTop(0);
-        } else {
-          $('.search-option.active').removeClass('active').prev().addClass('active');
-          //console.log('amit2')
-        }
-      } else if (e.keyCode === 13) {
-        var redirectLink = $('.search-option.active').children().attr('href');
-        window.open(redirectLink, '_self');
-        if ($('.search-option.active').parents('.search-itinerary-drop')) {
-          var urlSlug = $('.search-option.active').children().children().attr('aria-label');
-          var userUrlSlug = $('.search-option.active').children().children().attr('id');
-          if ($('.search-option.active').children().children().attr('alt') == "quick-itinerary") {
-            $state.go('userquickitinerary', {
-              'id': urlSlug,
-              'urlSlug': userUrlSlug
-            })
-          } else {
-            $state.go('userdetailitinerary', {
-              'id': urlSlug,
-              'urlSlug': userUrlSlug
-            })
-          }
-        }
-      }
-      $('.search-result-dropdown').scrollTop(0);
-      $('.search-result-dropdown').scrollTop($('.search-option.active').offset().top - $('.search-result-dropdown').height());
-    }
-    // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
-    //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
-    // }
+        // if($('.search-result-dropdown').children().children(':last-child').children(':first-child').hasClass('active')){
+        //    $('.search-result-dropdown').children(':first-child').children('.searchdrop-options').children(':first-child').addClass('active');
+        // }
     $scope.viewResult = function (state, searchText) {
       switch (state) {
         case 'search-traveller':

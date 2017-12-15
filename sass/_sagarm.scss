@@ -125,6 +125,13 @@
     &:focus {
       border-color: $brand-blue;
     }
+    &.error {
+      border-bottom: 1px solid #ef645e;
+      &:after,
+      &:before {
+        background-color: #ef645e;
+      }
+    }
   }
   &:after,
   &:before {

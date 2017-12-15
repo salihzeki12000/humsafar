@@ -800,6 +800,31 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  /*home*/
+  .mobile-fixed, .mobilecontent-view, .mobile-section, .content-section { width: 100%; }
+  .mobilecontent-view {
+    background-color: #fff;
+    z-index: 14;
+  }
+  .mobile-section {
+    .get-center {
+      left: 50% !important;
+    }
+  }
+  .content-section {
+    background-color: #fff;
+    z-index: 14;
+    > div {
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%,-50%));
+    }
+    .seventh-content { left: 50% !important; }
+  }
+  .iphone-fix, .first-fix {
+    left: 50% !important;
+  }
+  /*home end*/
   .modal-content {
     margin-top: 50px;
   }
@@ -2384,6 +2409,17 @@
   #content {
     margin-top: 50px;
   }
+  .mob-screen-img {
+    width: 172px;
+    max-width: 172px;
+  }
+  .iphone-fix {
+    img {
+      max-width: 187px;
+      width: 187px;
+    }
+  }
+
   .autosave {
     font-size: 10px;
     margin-top: 60px;
@@ -2963,7 +2999,7 @@
     padding: 15px 5px;
     .journey-end {
       p {
-        font-size: 12px;
+        font-size: 11px;
       }
     }
     .end-journey-flag {
