@@ -1,0 +1,360 @@
+<div class="past-story drafts relate" auto-height>
+  <div class="color-white autosave " ng-if="!showPublish">
+    <span class="pointer"
+          ng-click="publishDraft()"><b><p class="publishStory">Publish Story</p></b></span>
+    <div><i>{{autosaveMsg}}</i></div>
+  </div>
+  <div class="past-journey on-go-journey">
+    <div class="draft-container">
+      <!-- past story main -->
+      <section class="main-paststory ongo-card-holder draftJourney" ng-style="cardHolderCss">
+        <div class="color-white autosave" ng-if="showPublish">
+          <span class="pointer" ng-click="publishDraft()"><b><p class="publishStory">Publish Story</p></b></span>
+          <div><i>{{autosaveMsg}}</i></div>
+        </div>
+        <div class="started-journey-card">
+          <div class="relate text-center">
+            <div class="pastjourney-start journey-start">
+              <img src="img/ongojourney/journey-step-white.png" alt=""
+                   class="img-responsive m-center hidden-sm hidden-xs" width="40">
+              <img src="img/ongojourney/journey-step.png" alt="" class="img-responsive m-center hidden-md hidden-lg"
+                   width="40">
+              <h4 class="avenir-roman color-white"><span class="block">{{pastJourneyArray.name}}</span></h4>
+              <div class="you-in" ng-if="pastJourneyArray.startLocation!=''">
+                <img src="img/icons/bon-voyage.png" alt="" class="img-responsive m-center hidden-sm hidden-xs"
+                     width="140">
+                <img src="img/icons/bon-voyage-blue.png" alt="" class="img-responsive m-center hidden-md hidden-lg"
+                     width="140">
+              </div>
+            </div>
+          </div>
+          <div class="startLoc">
+            <div class="day-post-holder pointer" ng-if="pastJourneyArray.startLocation==''"
+                 ng-click="addMorePost(pastStory._id);">
+              <form name="loc">
+                <div class="row">
+                  <div class="col-xs-2">
+                    <button class="setLocation">
+                      <i class="fa fa-map-marker color-white"></i>
+                    </button>
+                  </div>
+                  <div class="col-xs-8">
+                    <ui-select ng-model="startLocationSet.description" theme="bootstrap" name="locate">
+                      <ui-select-match placeholder="Set Start Location">{{$select.selected.description}}
+                      </ui-select-match>
+                      <ui-select-choices
+                        repeat="city.description as city in cities | filter:$select.search track by $index"
+                        refresh="searchByKey($select.search)" refresh-delay="0">
+                        <span class="color-light-grey" ng-click="setLocation(startLocationSet.description)">{{city.description}}</span>
+                      </ui-select-choices>
+                    </ui-select>
+                    <div class="errorMsgDraft" ng-bind="msg"></div>
+                  </div>
+                  <div class="col-xs-2">
+                    <button class="location btn btn-block"
+                            ng-disabled="profile.locate.$touched && profile.locate.$invalid"
+                            ng-click="setLocation(startLocationSet.description)">
+                      <img src="img/send_location.png" width="20px">
+                      <!--<i class="fa fa-play" aria-hidden="true"></i>-->
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="started-paststory" ng-if="pastJourneyArray.startLocation!=''" ng-class="{'none':widthScreen}">
+            <div class="box-start-paststory box-start-journey">
+              <!-- header started -->
+              <div class="started-heading relate text-center clearfix" ng-init="pastStory.kindOf = {};">
+                <div class="start-card-options" ng-click="editOption(pastStory.kindOf);" ng-if="template.isMine">
+                  <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
+                  <div class="edit-kind-journey" ng-show="pastStory.kindOf.backgroundClick;">
+                    <ul class="text-left">
+                      <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(pastJourneyArray._id);">Change
+                        Cover Photo</a>
+                      </li>
+                      <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Edit Journey Name</a>
+                      </li>
+                      <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
+                      <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
+                      <li><a href="" title="Reviews Countries Visited" ng-click="countryReview();">Reviews Countries
+                        Visited</a></li>
+                      <!-- <li ng-if="journey.onGoing == false">
+                                                <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+                                            </li> -->
+                    </ul>
+                  </div>
+                </div>
+                <h4 class="color-white avenir-light">{{pastJourneyArray.startLocation}}</h4>
+                <p class="color-white m-clear avenir-roman">
+                  <!-- <i class="fa fa-calendar mr5"></i> -->
+                  <span class="mr5">{{pastJourneyArray.startTime|formatDate: 'date'}}</span> <span class="mr5">|</span>
+                  <!-- <i class="fa fa-clock-o mr5"></i> -->
+                  <span class="mr5">{{pastJourneyArray.startTime|formatDate: 'time'}}</span></p>
+              </div>
+              <!-- header started end-->
+              <!-- story banner holder -->
+              <div class="banner-imgholder journeybanner-imgholder start-journey">
+                <!-- <img src="{{pastJourneyArray.startLocationPic|uploadpath}}" alt="" class="img-responsive"> -->
+                <img src="{{pastJourneyArray.startLocationPic|uploadpath}}" alt=""
+                     class="img-responsive get-center full-width">
+                <!-- past story heading -->
+                <!-- <div class="past-story-heading">
+                                      <div class="clearfix">
+                                          <div class="pull-left">
+                                              <span class="color-white">{{pastJourneyArray.startTime|formatDate: 'date'}} | {{pastJourneyArray.startTime|formatDate: 'time'}}</span>
+                                          </div>
+                                          <div class="pull-right" ng-init="pastStory.kindOf = {};">
+                                              <div class="start-past-card relate" ng-click="editOption(pastStory.kindOf);" ng-if="template.isMine">
+                                                  <img src="img/options-white.png" alt="Edit Journey" width="3" class="img-responsive">
+                                                  <div class="edit-kind-journey" ng-show="pastStory.kindOf.backgroundClick;">
+                                                      <ul>
+                                                          <li><a ng-click="editKindOf()">Edit Kind of Journey</a></li>
+                                                          <li><a href="" ng-click="changeBannerDate()">Change Date &amp; Time</a></li>
+                                                      </ul>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div> -->
+                <!-- past story heading end-->
+                <!-- past story overivew -->
+                <div class="journey-overview past-story-overview">
+                  <ul>
+                    <li ng-if="pastJourneyArray.count.photos>0">
+                      <div class="symbol-up">
+                        <img src="img/camera.png" alt="Camera" width="15" class="mr5">
+                        <span class="inline-block v-mid count-reach ng-binding">{{pastJourneyArray.count.photos}}</span>
+                      </div>
+                    </li>
+                    <li ng-if="pastJourneyArray.count.videos>0">
+                      <div class="symbol-up">
+                        <img src="img/video.png" alt="Video" width="15" class="mr5">
+                        <span class="inline-block v-mid count-reach ng-binding">{{pastJourneyArray.count.videos}}</span>
+                      </div>
+                    </li>
+                    <li ng-if="pastJourneyArray.count.checkIns>0">
+                      <div class="symbol-up">
+                        <img src="img/location.png" alt="Location" width="15" class="mr5">
+                        <span
+                          class="inline-block v-mid count-reach ng-binding">{{pastJourneyArray.count.checkIns}}</span>
+                      </div>
+                    </li>
+                    <li ng-if="pastJourneyArray.count.thoughts>0">
+                      <div class="symbol-up">
+                        <img src="img/thought-white.png" alt="Thought" width="15" class="mr5">
+                        <span
+                          class="inline-block v-mid count-reach ng-binding">{{pastJourneyArray.count.thoughts}}</span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <!-- past story overivew end-->
+              </div>
+              <!-- story banner holder end-->
+              <!-- past story detail -->
+              <div class="past-story-detail" hidden>
+                <div class="clearfix">
+                  <div class="pull-left">
+                    <div class="start-end-date avenir-medium">
+                      <p class="past-startdate">Start Date : <span class="date">{{pastJourneyArray.startTime | formatDate : 'date'}}</span><span
+                        class="edit-date pointer">Edit</span></p>
+                      <p class="past-enddate">End Date : <span class="date">{{pastJourneyArray.endTime | formatDate: 'date'}}</span><span
+                        class="edit-date pointer">Edit</span></p>
+                    </div>
+                  </div>
+                  <div class="pull-right">
+                    <div class="journeys-dayscount color-dark-blue avenir-medium text-center"><span class="days-count">{{pastJourneyArray.endTime|dateDifference: pastJourneyArray.startTime}}</span>Days
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- past story detail end-->
+            </div>
+          </div>
+
+        </div>
+        <!-- destination visited -->
+        <div class="pastdestination-visited">
+          <div class="dest-heading">
+            <div class="clearfix">
+              <div class="pull-left">
+                <span class="avenir-medium color-dark-blue">Destination Visited</span>
+              </div>
+              <div class="pull-right" ng-if="isMine">
+                <span class="add-dest-visited avenir-medium color-dark-blue pointer"
+                      ng-click="addDestination(destinationData);">Add</span>
+              </div>
+            </div>
+          </div>
+          <div class="list-country-city">
+            <!-- list of country city visited -->
+            <div class="list-holder" ng-repeat="country in pastJourneyArray.destinationVisited track by $index">
+              <div class="clearfix">
+                <div class="pull-left">
+                  <div class="" ng-hide="$index == showEdit">
+                    <div class="past-flag-holder">
+                      <img ng-src="{{country.country.flag|uploadpath}}" alt="{{country.country.name}}"
+                           class="get-center" height="40">
+                    </div>
+                    <h4 class="dest-country-vist avenir-roman country-name-visited">
+                      <span class="country-name-visited">{{country.country.name}} :</span>
+                    </h4>
+                    <h4 class="dest-city-visit avenir-roman city-name-visited">
+												<span ng-repeat="city in country.cityVisited track by $index">
+													{{city.name}}
+												</span>
+                    </h4>
+                  </div>
+                  <div class="edit-data" ng-show="$index == showEdit">
+                    <div class="edit-country">
+                      <ui-select ng-model="country.country" theme="bootstrap"
+                                 on-select="countryReplace(country,$index,country.country);">
+                        <ui-select-match placeholder="Country Visited">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="country in countries | filter: $select.search track by $index">
+                          <h4 ng-bind="country.name"></h4>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                    <div class="edit-city">
+                      <ui-select multiple ng-model="country.cityVisited">
+                        {{$select.search}}
+                        <ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
+                        <ui-select-choices repeat="city in cities | filter: $select.search track by $index"
+                                           refresh="getCityVisited(country.country._id,$select.search)">
+                          <h4 ng-bind="city.name"></h4>
+                        </ui-select-choices>
+                      </ui-select>
+                    </div>
+                    <div class="edit-action">
+                      <span ng-click="viewEdit($index);">Cancel</span>
+                      <button class="btn btn-pink" ng-click="saveDestinationVisited()">Save</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="pull-right">
+                  <div class="edit-delete-dest" ng-if="isMine">
+                    <span class="edit-dest pointer" title="Edit" ng-click=viewEdit($index);><i
+                      class="fa fa-pencil color-light-grey"></i></span>
+                    <span class="delete-dest pointer" title="Delete" ng-click="deleteVisited($index,country);"><i
+                      class="fa fa-trash color-light-grey"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- list of country city visited end-->
+          </div>
+        </div>
+        <!-- destination visited end-->
+        <!--trip traveller buddies-->
+        <div class="dash-up"></div>
+        <div class="trip-travellers-card">
+          <div class="trip-travellers-card-header">
+            <div class="clearfix gray-line-bottom">
+              <h4 class="font-bold color-username m-clear" style="text-align: center;padding: 6px 0">Trip Travellers
+                ({{pastJourneyArray.buddies.length+1}})</h4>
+            </div>
+          </div>
+          <div class="trip-travellers-card-main">
+            <div class="trip-user-imgholder">
+              <div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':pastJourneyArray.user.urlSlug})">
+                <img src="{{pastJourneyArray.user.profilePicture|uploadpath:99:99:'cover'}}" alt=""
+                     class="img-responsive">
+              </div>
+              <h5 class="bold" ui-sref="mylife({'urlSlug':pastJourneyArray.user.urlSlug})">
+                {{pastJourneyArray.user.name}}
+              </h5>
+            </div>
+            <span ng-if="pastJourneyArray.buddies.length>0">
+								<div class="trip-user-imgholder" ng-repeat="buddy in pastJourneyArray.buddies track by $index">
+									<div class="travellers-img-ongo pointer" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+										<img src="{{buddy.profilePicture|uploadpath:99:99:'cover'}}" alt="" class="img-responsive">
+									</div>
+									<h5 class="bold" ui-sref="mylife({'urlSlug':buddy.urlSlug})">
+										{{buddy.name}}
+									</h5>
+								</div>
+							</span>
+          </div>
+        </div>
+        <!--trip traveller buddies end-->
+        <!-- past journey card -->
+        <div class="past-journey-card functionmap" ng-if="pastJourneyArray.post">
+          <past-journey-card is-mine="template.isMine" ng-class="{'hideSpan':loadmoreOption}" is-logged-in="isLoggedIn"
+                             json="pastJourneyArray" post="pastStory"
+                             ng-repeat="pastStory in pastJourneyArray.post track by $index"
+                             get-likes-data="getLikesData(post)" get-comments-data="getCommentsData(post)"
+                             close-back-drop="closeBackDrop()" template="template">
+          </past-journey-card>
+          <!-- past story-end -->
+          <!-- ongo journey end -->
+        </div>
+        <!-- past journey card end-->
+
+        <!-- ongo journey-end -->
+        <div class="ongo-journey-end past-journey-end" ng-hide="loadmoreOption" ng-if="pastJourneyArray.onGoing==false">
+          <div class="journey-end text-center relate">
+            <h4 class="color-pink avenir-heavy">{{pastStory.location}}</h4>
+            <p class="m-clear color-pink avenir-heavy">
+              <!-- <i class="fa fa-calendar mr5"></i> -->
+              <span class="mr5">{{pastJourneyArray.endTime|formatDate: 'date'}}</span>
+              <span class="mr5">|</span>
+              <!-- <i class="fa fa-clock-o mr5"></i> -->
+              <span class="mr5">{{pastJourneyArray.endTime|formatDate: 'time'}}</span></p>
+            <div class="end-strip options pointer pull-right" ng-init="pastStory.lastDate = {};">
+              <img src="img/options.png" alt="" ng-click="editOption(pastStory.lastDate);">
+              <div class="own-trip" ng-show="pastStory.lastDate.backgroundClick;">
+                <ul class="text-left">
+                  <li>
+                    <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="end-journey-flag text-center">
+            <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
+            <span class="color-white jenna-font">until we meet again!</span>
+          </div>
+        </div>
+
+        <!-- ongo journey end -->
+        <div class="loadmore" style="padding: 0 10px 30px 10px">
+          <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
+          <button class="btn btn-block publish color-white" ng-click="publishDraft()" ng-if="showPublish"><b>Publish Story</b></button>
+          <div class="take-me-to-thestories">
+            <div style="overflow: hidden;border-radius: 8px">
+              <div class="row">
+                <a href="#/popular-journey" ui-sref="popularjourney">
+                  <div class="col-xs-4 explore-stories"><span>Explore</span><span
+                    class="explore-more">Trending Stories</span></div>
+                </a>
+                <a
+                  href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}">
+                  <div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span>
+                  </div>
+                </a>
+                <a
+                  href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}">
+                  <div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
+                    <span>Share</span>
+                    <span class="explore-more">
+												Past Stories
+											</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- past story main end -->
+    </div>
+  </div>
+</div>
+<div class="" ng-if="postScrollData.viewList">
+  <comment-like-section post="post" user-data='userData' post-scroll-data="postScrollData"
+                        view-card-comment="viewCardComment" view-card-like='viewCardLike'
+                        list-of-comments="listOfComments" list-of-likes="listOfLikes" get-card="getCard"
+                        show-like-show='showLikeShow'></comment-like-section>
+</div>

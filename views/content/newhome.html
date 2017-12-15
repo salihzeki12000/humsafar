@@ -27,18 +27,62 @@
           <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank"><img src="img/button-get-it-on-app-store.png" alt="App Store"></a>
           <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" target="_blank"><img src="img/button-get-it-on-google-play.png" alt="Play Store"></a>
         </div>
-        <div class="mouse-scrolldown text-center home-scroll" ng-click="go_at('discover')">
+        <div class="mouse-scrolldown text-center home-scroll">
           <img src="img/mouse-scroll-grey.png" alt="Travelibro">
           <p>Scroll Down</p>
         </div>
       </div>
+      <div id="ongo" hidden>
+        <section id="one">
+          <div class="inner innerS1">
+            <h1>Simple ScrollMagic Tutorial</h1>
+            <p>Learn how to create a <strong>simple scrolling website</strong> using ScrollMagic</p>
+          </div>
+        </section>
+        <section id="two">
+          <div class="innerText innerS2">
+            <h2>Why to learn ScrollMagic?</h2>
+            <ul class="features">
+              <li>It's great for <strong>story telling websites</strong></li>
+              <li>It gives you <strong>endless creative power</strong></li>
+              <li>It's <strong>easy to use</strong> once you get it</li>
+            </ul>
+          </div>
+        </section>
+        <section id="three">
+          <div class="innerText innerS3">
+            <h2>When to use ScrollMagic?</h2>
+            <ul class="features">
+              <li>When building <strong>interactive infographics</strong></li>
+              <li>When introducing your <strong>product or service</strong></li>
+              <li>When sharing your <strong>unique story or timeline</strong></li>
+            </ul>
+          </div>
+        </section>
+        <section id="four">
+          <div class="innerText innerS4">
+            <h2>Want to learn more about ScrollMagic?</h2>
+            <ul class="features">
+              <li>Read the full article <a href="https://ihatetomatoes.net/simple-scrollmagic-tutorial/">Simple ScrollMagic Tutorial</a></li>
+            </ul>
+          </div>
+          <div class="iphone">
+            <p class="screen screenHat">
+              <!-- <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/107366/img_scrollMagic.png" /> -->
+            </p>
+            <p class="screen screenA">A</p>
+            <p class="screen screenB">B</p>
+            <p class="screen screenC">C</p>
+          </div>
+        </section>
+      </div>
       <div class="home-navigation hidden-sm hidden-xs">
-        <div class="submenu hidden-sm hidden-xs" role="navigation" id="navigation">
-          <ul class="sectionScroll">
-            <li ng-click="go_at('discover')"><a href=""  class="take-scroll discover1" title="discover">DISCOVER</a></li>|
-            <li ng-click="go_at('capture')"><a href=""  class="take-scroll capture1" title="capture">CAPTURE</a></li>|
-            <li ng-click="go_at('inspire')"><a href=""  class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
-            <li ng-click="go_at('relive')"><a href=""  class="take-scroll relive1" title="relive">RELIVE</a></li>
+        <div class="submenu hidden-sm hidden-xs home-navigate" role="navigation" id="navigation">
+          <ul class="sectionScroll">           
+            <li><a href="#discover" class="take-scroll discover1" title="discover">DISCOVER</a></li>|
+            <li><a href="#capture" class="take-scroll capture1" title="capture">CAPTURE</a></li>|
+            <li><a href="#inspire" class="take-scroll inspire1" title="inspire">INSPIRE</a></li>|
+            <li><a href="#relive" class="take-scroll relive1" title="relive">RELIVE</a></li>
           </ul>
         </div>
       </div>
@@ -324,8 +368,101 @@
 
 
 </div>
+
 <div id="capture" class="capture bottomspace" auto-height>
   <h2 class="text-heavy color-iphone-gray mobile-headline text-center visible-xs visible-sm">CAPTURE</h2>
+  <!-- mobile section -->
+  <div class="heading-capture text-center">
+    <h4>Live On The Go Stories - Solo or Group</h4>
+    <p>Capture moments of your journey live on the go together to create shared memories.</p>
+  </div>
+  <div class="mobile-view">          
+    <div class="mobile-fixed">
+      <div class="iphone-fix">
+        <img src="img/iphone-black.png" alt="" class="img-responsive">
+        <span class="whitespace"></span>
+      </div> 
+      <div class="first-fix get-center">
+        <img src="img/mob-screen1.png" alt="" class="img-responsive  mob-screen-img"> 
+      </div>                     
+    </div>    
+    <div class="mobilecontent-view">
+      <img src="img/mob-content1.png" alt="" class="img-responsive get-center mob-content-img">
+    </div>
+  </div>
+  <div class="second-screen common-view">
+    <div class="mobile-section">
+      <div class="second-view get-center">
+        <img src="img/mob-screen2.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="second-content get-center">
+        <img src="img/mob-content2.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <div class="third-screen common-view">
+    <div class="mobile-section">
+      <div class="third-view get-center">
+        <img src="img/mob-screen3.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="third-content get-center">
+        <img src="img/mob-content3.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <div class="fourth-screen common-view">
+    <div class="mobile-section">
+      <div class="fourth-view get-center">
+        <img src="img/mob-screen4.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="fourth-content get-center">
+        <img src="img/mob-content4.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <div class="fivth-screen common-view">
+    <div class="mobile-section">
+      <div class="fivth-view get-center">
+        <img src="img/mob-screen5.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="fivth-content get-center">
+        <img src="img/mob-content5.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <div class="sixth-screen common-view">
+    <div class="mobile-section">
+      <div class="sixth-view get-center">
+        <img src="img/mob-screen6.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="sixth-content get-center">
+        <img src="img/mob-content6.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <div class="seventh-screen common-view">
+    <div class="mobile-section">
+      <div class="seventh-view get-center">
+        <img src="img/mob-screen7.png" alt="" class="img-responsive mob-screen-img">
+      </div>
+    </div>
+    <div class="content-section">
+      <div class="seventh-content get-center">
+        <img src="img/mob-content7.png" alt="" class="img-responsive mob-content-img">
+      </div>
+    </div>
+  </div>
+  <!-- mobile section end-->
   <div class="row capture-row row-pad" appear-inscreen>
     <div class="col-md-4">
       <img src="/img/On-The-Go Stories.png" class="full-img" alt="">
@@ -545,9 +682,9 @@
                     <ul class="list-unstyled list-inline">
                       <li><h4 class="text-heavy">THE TRAVEL SOCIAL COMMUNITY</h4>
                         <li class="footer-text">
-                            We are passionate travellers set our to create a global community of discerning travellers
-                            and your feedback would help us achieve this goal. We look forward to your response at
-                            <a href="mailto:info@travelibro.com">info@travelibro.com</a>.
+                          We are passionate travellers set our to create a global community of discerning travellers
+                          and your feedback would help us achieve this goal. We look forward to your response at
+                          <a href="mailto:info@travelibro.com">info@travelibro.com</a>.
                         </li>
                       </ul>
                     </div>

@@ -1,7 +1,6 @@
 var commontask = angular.module('commontask', [])
 
 .factory('LikesAndComments', function (TravelibroService, $filter, $uibModal, $timeout, $state) {
-
     var returnVal = {
         getHashTags: function (commentString, callback) {
             if (_.trim(commentString) != "") {
@@ -448,6 +447,18 @@ var commontask = angular.module('commontask', [])
             });
             return bb;
         }
+    };
+})
+
+.factory('shareDataService', function () {
+  var shareData = null;
+    return {
+      set: function(data){
+        shareData = data;
+      },
+      get: function () {
+        return shareData;
+      }
     };
 });
 

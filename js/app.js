@@ -196,7 +196,7 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             reloadOnSearch: false
         })
         .state('mylife1', {
-            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews|drafts)}",
+            url: "/users/:urlSlug/{name:(?:journeys|moments|reviews|untold)}",
             templateUrl: "views/template.html",
             controller: 'MylifeCtrl',
             reloadOnSearch: false
@@ -362,6 +362,11 @@ firstapp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $lo
             url: "/users/:urlSlug/past-story/:id",
             templateUrl: "views/template.html",
             controller: 'PastStoryCtrl'
+        })
+        .state('drafts', {
+            url: "/users/:urlSlug/untold/:draftSlug",
+            templateUrl: "views/template.html",
+            controller: 'newdraftsCtrl'
         })
         .state('editoritinerary', {
             url: "/editor-itinerary",
@@ -568,7 +573,7 @@ firstapp.directive('fancyboxBox', function ($document) {
     return {
         restrict: 'EA',
         replace: false,
-        link: function (scope, element, attr) {            
+        link: function (scope, element, attr) {
             if(attr.ariaHidden){
                 var className = attr.ariaHidden;
             }
@@ -590,7 +595,7 @@ firstapp.directive('fancyboxBox', function ($document) {
                 }
               });
             },2000);
-            
+
         }
     };
 });
