@@ -760,9 +760,9 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                 if (!isArr && newVal && newVal.file) {
                     $scope.uploadNow(newVal);
                     TemplateService.uploadLoader = true;
-                    $timeout(function(){
-                        TemplateService.uploadLoader = false;
-                    },36000);
+                    // $timeout(function(){
+                    //     TemplateService.uploadLoader = false;
+                    // },36000);
                 } else if (isArr && newVal.length > 0 && newVal[0].file) {
                     $timeout(function () {
                         //console.log(oldVal, newVal);
@@ -771,9 +771,9 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                             if (newV && newV.file) {
                                 TemplateService.uploadLoader = true;
                                 TemplateService.type = $scope.dataValue;
-                                $timeout(function(){
-                                 TemplateService.uploadLoader = false;
-                                },36000);
+                                // $timeout(function(){
+                                //  TemplateService.uploadLoader = false;
+                                // },36000);
                                 TemplateService.type = $scope.dataValue;
                                 $scope.uploadNow(newV);
                             }
