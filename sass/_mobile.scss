@@ -55,6 +55,10 @@
 }
 
 @media screen and (max-width: 1204px) {
+  .addBrick .newDraft {
+    margin-top: 20%;
+  }
+
   .inspire-banner, .relive-banner {
     height: auto !important;
   }
@@ -305,6 +309,10 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .addBrick .newDraft {
+    margin-top: 25%;
+  }
+
   #discover {
     .popular-user {
       margin: 0 3%;
@@ -792,6 +800,61 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  /*home*/
+  .mobile-fixed, .mobilecontent-view, .mobile-section, .content-section { width: 100%; }
+  .mobilecontent-view {
+    background-color: #fff;
+    z-index: 14;
+  }
+  .mobile-section {
+    .get-center {
+      left: 50% !important;
+    }
+  }
+  .content-section {
+    background-color: #fff;
+    z-index: 14;
+    > div {
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%,-50%));
+    }
+    .seventh-content { left: 50% !important; }
+  }
+  .iphone-fix, .first-fix {
+    left: 50% !important;
+  }
+  /*home end*/
+  .modal-content {
+    margin-top: 50px;
+  }
+  .draft-list-popup form{
+    .draft-group {
+      display: block;
+      input {
+        width: 80%;
+      }
+    }
+  }
+  .drafts-view .addCard .add-draft {
+    width: 100%;
+    .newDraft {
+      margin-top: 38%;
+    }
+  }
+  .past-story .autosave {
+    margin-top: 15px;
+  }
+  .draftContainer {
+    padding: 0;
+  }
+  .draftContainer .travelled-imgholder {
+    min-height: 90vw;
+  }
+  .addBrick .newDraft {
+    margin-top: 40%;
+  }
+
   /*new landing page*/
   .worksheet {
     -webkit-overflow-scrolling: touch !important;
@@ -1700,6 +1763,22 @@
         padding: 17px 20px;
       }
     }
+  }
+  .drafts-active {
+    ul li {
+      &:nth-child(4) .tab-heading {
+        padding: 17px 20px;
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 13px 20px;
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 9px 20px;
+      }
+      &:nth-child(1) .tab-heading {
+        padding: 6px 20px;
+      }
+    }
   } // LOCAL LIFE
   .heading-localtitle {
     font-size: 12px;
@@ -2306,10 +2385,37 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .past-story .autosave {
+    position: relative;
+    margin-top: 60px;
+    i {
+      font-size: 9px;
+    }
+  }
+  .draft-container {
+    padding-top: 0 !important;
+  }
+  .publishStory {
+    font-size: 14px;
+  }
   #content {
     margin-top: 50px;
   }
+  .mob-screen-img {
+    width: 172px;
+    max-width: 172px;
+  }
+  .iphone-fix {
+    img {
+      max-width: 187px;
+      width: 187px;
+    }
+  }
 
+  .autosave {
+    font-size: 10px;
+    margin-top: 60px;
+  }
   //new landing page
   .landing-home {
     .headline {
@@ -2418,7 +2524,7 @@
     p {
       font-size: 12px;
     }
-    p:last-child { font-size: 14px; }
+    //p:last-child { font-size: 14px; }
   }
   .trending-journey-story, .downloadapp-btn, .login-journey-btn {
     span {
@@ -2896,7 +3002,7 @@
     padding: 15px 5px;
     .journey-end {
       p {
-        font-size: 13px;
+        font-size: 11px;
       }
     }
     .end-journey-flag {
@@ -3138,7 +3244,7 @@
     right: 55px;
   } // my life
   .profile-tabs {
-    margin: -10px 0 0 0;
+    margin: -22px 0 0 0;
     .sec-strip {
       bottom: 3px;
     }
@@ -3154,6 +3260,9 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        padding: 4px 20px;
       }
     }
   }
@@ -3180,6 +3289,25 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 15px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        padding: 7px 20px;
+      }
+    }
+  }
+  .drafts-active {
+    ul li {
+      &:nth-child(4) .tab-heading {
+        padding: 15px 20px;
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 11px 20px;
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 8px 20px;
+      }
+      &:nth-child(1) .tab-heading {
+        padding: 4px 20px;
       }
     }
   }

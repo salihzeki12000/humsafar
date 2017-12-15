@@ -4,7 +4,7 @@
 		</div>
 	</div>
 	<div class="past-journey on-go-journey mt60">
-		<div class="container-fluid">			
+		<div class="container-fluid">
 			<!-- past story main -->
 			<section class="main-paststory ongo-card-holder" ng-style="cardHolderCss">
 				<!--slug profile-->
@@ -157,7 +157,7 @@
 										<ul>
 											<li ng-if="pastJourneyArray.count.photos>0">
 												<div class="symbol-up">
-													<img src="img/camera.png" alt="Camera" width="15" class="mr5"> 
+													<img src="img/camera.png" alt="Camera" width="15" class="mr5">
 													<span class="inline-block v-mid count-reach ng-binding">{{pastJourneyArray.count.photos}}</span>
 												</div>
 											</li>
@@ -197,9 +197,9 @@
 											<div class="journeys-dayscount color-dark-blue avenir-medium text-center"><span class="days-count">{{pastJourneyArray.endTime|dateDifference: pastJourneyArray.startTime}}</span>Days</div>
 										</div>
 									</div>
-								</div>	
+								</div>
 								<!-- past story detail end-->
-							</div>		
+							</div>
 						</div>
 					</div>
 					<!-- destination visited -->
@@ -224,7 +224,7 @@
 												<img ng-src="{{country.country.flag|uploadpath}}" alt="{{country.country.name}}" class="get-center" height="40">
 											</div>
 											<h4 class="dest-country-vist avenir-roman country-name-visited">
-												<span class="country-name-visited">{{country.country.name}} :</span>								
+												<span class="country-name-visited">{{country.country.name}} :</span>
 											</h4>
 											<h4 class="dest-city-visit avenir-roman city-name-visited">
 												<span ng-repeat="city in country.cityVisited track by $index">
@@ -303,7 +303,7 @@
 					<div class="" ng-if="isLoggedIn">
 						<div class="past-journey-card functionmap" ng-if="pastJourneyArray.post">
 							<past-journey-card is-mine="template.isMine" ng-class="{'hideSpan':loadmoreOption}" is-logged-in="isLoggedIn" json="pastJourneyArray" post="pastStory" ng-repeat="pastStory in pastJourneyArray.post track by $index" get-likes-data="getLikesData(post)" get-comments-data="getCommentsData(post)" close-back-drop="closeBackDrop()" template="template" ></past-journey-card>
-							<!-- past story-end -->						
+							<!-- past story-end -->
 							<!-- ongo journey end -->
 						</div>
 						<!-- past journey card end-->
@@ -331,14 +331,14 @@
 									<img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
 									<span class="color-white jenna-font">until we meet again!</span>
 								</div>
-							</div>							
+							</div>
 						</div>
 						<!-- ongo journey end -->
 						<div class="loadmore" ng-if="!isLoggedIn">
 							<div class="no-login">
 								<p class="text-center avenir-roman color-white">​​​Real Journeys by Real People!</p>
 								<p class="text-justify avenir-roman color-white">TraveLibro boasts of a community of nomads, wanderers, explorers and storytellers. We bring to you visual travel stories highlighting the entire experience of a trip by the best global travel bloggers and photographers. Discover these travel stories by destinations or interest to help inspire your future travels.</p>
-								<p class="text-center avenir-roman color-white">Download App or Login to view this entire journey.​</p>
+								<p class="text-center avenir-roman color-pink">Download App or Login to view the journey.​</p>
 							</div>
 							<!-- <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button> -->
 							<div class="take-me-to-thestories">
@@ -351,7 +351,7 @@
 										<a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
 											<span>Share</span><span class="explore-more">Past Stories</span></div></a> -->
 										</div>
-									</div>									
+									</div>
 								</div>
 							</div>
 						</section>

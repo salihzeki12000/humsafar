@@ -2,23 +2,86 @@ var pastJourney = angular.module('pastjourney',[]);
 
 pastJourney.factory('pastJourney', function(TravelibroService, $filter){
 	return{
-		// getPastJourney : function(formData, callback, errorCallback){
-		// 	TravelibroService.http({
-		// 		url: adminURL + '/draft/getOneWeb',
-		// 		method: "POST",
-		// 		data: formData
-		// 	}).success(function(data){
-		// 		callback(data.data);
-		// 	}).error(function(data){
-		// 		console.log(data);
-		// 	})
-		// },
+	  getDrafts: function(formData, callback, errorCallback){
+      TravelibroService.http({
+          		url: adminURL + '/draft/getDraftWeb',
+          		method: "POST",
+          		data: formData
+          	}).success(function(data){
+          		callback(data.data);
+          	}).error(function(data){
+          		console.log(data);
+          	})
+    },
+		getOneDraft : function(formData, callback, errorCallback){
+			TravelibroService.http({
+				url: adminURL + '/draft/getOneDraftWeb',
+				method: "POST",
+				data: formData
+			}).success(function(data){
+        var journey = data.data;
+        var allPastPost = [];
+        var dateJourneyDifference = moment(journey.endTime).diff(moment(journey.startTime),'days');
+        _.times(dateJourneyDifference+1,function(day){
+          allPastPost.push({
+            type:"addDays",
+            UTCModified:moment(journey.startTime).add(day,'d').format("YYYY-MM-DD")
+          });
+        });
+        _.each(journey.post,function(eachVal){
+          _.remove(allPastPost,function(each){
+            return (moment(eachVal.UTCModified).format('DD:MM:YYYY') === moment(each.UTCModified).format('DD:MM:YYYY')) && each.type==="addDays";
+          });
+        });
+        // console.log(allPastPost,'all past post');
+        journey.post = _.concat(journey.post,allPastPost);
+        journey.post=_.orderBy(journey.post,['UTCModified'],['asc']);
+        // console.log(journey.post,'journey post');
+        for(var i = 0; i<journey.post.length-1;i++){
+          if(moment(journey.post[i].UTCModified).format('DD:MM:YYYY')!==moment(journey.post[i+1].UTCModified).format('DD:MM:YYYY')){
+            journey.post[i].showAddMore = true;
+          }else{
+            journey.post[i].showAddMore = false;
+          }
+        }
+        journey.post[journey.post.length-1].showAddMore = true;
+        // console.log(journey,'date wala data jo aaya wo');
+        journey.kindOfJourneyIconsAddr = [];
+        journey.buddiesCount = journey.buddies.length;
+        journey.buddiesString = "";
+        if (journey.buddiesCount == 1) {
+          journey.buddiesString = " and " + "<a href='/users/" + journey.buddies[0].urlSlug + "'>" + journey.buddies[0].name.bold() + "</a>";
+        } else if (journey.buddiesCount == 2) {
+          journey.buddiesString = ", " + "<a href='/users/" + journey.buddies[0].urlSlug + "'>" + journey.buddies[0].name.bold() + "</a>" + " and " + "<a href='/users/" + journey.buddies[1].urlSlug + "'>" + journey.buddies[1].name.bold() + "</a>" + ".";
+        } else if (journey.buddiesCount >= 2) {
+          var i = 0;
+          journey.buddiesString = ", ";
+          while (i <= journey.buddiesCount - 1) {
+            if (i < journey.buddiesCount - 1) {
+              journey.buddiesString = journey.buddiesString + "<a href='/users/" + journey.buddies[i].urlSlug + "'>" + journey.buddies[i].name.bold() + "</a>" + ", ";
+            } else if (i == journey.buddiesCount - 1) {
+              journey.buddiesString = journey.buddiesString + " and " + "<a href='/users/" + journey.buddies[i].urlSlug + "'>" + journey.buddies[i].name.bold() + "</a>" + ".";
+            }
+            i++;
+          }
+        }
+        if (journey.buddiesString != undefined) {
+          journey.startJourneyString = "Trip Travellers - " + "<a href='/users/" + journey.user.urlSlug + "'>" + journey.user.name.bold() + "</a>" + journey.buddiesString;
+        } else {
+          journey.startJourneyString = "Trip Traveller - " + "<a href='/users/" + journey.user.urlSlug + "'>" + journey.user.name.bold() + "</a>";
+        }
+        callback(journey);
+			}).error(function(data){
+				console.log(data);
+			})
+		},
 		getPastJourney: function (formData, callback, errorCallback) {
         TravelibroService.http({
           url: adminURL + "/draft/getOneWeb",
           method: "POST",
           data: formData
         }, 'allLoader').success(function (data) {
+          console.log('journey in post ',data);
           var journey = data.data;
           var lastPostUtc;
           if(journey.post && journey.post.length >= 1) {
@@ -40,10 +103,10 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
                return (moment(eachVal.UTCModified).format('DD:MM:YYYY') === moment(each.UTCModified).format('DD:MM:YYYY')) && each.type==="addDays";
             });
           });
-          console.log(allPastPost,'all past post');
+          // console.log(allPastPost,'all past post');
           journey.post = _.concat(journey.post,allPastPost);
           journey.post=_.orderBy(journey.post,['UTCModified'],['asc']);
-          console.log(journey.post,'journey post');
+          // console.log(journey.post,'journey post');
           for(var i = 0; i<journey.post.length-1;i++){
             if(moment(journey.post[i].UTCModified).format('DD:MM:YYYY')!==moment(journey.post[i+1].UTCModified).format('DD:MM:YYYY')){
               journey.post[i].showAddMore = true;
@@ -52,7 +115,7 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
             }
           }
           journey.post[journey.post.length-1].showAddMore = true;
-          console.log(journey,'date wala data jo aaya wo');
+          // console.log(journey,'date wala data jo aaya wo');
           journey.kindOfJourneyIconsAddr = [];
           journey.buddiesCount = journey.buddies.length;
           journey.buddiesString = "";
@@ -82,13 +145,57 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           console.log(data);
         });
       },
-		editJourneyName: function (formData, callback) {
+      deleteJourney : function(formData,callback){
+        TravelibroService.http({
+          url: adminURL + "/journey/deleteJourneyWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+		  getLatLong: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/card/getGooglePlaceDetail",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      editJourneyName: function (formData, callback) {
         TravelibroService.http({
           url: adminURL + "/draft/editDataWeb",
           method: "POST",
           data: formData
         }).success(function (data) {
           callback(formData.name)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      publishDraft: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/draft/publishDraft",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
+        }).error(function (data) {
+          console.log(data);
+        });
+      },
+      setStartLocation: function (formData, callback) {
+        TravelibroService.http({
+          url: adminURL + "/draft/editDataWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          callback(data)
         }).error(function (data) {
           console.log(data);
         });
@@ -211,6 +318,18 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
           console.log(data);
         });
 
+      },
+      createDraft: function(formData, callback){
+        TravelibroService.http({
+          url: adminURL + "/draft/saveWeb",
+          method: "POST",
+          data: formData
+        }).success(function (data) {
+          console.log('response ',data);
+          callback(data);
+        }).error(function(data){
+          console.log(data);
+        });
       }
     };
 });
@@ -321,7 +440,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.pastStory.onDisplay = "photos";
         }
       }
-			makePostString();			
+			makePostString();
 			// poststring end
 
 			$scope.editOption = function (model) {
@@ -332,7 +451,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         backgroundClick.scope = $scope;
       };
 
-      // edit checkin 
+      // edit checkin
       var modal = "";
       $scope.editCheckIn = function(){
       	// journey and paststory has same modal
@@ -428,7 +547,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
       }
       $scope.categoryList = ['Beaches', 'Airport', 'Hotels', 'Restaurants', 'Nature & parks', 'Sights & Landmarks', 'Museums & Galleries', 'Religious', 'Shopping', 'Adventure & Excursion', 'Zoos & Aqua', 'Cinema & Theatre'];
       // checkin choose you location end
-      // photos array 
+      // photos array
        $scope.photosArray = _.cloneDeep($scope.pastStory.photos);
       $scope.photosArray = _.chunk($scope.photosArray, 4);
       for (var i = 0; i < $scope.photosArray.length; i++) {
@@ -751,7 +870,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           templateUrl: "views/modal/past-datetime.html",
           scope: $scope,
           backdropClass: "review-backdrop",
-        })        
+        })
       console.log($scope.pastJourneyArray.post,'past journey array');
       };
       $scope.updateDateTime = function (id, formData, dt) {
@@ -866,10 +985,10 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           console.log("failed to delete");
         })
       }
-      // delete past journey card end     
-      // add more post 
+      // delete past journey card end
+      // add more post
       $scope.addMorePost = function(id){
-        console.log($scope.pastStory.UTCModified,'what is utc',id,'id',moment($scope.pastStory.UTCModified));  
+        console.log($scope.pastStory.UTCModified,'what is utc',id,'id',moment($scope.pastStory.UTCModified));
         if(id){
           $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).add(2,'seconds').format();
         }else{
@@ -880,7 +999,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         $scope.pastStory.thoughts = "";
         $scope.ongo = $scope.pastStory;
         // console.log($scope.pastStory.UTCModified,'what is utc new');
-        
+
         var modal = "";
         modal = $uibModal.open({
           animation: true,
@@ -913,8 +1032,8 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
             date: $scope.pastStory.UTCModified,
             thoughts: $scope.pastStory.thoughts,
             checkIn: $scope.pastStory.checkIn,
-            journey: $scope.pastJourneyArray.uniqueId,         
-            hashtag: hashTag,          
+            journey: $scope.pastJourneyArray.uniqueId,
+            hashtag: hashTag,
             photos: $scope.otgPhoto,
             videos: $scope.otgVideo
           }
@@ -932,8 +1051,8 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         }
       // save new post end
       }
-      // add more post end      
-      // like photo 
+      // add more post end
+      // like photo
         $scope.likePost = function (pastStory) {
         console.log(pastStory, "this call is from journey-post.html");
         pastStory.likeDone = !pastStory.likeDone;
