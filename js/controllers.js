@@ -5930,6 +5930,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // $scope.endDate = '';
     $scope.viewTab = 1;
     $scope.isMine = $.jStorage.get("isMine");
+    var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    if(vw <=1060){
+      $scope.showBox = true;
+    }
     var pageNo = 0;
     $scope.scroll = {
       busy: false
@@ -10600,7 +10604,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     var profile = $.jStorage.get("profile");
-    $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published';
+    $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published.';
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -10608,14 +10612,18 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (vw <= 480) {
-      $scope.loadmoreOption = true;
+      // $scope.loadmoreOption = true;
+      $scope.showPublish = true;
     } else {
-      $scope.loadmoreOption = false;
+      // $scope.loadmoreOption = false;
+      $scope.showPublish = false;
       $('.ongo-journey-main').css('margin-top', '70px');
     }
-    if(vw <= 767) {
-      $("#navi").css('height','110px');
-    }
+    // if(vw <= 767) {
+    //   // $("#navi .container-fluid").css('background-color','#272b49');
+    //   document.getElementsByClassName('navbar').style.color = '#272b49';
+    //   console.log('----------------------------------------',$("#navi .container-fluid"))
+    // }
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
       if ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug) {
@@ -14036,18 +14044,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    /////////////////////////////////////////////////
     // if($state.current.name == 'home'){
     //   $('.travel-bg').css('overflow','hidden');
     // }
     // else {
     //   $('.travel-bg').css('overflow','auto');
     // }
+    if($state.is('drafts')){
+      $("#navi").css('background-color','#272b49');
+      if (screenWidth <= 480) {
+        $("body").css('margin-top','50px');
+      }
+    }
     $scope.closeStripe = function () {
       try {
         $scope.viewStripe = false;
         var a = document.getElementById('content');
         $('.destination-nav.mustdo-not').css('top', '55px');
+        $("body").css('margin-top','0px');
         a.style.marginTop = "0px";
       } catch (e) {
       }
@@ -14062,6 +14076,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (screenWidth <= 480) {
         if ($(window).scrollTop() < 3) {
           $("#nav-onhead").removeClass('blue-head');
+          if(!$state.is('drafts'))
           $("#navi").removeClass('blue-head');
         }
         else {
@@ -14074,7 +14089,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // ISMINE FUNCTION
     if ($.jStorage.get("isLoggedIn")) {
       $scope.isLoggedIn = true;
-      $scope.template.isLoggedIn = true; ///////////////////////////////////////////////////////////////////////
+      $scope.template.isLoggedIn = true;
       if ($.jStorage.get("profile") && ($stateParams.urlSlug == $.jStorage.get("profile").urlSlug)) {
         // $.jStorage.set("isMine", true);
         $scope.template.isMine = true;

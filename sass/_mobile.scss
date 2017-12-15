@@ -800,8 +800,25 @@
 // media query for 991px to 768px end
 // media query for 767px to 480px
 @media screen and (max-width: 767px) {
+  .modal-content {
+    margin-top: 50px;
+  }
+  .draft-list-popup form{
+    .draft-group {
+      display: block;
+      input {
+        width: 80%;
+      }
+    }
+  }
+  .drafts-view .addCard .add-draft {
+    width: 100%;
+    .newDraft {
+      margin-top: 38%;
+    }
+  }
   .past-story .autosave {
-    margin-top: 60px;
+    margin-top: 15px;
   }
   .draftContainer {
     padding: 0;
@@ -1729,6 +1746,22 @@
         padding: 17px 20px;
       }
     }
+  }
+  .drafts-active {
+    ul li {
+      &:nth-child(4) .tab-heading {
+        padding: 17px 20px;
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 13px 20px;
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 9px 20px;
+      }
+      &:nth-child(1) .tab-heading {
+        padding: 6px 20px;
+      }
+    }
   } // LOCAL LIFE
   .heading-localtitle {
     font-size: 12px;
@@ -2335,6 +2368,19 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .past-story .autosave {
+    position: relative;
+    margin-top: 60px;
+    i {
+      font-size: 9px;
+    }
+  }
+  .draft-container {
+    padding-top: 0 !important;
+  }
+  .publishStory {
+    font-size: 14px;
+  }
   #content {
     margin-top: 50px;
   }
@@ -2917,7 +2963,7 @@
     padding: 15px 5px;
     .journey-end {
       p {
-        font-size: 13px;
+        font-size: 12px;
       }
     }
     .end-journey-flag {
@@ -3159,7 +3205,7 @@
     right: 55px;
   } // my life
   .profile-tabs {
-    margin: -10px 0 0 0;
+    margin: -22px 0 0 0;
     .sec-strip {
       bottom: 3px;
     }
@@ -3175,6 +3221,9 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        padding: 4px 20px;
       }
     }
   }
@@ -3201,6 +3250,25 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 15px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        padding: 7px 20px;
+      }
+    }
+  }
+  .drafts-active {
+    ul li {
+      &:nth-child(4) .tab-heading {
+        padding: 15px 20px;
+      }
+      &:nth-child(3) .tab-heading {
+        padding: 11px 20px;
+      }
+      &:nth-child(2) .tab-heading {
+        padding: 8px 20px;
+      }
+      &:nth-child(1) .tab-heading {
+        padding: 4px 20px;
       }
     }
   }

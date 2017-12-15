@@ -1,6 +1,6 @@
 <div class="avenir-roman date-time-main text-center">
   <div class="date-time-heading clearfix">
-    <p class="avenir-light">Create Draft</p>
+    <p class="avenir-light">Create Story</p>
     <div class="pull-right">
       <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
     </div>
@@ -8,17 +8,18 @@
   <div class="drafts-list draft-list-popup">
     <form name="newDraft" ng-submit="createDraft(Draft)">
       <div class="draft-group">
-        <label>Trip Name :</label>
-        <input type="text" class="new-draft form-control" ng-model="Draft.name" required/>
+        <!--<label>Trip Name :</label>-->
+        <input type="text" class="new-draft text-center form-control" placeholder="Trip Name" ng-model="Draft.name"
+               required/>
       </div>
       <div class="draft-group ">
-        <label>From :</label>
+        <!--<label>From :</label>-->
         <span class="draft-inputholder setting-datepicker">
                     <input type="text" placeholder="Start Date" class="form-control text-center detail-date" ng-click="open1();" uib-datepicker-popup="{{format}}" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" ng-model="Draft.startTime" name="start-date" required/>
                   </span>
       </div>
       <div class="draft-group ">
-        <label>To :</label>
+        <!--<label>To :</label>-->
         <span class="draft-inputholder setting-datepicker">
                     <input type="text" placeholder="End Date" class="form-control text-center detail-date" ng-click="open2();" uib-datepicker-popup="{{format}}" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="false" ng-model="Draft.endTime" name="end-date" required/>
                   </span>

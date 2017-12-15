@@ -6271,6 +6271,7 @@ header {
   position: relative;
   margin-bottom: 20px;
   border-radius: 8px;
+  margin-top: 55px;
   overflow: hidden;
   &:before {
     content: "";
@@ -14416,7 +14417,7 @@ video::-webkit-media-controls-fullscreen-button {
     margin: auto;
   }
   .started-journey-card {
-    margin-top: 30px;
+    //margin-top: 30px;
   }
   .ongo-journey-card,
   .day-post-holder,
@@ -14445,14 +14446,14 @@ video::-webkit-media-controls-fullscreen-button {
   }
   .location {
     margin-top: 5px;
-    border: 1px solid white;
+    font-size: 18px;
     background-color: transparent;
     color: white;
   }
-  .location:hover {
-    background-color: #ffffff;
-    color: $brand-pink;
-  }
+  //.location:hover {
+  //  background-color: #ffffff;
+  //  color: $brand-pink;
+  //}
   .ui-select-placeholder {
     color: #ffffff;
   }
@@ -14524,8 +14525,9 @@ video::-webkit-media-controls-fullscreen-button {
 
 }
 .save-publish {
-  position: absolute;
+  position: fixed;
   right: 10px;
+  bottom: 10px;
   .btn {
     background-color: transparent;
     color: #ef645e;
@@ -14579,7 +14581,50 @@ video::-webkit-media-controls-fullscreen-button {
 }
 .autosave {
   text-align: center;
-  margin-top: 50px;
+  //margin-top: 50px;
+  position: fixed;
+  width: 100%;
   background-color: rgba(0,0,0,0.7);
   padding: 7px 0;
+  z-index: 10;
+  i {
+    font-size: 10px;
+  }
+}
+ .profile-main .bg-white {
+   padding-bottom: 25px;
+ }
+.addCard {
+  padding-top: 50px;
+  text-align: center;
+  .newDraft{
+    margin-top: 82px;
+  }
+  .add-draft {
+    margin: auto;
+    padding-top: 20px;
+    width: 300px;
+    border-radius: 5px;
+  }
+}
+.showPublish {
+  .save-publish {
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    top: 85px;
+    .btn {
+      width: 32%;
+    }
+    z-index: 5;
+  }
+}
+.publishStory {
+  margin: 7px 0;
+}
+.draft-container {
+  padding-top: 70px;
+}
+.loadmore .publish {
+  background-color: $brand-pink;
 }
