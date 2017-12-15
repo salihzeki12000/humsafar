@@ -15,8 +15,12 @@
       <div class="col-md-5">
         <div class="login-ht">
           <div class="full-width get-center">
-            <div class="partnerlogin-title text-center mb10">
+            <div class="partnerlogin-title text-center color-white mb10">
               <h3 class="avenir-medium color-white m-clear">Capture And Relive Your Travel Stories</h3>
+              <!--<h3 class="avenir-medium m-clear">Capture And Relive Your Travel Stories</h3>-->
+              <h4 class="avenir-roman text-capitalize">TraveLibro is your personalised Travel Diary.</h4>
+              <p class="avenir-roman text-justify">Capture each trip live using the TraveLibro app and record every activity on-the-go to showcase a beautiful timeline of your journey. Here's a detailed travel log of your travel stories, moments and reviews to relive a lifetime of memories, which makes it a must-have travel tracker.</p>
+              <p class="avenir-roman text-justify">Additionally, some of the world's best travel bloggers use our app as their travel journal. Discover their travel stories and get inspired to explore the world.</p>
             </div>
             <div class="social-login-btn">
               <a class="facebook-login-btn" ng-click="socialLogin('loginFacebook')">
@@ -28,134 +32,136 @@
                 <span>Continue With Google</span>
               </a>
             </div>
-            <div class="or-dash">
-              <div class="hr hr-left"></div>OR<div class="hr hr-right"></div>
-            </div>
+            <!--<div class="or-dash">-->
+              <!--<div class="hr hr-left"></div>OR<div class="hr hr-right"></div>-->
+            <!--</div>-->
             <!-- pt30 -->
-            <div class="login-signup-tab" ng-init="indextab=1">
-              <uib-tabset active="indextab">
-                <!-- active="activeJustified" -->
-                <uib-tab index="0" heading="Login" ng-click="reset();">
-                  <div class="login-form agent-signup">
-                    <form name="loginForm" ng-submit="loginAsUser(userLoginForm)" autocomplete="off">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-envelope color-white" aria-hidden="true"></i>
-                          </span>
-                          <input type="email" class="form-control color-white" id="inputGroupSuccess4"
-                                 aria-describedby="Emaild Id" placeholder="Email Id" ng-model="userLoginForm.email">
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
-                          </span>
-                          <input type="password" class="form-control color-white" placeholder="Password"
-                                 ng-model="userLoginForm.password">
-                        </div>
-                        <div class="forgot-link pt10 text-right">
-                          <a ui-sref="forgot-password-email" class="color-white avenir-roman">Forgot Password?</a>
-                        </div>
-                      </div>
-                      <div class="login-error-veri" ng-if="showError.show">
-                        <p>*{{showError.msg}}.</p>
-                      </div>
-                      <div class="btn-login mt25">
-                        <input type="submit" class="btn btn-outline color-white avenir-roman" value="Login">
-                        </button>
-                      </div>
-                      <!-- <div class="loginsign-toggle">
-  <span>or</span>
-  <a ui-sref="login" class="color-pink">Go To User Login</a>
-</div> -->
-                    </form>
-                  </div>
-                </uib-tab>
-                <uib-tab index="1" heading="Sign Up" ng-click="reset();" active="true">
-                  <div class="login-form agent-signup">
-                    <form name="signUpForm" ng-submit="registerAsUser(userSignUpForm)" autocomplete="off">
-                      <div class="form-group">
-                        <div class="input-group full-width">
-                          <div class="row">
-                            <div class="col-xs-6" style="display: inline-table">
-                              <span class="input-group-addon">
-                                <i class="fa fa-user color-white" aria-hidden="true"></i>
-                              </span>
-                              <input type="text" class="form-control color-white" id="inputGroupSuccess4"
-                                     aria-describedby="First Name" placeholder="Firstname"
-                                     ng-model="userSignUpForm.firstName"
-                                     required>
-                            </div>
-                            <div class="col-xs-6">
-                              <input type="text" class="form-control color-white" id="inputGroupSuccess4"
-                                     aria-describedby="Last Name" placeholder="Lastname"
-                                     ng-model="userSignUpForm.lastName"
-                                     required>
-                            </div>
-                          </div>
-
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-envelope color-white" aria-hidden="true"></i>
-                          </span>
-                          <input type="email" class="form-control color-white" id="inputGroupSuccess4"
-                                 aria-describedby="Emaild Id" placeholder="Email Id" ng-model="userSignUpForm.email"
-                                 required>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="input-group mobile-codes">
+            <!--start login and signup -->
+            <!--<div class="login-signup-tab" ng-init="indextab=1">-->
+              <!--<uib-tabset active="indextab">-->
+                <!--&lt;!&ndash; active="activeJustified" &ndash;&gt;-->
+                <!--<uib-tab index="0" heading="Login" ng-click="reset();">-->
+                  <!--<div class="login-form agent-signup">-->
+                    <!--<form name="loginForm" ng-submit="loginAsUser(userLoginForm)" autocomplete="off">-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group">-->
                           <!--<span class="input-group-addon">-->
-                          <!--<i class="fa fa-user color-white" aria-hidden="true"></i>-->
+                            <!--<i class="fa fa-envelope color-white" aria-hidden="true"></i>-->
                           <!--</span>-->
-                          <div class="agent-cmpny-inputholder agentcompany-phone">
-                            <input type="text" id="phone2" class="form-control color-blue" placeholder="Mobile No"
-                                   ng-model="userSignUpForm.mobile" ng-intl-tel-input
-                                   ng-change="isValidNo(userDetails.company.mobile,'2')">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>
-                          </span>
-                          <input type="password" class="form-control color-white" placeholder="Password"
-                                 ng-model="userSignUpForm.password" required>
-                        </div>
-                      </div>
-                      <div class="terms-condt">
-                        <div class="checkbox">
-                          <label class="color-white">
-                            <input type="checkbox" id="tnc" ng-model="userSignUpForm.terms" required/>
-                            <label for="tnc" class=" avenir-roman">I accept the <a ui-sref="termscondition"
-                                                                                   target="_blank" class="white-link">Terms
-                              &amp; Conditions</a> and <a ui-sref="privacypolicy" target="_blank" class="white-link">Privacy
-                              Policy</a> of the website.</label>
-                          </label>
-                        </div>
-                      </div>
-                      <div class="login-error-veri" ng-if="showError.show">
-                        <p>*{{showError.msg}}.</p>
-                      </div>
-                      <div class="btn-login color-white mt25"
-                           ng-class="{'not-allowed': signUpForm.$invalid, 'pointer': !signUpForm.$invalid}">
-                        <input type="submit" class="btn btn-outline color-white avenir-roman inline-block"
-                               value="Register" ng-disabled="signUpForm.$invalid">
-                      </div>
-                    </form>
-                  </div>
-                </uib-tab>
-                <!-- <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"
-  class="pointer login-partner-tooltip">
-</uib-tab>-->
-              </uib-tabset>
-            </div>
+                          <!--<input type="email" class="form-control color-white" id="inputGroupSuccess4"-->
+                                 <!--aria-describedby="Emaild Id" placeholder="Email Id" ng-model="userLoginForm.email">-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group">-->
+                          <!--<span class="input-group-addon">-->
+                            <!--<i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>-->
+                          <!--</span>-->
+                          <!--<input type="password" class="form-control color-white" placeholder="Password"-->
+                                 <!--ng-model="userLoginForm.password">-->
+                        <!--</div>-->
+                        <!--<div class="forgot-link pt10 text-right">-->
+                          <!--<a ui-sref="forgot-password-email" class="color-white avenir-roman">Forgot Password?</a>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="login-error-veri" ng-if="showError.show">-->
+                        <!--<p>*{{showError.msg}}.</p>-->
+                      <!--</div>-->
+                      <!--<div class="btn-login mt25">-->
+                        <!--<input type="submit" class="btn btn-outline color-white avenir-roman" value="Login">-->
+                        <!--</button>-->
+                      <!--</div>-->
+                      <!--&lt;!&ndash; <div class="loginsign-toggle">-->
+  <!--<span>or</span>-->
+  <!--<a ui-sref="login" class="color-pink">Go To User Login</a>-->
+<!--</div> &ndash;&gt;-->
+                    <!--</form>-->
+                  <!--</div>-->
+                <!--</uib-tab>-->
+                <!--<uib-tab index="1" heading="Sign Up" ng-click="reset();" active="true">-->
+                  <!--<div class="login-form agent-signup">-->
+                    <!--<form name="signUpForm" ng-submit="registerAsUser(userSignUpForm)" autocomplete="off">-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group full-width">-->
+                          <!--<div class="row">-->
+                            <!--<div class="col-xs-6" style="display: inline-table">-->
+                              <!--<span class="input-group-addon">-->
+                                <!--<i class="fa fa-user color-white" aria-hidden="true"></i>-->
+                              <!--</span>-->
+                              <!--<input type="text" class="form-control color-white" id="inputGroupSuccess4"-->
+                                     <!--aria-describedby="First Name" placeholder="Firstname"-->
+                                     <!--ng-model="userSignUpForm.firstName"-->
+                                     <!--required>-->
+                            <!--</div>-->
+                            <!--<div class="col-xs-6">-->
+                              <!--<input type="text" class="form-control color-white" id="inputGroupSuccess4"-->
+                                     <!--aria-describedby="Last Name" placeholder="Lastname"-->
+                                     <!--ng-model="userSignUpForm.lastName"-->
+                                     <!--required>-->
+                            <!--</div>-->
+                          <!--</div>-->
+
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group">-->
+                          <!--<span class="input-group-addon">-->
+                            <!--<i class="fa fa-envelope color-white" aria-hidden="true"></i>-->
+                          <!--</span>-->
+                          <!--<input type="email" class="form-control color-white" id="inputGroupSuccess4"-->
+                                 <!--aria-describedby="Emaild Id" placeholder="Email Id" ng-model="userSignUpForm.email"-->
+                                 <!--required>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group mobile-codes">-->
+                          <!--&lt;!&ndash;<span class="input-group-addon">&ndash;&gt;-->
+                          <!--&lt;!&ndash;<i class="fa fa-user color-white" aria-hidden="true"></i>&ndash;&gt;-->
+                          <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                          <!--<div class="agent-cmpny-inputholder agentcompany-phone">-->
+                            <!--<input type="text" id="phone2" class="form-control color-blue" placeholder="Mobile No"-->
+                                   <!--ng-model="userSignUpForm.mobile" ng-intl-tel-input-->
+                                   <!--ng-change="isValidNo(userDetails.company.mobile,'2')">-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="form-group">-->
+                        <!--<div class="input-group">-->
+                          <!--<span class="input-group-addon">-->
+                            <!--<i class="fa fa-lock color-white fnt-20" aria-hidden="true"></i>-->
+                          <!--</span>-->
+                          <!--<input type="password" class="form-control color-white" placeholder="Password"-->
+                                 <!--ng-model="userSignUpForm.password" required>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="terms-condt">-->
+                        <!--<div class="checkbox">-->
+                          <!--<label class="color-white">-->
+                            <!--<input type="checkbox" id="tnc" ng-model="userSignUpForm.terms" required/>-->
+                            <!--<label for="tnc" class=" avenir-roman">I accept the <a ui-sref="termscondition"-->
+                                                                                   <!--target="_blank" class="white-link">Terms-->
+                              <!--&amp; Conditions</a> and <a ui-sref="privacypolicy" target="_blank" class="white-link">Privacy-->
+                              <!--Policy</a> of the website.</label>-->
+                          <!--</label>-->
+                        <!--</div>-->
+                      <!--</div>-->
+                      <!--<div class="login-error-veri" ng-if="showError.show">-->
+                        <!--<p>*{{showError.msg}}.</p>-->
+                      <!--</div>-->
+                      <!--<div class="btn-login color-white mt25"-->
+                           <!--ng-class="{'not-allowed': signUpForm.$invalid, 'pointer': !signUpForm.$invalid}">-->
+                        <!--<input type="submit" class="btn btn-outline color-white avenir-roman inline-block"-->
+                               <!--value="Register" ng-disabled="signUpForm.$invalid">-->
+                      <!--</div>-->
+                    <!--</form>-->
+                  <!--</div>-->
+                <!--</uib-tab>-->
+                <!--&lt;!&ndash; <uib-tab index="2" heading="Register As Partner" data-toggle="tooltip" title="Travel Agent | Tour Operator | Local Guide"-->
+  <!--class="pointer login-partner-tooltip">-->
+<!--</uib-tab>&ndash;&gt;-->
+              <!--</uib-tabset>-->
+            <!--</div>-->
+            <!--end login and signup -->
             <!--<div class="login-signup-tab">-->
             <!--<uib-tabset active="activeJustified">-->
             <!--<uib-tab index="0" heading="Login | ">-->
