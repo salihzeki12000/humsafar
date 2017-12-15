@@ -110,7 +110,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
           //end blue navbar on scroll
           var fixedHeader = $('.home-navigation').offset();
-          console.log(fixedHeader,'what is offset');
+          // console.log(fixedHeader,'what is offset');
           var firstHeight = $('.worksheet').height();
           if($('.worksheet').scrollTop() > firstHeight && $('.worksheet').scrollTop()<4200) {
             $("#navigation").removeClass("submenu");
