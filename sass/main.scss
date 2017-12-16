@@ -12832,6 +12832,10 @@ header {
   // }
   // destination booking
 
+  .single-notification {
+    .dash-up { display: none; }
+  }
+
   .destination-hotel-card {
     position: relative;
     min-height: 290px;
