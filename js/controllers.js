@@ -11568,10 +11568,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }]
           locationData.destinationVisited = destination;
           console.log('we r sending ', locationData);
-          pastJourney.setStartLocation(locationData, function (data) {
+          if(locationData.startLocation){
+             pastJourney.setStartLocation(locationData, function (data) {
             console.log('loc set ', data);
             $window.location.reload();
           })
+          }         
         })
       }
     }
