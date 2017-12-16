@@ -73,16 +73,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     setTimeout(function(){
       $(document).ready(function(){
-        var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+        // var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        // var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
         $('.common-view').css('height',$(window).height());
         $('.mobile-view').css('height',$(window).height());
-        // smooth scroll
-        if(isChrome){
-          $('html').smoothWheel({speed: 100});
-        }else if(isSafari){
-          $('body').smoothWheel({speed: 100});
-        }
+        // // smooth scroll
+        // if(isChrome){
+        //   $('html').smoothWheel({speed: 100});
+        // }else if(isSafari){
+        //   $('body').smoothWheel({speed: 100});
+        // }
       var mobileWhite = $('.mobile-view').height() - 520;
       console.log(mobileWhite,'mobile');
       $('.whitespace').css({
@@ -14238,6 +14238,29 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    // for smooth scroll
+    if ($state.current.controller == 'HomeCtrl') {
+        setTimeout(function () {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isChrome) {
+                $('html').smoothWheel();
+            } else if (isSafari) {
+                $('body').smoothWheel();
+            }
+        }, 1500);
+    } else {
+        setTimeout(function () {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isChrome) {
+                $('html').smoothWheel({ remove: true });
+            } else if (isSafari) {
+                $('body').normalizeWheelDelta();
+            }
+        }, 1500);
+    }
+    // for smooth scroll end
     // if($state.current.name == 'home'){
     //   $('.travel-bg').css('overflow','hidden');
     // }

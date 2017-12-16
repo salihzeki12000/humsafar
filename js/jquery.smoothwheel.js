@@ -5,12 +5,18 @@
  */
 (function ($) {
 
-    var self = this, container, running=false, currentY = 0, targetY = 0, oldY = 0, maxScrollTop= 0, minScrollTop, direction, onRenderCallback=null,
-            fricton = 0.95, // higher value for slower deceleration
-            vy = 0,
-            stepAmt = 1,
-            minMovement= 0.1,
-            ts=0.1;
+    var self = this,
+        container, running = false,
+        currentY = 0,
+        targetY = 0,
+        oldY = 0,
+        maxScrollTop = 0,
+        minScrollTop, direction, onRenderCallback = null,
+        fricton = 0.95, // higher value for slower deceleration
+        vy = 0,
+        stepAmt = 1,
+        minMovement = 0.1,
+        ts = 0.1;
 
     var updateScrollTarget = function (amt) {
         targetY += amt;
@@ -27,25 +33,25 @@
             if (currentY > maxScrollTop) {
                 currentY = vy = 0;
             } else if (currentY < minScrollTop) {
-                    vy = 0;
-                    currentY = minScrollTop;
-                }
+                vy = 0;
+                currentY = minScrollTop;
+            }
 
             container.scrollTop(-currentY);
 
             vy *= fricton;
 
-         //   vy += ts * (currentY-targetY);
+            //   vy += ts * (currentY-targetY);
             // scrollTopTweened += settings.tweenSpeed * (scrollTop - scrollTopTweened);
             // currentY += ts * (targetY - currentY);
 
-            if(onRenderCallback){
+            if (onRenderCallback) {
                 onRenderCallback();
             }
         }
     }
     var animateLoop = function () {
-        if(! running)return;
+        if (!running) return;
         requestAnimFrame(animateLoop);
         render();
         //log("45","animateLoop","animateLoop", "",stop);
@@ -71,14 +77,14 @@
      * http://paulirish.com/2011/requestanimationframe-for-smart-animating/
      */
     window.requestAnimFrame = (function () {
-        return  window.requestAnimationFrame ||
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                window.oRequestAnimationFrame ||
-                window.msRequestAnimationFrame ||
-                function (callback) {
-                    window.setTimeout(callback, 1000 / 60);
-                };
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
 
 
     })();
@@ -89,7 +95,9 @@
     var normalizeWheelDelta = function () {
         // Keep a distribution of observed values, and scale by the
         // 33rd percentile.
-        var distribution = [], done = null, scale = 30;
+        var distribution = [],
+            done = null,
+            scale = 30;
         return function (n) {
             // Zeroes don't count.
             if (n == 0) return n;
@@ -119,7 +127,7 @@
         var options = jQuery.extend({}, arguments[0]);
         return this.each(function (index, elm) {
 
-            if(!('ontouchstart' in window)){
+            if (!('ontouchstart' in window)) {
                 container = $(this);
                 container.bind("mousewheel", onWheel);
                 container.bind("DOMMouseScroll", onWheel);
@@ -129,16 +137,16 @@
                 currentY = -targetY;
 
                 minScrollTop = container.get(0).clientHeight - container.get(0).scrollHeight;
-                if(options.onRender){
+                if (options.onRender) {
                     onRenderCallback = options.onRender;
                 }
-                if(options.remove){
-                    log("122","smoothWheel","remove", "");
-                    running=false;
+                if (options.remove) {
+                    // log("122","smoothWheel","remove", "");
+                    running = false;
                     container.unbind("mousewheel", onWheel);
                     container.unbind("DOMMouseScroll", onWheel);
-                }else if(!running){
-                    running=true;
+                } else if (!running) {
+                    running = true;
                     animateLoop();
                 }
 
