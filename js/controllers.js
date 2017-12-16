@@ -11287,7 +11287,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }).error(function (data) {
         console.log(data);
       });
-      console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
+      // console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
     };
     // delete destinationVisited
     $scope.deleteVisited = function (index, country) {
@@ -11295,13 +11295,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.pastJourneyArray.destinationVisited[index] = [];
       $scope.pastJourneyArray.destinationVisited.splice(index, 1);
       $scope.countries.push(country.country);
-      console.log($scope.countries, 'what is new country');
       $scope.saveDestinationVisited();
     };
     // delete destinationVisited end
     $scope.noPostErr = 'Need atleast one activity to upload this journey.';
     $scope.publishDraft = function(){
-      console.log($scope.pastJourneyArray);
       _.each($scope.pastJourneyArray.post, function(elem){
         if(elem.type=='travel-life'){
           $scope.postCreated = true;
@@ -11312,7 +11310,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.noPostErr = null;
           },5000);
         }
-        console.log('yo ',elem);
       })
       if($scope.pastJourneyArray.startLocation == null || $scope.pastJourneyArray.startLocation=="") {
         $scope.msg = "*Cannot publish story without Start Location";
@@ -11323,7 +11320,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       else {
         if($scope.postCreated){
           pastJourney.publishDraft($scope.pastJourneyArray, function(data){
-            console.log('draft has been published ',data);
             // $state.go('paststory',{
             //   "urlSlug": $.jStorage.get("profile").urlSlug,
             //   "id" : $scope.pastJourneyArray.urlSlug
