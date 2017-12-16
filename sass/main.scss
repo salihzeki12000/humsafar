@@ -5322,6 +5322,11 @@ header {
     }*/
   }
   .video-sec, .album-videoholder  {
+    .video-bg-blur {
+      @include position(absolute,0);
+      @include filter(blur(8px));
+      @include transform(scale(1.1));
+    }
     .video-js {
        width: 100%;
        height: 350px;
@@ -6302,6 +6307,7 @@ header {
   width: 100%;
   height: 550px;
   position: relative;
+  margin-top: 15px;
   margin-bottom: 20px;
   border-radius: 8px;
   overflow: hidden;
@@ -6778,9 +6784,15 @@ header {
     position: relative;
     //max-height: 350px;
     overflow: hidden;
+    .video-bg-blur {
+      @include position(absolute,0);
+      @include filter(blur(8px));
+      @include transform(scale(1.1));
+    }
       .video-js {
         width: 100%;
         height: 550px;
+        background-color: transparent;
         }
       .vjs-poster {
          display: none;
@@ -12292,9 +12304,15 @@ header {
         @extend.get-center;
         z-index: 2;
       }
+      .video-bg-blur {
+      @include position(absolute,0);
+      @include filter(blur(8px));
+      @include transform(scale(1.1));
+    }
       .video-js {
         width: 100%;
         height: 500px;
+        background-color: transparent;
       }
       .vjs-big-play-button {
         @include square(50px);

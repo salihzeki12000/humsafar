@@ -6739,6 +6739,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     }
     // };
     $scope.routeTO = function (journey) {
+      console.log(journey,'what is journey');
       if (journey.type == "on-the-go-journey") {
         $state.go('ongojourney', {
           'id': journey.urlSlug,
@@ -6760,6 +6761,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             'id': journey.urlSlug,
             'urlSlug': journey.user.urlSlug
           });
+        }else {
+          $state.go('ongojourney', {
+          'id': journey.urlSlug,
+          'urlSlug': journey.user.urlSlug
+        });
         }
       } else if (journey.draft === true && journey.status === false) {
         $state.go('drafts', {

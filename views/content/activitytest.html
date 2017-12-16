@@ -157,6 +157,7 @@
                     <!-- video -->
                     <div class="video-sec" ng-if="activity.videos.length>0 && activity.display==='video' && activity.type!='quick-itinerary' && activity.type!='detail-itinerary'">
                         <div class="post-img card-imgholder pointer relate">
+                            <div class="video-bg-blur" style="background: url({{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}})"></div>
                             <video class="video-js vjs-default-skin" poster="{{activity.activityPhotosVideos[activity.index].thumbnail|uploadpath}}" controls width="100%" ng-src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" preload="auto" ng-click="getPhotosCommentData(activity.activityPhotosVideos[activity.index]._id, activity.index ,activity.activityPhotosVideos.length, activity.activityPhotosVideos)" vjs-video>
                                 <source ng-src="{{activity.activityPhotosVideos[activity.index].name| trusted}}" type="video/mp4">
                                 </video>
@@ -442,17 +443,17 @@
                 <div class="clearfix">
                     <div class="pull-left" ng-init="activity.listLike={}; likeShow='false';">
                         <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getLikesData(activity); showLikeClick();"><i class="fa fa-heart color-medium-grey mr5"></i><b>{{activity.likeCount}}</b> {{activity.likeCount|singularPlural:'Likes'}}
-                           <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
-                              <ul>
-                                <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)" ng-if="activity.commentCount > 0">
-                        <img src="img/comments.png" alt="" height="14">
-                        <b class="" ng-if="activity.commentCount!=0"> {{activity.commentCount}}</b>
-                        {{activity.commentCount|singularPlural:'Comments'}}
-                    </span>
+                         <div class="card-like-dropdown" ng-show="activity.listLike.backgroundClick;">
+                          <ul>
+                            <li ng-repeat="listLikes in listOfLikes.like"><a href="">{{listLikes.name}}</a></li>
+                        </ul>
+                    </div>
+                </span>
+                <span class="color-medium-grey mr10 card-like avenir-roman" ng-click="getCommentsData(activity)" ng-if="activity.commentCount > 0">
+                    <img src="img/comments.png" alt="" height="14">
+                    <b class="" ng-if="activity.commentCount!=0"> {{activity.commentCount}}</b>
+                    {{activity.commentCount|singularPlural:'Comments'}}
+                </span>
                                                     <!-- <span class="color-blue">
                             <img src="img/reviews.png" alt="" height="15" class="mr5 v-top if-blue" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">
                             <img src="img/reviews-white.png" alt="" height="15" class="mr5 v-top if-white" ng-if="!((activity.class !='travel-taught') || (activity.class !='local-life'))">

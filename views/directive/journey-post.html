@@ -63,10 +63,11 @@ ng-class="{'hasLatLng':ongo.latlong && ongo.latlong.lat}">
       </div>
       <div class="video-ongo-journey relate {{removeVideoButton}}"
       ng-if="ongo.videos.length>0 && ongo.onDisplay=='videos'">
+      <div class="video-bg-blur" style="background: url({{ongo.photosVideos[index].thumbnail|uploadpath}})"></div>
       <!-- ng-click="playVideo(ongo._id,$parent.index);" -->
       <video class="video-js vjs-default-skin" poster="{{ongo.photosVideos[index].thumbnail|uploadpath}}"  controls="controls" width="550" preload="auto" ng-src="{{ongo.photosVideos[index].name|trusted}}" vjs-video>
         <source ng-src="{{ongo.photosVideos[index].name|trusted}}" type="video/mp4">
-        </video>
+        </video>        
         <div class="youtube-icon get-center" hidden>
           <!-- <span><i class="fa fa-youtube-play fa-4x color-pink"></i></span> -->
           <img src="img/ongojourney/play-journey.png" alt="Play Journey" width="40" class="img-responsive">
