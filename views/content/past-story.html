@@ -246,7 +246,7 @@
 													{{$select.search}}
 													<ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
 													<ui-select-choices repeat="city in cities | filter: $select.search track by $index" refresh="getCityVisited(country.country._id,$select.search)">
-														<h4 ng-bind="city.name"></h4>
+														<h4 ng-bind="city.name" class="city-listname"></h4>
 													</ui-select-choices>
 												</ui-select>
 											</div>
