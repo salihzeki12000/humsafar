@@ -5323,6 +5323,7 @@ header {
   }
   .video-sec, .album-videoholder  {
     .video-bg-blur {
+      background-position: 50% 50%;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -6787,6 +6788,7 @@ header {
     //max-height: 350px;
     overflow: hidden;
     .video-bg-blur {
+      background-position: 50% 50%;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -8938,6 +8940,10 @@ header {
       }
       &:before { left: 0; }
       &:after { right: 0; }
+      .city-listname {
+        font-size: 14px;
+        margin: 0;
+      }
     }
     .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
       min-width: 124px;
@@ -12308,6 +12314,7 @@ header {
         z-index: 2;
       }
       .video-bg-blur {
+        background-position: 50% 50%;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -13892,7 +13899,8 @@ header {
   }
 
 .download {
-  margin-top: 30px;
+  /*margin-top: 30px;*/
+  margin: 30px 0;
   img {
     width: 150px;
   }
@@ -14503,8 +14511,9 @@ header {
   display: inline-block;
 }
 .drafts {
-  margin-top: 45px;
+  margin-top: 60px;
   //background-color: rgba(255,255,255,0.8);
+  background-color: #a6cbe3;
   .main-paststory{
     margin: auto;
   }
@@ -14515,7 +14524,15 @@ header {
   .day-post-holder,
   .postto-day,
   .journey-end {
-    box-shadow: 5px 5px 30px rgba(0,0,0,.35);
+    box-shadow: 2px 2px 3px rgba(0,0,0,.35);
+  }
+}
+.set-draft-location {
+  .btn-default-focus {
+    background-color: transparent;
+  }
+  .ui-select-choices-row.active>span {
+    span { color: #fff; }
   }
 }
 .startLoc {
@@ -14616,6 +14633,9 @@ header {
 .base {
 
 }
+.publish-button {
+  padding-bottom: 20px;
+}
 .save-publish {
   position: fixed;
   right: 10px;
@@ -14673,11 +14693,11 @@ header {
 }
 .autosave {
   text-align: center;
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   position: fixed;
   width: 100%;
   background-color: rgba(0,0,0,0.7);
-  padding: 7px 0;
+  padding: 10px 0;
   z-index: 10;
   i {
     font-size: 10px;
@@ -14715,7 +14735,7 @@ header {
   margin: 7px 0 0;
 }
 .draft-container {
-  padding-top: 70px;
+  padding-top: 95px;
 }
 .loadmore .publish {
   background-color: $brand-pink;

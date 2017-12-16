@@ -10747,6 +10747,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.navigation = NavigationService.getnav();
     var profile = $.jStorage.get("profile");
     $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published.';
+    $scope.countries = [];
+    $scope.pastJourneyArray = [];
+    $scope.destinationVisited = [];
+    $scope.destinationData = {
+      cityVisited: [],
+      country: {
+        flag: '',
+        name: '',
+        _id: ''
+      }
+    };
     var didScroll;
     var lastScrollTop = 0;
     var delta = 5;
@@ -10907,11 +10918,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     console.log($scope.pastDestination, 'before function');
     $scope.addDestination = function (destinationData) {
       $scope.pastJourneyArray.destinationVisited.push(destinationData);
-      console.log($scope.pastJourneyArray.destinationVisited.length - 1);
-      console.log($scope.pastJourneyArray.destinationVisited, 'destinationVisited', $scope.countries, 'countries');
+      // console.log($scope.pastJourneyArray.destinationVisited, 'destinationVisited', $scope.countries, 'countries');
       $scope.showEdit = $scope.pastJourneyArray.destinationVisited.length - 1;
 
       // adding and removing country
+      console.log($scope.pastJourneyArray.destinationVisited,'data');
       _.each($scope.pastJourneyArray.destinationVisited, function (destVisit) {
         console.log(destVisit, 'index');
         _.remove($scope.countries, function (country) {
