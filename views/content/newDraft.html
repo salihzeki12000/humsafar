@@ -51,10 +51,9 @@
                     <div class="errorMsgDraft" ng-bind="msg"></div>
                   </div>
                   <div class="col-xs-2">
-                    <button class="location btn btn-block"
-                            ng-disabled="profile.locate.$touched && profile.locate.$invalid"
-                            ng-click="setLocation(startLocationSet.description)">
-                      <img src="img/send_location.png" width="20px">
+                    <button class="location setLocationBtn btn btn-block"
+                            ng-disabled="profile.locate.$touched && profile.locate.$invalid||startLocationSet.description==null||startLocationSet.description==''"
+                            ng-click="setLocation(startLocationSet.description)">Done
                       <!--<i class="fa fa-play" aria-hidden="true"></i>-->
                     </button>
                   </div>

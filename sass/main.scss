@@ -14732,13 +14732,29 @@ header {
   height: 45px;
   width: 150px;
   border: 2px solid $brand-pink;
+  &:hover {
+    color: white;
+  }
 }
 .createDraftBtn:disabled {
   background-color: transparent;
   color: $brand-pink;
   border: 2px solid $brand-pink;
+  &:hover {
+    color: $brand-pink;
+  }
 }
-
+.setLocationBtn {
+  &:hover {
+    color: white;
+  }
+}
+.setLocationBtn:disabled {
+  color: transparent;
+  &:hover {
+    color:transparent;
+  }
+}
 @import "sohan.scss";
 @import "sagarm.scss";
 @import "_sagarmobile.scss";
