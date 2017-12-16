@@ -11299,6 +11299,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       $scope.saveDestinationVisited();
     };
     // delete destinationVisited end
+    $scope.noPostErr = 'Need atleast one activity to upload this journey.';
     $scope.publishDraft = function(){
       console.log($scope.pastJourneyArray);
       _.each($scope.pastJourneyArray.post, function(elem){
@@ -11307,6 +11308,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           return false;
         }else {
           $scope.postCreated = false;
+          $timeout(function () {
+            $scope.noPostErr = null;
+          },5000);
         }
         console.log('yo ',elem);
       })
@@ -11596,7 +11600,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             console.log('loc set ', data);
             $window.location.reload();
           })
-          }         
+          }
         })
       }
     }

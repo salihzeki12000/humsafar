@@ -4,7 +4,7 @@
     <!-- <span class="pointer"
       ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
       <div><i>{{autosaveMsg}}</i></div>
-      <div style="color:orangered" ng-if="postCreated==false">Need atleast one activity to upload this journey.</div>
+      <div style="color:orangered" ng-if="postCreated==false">{{noPostErr}}</div>
   </div>
     <div class="past-journey on-go-journey">
       <div class="draft-container">
