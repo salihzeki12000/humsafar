@@ -809,7 +809,6 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
             };
             $scope.uploadNow = function (image) {
                 $scope.uploadStatus = "uploading";
-
                 var Template = this;
                 image.hide = true;
                 var formData = new FormData();

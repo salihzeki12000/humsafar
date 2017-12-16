@@ -9014,8 +9014,19 @@ header {
   .day-post-holder {
     padding: 10px 15px;
     border-radius: 6px;
-    margin: 10px 0px 30px;
+    margin: 60px 0;
     background-color: #7492a8;
+    position: relative;
+    &:before {
+      content: '';
+      width: 4px;
+      height: 29px;
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      border: none;
+      border-left: 4px dashed #fff;
+    }
     .add-more-post {
       margin-right: 5px;
       font-size: 14px;
@@ -9060,6 +9071,20 @@ header {
     top: 10px;
     right: 5px;
     .own-trip { padding: 10px; }
+  }
+  .past-journey-end {
+    .journey-end {
+      &:before {
+        content: '';
+        position: absolute;
+        top: -45px;
+        left: 50%;
+        width: 4px;
+        height: 29px;
+        border: none;
+        border-left: 4px dashed #fff;
+      }
+    }
   }
   /*map gl past story */
   .map-paststory {
@@ -14544,6 +14569,9 @@ header {
   p {
     padding-top: 10px;
   }
+  .day-post-holder {
+    &:before { display: none; }
+  }
   .ui-select-container {
     margin-top: 6px;
     background-color: transparent;
@@ -14700,7 +14728,7 @@ header {
   /*margin-top: 10px;*/
   position: fixed;
   width: 100%;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.8);
   padding: 10px 0;
   z-index: 10;
   i {
