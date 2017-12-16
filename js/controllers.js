@@ -6849,6 +6849,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         console.log($scope.draftCreated);
       })
     };
+    $scope.getDrafts = function(){
+      getDrafts();
+    }
     var getMoments = function () {
       $scope.allMoments.scrollBusy = true;
       $scope.travelLifeMoments.scrollBusy = true;
@@ -7440,7 +7443,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     ];
     $scope.myLife = {
       profileMain: "views/content/myLife/profile.html",
-      innerView: allMyLife[0]
+      innerView: allMyLife[3]
     };
     // change url
     $scope.viewTab = 1;
@@ -7478,7 +7481,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         break;
       default:
         console.log('default he re ',$state.params.name);
-        $scope.myLife.innerView = allMyLife[0];
+        $scope.myLife.innerView = allMyLife[3];
     }
 
 
@@ -8093,7 +8096,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // anchorSmoothScroll.scrollTo("reviews");
             break;
           default:
-            $scope.myLife.innerView = allMyLife[0];
+            $scope.myLife.innerView = allMyLife[3];
             //console.log('test');
             break;
         }
@@ -9263,6 +9266,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       if (activity.type == 'ended-journey' || activity.type == 'on-the-go-journey') {
         $state.go('ongojourney', {
           'id': activity.urlSlug,
+          'urlSlug': activity.user.urlSlug
+        });
+      } else if(activity.type =='travel-life'){
+        $state.go('ongojourney', {
+          'id': activity.journeyUrlSlug,
           'urlSlug': activity.user.urlSlug
         });
       }

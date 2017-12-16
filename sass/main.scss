@@ -14743,6 +14743,22 @@ header {
 .logo-wo-footer, .logo {
   margin-top: 6px;
 }
+.no-draft {
+  margin-top: 70px;
+}
+.createDraftBtn {
+  background-color: $brand-pink;
+  color: white;
+  height: 45px;
+  width: 150px;
+  border: 2px solid $brand-pink;
+}
+.createDraftBtn:disabled {
+  background-color: transparent;
+  color: $brand-pink;
+  border: 2px solid $brand-pink;
+}
+
 @import "sohan.scss";
 @import "sagarm.scss";
 @import "_sagarmobile.scss";
