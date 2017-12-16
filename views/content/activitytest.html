@@ -68,7 +68,7 @@
                   </div>
               </div>
               <div class="pull-right activity-see-more color-darkgrey">
-                <span ng-if="activity.type =='travel-life'" ui-sref="single-notification({'postId': activity._id, 'urlSlug': activity.user.urlSlug})">See More</span>
+                <span ng-if="activity.type =='travel-life'" ng-click="routeOngo(activity);">See More</span>
                 <span ng-if="activity.type =='on-the-go-journey' || activity.type=='ended-journey'" ng-click="routeOngo(activity);">See More</span>
             </div>
         </div>

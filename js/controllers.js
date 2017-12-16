@@ -9265,6 +9265,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           'id': activity.urlSlug,
           'urlSlug': activity.user.urlSlug
         });
+      } else if(activity.type =='travel-life'){
+        $state.go('ongojourney', {
+          'id': activity.journeyUrlSlug,
+          'urlSlug': activity.user.urlSlug
+        });
       }
     }
     // route to on go journey end
