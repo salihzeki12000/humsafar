@@ -347,7 +347,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
         });
       };
       $scope.getLocation = function () {
-        if ($scope.ongo.checkIn.location !== "") {
+        if ($scope.ongo.checkIn.location && $scope.ongo.checkIn.location !== "") {
           $scope.showLocation = true;
           TravelibroService.http({
             url: adminURL + "/post/checkInPlaceSearch",

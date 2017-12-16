@@ -499,7 +499,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         });
       };
       $scope.getLocation = function () {
-        if ($scope.pastStory.checkIn.location !== "") {
+        if ($scope.pastStory.checkIn.location && $scope.pastStory.checkIn.location !== "") {
           $scope.showLocation = true;
           TravelibroService.http({
             url: adminURL + "/post/checkInPlaceSearch",
