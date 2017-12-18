@@ -1213,9 +1213,10 @@ a.color-white {
 .popular-blogger, .trending-travellers {
   .blogger-cover {
     min-height: 300px;
-    border-radius: 4px;
+    border-radius: 16px;
     margin: 15px 0;
-    box-shadow:1px 7px 4px rgba(0, 0, 0, 0.35);
+    box-shadow:5px 5px 30px rgba(0,0,0,.35);
+    overflow: hidden;
     &:before {
       content: '';
       @include position(absolute, 0);

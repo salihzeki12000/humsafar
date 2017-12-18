@@ -9081,8 +9081,8 @@ header {
       @extend.get-center;
       background-color: #fff;
     }
-    &:before { @include size(50%,2px) }
-    &:after { @include size(2px,50%) }
+    &:before { @include size(30%,2px); }
+    &:after { @include size(2px,30%); }
   }
   .end-strip {
     position: absolute;
@@ -13947,8 +13947,8 @@ header {
   }
 
 .download {
-  /*margin-top: 30px;*/
-  margin: 30px 0;
+  margin-top: 30px;
+  //margin: 30px 0;
   img {
     width: 150px;
   }

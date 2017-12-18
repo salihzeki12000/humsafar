@@ -238,7 +238,7 @@
 												<ui-select ng-model="country.country" theme="bootstrap" on-select="countryReplace(country,$index,country.country);">
 													<ui-select-match placeholder="Country Visited">{{$select.selected.name}}</ui-select-match>
 													<ui-select-choices repeat="country in countries | filter: $select.search track by $index">
-														<h4 ng-bind="country.name"></h4>
+														<h4 ng-bind="country.name" class="edit-country-name"></h4>
 													</ui-select-choices>
 												</ui-select>
 											</div>
@@ -247,7 +247,7 @@
 													{{$select.search}}
 													<ui-select-match placeholder="City Visited">{{$item.name}}</ui-select-match>
 													<ui-select-choices repeat="city in cities | filter: $select.search track by $index" refresh="getCityVisited(country.country._id,$select.search)">
-														<h4 ng-bind="city.name" class="city-listname"></h4>
+														<h4 ng-bind="city.name" class="city-listname edit-city-name"></h4>
 													</ui-select-choices>
 												</ui-select>
 											</div>

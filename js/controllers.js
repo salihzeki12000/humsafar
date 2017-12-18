@@ -10982,7 +10982,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var str = searchKey;
       console.log(str);
       $scope.cities = [];
-      if (str && str.length > 3) {
+      if (str && str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
           $scope.cities = data.data;
           // cities = data.data;
@@ -12463,7 +12463,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var str = searchKey;
       console.log(str);
       $scope.cities = [];
-      if (str && str.length > 3) {
+      if (str && str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
           $scope.cities = data.data;
           // cities = data.data;
