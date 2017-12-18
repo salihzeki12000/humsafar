@@ -220,6 +220,11 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
       $scope.buddyName = [];
       var hashTag = [];
       $scope.removedHashTag = [];
+      $scope.buttonValue = "Save";
+      $scope.lengthPhotos = 0;
+      $scope.uploadPhotoCount = 1;
+      $scope.lengthVideos = 0
+      $scope.uploadVideoCount = 1;
       $scope.ongo.getSearchedList = "";
       $scope.ongo.buddiesCount = 0;
       if ($scope.ongo.checkIn && $scope.ongo.checkIn.location) {
@@ -420,6 +425,8 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           $scope.otgPhotoArray = [];
           $scope.photoSec = false;
           $scope.otgPhoto = [];
+          $scope.lengthVideos =0;
+          $scope.lengthPhotos =0;
         });
       };
       // add photo videos otg end
@@ -428,8 +435,23 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
       // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
       // add photos start
       $scope.photoSec = false;
-      $scope.addOtgPhotos = function (detail, length) {
-        console.log(detail);
+      $scope.addOtgPhotos = function (detail, length,status) {
+        if($scope.uploadPhotoCount == 1){
+          $scope.lengthPhotos = $scope.lengthPhotos + length;
+          $scope.uploadPhotoCount++;
+        }else if($scope.uploadPhotoCount == length){
+          $scope.uploadPhotoCount = 1;
+        }else{
+          $scope.uploadPhotoCount++;
+        }
+        if(status == 'Uploading...'){
+          $('.status').attr('disabled',true);
+          $('.status').removeClass('btn-pink').addClass('btn-grey');
+        }else {
+          $('.status').attr('disabled',false);
+          $('.status').removeClass('btn-grey').addClass('btn-pink');
+        }
+        console.log(detail,length);
         $scope.otgPhoto.push({
           name: detail,
           caption: ""
@@ -459,7 +481,23 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
       }
       // add photos end
       // add video start
-      $scope.addOtgVideo = function (video) {
+      $scope.addOtgVideo = function (video,length,status) {
+        if($scope.uploadVideoCount == 1){
+          $scope.lengthVideos = $scope.lengthVideos + length;
+          $scope.uploadVideoCount++;
+        }else if($scope.uploadVideoCount == length){
+          $scope.uploadVideoCount = 1;
+        }else{
+          $scope.uploadVideoCount++;
+        }
+        if(status == 'Uploading...'){
+          $('.status').attr('disabled',true);
+          $('.status').removeClass('btn-pink').addClass('btn-grey');
+        }else {
+          $('.status').attr('disabled',false);
+          $('.status').removeClass('btn-grey').addClass('btn-pink');
+        }
+        $scope.buttonValue = status;
         console.log(video, 'video mai kya aaya');
         $scope.otgVideo.push({
           name: video.name,
@@ -497,6 +535,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
         _.remove($scope.otgVideo, function(videoObj){
           return videoObj.name === videoName;
         })
+        $scope.lengthVideos = $scope.lengthVideos - 1;
         console.log($scope.otgVideo, 'new video');
         $timeout(function () {
           $scope.videoFlex = true;
@@ -521,6 +560,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           return n.name === name;
         })
         $scope.otgPhotoArray = $scope.otgPhoto;
+        $scope.lengthPhotos = $scope.lengthPhotos - 1;
         $scope.otgPhotoArray = _.chunk($scope.otgPhotoArray, 4);
         for (var i = 0; i < $scope.otgPhotoArray.length; i++) {
           $scope.otgPhotoArray[i] = _.chunk($scope.otgPhotoArray[i], 2);

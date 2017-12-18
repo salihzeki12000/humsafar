@@ -8456,6 +8456,12 @@ header {
     a:hover {
       color: #fff;
     }
+    .status.btn-grey{
+      &:hover {
+        background-color: #ddd;
+        color: #333;
+      }
+    }
   }
   // video edit end
   // tagged buddy on add photo video
@@ -8532,7 +8538,8 @@ header {
     margin: 15px 0 0;
 
     upload-image,
-    upload-image-otg {
+    upload-image-otg,
+    upload-image-count {
       width: 100%;
       position: absolute;
       top: 0;
@@ -12280,6 +12287,7 @@ header {
   }
 
   .notify-popup {
+    background-color: rgba(0,0,0,0.8);
     .modal-dialog {
       /*width: 100%;*/
       width: 1000px;

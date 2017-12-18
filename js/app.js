@@ -863,16 +863,17 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
         scope: {
             model: '=ngModel',
             type: "@type",
+            dataValue: "@datatype",
             callback: "&ngCallback"
         },
         link: function ($scope, element, attrs) {
             $scope.showImage = function () {
                 //console.log($scope.image);
             };
+            $scope.i = 0;
             $scope.check = true;
             $scope.length = 0;
-            $scope.imageDate = "";
-
+            $scope.imageDate = "";            
             if (!$scope.type) {
                 $scope.type = "image";
             }
@@ -905,7 +906,9 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                         $scope.length = newVal.length;
                         _.each(newVal, function (newV, key) {
                             if (newV && newV.file) {
+                                $scope.buttonValue = 'Uploading...';
                                 TemplateService.uploadLoader = true;
+                                TemplateService.type = $scope.dataValue;
                                 $scope.uploadNow(newV);
                             }
                         });
@@ -947,8 +950,15 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     },
                     transformRequest: angular.identity
                 }).success(function (data) {
-                    TemplateService.uploadLoader = false;
+                    // TemplateService.uploadLoader = false;
+                    // TemplateService.type = $scope.dataValue;
                     $scope.uploadStatus = "uploaded";
+                    $scope.i++;
+                    if($scope.i == $scope.length){
+                        TemplateService.uploadLoader = false;
+                        TemplateService.type = $scope.dataValue;
+                        $scope.buttonValue = 'Save';
+                    }
                     if ($scope.isMultiple) {
                         if ($scope.inObject) {
                             $scope.model.push({
@@ -971,7 +981,8 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     }
                     $scope.callback({
                         'data': data.data[0],
-                        'length': $scope.length
+                        'length': $scope.length,
+                        'status' : $scope.buttonValue
                     });
                     // $timeout(function () {
                     //    $scope.callback({'data':$scope.model});
