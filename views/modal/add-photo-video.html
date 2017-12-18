@@ -5,7 +5,7 @@
     <div class="edit-otg-title add-otg-title">
       <h4 class="avenir-roman text-center color-white">Add Photos & Videos</h4>
       <div class="pull-right">
-        <span class="close pop-close-btn notify-close" ng-click="$dismiss();">
+        <span class="close pop-close-btn notify-close" ng-click="$dismiss(); cancelEdit();">
           <!--<img src="img/cancel.png" alt="Cancel" class="img-responsive">-->
           X
         </span>
@@ -175,7 +175,7 @@
   <!-- add otg end-->
   <!-- save or cancel otg -->
   <div class="save-cancel-otg text-center">
-    <a href="" class="color-white" ng-click="$close();">Cancel</a>
+    <a href="" class="color-white" ng-click="$close();cancelEdit();">Cancel</a>
     <button class="btn btn-pink status btn-more" ng-click="savePhotosVideos(); $dismiss();">{{buttonValue}}</button>
   </div>
   <!-- save or cancel otg end-->

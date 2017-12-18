@@ -174,7 +174,7 @@ var ongojourney = angular.module('ongojourney', [])
     };
   });
 
-ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService, $sce) {
+ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '$timeout', '$uibModal', 'OnGoJourney', 'LikesAndComments', 'TravelibroService','TemplateService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, OnGoJourney, LikesAndComments, TravelibroService,TemplateService, $sce) {
   return {
     restrict: 'E',
     scope: {
@@ -424,12 +424,25 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
         modal.closed.then(function () {
           $scope.otgPhotoArray = [];
           $scope.photoSec = false;
+          $scope.videoSec = false;
           $scope.otgPhoto = [];
+          $scope.otgVideo = [];
           $scope.lengthVideos =0;
           $scope.lengthPhotos =0;
         });
       };
       // add photo videos otg end
+       $scope.cancelEdit = function(){
+          window.stop();
+          $scope.otgPhotoArray = [];
+          $scope.photoSec = false;
+          $scope.otgPhoto = [];
+          $scope.otgVideo = [];
+          $scope.lengthVideos = 0;
+          $scope.lengthPhotos = 0;
+          TemplateService.uploadLoader = false;
+          $scope.videoSec = false;
+      }
       // edit otg
 
       // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);
