@@ -334,7 +334,7 @@ pastJourney.factory('pastJourney', function(TravelibroService, $filter){
       }
     };
 });
-pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state', '$timeout', '$uibModal', 'pastJourney', 'LikesAndComments', 'TravelibroService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, pastJourney, LikesAndComments, TravelibroService, $sce){
+pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state', '$timeout', '$uibModal', 'pastJourney', 'LikesAndComments', 'TravelibroService','TemplateService', '$sce', function ($http, $filter, $window, $state, $timeout, $uibModal, pastJourney, LikesAndComments, TravelibroService,TemplateService, $sce){
 	return{
 		restrict : 'E',
 		scope: {
@@ -699,16 +699,20 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.otgVideo = [];
           $scope.lengthVideos = 0;
           $scope.lengthPhotos = 0;
+          $scope.videoSec = false;
           console.log($scope.otgVideo,'empty hai kya');
         });
       };
       $scope.cancelEdit = function(){
-        $scope.otgPhotoArray = [];
+          window.stop();
+          $scope.otgPhotoArray = [];
           $scope.photoSec = false;
           $scope.otgPhoto = [];
           $scope.otgVideo = [];
           $scope.lengthVideos = 0;
           $scope.lengthPhotos = 0;
+          TemplateService.uploadLoader = false;
+          $scope.videoSec = false;
       }
       // add photos start
       $scope.photoSec = false;
