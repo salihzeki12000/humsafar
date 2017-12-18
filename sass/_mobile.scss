@@ -3276,6 +3276,9 @@
       }
       &:nth-child(4) .tab-heading {
         padding: 4px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3289,6 +3292,11 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3305,6 +3313,9 @@
       }
       &:nth-child(4) .tab-heading {
         padding: 7px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3312,6 +3323,9 @@
     ul li {
       &:nth-child(4) .tab-heading {
         padding: 15px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       &:nth-child(3) .tab-heading {
         padding: 11px 20px;
