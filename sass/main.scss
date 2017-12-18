@@ -7026,6 +7026,7 @@ header {
     .journey-end {
       padding: 10px;
       border-radius: 6px;
+      margin-top: 60px;
       /*margin-left: -18px;*/
       // background-color: rgba(242, 103, 91, 0.75);
       background-color: #fff;
@@ -14725,13 +14726,12 @@ header {
 }
 .autosave {
   text-align: center;
-  /*margin-top: 10px;*/
-  position: fixed;
+  //position: fixed;
   width: 100%;
-  background-color: rgba(0,0,0,0.8);
   padding: 10px 0;
   z-index: 10;
   i {
+    color: $brand-dark-blue;
     font-size: 10px;
   }
 }
@@ -14767,7 +14767,7 @@ header {
   margin: 7px 0 0;
 }
 .draft-container {
-  padding-top: 95px;
+  //padding-top: 95px;
   .ongo-card-footer {
     .user-social-item .pull-left, .social-likes-reviews{
       display: none;
