@@ -412,7 +412,7 @@
         color: #fff;
         text-shadow: 2px 2px 2px #020202;
         &:before, &:after {
-          border-right: 4px dashed #f58b86;
+          border-right: 4px dashed #ffffff;
         }
       }
     }
@@ -432,7 +432,7 @@
       margin-top: 10px;
     }
   }
-  .dash-up { border-left: 4px dashed #f58b86; }
+  .dash-up { border-left: 4px dashed #ffffff; }
   .day-post-holder {
     background-color: $brand-pink;
   }
@@ -2390,9 +2390,17 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .day-post-holder,
+  .past-journey-end .journey-end {
+    &:before {
+      content: '';
+      height: 16px;
+      top: -39px;
+    }
+  }
   .past-story .autosave {
     position: relative;
-    margin-top: 60px;
+    //margin-top: 60px;
     i {
       font-size: 9px;
     }
@@ -2519,7 +2527,7 @@
   }
   .dash-up {
     height: 14px;
-    border-left: 4px solid #f58b86;
+    border-left: 4px solid #ffffff;
   }
   .thumbnail-holder {
     padding-top: 0;
@@ -3004,7 +3012,7 @@
   // journey end
   .ongo-journey-end {
     width: 200px;
-    padding: 15px 5px;
+    //padding: 15px 5px;
     .journey-end {
       p {
         font-size: 11px;

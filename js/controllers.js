@@ -10764,7 +10764,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     var profile = $.jStorage.get("profile");
-    $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published.';
+    $scope.autosaveMsg = 'This story will be auto saved and found under "Past Journey" until published.';
     $scope.countries = [];
     $scope.pastJourneyArray = [];
     $scope.destinationVisited = [];
@@ -10910,25 +10910,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.updateBannerDateTime = function (id, formData, dt) {
-      //console.log(dt);
       var date = $filter('formatDateCalender')(dt);
       var time = $filter('formatTimeCalender')(formData);
       var result = {};
-      var callback = function (data) {
-        var formData = {
-          "urlSlug": $scope.pastJourneyArray.urlSlug
-        }
-        pastJourney.getPastJourney(formData, function (pastStoryData, lastPostDate) {
-          $scope.pastJourneyArray.startTime = pastStoryData.startTime;
-          modal.close();
-          //console.log(journeys);
-        }, function (err) {
-          //console.log(err);
-        });
-      }
       result._id = id;
       result.startTime = new Date(date + " " + time);
-      pastJourney.updateBannerDateTime(result, callback);
+      pastJourney.updateBannerDateTime(result, function(data){
+        modal.close();
+        $window.location.reload();
+      });
     };
     //change banner date and time ends
     $scope.viewEdit = function (index) {

@@ -638,6 +638,11 @@ textarea {
   background-color: $brand-pink;
 }
 
+.btn-green {
+  background-color: #2EB286;
+  color: #ffffff;
+}
+
 .bg-dark-cyan {
   background-color: $brand-dark-cyan;
 }
@@ -6298,6 +6303,7 @@ header {
   position: relative;
   background-color: #fff;
   border-radius: 8px;
+  box-shadow: 5px 5px 30px rgba(0,0,0,.35);
 }
 .ongo-card-holder
  {
@@ -6398,7 +6404,7 @@ header {
     margin-bottom: 30px;
     border-radius: 8px;
     // box-shadow: 1px 4px 5px #ccc;
-    box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 5px 5px 30px rgba(0,0,0,.35);
     background-color: rgba(255, 255, 255, 0.95);
 
     .user-social-item {
@@ -7061,7 +7067,7 @@ header {
 
     .box-start-journey {
       border-radius: 6px;
-      box-shadow: 2px 4px 4px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 5px 5px 30px rgba(0,0,0,.35);
       position: relative;
       z-index: 2;
     }
@@ -8916,6 +8922,7 @@ header {
     padding: 10px;
     border-radius: 6px;
     margin-bottom: 30px;
+    box-shadow: 5px 5px 30px rgba(0,0,0,.35);
     /*background-color: rgba(255,255,255,0.95);*/
     background-color: #fff;
     color: $brand-dark-blue;
@@ -8966,6 +8973,9 @@ header {
   }
   .dest-heading {
     font-size: 17px;
+    .pull-right {
+      font-size: 14px;
+    }
   }
   .past-story-heading {
     width: 100%;
@@ -9022,7 +9032,7 @@ header {
   .day-post-holder {
     padding: 10px 15px;
     border-radius: 6px;
-    margin: 60px 0;
+    margin: 60px 0 30px;
     background-color: #7492a8;
     position: relative;
     &:before {
@@ -9088,7 +9098,7 @@ header {
         top: -45px;
         left: 50%;
         width: 4px;
-        height: 29px;
+        height: 26px;
         border: none;
         border-left: 4px dashed #fff;
       }
@@ -14562,7 +14572,7 @@ header {
   .day-post-holder,
   .postto-day,
   .journey-end {
-    box-shadow: 2px 2px 3px rgba(0,0,0,.35);
+    box-shadow: 5px 5px 30px rgba(0,0,0,.35);
   }
 }
 .set-draft-location {
@@ -14738,10 +14748,22 @@ header {
   width: 100%;
   padding: 10px 0;
   z-index: 10;
+  .btn {
+    box-shadow: 2px 2px 5px gray;
+  }
   i {
     color: $brand-dark-blue;
     font-size: 10px;
   }
+  .btn-green {
+    &:focus {
+      color: #ffffff;
+    }
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
 }
  .profile-main .bg-white {
    padding-bottom: 25px;
@@ -14789,9 +14811,11 @@ header {
     top: -30px;
   }
   .btn-publish {
+    margin: auto;
     margin-bottom: 5px;
-    margin-top: -9px;
-    border-radius: 0;
+    width: 60%;
+    height: 40px;
+    box-shadow: 5px 5px 30px rgba(0,0,0,.35)  ;
   }
 }
 .loadmore .publish {

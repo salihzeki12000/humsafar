@@ -4,7 +4,7 @@
         <!-- past story main -->
         <section class="main-paststory ongo-card-holder draftJourney" ng-style="cardHolderCss">
           <div class=" autosave " ng-if="!showPublish">
-            <button class="btn btn-pink" ng-click="publishDraft()">Publish Story</button>
+            <button class="btn btn-dark-blue" ng-click="publishDraft()">Publish Story</button>
             <!-- <span class="pointer"
               ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
             <div><i>{{autosaveMsg}}</i></div>
@@ -320,7 +320,10 @@
                                 <span class="color-white jenna-font">until we meet again!</span>
                               </div>
                             </div>
-
+                              <div class="color-white autosave" ng-if="showPublish">
+                                <button class="btn btn-block btn-pink btn-publish" ng-click="publishDraft()">Publish Story</button>
+                                <div><i>{{autosaveMsg}}</i></div>
+                              </div>
                             <!-- ongo journey end -->
         <!-- <div class="loadmore" style="padding: 0 10px 30px 10px">
           <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button>
@@ -352,8 +355,8 @@
         </div> -->
       </section>
       <!-- past story main end -->
-        <div class=" autosave ">
-          <button class="btn btn-pink" ng-click="publishDraft()">Publish Story</button>
+        <div class=" autosave " ng-if="!showPublish">
+          <button class="btn btn-dark-blue" ng-click="publishDraft()">Publish Story</button>
           <!-- <span class="pointer"
             ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
           <div><i>{{autosaveMsg}}</i></div>
