@@ -97,7 +97,7 @@
           <div class="view-photo-sec otg-bg-all">
             <div class="otg-photo-count">
               <img src="img/ongojourney/otg-photo.png" alt="" class="img-responsive" width="25">
-              <span class="avenir-roman">({{otgPhoto.length}})</span>
+              <span class="avenir-roman">({{otgPhoto.length}}/{{lengthPhotos}})</span>
             </div>
             <!-- photo upload -->
             <div class="uplad-otg-sec" ng-hide="photoSec">
@@ -106,7 +106,7 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn relate text-center">
                 <button class="btn btn-pink btn-more pointer">Upload Photos</button>
-                <upload-image datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data);" no-view class="pointer"></upload-image>
+                <upload-image-count datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length,status);" no-view class="pointer"></upload-image-count>
               </div>
             </div>
             <!-- photo upload end-->
@@ -156,8 +156,8 @@
             <div class="add-otg-more" ng-show="photoSec">
               <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
               <div class="add-more-pic">
-                <upload-image datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,type);" no-view>
-                </upload-image>
+                <upload-image-count datatype="photo" allow-type="image/*" multiple="true" ng-model="uploadPic" ng-callback="addOtgPhotos(data,length,status);" no-view>
+                </upload-image-count>
               </div>
             </div>
             <!-- add more photo video part end-->
@@ -169,7 +169,7 @@
           <div class="view-video-sec otg-bg-all">
             <div class="otg-video-count">
               <img src="img/ongojourney/otg-video.png" alt="" class="img-responsive" width="25px">
-              <span class="avenir-roman">({{otgVideo.length}})</span>
+              <span class="avenir-roman">({{otgVideo.length}}/{{lengthVideos}})</span>
             </div>
             <!-- video upload -->
             <div class="uplad-otg-sec" ng-hide="videoSec">
@@ -178,7 +178,7 @@
               <span class="block text-center color-dark-blue avenir-roman">-or-</span>-->
               <div class="otg-upload-btn text-center relate">
                 <button class="btn btn-pink btn-more">Upload Videos</button>
-                <upload-image datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+                <upload-image-count datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data,length,status);" no-view class="pointer"></upload-image-count>
               </div>
             </div>
             <!-- video upload end-->
@@ -224,7 +224,7 @@
           <div class="add-otg-more" ng-show="videoSec">
             <span class="putmore-photo-video"><i class="fa fa-plus"></i></span>
             <div class="add-more-vid">
-              <upload-image datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data);" no-view class="pointer"></upload-image>
+              <upload-image-count datatype="video" allow-type="video/*" multiple="true" ng-model="uploadVid" ng-callback="addOtgVideo(data,length,status);" no-view class="pointer"></upload-image-count>
             </div>
           </div>
           <!-- add more photo video part end-->
@@ -239,7 +239,7 @@
 <!-- save or cancel otg -->
 <div class="save-cancel-otg text-center">
   <a href="" class="color-white" ng-click="$dismiss();">Cancel</a>
-  <button class="btn btn-pink btn-more" ng-click="addNewPost(); $dismiss();">Save</button>
+  <button class="btn btn-pink btn-more status" ng-click="addNewPost(); $dismiss();">{{buttonValue}}</button>
 </div>
 <!-- save or cancel otg end-->
 </div>
