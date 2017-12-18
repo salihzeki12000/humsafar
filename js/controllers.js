@@ -461,6 +461,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.password = {};
     $scope.userSignUpForm = {};
 
+
     $scope.initialiseError = function () {
       $scope.showError = {
         'show': false,
@@ -479,6 +480,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $(window).load(function() {
       // //console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
+      $('.login-process').parent().parent().next().children().addClass('hidden-xs');
     });
 
     $scope.openalreadyexist = function(size) {
@@ -14338,7 +14340,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     } else {
       $scope.isLoggedIn = false;
-      $scope.template.isLoggedIn = false; //////////////////////////////////////////
+      $scope.template.isLoggedIn = false;
       // $scope.isMine = false;
       $scope.template.isMine = false;
     }

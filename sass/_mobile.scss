@@ -1351,7 +1351,6 @@
       @include placeholder {
         font-size: 13px;
       }
-      ;
     }
   } // login end
   // footer
@@ -2424,6 +2423,7 @@
       width: 187px;
     }
   }
+  .str
 
   .autosave {
     font-size: 10px;
@@ -3666,7 +3666,22 @@
   .non-rated-star i:first-child {
     margin-left: -3px;
   }
+  .startLoc {
+    .col-xs-2, .col-xs-8 {
+      padding: 0;
+    }
+    .setLocation {
+      margin: 5px 0 0 10px;
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+    .location {
+      font-size: 14px;
+    }
+  }
 }
+
 
 // media query for 480px to 320px end
 // media query for max 330px (iphone 5S)
