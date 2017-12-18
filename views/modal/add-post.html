@@ -6,7 +6,7 @@
     <div class="edit-otg-title">
       <h4 class="avenir-roman text-center color-white">Add Activity</h4>
       <div class="pull-right">
-        <span class="close pop-close-btn notify-close" ng-click="$dismiss();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
+        <span class="close pop-close-btn notify-close" ng-click="$dismiss(); cancelEdit();"><img src="img/cancel.png" alt="Cancel" class="img-responsive"></span>
       </div>
     </div>
     <!-- edit otg title end-->
@@ -17,7 +17,7 @@
           <div class="otg-search-location otg-bg-all">
             <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22" />
             <div class="search-by-category" ng-init="ongo.locationEdit = {};">
-              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()" />
+              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Select location" ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()" />
               <div class="search-otg-location" ng-show="showLocation &&  ongo.locationEdit.backgroundClick;">
                 <ul>
                   <li ng-repeat="location in nearByLocation track by $index" ng-click="locationId(location);viewLocation();">
@@ -27,7 +27,7 @@
               </div>
             </div>
             <div class="category-location" ng-init="ongo.typeJourney= {};">
-              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.typeJourney)">
+              <input type="text" class="form-control" ng-model="ongo.checkIn.category" placeholder="Category" ng-click="editOption(ongo.typeJourney)">
               <div class="dropdown-otg-category" ng-show="ongo.typeJourney.backgroundClick;">
                 <ul>
                   <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category;"><a href="">{{category}}</a></li>
@@ -238,7 +238,7 @@
 <!-- edit otg end-->
 <!-- save or cancel otg -->
 <div class="save-cancel-otg text-center">
-  <a href="" class="color-white" ng-click="$dismiss();">Cancel</a>
+  <a href="" class="color-white" ng-click="$dismiss();cancelEdit();">Cancel</a>
   <button class="btn btn-pink btn-more status" ng-click="addNewPost(); $dismiss();">{{buttonValue}}</button>
 </div>
 <!-- save or cancel otg end-->

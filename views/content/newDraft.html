@@ -1,15 +1,15 @@
 <div class="past-story drafts relate" auto-height>
-  <div class="color-white autosave " ng-if="!showPublish">
-    <button class="btn btn-pink" ng-click="publishDraft()">Publish Story</button>
-    <!-- <span class="pointer"
-      ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
-      <div><i>{{autosaveMsg}}</i></div>
-      <div style="color:orangered" ng-if="postCreated==false">{{noPostErr}}</div>
-  </div>
-    <div class="past-journey on-go-journey">
+  <div class="past-journey on-go-journey">
       <div class="draft-container">
         <!-- past story main -->
         <section class="main-paststory ongo-card-holder draftJourney" ng-style="cardHolderCss">
+          <div class=" autosave " ng-if="!showPublish">
+            <button class="btn btn-pink" ng-click="publishDraft()">Publish Story</button>
+            <!-- <span class="pointer"
+              ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
+            <div><i>{{autosaveMsg}}</i></div>
+            <div style="color:orangered" ng-if="postCreated==false">{{noPostErr}}</div>
+          </div>
           <div class="color-white autosave" ng-if="showPublish">
             <button class="btn btn-block btn-pink btn-publish" ng-click="publishDraft()">Publish Story</button>
             <div><i>{{autosaveMsg}}</i></div>
@@ -72,7 +72,8 @@
                   <span class="color-white">Edit</span>
                   <div class="edit-kind-journey" ng-show="pastStory.kindOf.backgroundClick;">
                     <ul class="text-left">
-                      <li><a href="" title="Journey Cover Photo" ng-click="coverPhoto(pastJourneyArray._id);">Change
+                      <li ng-if="showCoverOption"><a href="" title="Journey Cover Photo"
+                                  ng-click="coverPhoto(pastJourneyArray._id);">Change
                         Cover Photo</a>
                       </li>
                       <li><a href="" title="Journey Name" ng-click="nameJourney(journey.name);">Edit Journey Name</a>
@@ -351,8 +352,12 @@
         </div> -->
       </section>
       <!-- past story main end -->
-        <div class="publish-button text-center">
+        <div class=" autosave ">
           <button class="btn btn-pink" ng-click="publishDraft()">Publish Story</button>
+          <!-- <span class="pointer"
+            ng-click="publishDraft()"><b><p class="publishStory"></p></b></span> -->
+          <div><i>{{autosaveMsg}}</i></div>
+          <div style="color:orangered" ng-if="postCreated==false">{{noPostErr}}</div>
         </div>
     </div>
   </div>

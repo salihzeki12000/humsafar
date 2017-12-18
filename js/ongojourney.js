@@ -425,11 +425,20 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           $scope.otgPhotoArray = [];
           $scope.photoSec = false;
           $scope.otgPhoto = [];
+          $scope.otgVideo = [];
           $scope.lengthVideos =0;
           $scope.lengthPhotos =0;
         });
       };
       // add photo videos otg end
+       $scope.cancelEdit = function(){
+        $scope.otgPhotoArray = [];
+          $scope.photoSec = false;
+          $scope.otgPhoto = [];
+          $scope.otgVideo = [];
+          $scope.lengthVideos = 0;
+          $scope.lengthPhotos = 0;
+      }
       // edit otg
 
       // $scope.otgPhoto = _.chunk([$scope.otgPhoto],2);

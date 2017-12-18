@@ -309,6 +309,11 @@
 
 // media query for 991px to 768px
 @media screen and (max-width: 991px) {
+  .autosave {
+    i {
+      color: #ffffff;
+    }
+  }
   .addBrick .newDraft {
     margin-top: 25%;
   }

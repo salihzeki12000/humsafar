@@ -6109,7 +6109,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // "initDate": $scope.userData.dob,
       showWeeks: false
     }
-
+    $scope.Draft = {
+      startTime : null,
+      endTime : null
+    }
     $scope.open2 = function () {
       $scope.popup2.opened = true;
       showWeeks = false;
@@ -6122,10 +6125,17 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       showWeeks: false
     };
     var profile = $.jStorage.get("profile");
-
+    $scope.$watch('Draft.startTime',function(newValue, oldValue, scope) {
+      if(newValue){
+        var startTime = $scope.Draft.startTime;
+        $scope.Draft.endTime = moment(startTime, "DD-MM-YYYY").add(1, 'days');
+      }
+    });
     $scope.createDraft = function (formData) {
-      // formData.user = $.jStorage.get("profile")._id;
-      console.log(formData);
+      var dateString = formData.endTime;
+      var m = moment(dateString, 'ddd MMM D YYYY HH:mm:ss ZZ');
+      m.set({h: 23, m: 59});
+      formData.endTime = m.toDate().toString();
       pastJourney.createDraft(formData, function (data) {
         console.log(data);
         if (data.value) {
@@ -6136,7 +6146,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           });
         }
       })
-
     };
 
     $scope.reviewAll = {
@@ -6717,6 +6726,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       } catch (e) {
       }
     };
+
     //end mobile badge
     // routing to on-the-go,detailed-iti,quick-iti
     // $scope.routeTO = function (type, urlSlug, userSlug) {
@@ -10805,6 +10815,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     pastJourney.getDrafts({pagenumber: 1}, function (data) {
       console.log('created drafts ', data);
     });
+
     $scope.getBlankPastJourney = function () {
       pastJourney.getOneDraft(formData, function (pastStoryData, lastPostDate) {
         $scope.pastJourneyArray = pastStoryData;
@@ -10850,6 +10861,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         }, function (err) {
           //console.log(err);
         });
+        pastJourney.getJourneyCoverPhoto({
+          "_id": $scope.pastJourneyArray._id,
+          "type": "photos"
+        }, function(data){
+          if(data.photos.length > 0)
+            $scope.showCoverOption = true;
+        });
       }, function (error) {
         console.log(error);
       })
@@ -10861,7 +10879,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.changeBannerDate = function () {
       $scope.journey = $scope.pastJourneyArray;
       $scope.ongo = $scope.pastStory;
-      console.log($scope.pastJourneyArray, 'pastJourneyarry');
       //console.log("Banner Date");
       $scope.isPostDate = false;
       $scope.isBannerDate = true;
@@ -11229,7 +11246,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // edit journey name end
     //edit journey cover photo
     $scope.coverPhoto = function (id) {
-      console.log($scope.pastJourneyArray, 'pastJourneyArray');
+      // console.log($scope.pastJourneyArray, 'pastJourneyArray');
       $scope.journey = $scope.pastJourneyArray;
       modal = $uibModal.open({
         animation: true,
@@ -11287,7 +11304,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }).error(function (data) {
         console.log(data);
       });
-      console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
+      // console.log('destinationVisited', $scope.pastJourneyArray.destinationVisited);
     };
     // delete destinationVisited
     $scope.deleteVisited = function (index, country) {
@@ -11295,13 +11312,11 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // $scope.pastJourneyArray.destinationVisited[index] = [];
       $scope.pastJourneyArray.destinationVisited.splice(index, 1);
       $scope.countries.push(country.country);
-      console.log($scope.countries, 'what is new country');
       $scope.saveDestinationVisited();
     };
     // delete destinationVisited end
-    $scope.noPostErr = 'Need atleast one activity to upload this journey.';
     $scope.publishDraft = function(){
-      console.log($scope.pastJourneyArray);
+      $scope.noPostErr = '*Need atleast one activity/post to upload this journey.';
       _.each($scope.pastJourneyArray.post, function(elem){
         if(elem.type=='travel-life'){
           $scope.postCreated = true;
@@ -11312,7 +11327,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             $scope.noPostErr = null;
           },5000);
         }
-        console.log('yo ',elem);
       })
       if($scope.pastJourneyArray.startLocation == null || $scope.pastJourneyArray.startLocation=="") {
         $scope.msg = "*Cannot publish story without Start Location";
@@ -11323,7 +11337,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       else {
         if($scope.postCreated){
           pastJourney.publishDraft($scope.pastJourneyArray, function(data){
-            console.log('draft has been published ',data);
             // $state.go('paststory',{
             //   "urlSlug": $.jStorage.get("profile").urlSlug,
             //   "id" : $scope.pastJourneyArray.urlSlug

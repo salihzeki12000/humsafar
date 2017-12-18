@@ -696,10 +696,20 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.otgPhotoArray = [];
           $scope.photoSec = false;
           $scope.otgPhoto = [];
-          $scope.lengthVideos =0;
-          $scope.lengthPhotos =0;
+          $scope.otgVideo = [];
+          $scope.lengthVideos = 0;
+          $scope.lengthPhotos = 0;
+          console.log($scope.otgVideo,'empty hai kya');
         });
       };
+      $scope.cancelEdit = function(){
+        $scope.otgPhotoArray = [];
+          $scope.photoSec = false;
+          $scope.otgPhoto = [];
+          $scope.otgVideo = [];
+          $scope.lengthVideos = 0;
+          $scope.lengthPhotos = 0;
+      }
       // add photos start
       $scope.photoSec = false;
       $scope.addOtgPhotos = function (detail, length,status) {
