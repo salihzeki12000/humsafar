@@ -505,7 +505,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         });
       };
       $scope.getLocation = function () {
-        if ($scope.pastStory.checkIn.location && $scope.pastStory.checkIn.location !== "") {
+        if ($scope.pastStory.checkIn && $scope.pastStory.checkIn.location && $scope.pastStory.checkIn.location !== "") {
           $scope.showLocation = true;
           TravelibroService.http({
             url: adminURL + "/post/checkInPlaceSearch",
@@ -1058,8 +1058,8 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).startOf('day').toDate();
         }
         // $scope.pastStory = {};
-        // $scope.pastStory.checkIn = {};
-        // $scope.pastStory.thoughts = "";
+        $scope.pastStory.checkIn = {};
+        $scope.pastStory.thoughts = "";
         $scope.ongo = $scope.pastStory;
         // console.log($scope.pastStory.UTCModified,'what is utc new');
 
@@ -1072,7 +1072,9 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           backdrop: 'static',
           backdropClass: "review-backdrop"
         });
-        modal.close();
+        modal.closed.then( function(){
+          $window.location.reload();
+        });
          // geo location
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function (geoLocation) {
