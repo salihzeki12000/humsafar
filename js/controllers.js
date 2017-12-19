@@ -396,6 +396,19 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               }else {
               $('.capture-row').css('z-index','21');
               }
+
+              // scroll header fix
+              $('header').css({
+                'transform':'translateY(0)',
+                'transition': 'transform 300ms linear'
+              });
+              if($(document).scrollTop() > headerFixed - 20 && $(document).scrollTop() < agentRegisterSec){
+                $('header').css({
+                  'transform':'translateY(0)',
+                  'transition': 'transform 300ms linear'
+                });
+              }
+              // scroll header fix end
             }
             // in mobile scrolling end
            }
@@ -448,6 +461,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.password = {};
     $scope.userSignUpForm = {};
 
+
     $scope.initialiseError = function () {
       $scope.showError = {
         'show': false,
@@ -466,6 +480,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $(window).load(function() {
       // //console.log("tooltip");
       $('[data-toggle="tooltip"]').tooltip();
+      $('.login-process').parent().parent().next().children().addClass('hidden-xs');
     });
 
     $scope.openalreadyexist = function(size) {
@@ -6074,12 +6089,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scroll = {
       busy: false
     };
-    $scope.ownerProfile = $stateParams.urlSlug === $.jStorage.get("profile").urlSlug;
     $scope.travelLife = [];
     var allowAccess = false;
     $scope.allowAccess = allowAccess;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.isopen = false;
+    if($scope.isLoggedIn){
+      $scope.ownerProfile = $stateParams.urlSlug === $.jStorage.get("profile").urlSlug;
+    }
     var modal = "";
     var arr = [];
     $scope.obj = {};
@@ -10764,7 +10781,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     var profile = $.jStorage.get("profile");
-    $scope.autosaveMsg = 'This story will be auto saved and found under "Untold" until published.';
+    $scope.autosaveMsg = 'This story will be auto saved and found under "Past Journey" until published.';
     $scope.countries = [];
     $scope.pastJourneyArray = [];
     $scope.destinationVisited = [];
@@ -10910,25 +10927,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     };
 
     $scope.updateBannerDateTime = function (id, formData, dt) {
-      //console.log(dt);
       var date = $filter('formatDateCalender')(dt);
       var time = $filter('formatTimeCalender')(formData);
       var result = {};
-      var callback = function (data) {
-        var formData = {
-          "urlSlug": $scope.pastJourneyArray.urlSlug
-        }
-        pastJourney.getPastJourney(formData, function (pastStoryData, lastPostDate) {
-          $scope.pastJourneyArray.startTime = pastStoryData.startTime;
-          modal.close();
-          //console.log(journeys);
-        }, function (err) {
-          //console.log(err);
-        });
-      }
       result._id = id;
       result.startTime = new Date(date + " " + time);
-      pastJourney.updateBannerDateTime(result, callback);
+      pastJourney.updateBannerDateTime(result, function(data){
+        modal.close();
+        $window.location.reload();
+      });
     };
     //change banner date and time ends
     $scope.viewEdit = function (index) {
@@ -10992,7 +10999,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var str = searchKey;
       console.log(str);
       $scope.cities = [];
-      if (str && str.length > 3) {
+      if (str && str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
           $scope.cities = data.data;
           // cities = data.data;
@@ -12473,7 +12480,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       var str = searchKey;
       console.log(str);
       $scope.cities = [];
-      if (str && str.length > 3) {
+      if (str && str.length > 2) {
         NavigationService.searchCityByCountry(formData, function (data) {
           $scope.cities = data.data;
           // cities = data.data;
@@ -14333,7 +14340,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     } else {
       $scope.isLoggedIn = false;
-      $scope.template.isLoggedIn = false; //////////////////////////////////////////
+      $scope.template.isLoggedIn = false;
       // $scope.isMine = false;
       $scope.template.isMine = false;
     }

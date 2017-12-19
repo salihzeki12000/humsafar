@@ -412,7 +412,7 @@
         color: #fff;
         text-shadow: 2px 2px 2px #020202;
         &:before, &:after {
-          border-right: 4px dashed #f58b86;
+          border-right: 4px dashed #ffffff;
         }
       }
     }
@@ -432,7 +432,7 @@
       margin-top: 10px;
     }
   }
-  .dash-up { border-left: 4px dashed #f58b86; }
+  .dash-up { border-left: 4px dashed #ffffff; }
   .day-post-holder {
     background-color: $brand-pink;
   }
@@ -1339,7 +1339,7 @@
     font-size: 20px;
   }
   .custom-search {
-    padding: 45px 0 0;
+    padding: 60px 0 0;
     height: 110px;
     .input-group-addon {
       padding: 3px 0;
@@ -1351,7 +1351,6 @@
       @include placeholder {
         font-size: 13px;
       }
-      ;
     }
   } // login end
   // footer
@@ -2390,9 +2389,17 @@
 // media query for 767px to 480px end
 // media query for 480px to 320px
 @media screen and (max-width: 480px) {
+  .day-post-holder,
+  .past-journey-end .journey-end {
+    &:before {
+      content: '';
+      height: 16px;
+      top: -39px;
+    }
+  }
   .past-story .autosave {
     position: relative;
-    margin-top: 60px;
+    //margin-top: 60px;
     i {
       font-size: 9px;
     }
@@ -2416,6 +2423,7 @@
       width: 187px;
     }
   }
+  .str
 
   .autosave {
     font-size: 10px;
@@ -2519,7 +2527,7 @@
   }
   .dash-up {
     height: 14px;
-    border-left: 4px solid #f58b86;
+    border-left: 4px solid #ffffff;
   }
   .thumbnail-holder {
     padding-top: 0;
@@ -3004,7 +3012,7 @@
   // journey end
   .ongo-journey-end {
     width: 200px;
-    padding: 15px 5px;
+    //padding: 15px 5px;
     .journey-end {
       p {
         font-size: 11px;
@@ -3268,6 +3276,9 @@
       }
       &:nth-child(4) .tab-heading {
         padding: 4px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3281,6 +3292,11 @@
       }
       &:nth-child(3) .tab-heading {
         padding: 8px 20px;
+      }
+      &:nth-child(4) .tab-heading {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3297,6 +3313,9 @@
       }
       &:nth-child(4) .tab-heading {
         padding: 7px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
     }
   }
@@ -3304,6 +3323,9 @@
     ul li {
       &:nth-child(4) .tab-heading {
         padding: 15px 20px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
       }
       &:nth-child(3) .tab-heading {
         padding: 11px 20px;
@@ -3644,7 +3666,22 @@
   .non-rated-star i:first-child {
     margin-left: -3px;
   }
+  .startLoc {
+    .col-xs-2, .col-xs-8 {
+      padding: 0;
+    }
+    .setLocation {
+      margin: 5px 0 0 10px;
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+    .location {
+      font-size: 14px;
+    }
+  }
 }
+
 
 // media query for 480px to 320px end
 // media query for max 330px (iphone 5S)
