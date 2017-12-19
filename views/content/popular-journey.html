@@ -6,7 +6,7 @@
     </div>
     <div ng-include="template.footer" class="template footer"></div>
     <div class="footer">
-      <footer ng-controller=headerctrl>
+      <footer ng-controller="headerctrl">
         <div class="hidden-xs app-icons ab">
           <div class="container-fluid">
             <div class="col-md-12">
@@ -42,7 +42,7 @@
     <div class="all-journey-categories {{allJourney.category}}" ng-repeat="allJourney in allPopularJourneys track by $index">
       <div class="journey-category-list">
         <div class="category-heading">
-          <h4 class="avenir-heavy text-center">{{allJourney.category}}</h4>          
+          <h4 class="avenir-heavy text-center">{{allJourney.category}}</h4>
         </div>
         <div class="category-view">
           <div masonry preserve-order>
@@ -89,7 +89,7 @@
                     <!-- post header end -->
                     <!-- post-main-section -->
                     <div class="post-main-section pointer"  ng-click="routeOngo(categoryList)">
-                      <div class="relate">                       
+                      <div class="relate">
                         <!-- post travelled journey -->
                         <!-- ng-if="post.travelledJourney" -->
                         <div class="travelled-journey">
@@ -274,7 +274,7 @@
                           <span class="color-darkgrey pointer" ng-click="getCommentsData(categoryList)" ng-if="categoryList.commentCount > 0">
                             <img src="img/comments.png" alt="" height="13" class="v-top comment-gray">
                             <b class="">
-                            {{categoryList.commentCount}} </b> {{categoryList.commentCount |singularPlural:'Comments'}}</span> 
+                            {{categoryList.commentCount}} </b> {{categoryList.commentCount |singularPlural:'Comments'}}</span>
                           </div>
                         </div>
                       </div>

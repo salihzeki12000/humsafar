@@ -14491,6 +14491,9 @@ header {
 .drafts-list {
   margin-top: 50px;
 }
+.ongo-profile-pic {
+  margin-top: 0;
+}
 .new-draft {
   border: none;
   border-radius: 5px;
@@ -14545,7 +14548,7 @@ header {
   padding: 40px;
 }
 .add-draft {
-  padding-top: 20px;
+  //padding-top: 20px;
   p {
     padding-top: 15px;
   }

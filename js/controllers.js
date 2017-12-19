@@ -460,8 +460,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.alreadyExist = false;
     $scope.password = {};
     $scope.userSignUpForm = {};
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
-
+    if($state.current.url === '/login'){
+      $scope.isUserLogin = true;
+      $scope.hideOther = true;
+    };
     $scope.initialiseError = function () {
       $scope.showError = {
         'show': false,
@@ -937,6 +941,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.form = {};
     $scope.template = TemplateService.changecontent("mainpage");
     $scope.menutitle = NavigationService.makeactive("Home");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     TemplateService.title = $scope.menutitle;
     TemplateService.footer = "";
     $scope.navigation = NavigationService.getnav();
@@ -1240,7 +1245,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
   .controller('HolidayCtrl', function ($scope, TemplateService, NavigationService, $timeout, $state) {
     //Used to name the .html file
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     // //console.log("Testing //consoles");
 
     $scope.listOfCategories = {
@@ -1504,6 +1509,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     // //console.log("Testing //consoles");
     $scope.userData = $.jStorage.get("profile");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     var slug = $stateParams.id;
     var formData = {
       "urlSlug": slug,
@@ -1573,6 +1579,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var lastScrollTop = 0;
     var delta = 5;
     var journeyInfoStrip = $('.journey-info-strip').outerHeight();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     var vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     // if(vw <= 480){
@@ -1700,14 +1707,14 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     var getOneJourneyCallback = function (journeys) {
         $scope.journey = journeys;
-        console.log($scope.journey,'journeyhs',$scope.journey.kindOfJourney,'koj');
+        // console.log($scope.journey,'journeyhs',$scope.journey.kindOfJourney,'koj');
         TemplateService.title = $scope.journey.name + " - Travel Life | TraveLibro";
         // for kind of journey
         _.each($scope.journey.kindOfJourney,function(kind){
           var getIndex = _.findIndex($scope.journeyType, function(journeyKind){
             return kind == journeyKind.captionSend;
           });
-          console.log(getIndex);
+          // console.log(getIndex);
           if(getIndex !== -1){
             $scope.journeyType[getIndex].activeClass = "active-itinerary";
           }
@@ -3055,7 +3062,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Popular Bloggers");
     TemplateService.title = "Popular Bloggers - TraveLibro";
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     // POPULAR BLOGGER INTEGRATION START
     $scope.scroll = {
       busy: false,
@@ -3151,7 +3158,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.scrollAgent = {};
     $scope.scrollAgent.busy = false;
     $scope.scrollAgent.stopCallingApi = false;
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     // get popular agent
     $scope.allAgent = [];
     $scope.viewPopularAgent = function (pageNo) {
@@ -3192,7 +3199,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Popular Itineraries");
     TemplateService.title = "Popular Itineraries - TraveLibro";
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.userData = $.jStorage.get("profile");
     $scope.scroll = {
       busy: false,
@@ -3456,6 +3463,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = "Popular Journeys - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.userData = $.jStorage.get("profile");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $timeout(function () {
       if ((navigator.platform.indexOf("iPhone") != -1) ||
         (navigator.platform.indexOf("iPod") != -1) ||
@@ -3500,7 +3508,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             cfpLoadingBar.complete();
           }, 100);
         }
-        console.log($scope.allPopularJourneys, 'all journeys');
+        // console.log($scope.allPopularJourneys, 'all journeys');
       })
     };
     $scope.popularAllJourney();
@@ -3783,6 +3791,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     TemplateService.title = "Travel Destinations - TraveLibro";
     $scope.navigation = NavigationService.getnav();
     $scope.destinationList = [];
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     //console.log($scope.searchLoader, 'search loader');
     setInterval(function () {
       $scope.searchLoader = TemplateService.searchLoader;
@@ -3928,6 +3937,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Destination");
     // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.urlDestinationCountry = $state.params.url;
     $scope.hotelsData = [];
     $scope.toursData = [];
@@ -4693,6 +4703,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // //console.log("Testing //consoles");
     $scope.template = TemplateService.changecontent("destination-city");
     $scope.menutitle = NavigationService.makeactive("Destination");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     // TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.cityDestData = [];
@@ -6061,7 +6072,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("mylife");
     $scope.menutitle = NavigationService.makeactive("Mylife");
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.localView = {};
     $scope.localView.view = true;
     $scope.showTravellife = false;
@@ -8215,7 +8226,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Journey");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
-
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.$watch('masonryContainer', function () {
       $timeout(function () {
         //console.log("reload");
@@ -8351,6 +8362,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.profile = $.jStorage.get("profile");
     $scope.userData = _.clone($scope.profile);
     $scope.showUsernameError = false;
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     // //console.log("Testing //consoles");
     $scope.template = TemplateService.changecontent("setting");
     $scope.menutitle = NavigationService.makeactive("Setting");
@@ -8867,6 +8879,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Activity");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.showLikeCommentCard = true;
     // setInterval(function () {
     //   $scope.paginationLoader = TemplateService.paginationLoader;
@@ -9750,6 +9763,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("itinerary");
     $scope.menutitle = NavigationService.makeactive("Itinerary");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
     $scope.createItinerary = function (status) {
@@ -10780,6 +10794,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Drafts");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     var profile = $.jStorage.get("profile");
     $scope.autosaveMsg = 'This story will be auto saved and found under "Past Journey" until published.';
     $scope.countries = [];
@@ -11631,6 +11646,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("past-story");
     $scope.menutitle = NavigationService.makeactive("Past Story");
     TemplateService.title = $scope.menutitle;
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.navigation = NavigationService.getnav();
 
     var didScroll;
@@ -14153,6 +14169,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
 
     $scope.template = TemplateService.changecontent("agent-itinerary");
     $scope.menutitle = NavigationService.makeactive("Agent-Itinerary");
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
 
@@ -14224,6 +14241,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("About TraveLibro");
     TemplateService.title = "About Us - TraveLibro";
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
     $scope.accessToken = $.jStorage.get("accessToken");
     $scope.bookingLink = function () {
@@ -14291,11 +14309,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // else {
     //   $('.travel-bg').css('overflow','auto');
     // }
-    if($state.is('drafts')){
+    if($state.current.name === 'drafts'){
       $("#navi").css('background-color','#272b49');
       if (screenWidth <= 480) {
         $("body").css('margin-top','50px');
       }
+    }else {
+      $("body").css('margin-top','0');
     }
     $scope.closeStripe = function () {
       try {
@@ -14640,6 +14660,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Agent Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.oneAtATime = true;
     $scope.disableCountries = true;
     $scope.disableSpecialization = true;
@@ -15132,6 +15153,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("agent-setting"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Partner Settings"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.navigation = NavigationService.getnav();
     $scope.oneAtATime = true;
     $scope.disableSpecialization = false;
@@ -15624,6 +15646,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Agent Upgrade"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.variables = {};
     $scope.variables.tooltips = {};
     $scope.showTip = false;
@@ -15733,6 +15756,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Agent User"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.oneAtATime = true
 
     // tab change
@@ -16206,6 +16230,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Agent Home"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.oneAtATime = true;
     $scope.addHomeBackdrop = "";
     $scope.showItinerary = false;
@@ -18364,6 +18389,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Message"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
 
     //showNewMessage box
     $scope.showNewMessage = false;
@@ -18667,6 +18693,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Notification"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.pageNo = 1;
     $scope.notifyScroll = {
       busy: false,
@@ -19681,6 +19708,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.template = TemplateService.changecontent("partner-login"); //Use same name of .html file
     $scope.menutitle = NavigationService.makeactive("Partner Login"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.navigation = NavigationService.getnav();
     $scope.reset = function (form) {
       $scope.showError.show = false;
@@ -19696,6 +19724,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.menutitle = NavigationService.makeactive("Login Flow"); //This is the Title of the Website
     TemplateService.title = $scope.menutitle;
     $scope.navigation = NavigationService.getnav();
+    $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.userData = $.jStorage.get("oldUserData");
     //console.log($scope.userData);
 
