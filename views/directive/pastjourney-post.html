@@ -289,7 +289,9 @@
 		<span class="add-more-post">
 			<!-- <i class="fa fa-plus color-white"></i> -->
 		</span>
-		<p class="color-white mt10 avenir-roman">Add Activity To <span class="">Day {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span> <span class="block"> {{pastStory.UTCModified|formatDate:'date'}}</span></p>
+		<p class="color-white mt10 avenir-roman">Add Activity To <span class="">Day
+      {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span> <span class="block date-post">
+      {{pastStory.UTCModified|formatDate:'date'}}</span></p>
 	</div>
 </div>
 <!-- add-date end-->

@@ -35,12 +35,12 @@
               ng-click="addMorePost(pastStory._id);">
               <form name="loc">
                 <div class="row">
-                  <div class="col-xs-2">
+                  <div class="col-xs-2 col-sm-2">
                     <button class="setLocation">
                       <i class="fa fa-map-marker color-white"></i>
                     </button>
                   </div>
-                  <div class="col-xs-8">
+                  <div class="col-xs-7 col-sm-8">
                     <ui-select class="set-draft-location" ng-model="startLocationSet.description" theme="bootstrap" name="locate">
                       <ui-select-match placeholder="Set Start Location">{{$select.selected.description}}
                       </ui-select-match>
@@ -52,7 +52,7 @@
                     </ui-select>
                     <div class="errorMsgDraft" ng-bind="msg"></div>
                   </div>
-                  <div class="col-xs-2">
+                  <div class="col-xs-3 col-sm-2">
                     <button class="location setLocationBtn btn btn-block"
                             ng-disabled="profile.locate.$touched && profile.locate.$invalid||startLocationSet.description==null||startLocationSet.description==''"
                             ng-click="setLocation(startLocationSet.description)">Done

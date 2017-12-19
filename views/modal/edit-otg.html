@@ -17,7 +17,8 @@
           <div class="otg-search-location otg-bg-all">
             <img src="img/ongojourney/otg-location.png" alt="" class="img-responsive icon-location" width="22">
             <div class="search-by-category" ng-init="ongo.locationEdit = {};">
-              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Choose your location" ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()">
+              <input type="text" ng-model="ongo.checkIn.location" class="form-control" placeholder="Select location"
+                     ng-click="getLocation(); editOption(ongo.locationEdit);" ng-change="getLocation()">
               <div class="search-otg-location" ng-show="showLocation &&  ongo.locationEdit.backgroundClick;">
                 <ul>
                   <li ng-repeat="location in nearByLocation track by $index" ng-click="locationId(location);viewLocation();">
@@ -26,13 +27,13 @@
                 </div>
               </div>
               <div class="category-location" ng-init="ongo.typeJourney= {};">
-                <input type="text" class="form-control pointer" ng-model="ongo.checkIn.category" placeholder="Select Category" ng-click="editOption(ongo.typeJourney)">
+                <input type="text" class="form-control pointer" ng-model="ongo.checkIn.category" placeholder="Category" ng-click="editOption(ongo.typeJourney)">
                 <div class="dropdown-otg-category" ng-show="ongo.typeJourney.backgroundClick;">
                   <ul>
                     <li ng-repeat="category in categoryList" ng-click="ongo.checkIn.category=category;"><a href="">{{category}}</a></li>
                   </ul>
                 </div>
-              </div>              
+              </div>
             </div>
           </div>
           <!-- search location sec end -->

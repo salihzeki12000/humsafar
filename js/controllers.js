@@ -84,7 +84,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         //   $('body').smoothWheel({speed: 100});
         // }
       var mobileWhite = $('.mobile-view').height() - 520;
-      console.log(mobileWhite,'mobile');
+      // console.log(mobileWhite,'mobile');
       $('.whitespace').css({
         'height' : mobileWhite,
         'bottom' : +-+mobileWhite + 10
@@ -6777,7 +6777,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     }
     // };
     $scope.routeTO = function (journey) {
-      console.log(journey,'what is journey');
+      // console.log(journey,'what is journey');
       if (journey.type == "on-the-go-journey") {
         $state.go('ongojourney', {
           'id': journey.urlSlug,
@@ -6884,7 +6884,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           life.duration = days;
         });
         $scope.draftCreated = data;
-        console.log($scope.draftCreated);
       })
     };
     $scope.getDrafts = function(){
@@ -7518,7 +7517,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // anchorSmoothScroll.scrollTo("reviews");
         break;
       default:
-        console.log('default he re ',$state.params.name);
         $scope.myLife.innerView = allMyLife[3];
     }
 
@@ -10845,7 +10843,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       "urlSlug": $stateParams.draftSlug
     };
     pastJourney.getDrafts({pagenumber: 1}, function (data) {
-      console.log('created drafts ', data);
+      // console.log('created drafts ', data);
     });
 
     $scope.getBlankPastJourney = function () {
@@ -10878,7 +10876,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           }
         });
         if (pastStoryData && pastStoryData.location && pastStoryData.location.lat) {
-          console.log('when is comes');
           var obj = {
             "lat": parseFloat(pastStoryData.location.lat),
             "lng": parseFloat(pastStoryData.location.long)
@@ -10886,7 +10883,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           centers.unshift(obj);
         } else {
         }
-        console.log(centers);
+        // console.log(centers);
         initMap();
         NavigationService.getProfile($scope.pastJourneyArray.user.urlSlug, function (data, status) {
           $scope.userData = data.data;
@@ -10962,7 +10959,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
     }
     // add destination
-    console.log($scope.pastDestination, 'before function');
+    // console.log($scope.pastDestination, 'before function');
     $scope.addDestination = function (destinationData) {
       $scope.pastJourneyArray.destinationVisited.push(destinationData);
       // console.log($scope.pastJourneyArray.destinationVisited, 'destinationVisited', $scope.countries, 'countries');
@@ -10981,7 +10978,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       // adding and removing country end
     }
 
-    console.log($scope.pastDestination, 'what is pastDestination');
+    // console.log($scope.pastDestination, 'what is pastDestination');
     // add destination end
     // get country data
     var countriesCallback = function (data) {
@@ -10995,7 +10992,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       console.log("error getting data");
     });
     // country replace
-    console.log($scope.pastJourneyArray, 'what is country');
+    // console.log($scope.pastJourneyArray, 'what is country');
     $scope.countryReplace = function (destinationData, index, countryData) {
       console.log(destinationData, 'what is country data', index);
       $scope.pastJourneyArray.destinationVisited[index].country = destinationData.country;
@@ -11006,7 +11003,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     // country replace end
 
     $scope.getCityVisited = function (countryId, searchKey) {
-      console.log(countryId, 'what is country id', searchKey, 'what is search key');
+      // console.log(countryId, 'what is country id', searchKey, 'what is search key');
       var formData = {
         country: countryId,
         search: searchKey
@@ -14276,7 +14273,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.search.viewData = false;
     $scope.isLoggedIn = $.jStorage.get("isLoggedIn");
     $scope.template.isLoggedIn = $.jStorage.get("isLoggedIn");
-    $scope.viewStripe = true;
+    // $scope.viewStripe = true;
+    // if($scope.viewStripe){
+    //   try {
+    //     var a = document.getElementById('content');
+    //     $('.destination-nav.mustdo-not').css('top', '55px');
+    //     $("body").css('margin-top', '0px');
+    //     $("#content").css('margin-top', '0px');
+    //     a.style.marginTop = "0px";
+    //   } catch (e){}
+    // }
     $scope.iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
@@ -14319,10 +14325,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     }
     $scope.closeStripe = function () {
       try {
-        $scope.viewStripe = false;
+        $.jStorage.set("downloadStripe", true);
+        $scope.viewStripe = $.jStorage.get("downloadStripe");
         var a = document.getElementById('content');
         $('.destination-nav.mustdo-not').css('top', '55px');
         $("body").css('margin-top','0px');
+        $("#content").css('margin-top','0px');
         a.style.marginTop = "0px";
       } catch (e) {
       }

@@ -417,7 +417,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
             $scope.pastStory.postString = "<a href='/users/" + $scope.pastStory.user.urlSlug + "'>" + $scope.pastStory.user.name.bold() + "</a>" + " with " + $scope.pastStory.buddiesString;
           }
         } else {
-          if ($scope.pastStory.thoughts && $scope.pastStory.checkIn.location) {
+          if ($scope.pastStory.checkIn && $scope.pastStory.checkIn.location) {
             $scope.pastStory.postString = $scope.pastStory.thoughts + " at " + $scope.pastStory.checkIn.location.bold();
           } else if ($scope.pastStory.thoughts) {
             $scope.pastStory.postString = $scope.pastStory.thoughts;
@@ -1058,8 +1058,8 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).startOf('day').toDate();
         }
         // $scope.pastStory = {};
-        $scope.pastStory.checkIn = {};
-        $scope.pastStory.thoughts = "";
+        // $scope.pastStory.checkIn = {};
+        // $scope.pastStory.thoughts = "";
         $scope.ongo = $scope.pastStory;
         // console.log($scope.pastStory.UTCModified,'what is utc new');
 

@@ -1,6 +1,6 @@
 // JavaScript Document
 var initMap = {};
-
+$.jStorage.set("downloadStripe",null);
 var backgroundClick = {
     object: undefined,
     close: function (e) {
@@ -22,7 +22,7 @@ var backgroundClick = {
 };
 
 $(document).ready(function () {
-    $("body").click(function (e) {
+  $("body").click(function (e) {
         // //console.log(backgroundClick.object);
         if (backgroundClick.object) {
             backgroundClick.close(e);
@@ -873,7 +873,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
             $scope.i = 0;
             $scope.check = true;
             $scope.length = 0;
-            $scope.imageDate = "";            
+            $scope.imageDate = "";
             if (!$scope.type) {
                 $scope.type = "image";
             }

@@ -9058,6 +9058,8 @@ header {
       display: inline-block;
       vertical-align: middle;
     }
+    .date-post {
+      font-size: 13px; }
   }
   .postto-day {
     width: 45%;
@@ -14610,7 +14612,7 @@ header {
   }
   .location {
     margin-top: 5px;
-    font-size: 18px;
+    font-size: 15px;
     background-color: transparent;
     color: white;
   }
@@ -14850,12 +14852,14 @@ header {
   }
 }
 .setLocationBtn {
+  border: 1px solid #ffffff;
   &:hover {
     color: white;
   }
 }
 .setLocationBtn:disabled {
   color: transparent;
+  border: 1px solid transparent;
   &:hover {
     color:transparent;
   }
