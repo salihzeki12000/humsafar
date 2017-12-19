@@ -417,7 +417,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
             $scope.pastStory.postString = "<a href='/users/" + $scope.pastStory.user.urlSlug + "'>" + $scope.pastStory.user.name.bold() + "</a>" + " with " + $scope.pastStory.buddiesString;
           }
         } else {
-          if ($scope.pastStory.checkIn && $scope.pastStory.checkIn.location) {
+          if ($scope.pastStory.thoughts && $scope.pastStory.checkIn &&  $scope.pastStory.checkIn.location) {
             $scope.pastStory.postString = $scope.pastStory.thoughts + " at " + $scope.pastStory.checkIn.location.bold();
           } else if ($scope.pastStory.thoughts) {
             $scope.pastStory.postString = $scope.pastStory.thoughts;
@@ -1107,11 +1107,14 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
         }).success(function (data) {
           if (data.value === true) {
             $window.location.reload();
+            $scope.pastStory.checkIn = {};
+            $scope.pastStory.thoughts = "";
           }
         }).error(function (data) {
           console.log(data);
         });
-        }
+        };
+
       // save new post end
       }
       // add more post end
