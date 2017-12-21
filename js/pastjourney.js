@@ -1113,7 +1113,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           }
         }).error(function (data) {
           console.log(data);
-        });
+          });
         };
 
       // save new post end

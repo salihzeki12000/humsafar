@@ -258,6 +258,16 @@
                   <span class="mr5">|</span>
                   <!-- <i class="fa fa-clock-o mr5"></i> -->
                   <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
+                  <span class="options pointer pull-right" ng-init="journey.lastDate = {};">
+                  <img src="img/options.png" alt="" ng-click="editOption(journey.lastDate);">
+                  <div class="own-trip" ng-show="journey.lastDate.backgroundClick;">
+                    <ul class="text-left">
+                      <li>
+                        <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+                      </li>
+                    </ul>
+                  </div>
+                </span>
                 </div>
                 <div class="end-journey-flag text-center">
                   <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
