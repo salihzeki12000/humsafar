@@ -226,6 +226,7 @@ templateservicemod.service('TemplateService', function ($http, $state) {
     this.isMine = false;
     this.uploadLoader = false;
     this.uploadVideoLoader = false;
+    this.progressPercentage = 0;
 
     var d = new Date();
     this.year = d.getFullYear();
