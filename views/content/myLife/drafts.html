@@ -75,11 +75,11 @@
             </div>
             <!--drafts card start-->
           <div class="container draftContainer"
-               ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+               ng-if="template.isMine || userData.status=='private' || userData.status=='public'">
 
             <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
               <div masonry preserve-order>
-                <div class="row-fluid " style="background-color: #fff" ng-if="!nodrafts">
+                <div class="row-fluid " style="background-color: #fff" ng-if="nodrafts==false">
                   <div class="masonry-brick col-lg-4 col-md-6 col-sm-6 addBrick pointer" ng-click="addNewDraft()">
                     <div class="journey-masonry-brick">
                       <div class="travelled-imgholder add-draft"><div class="newDraft">

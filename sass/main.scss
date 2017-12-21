@@ -14868,6 +14868,7 @@ header {
   display: none;
   padding-left: 0px;
 }
+body.iosBugFixCaret.modal-open { position: fixed; width: 100%; }
 @import "sohan.scss";
 @import "sagarm.scss";
 @import "_sagarmobile.scss";

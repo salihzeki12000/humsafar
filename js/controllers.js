@@ -6875,8 +6875,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'pagenumber': 1
       };
       pastJourney.getDrafts(formData, function (data) {
-        if (data.length > 0)
+        console.log('bug ',data,data.length);
+        if (data.length > 0) {
           $scope.nodrafts = false;
+        }
         _.forEach(data, function (life) {
           var start = moment(life.startTime,'YYYY-MM-DD');
           var end = moment(life.endTime,'YYYY-MM-DD');
@@ -7622,13 +7624,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       busy: false
     };
     var getAllJourney = function (journeys) {
+
       _.each(journeys, function (obj) {
         $scope.travelLife.push(obj);
         setTimeout(function () {
           $scope.scroll.busy = false;
         }, 500);
       });
-      // //console.log($scope.travelLife);
       if ($scope.travelLife.length == 0) {
         $scope.hasJourney = false;
       } else {
@@ -7636,9 +7638,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       // $scope.hasJourney = flag;
     };
-    // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-    //   //console.log(err);
-    // });
+    MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+      //console.log(err);
+    });
     $scope.getMore = function () {
       if ($scope.scroll.busy) {
         return;
