@@ -14908,7 +14908,9 @@ header {
   height: 100vh;
   /*overflow: hidden;*/
 }
-body.iosBugFixCaret.modal-open { position: fixed; width: 100%; }
+.modal-open { position: fixed; }
+
+//body.iosBugFixCaret.modal-open { position: fixed; width: 100%; }
 @import "sohan.scss";
 @import "sagarm.scss";
 @import "_sagarmobile.scss";
