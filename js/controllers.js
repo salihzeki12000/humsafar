@@ -6902,8 +6902,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'pagenumber': 1
       };
       pastJourney.getDrafts(formData, function (data) {
-        if (data.length > 0)
+        if (data.length > 0) {
           $scope.nodrafts = false;
+        }
         _.forEach(data, function (life) {
           var start = moment(life.startTime,'YYYY-MM-DD');
           var end = moment(life.endTime,'YYYY-MM-DD');
@@ -7649,13 +7650,13 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       busy: false
     };
     var getAllJourney = function (journeys) {
+
       _.each(journeys, function (obj) {
         $scope.travelLife.push(obj);
         setTimeout(function () {
           $scope.scroll.busy = false;
         }, 500);
       });
-      // //console.log($scope.travelLife);
       if ($scope.travelLife.length == 0) {
         $scope.hasJourney = false;
       } else {
@@ -7663,9 +7664,9 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       }
       // $scope.hasJourney = flag;
     };
-    // MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
-    //   //console.log(err);
-    // });
+    MyLife.getAllJourney(getAllJourney, pageNo, function (err) {
+      //console.log(err);
+    });
     $scope.getMore = function () {
       if ($scope.scroll.busy) {
         return;
@@ -14270,7 +14271,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.accessToken = $.jStorage.get("accessToken");
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
-    } 
+    }
       //  setTimeout(function(){
       //  var swiper = new Swiper('.swiper-container', {
       //  direction: 'vertical',
@@ -14316,7 +14317,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     //     });
     //   },3600);
     // })
-    
+
   })
 
   .controller('TermsConditionsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {

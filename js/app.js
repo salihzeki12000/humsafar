@@ -22,6 +22,17 @@ var backgroundClick = {
 };
 
 $(document).ready(function () {
+  var ua = navigator.userAgent,
+    iOS = /iPad|iPhone|iPod/.test(ua),
+    iOS11 = /OS 11_0_1|OS 11_0_2|OS 11_0_3|OS 11_1|OS 11_1_1|OS 11_1_2|OS 11_2|OS 11_2_1/.test(ua);
+
+  // ios 11 bug caret position
+  if ( iOS && iOS11 ) {
+
+    // Add CSS class to body
+    $("body").addClass("iosBugFixCaret");
+
+  }
   $("body").click(function (e) {
         // //console.log(backgroundClick.object);
         if (backgroundClick.object) {
@@ -808,17 +819,20 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
                 $scope.model = [];
             };
             $scope.uploadNow = function (image) {
+                console.log('image ',image);
                 $scope.uploadStatus = "uploading";
                 var Template = this;
                 image.hide = true;
                 var formData = new FormData();
                 formData.append('file', image.file, image.name);
+                var defer = $q.defer();
                 $http.post(uploadurl, formData, {
                     headers: {
                         'Content-Type': undefined
                     },
                     transformRequest: angular.identity
                 }).success(function (data) {
+                  console.log(data);
                     TemplateService.uploadLoader = false;
                     TemplateService.type = $scope.dataValue;
                     $scope.uploadStatus = "uploaded";
