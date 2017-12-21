@@ -422,6 +422,25 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeKnowMore = function () {
       $(".know-more-modal").removeClass("show-know-more");
     };
+     setTimeout(function () {
+      var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        effect: 'slide',
+        slidesPerView: 1,
+        paginationClickable: true,
+        mousewheelControl: true,
+        mousewheel : {
+          sensitivity : 1,
+          releaseOnEdges: true
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        parallax: true,
+        speed: 1000,
+      });
+    }, 10);
     // $scope.go_at = function(section){
     //   console.log(section);
     //   if(section == 'discover'){
@@ -6875,7 +6894,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         'pagenumber': 1
       };
       pastJourney.getDrafts(formData, function (data) {
-        console.log('bug ',data,data.length);
         if (data.length > 0) {
           $scope.nodrafts = false;
         }
@@ -14246,6 +14264,52 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.bookingLink = function () {
       window.location.href = "https://travelibro.com/bookings/";
     }
+      //  setTimeout(function(){
+      //  var swiper = new Swiper('.swiper-container', {
+      //  direction: 'vertical',
+      //  slidesPerView: 1,
+      //  spaceBetween: 30,
+      //  mousewheel: true,
+      //  pagination: {
+      //      el: '.swiper-pagination',
+      //      clickable: true,
+      //     },
+      //   });
+      // },10);
+    setTimeout(function () {
+      var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        effect: 'slide',
+        slidesPerView: 1,
+        paginationClickable: true,
+        mousewheelControl: true,
+        mousewheel : {
+          sensitivity : 1,
+          releaseOnEdges: true
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        parallax: true,
+        speed: 1000,
+      });
+    }, 10);
+    //  $scope.$on('$viewContentLoaded', function (event) {
+    //   setTimeout(function(){
+    //    var swiper = new Swiper('.swiper-container', {
+    //    direction: 'vertical',
+    //    slidesPerView: 1,
+    //    spaceBetween: 30,
+    //    mousewheel: true,
+    //    pagination: {
+    //        el: '.swiper-pagination',
+    //        clickable: true,
+    //       },
+    //     });
+    //   },3600);
+    // })
+
   })
 
   .controller('TermsConditionsCtrl', function ($scope, $state, TemplateService, NavigationService, $timeout, $uibModal, $location, MyLife, OnGoJourney) {

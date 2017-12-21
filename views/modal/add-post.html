@@ -113,7 +113,9 @@
             <!-- flex slider for photo in 2 row -->
             <!-- img upload loader -->
             <div class="image-upload-loader" ng-if="template.uploadLoader && template.type == 'photo'">
-              <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+              <img src="img/page.svg" alt="" class="get-center img-responsive" width="55px">
+              <span class="color-pink get-center" ng-hide="template.progressPercentage == '100%'">{{template.progressPercentage}}</span>
+              <span ng-if="template.progressPercentage == '100%'" class="fetching-file">Processing...</span>
             </div>
             <!-- img upload loader end-->
             <div class="otg-photo-slider" ng-show="photoSec" ng-if="flexShow">
@@ -184,7 +186,9 @@
             <!-- video upload end-->
             <!-- video upload loader -->
             <div class="image-upload-loader" ng-if="template.uploadLoader && template.type == 'video'">
-              <img src="img/page.svg" alt="" class="get-center img-responsive" width="40px">
+              <img src="img/page.svg" alt="" class="get-center img-responsive" width="55px">
+              <span class="color-pink get-center" ng-hide="template.progressPercentage == '100%'">{{template.progressPercentage}}</span>
+              <span ng-if="template.progressPercentage == '100%'" class="fetching-file">Processing...</span>
             </div>
             <!-- video upload loader end-->
             <!-- flexslider for video -->

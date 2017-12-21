@@ -881,9 +881,11 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
             callback: "&ngCallback"
         },
         link: function ($scope, element, attrs) {
+            console.log($scope, 'scope',element,'element kya',attrs,'attrs');
             $scope.showImage = function () {
                 //console.log($scope.image);
             };
+            var progressPercentage = "";
             $scope.i = 0;
             $scope.check = true;
             $scope.length = 0;
@@ -951,6 +953,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                 $scope.model = [];
             };
             $scope.uploadNow = function (image) {
+                console.log(image,'image');
                 $scope.uploadStatus = "uploading";
                 TemplateService.uploading = false;
 
@@ -962,7 +965,15 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     headers: {
                         'Content-Type': undefined
                     },
-                    transformRequest: angular.identity
+                    transformRequest: angular.identity,
+                    uploadEventHandlers : {
+                        progress : function(e){
+                            console.log(e,'what is e');
+                            progressPercentage = parseInt(100.0 * e.loaded / e.total);
+                            console.log(progressPercentage,'progressPercentage');
+                            TemplateService.progressPercentage = progressPercentage + '%';
+                        }
+                    }
                 }).success(function (data) {
                     // TemplateService.uploadLoader = false;
                     // TemplateService.type = $scope.dataValue;

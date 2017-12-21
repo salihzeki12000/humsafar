@@ -717,7 +717,6 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
       // add photos start
       $scope.photoSec = false;
       $scope.addOtgPhotos = function (detail, length,status) {
-        console.log(detail,length,status);
         if($scope.uploadPhotoCount == 1){
           $scope.lengthPhotos = $scope.lengthPhotos + length;
           $scope.uploadPhotoCount++;

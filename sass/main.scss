@@ -8240,6 +8240,13 @@ header {
     left: 0;
     z-index: 5;
     background-color: rgba(255,255,255,0.5);
+    .fetching-file {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      @include transform(translate(-50%,-70%));
+      color: $brand-pink;
+    }
   }
   .otg-photo-count,
   .otg-video-count {
@@ -14867,6 +14874,39 @@ header {
 .draft-edit {
   display: none;
   padding-left: 0px;
+}
+
+.swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+.swiper-pagination-bullet-active{
+  background-color:#fff;
+}
+.about-slider-holder {
+  position: relative;
+  height: 100vh;
+  /*overflow: hidden;*/
 }
 body.iosBugFixCaret.modal-open { position: fixed; width: 100%; }
 @import "sohan.scss";
