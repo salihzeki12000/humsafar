@@ -968,13 +968,26 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     transformRequest: angular.identity,
                     uploadEventHandlers : {
                         progress : function(e){
-                            console.log(e,'what is e');
+                            if($scope.length == 1){
+                            // console.log(e,'what is e');
                             progressPercentage = parseInt(100.0 * e.loaded / e.total);
                             console.log(progressPercentage,'progressPercentage');
                             TemplateService.progressPercentage = progressPercentage + '%';
                         }
+                         if($scope.length > 1){
+                        progressPercentage = parseInt(100.0 * $scope.i/$scope.length);
+                        TemplateService.progressPercentage = progressPercentage + '%';
+                        console.log(TemplateService.progressPercentage,'pp%');
+                    }
+                        }
                     }
                 }).success(function (data) {
+                    console.log($scope.length,'bhendi upload ka length', $scope.i,'i');
+                    // if($scope.length > 1){
+                    //     progressPercentage = parseInt(100.0 * $scope.i/$scope.length);
+                    //     TemplateService.progressPercentage = progressPercentage + '%';
+                    //     console.log(TemplateService.progressPercentage,'pp%');
+                    // }
                     // TemplateService.uploadLoader = false;
                     // TemplateService.type = $scope.dataValue;
                     $scope.uploadStatus = "uploaded";
@@ -982,6 +995,7 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
                     if($scope.i == $scope.length){
                         TemplateService.uploadLoader = false;
                         TemplateService.type = $scope.dataValue;
+                        TemplateService.progressPercentage = 0;
                         $scope.buttonValue = 'Save';
                     }
                     if ($scope.isMultiple) {

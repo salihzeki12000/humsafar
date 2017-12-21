@@ -44,6 +44,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
+    // swiper 
+    setTimeout(function () {
+      var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        direction: 'vertical',
+        effect: 'slide',
+        slidesPerView: 1,
+        paginationClickable: true,
+        mousewheelControl: true,
+        mousewheel : {
+          sensitivity : 1,
+          releaseOnEdges: true
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        parallax: true,
+        speed: 1000,
+      });
+    }, 10);
+    // swiper end
+
     if (screenWidth >= 768 && screenWidth <= 991) {
       $scope.screenWidth = 4;
     }
@@ -219,119 +241,124 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             }
             // mobile naviagtion end
             // on scroll function fixing the elements
-          if($(document).scrollTop() >= $('.mobile-view').offset().top){
-            $('.iphone-fix').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%',
-              'z-index':'14'
-            });
-            $('.first-fix').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-          }else{
-              $('.iphone-fix').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              });
-              $('.first-fix').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.second-screen').offset().top){
-              $('.second-screen .second-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-            }else{
-              $('.second-screen .second-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.third-screen').offset().top){
-              $('.third-screen .third-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-            }else{
-              $('.third-screen .third-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.fourth-screen').offset().top){
-              $('.fourth-screen .fourth-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-            }else{
-              $('.fourth-screen .fourth-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.fivth-screen').offset().top){
-              $('.fivth-screen .fivth-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-            }else{
-              $('.fivth-screen .fivth-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.sixth-screen').offset().top){
-              $('.sixth-screen .sixth-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            })
-            }else{
-              $('.sixth-screen .sixth-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              })
-            }
-            if($(document).scrollTop() >= $('.seventh-screen').offset().top){
-              $('.seventh-screen .seventh-view').css({
-              'position':'fixed',
-              'top':'50%',
-              'left':'34%'
-            });
-              $('.seventh-content').css({
-                'position': 'fixed',
-                'top': '50%',
-                'left': '66%'
-              });
-            }else{
-              $('.seventh-screen .seventh-view').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'65%'
-              });
-              $('.seventh-content').css({
-                'position': 'absolute',
-                'top': '50%',
-                'left': '35%'
-              });
-            }
+          // if($(document).scrollTop() >= $('.mobile-view').offset().top){
+          //   $('.iphone-fix').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%',
+          //     'z-index':'14'
+          //   });
+          //   $('.first-fix').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          // }else{
+          //     $('.iphone-fix').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     });
+          //     $('.first-fix').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.second-screen').offset().top){
+          //     $('.second-screen .second-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          //   }else{
+          //     $('.second-screen .second-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.third-screen').offset().top){
+          //     $('.third-screen .third-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          //   }else{
+          //     $('.third-screen .third-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.fourth-screen').offset().top){
+          //     $('.fourth-screen .fourth-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          //   }else{
+          //     $('.fourth-screen .fourth-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.fivth-screen').offset().top){
+          //     $('.fivth-screen .fivth-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          //   }else{
+          //     $('.fivth-screen .fivth-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.sixth-screen').offset().top){
+          //     $('.sixth-screen .sixth-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   })
+          //   }else{
+          //     $('.sixth-screen .sixth-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     })
+          //   }
+          //   if($(document).scrollTop() >= $('.seventh-screen').offset().top){
+          //     $('.seventh-screen .seventh-view').css({
+          //     'position':'fixed',
+          //     'top':'50%',
+          //     'left':'34%'
+          //   });
+          //     $('.seventh-content').css({
+          //       'position': 'fixed',
+          //       'top': '50%',
+          //       'left': '66%'
+          //     });
+          //   }else{
+          //     $('.seventh-screen .seventh-view').css({
+          //       'position':'absolute',
+          //       'top':'50%',
+          //       'left':'65%'
+          //     });
+          //     $('.seventh-content').css({
+          //       'position': 'absolute',
+          //       'top': '50%',
+          //       'left': '35%'
+          //     });
+          //   }
             // remove fixed part
+            if($(document).scrollTop() >= $('.about-slider-holder').offset().top - 50 && $(document).scrollTop() <= $('.capture-row').offset().top + 20){
+              $('.about-slider-holder').addClass('one-scroll-fix');
+            }else {
+              $('.about-slider-holder').removeClass('one-scroll-fix');
+            }
 
             if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
               $('.iphone-fix').css({
@@ -422,25 +449,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeKnowMore = function () {
       $(".know-more-modal").removeClass("show-know-more");
     };
-     setTimeout(function () {
-      var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        direction: 'vertical',
-        effect: 'slide',
-        slidesPerView: 1,
-        paginationClickable: true,
-        mousewheelControl: true,
-        mousewheel : {
-          sensitivity : 1,
-          releaseOnEdges: true
-        },
-        lazy: {
-          loadPrevNext: true,
-        },
-        parallax: true,
-        speed: 1000,
-      });
-    }, 10);
     // $scope.go_at = function(section){
     //   console.log(section);
     //   if(section == 'discover'){
