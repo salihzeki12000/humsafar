@@ -48,20 +48,24 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
-        direction: 'vertical',
+        // direction: 'vertical',
         effect: 'slide',
         slidesPerView: 1,
         paginationClickable: true,
-        mousewheelControl: true,
+        // mousewheelControl: true,
         mousewheel : {
           sensitivity : 1,
           releaseOnEdges: true
         },
-        lazy: {
-          loadPrevNext: true,
-        },
-        parallax: true,
-        speed: 1000,
+        // mousewheelReleaseOnEdges: true,        
+        // parallax: true,
+        speed: 500,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+       //  navigation: {
+       //    nextEl: '.swiper-button-next',
+       //    prevEl: '.swiper-button-prev',
+       // },
       });
     }, 10);
     // swiper end
@@ -152,8 +156,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $(this).off(e);
             });
         //end landing page animation
-
-        $('.iphone-fix:after').css('height', $('.mobile-view').height() - 500);
+        // if($(document).scrollTop() >= ($('#discover').offset().top + $('#discover').height()/2 + 200)){
+        //   console.log($(document).scrollTop(),'console value', $('#discover').offset().top,'offset discover', $('#discover').height()/2,'height discover');
+        //   $('html, body').animate({scrollTop: $('.about-slider-holder').offset().top})
+        //   console.log('huwa kya');
+        // }
+        // $('.iphone-fix:after').css('height', $('.mobile-view').height() - 500);
         // on mouse dropdown scroll
         $('.mouse-scrolldown').click(function(){
           $('html').animate({
@@ -166,20 +174,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var scrollValue = $(this).attr('href');
           if(scrollValue == '#discover'){
               console.log('first');
+              $('.take-scroll').removeClass('active-homenav');
+              $('.discover1').addClass('active-homenav');
               $('html').animate({
               scrollTop: $('#discover').offset().top
             },1000);
           }else if(scrollValue == '#capture'){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.capture1').addClass('active-homenav');
                console.log('sec');
                $('html').animate({
               scrollTop: $('#capture').offset().top
             },1000);
           }else if(scrollValue == '#inspire'){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.inspire1').addClass('active-homenav');
               console.log('third');
               $('html').animate({
               scrollTop: $('#inspire').offset().top
             },1000);
           }else if(scrollValue == '#relive'){
+              $('.take-scroll').removeClass('active-homenav');
+              $('.relive1').addClass('active-homenav');
               console.log('fourth');
               $('html').animate({
               scrollTop: $('#relive ').offset().top
@@ -209,6 +225,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               'transition': 'transform 300ms linear'
             });
              $('.home-navigate').addClass('fixed-subnavigation');
+             $('.discover1').addClass('active-homenav');
              // navigation menu active
              if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
               $('.take-scroll').removeClass('active-homenav');
@@ -239,7 +256,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('.home-navigate').removeClass('fixed-subnavigation');
               $('.take-scroll').removeClass('active-homenav');
             }
-            // mobile naviagtion end
+            // mobile naviagtion end           
             // on scroll function fixing the elements
           // if($(document).scrollTop() >= $('.mobile-view').offset().top){
           //   $('.iphone-fix').css({
@@ -354,37 +371,41 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           //     });
           //   }
             // remove fixed part
-            if($(document).scrollTop() >= $('.about-slider-holder').offset().top - 50 && $(document).scrollTop() <= $('.capture-row').offset().top + 20){
-              $('.about-slider-holder').addClass('one-scroll-fix');
-            }else {
-              $('.about-slider-holder').removeClass('one-scroll-fix');
-            }
+            // if($(document).scrollTop() >= $('.about-slider-holder').offset().top - 50 && $(document).scrollTop() <= $('.capture-row').offset().top + 20){
 
-            if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
-              $('.iphone-fix').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'50%'
-              });
-              $('.mobile-section .get-center').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'50%'
-              });
-              $('.first-fix').css({
-                'position':'absolute',
-                'top':'50%',
-                'left':'50%'
-              });
-              $('.seventh-content').css({
-                'position': 'absolute',
-                'top': '50%',
-                'left': '35%'
-              });
-              $('.capture-row').css('z-index','1');
-            }else {
-              $('.capture-row').css('z-index','21');
-            }
+            // }else {
+              
+            // }
+            // if($(document).scrollTop() >= $('.swipe-second').offset().top){
+            //     $('.about-slider-holder').addClass('one-scroll-fix');
+            //   }else {
+            //     $('.about-slider-holder').removeClass('one-scroll-fix');  
+            //   }
+            // if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
+            //   $('.iphone-fix').css({
+            //     'position':'absolute',
+            //     'top':'50%',
+            //     'left':'50%'
+            //   });
+            //   $('.mobile-section .get-center').css({
+            //     'position':'absolute',
+            //     'top':'50%',
+            //     'left':'50%'
+            //   });
+            //   $('.first-fix').css({
+            //     'position':'absolute',
+            //     'top':'50%',
+            //     'left':'50%'
+            //   });
+            //   $('.seventh-content').css({
+            //     'position': 'absolute',
+            //     'top': '50%',
+            //     'left': '35%'
+            //   });
+            //   $('.capture-row').css('z-index','1');
+            // }else {
+            //   $('.capture-row').css('z-index','21');
+            // }
             // remove fixed part end
 
             // on scroll function fixing the elements end
@@ -449,6 +470,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeKnowMore = function () {
       $(".know-more-modal").removeClass("show-know-more");
     };
+    
     // $scope.go_at = function(section){
     //   console.log(section);
     //   if(section == 'discover'){
@@ -14362,15 +14384,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     // for smooth scroll
     if ($state.current.controller == 'HomeCtrl') {
-        setTimeout(function () {
-            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
-            if (isChrome) {
-                $('html').smoothWheel();
-            } else if (isSafari) {
-                $('body').smoothWheel();
-            }
-        }, 1500);
+        // setTimeout(function () {
+        //     var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        //     var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+        //     if (isChrome) {
+        //         $('html').smoothWheel();
+        //     } else if (isSafari) {
+        //         $('body').smoothWheel();
+        //     }
+        // }, 1500);
     } else {
         setTimeout(function () {
             var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);

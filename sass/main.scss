@@ -14053,6 +14053,39 @@ header {
   z-index: 1;
   @include transition(all 300ms linear);
 }
+/*home swiper slider*/
+.ongo-slider-holder {
+  .swiper-container {
+      width: 100%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .swiper-slide {
+      height: 100vh;
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  .swiper-container-horizontal>.swiper-pagination {
+    bottom: 100px;
+  }
+}
+
+/*home swiper slider end*/
 /*mobile view*/
 .mobile-view {
   width: 100%;
@@ -14110,9 +14143,9 @@ header {
   margin-left: -6px;
   > div {
     height: auto;
-    top: 60%;
+    top: 40%;
     left: 35%;
-    @include transform(translate(-35%,-60%));
+    @include transform(translate(-35%,-40%));
   }
 }
 .iphone-fix {
@@ -14129,7 +14162,7 @@ header {
 .capture-row {
   background-color: #fff;
   position: relative;
-  z-index: 21;
+  /*z-index: 21;*/
 }
 /*mobile view end*/
 .relive-mobile-holder {
@@ -14876,46 +14909,6 @@ header {
   padding-left: 0px;
 }
 
-.swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        background: #fff;
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
-.swiper-pagination-bullet-active{
-  background-color:#fff;
-}
-.about-slider-holder {
-  position: relative;
-  height: 100vh;
-  /*overflow: hidden;*/
-  &.one-scroll-fix {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 4;
-  }
-}
 body.iosBugFixCaret.modal-open { position: fixed; width: 100%; }
 @import "sohan.scss";
 @import "sagarm.scss";
