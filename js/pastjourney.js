@@ -716,7 +716,7 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
       }
       // add photos start
       $scope.photoSec = false;
-      $scope.addOtgPhotos = function (detail, length,status) {
+      $scope.addOtgPhotos = function (detail, length,status) {       
         if($scope.uploadPhotoCount == 1){
           $scope.lengthPhotos = $scope.lengthPhotos + length;
           $scope.uploadPhotoCount++;
@@ -801,13 +801,19 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
 
       // add video start
       $scope.addOtgVideo = function (video,length, status) {
+        console.log(video,'video',length,'length', status, 'status');
+        console.log($scope.uploadVideoCount,'uploadVideoCount');
         if($scope.uploadVideoCount == 1){
           $scope.lengthVideos = $scope.lengthVideos + length;
           $scope.uploadVideoCount++;
+          console.log($scope.uploadVideoCount,'if upc == 1');
         }else if($scope.uploadVideoCount == length){
           $scope.uploadVideoCount = 1;
+          console.log($scope.uploadVideoCount,'equals to 1')
         }else{
+          $scope.lengthVideos++
           $scope.uploadVideoCount++;
+          console.log($scope.uploadVideoCount,'last else');
         }
         if(status == 'Uploading...'){
           $('.status').attr('disabled',true);

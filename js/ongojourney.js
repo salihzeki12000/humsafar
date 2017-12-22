@@ -454,7 +454,7 @@ ongojourney.directive('journeyPost', ['$http', '$filter', '$window', '$state', '
           $scope.uploadPhotoCount++;
         }else if($scope.uploadPhotoCount == length){
           $scope.uploadPhotoCount = 1;
-        }else{
+        }else{          
           $scope.uploadPhotoCount++;
         }
         if(status == 'Uploading...'){

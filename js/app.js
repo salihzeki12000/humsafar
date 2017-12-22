@@ -870,7 +870,6 @@ firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, Templ
             callback: "&ngCallback"
         },
         link: function ($scope, element, attrs) {
-            console.log($scope, 'scope',element,'element kya',attrs,'attrs');
             $scope.showImage = function () {
                 //console.log($scope.image);
             };
