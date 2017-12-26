@@ -44,7 +44,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var screenWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-    // swiper 
+    // swiper
     setTimeout(function () {
       var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -57,7 +57,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           sensitivity : 1,
           releaseOnEdges: true
         },
-        // mousewheelReleaseOnEdges: true,        
+        // mousewheelReleaseOnEdges: true,
         // parallax: true,
         speed: 500,
         nextButton: '.swiper-button-next',
@@ -109,6 +109,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // }else if(isSafari){
         //   $('body').smoothWheel({speed: 100});
         // }
+
       var mobileWhite = $('.mobile-view').height() - 520;
       // console.log(mobileWhite,'mobile');
       $('.whitespace').css({
@@ -177,28 +178,28 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('.take-scroll').removeClass('active-homenav');
               $('.discover1').addClass('active-homenav');
               $('html').animate({
-              scrollTop: $('#discover').offset().top
+              scrollTop: $('#discover').offset().top - 100
             },1000);
           }else if(scrollValue == '#capture'){
               $('.take-scroll').removeClass('active-homenav');
               $('.capture1').addClass('active-homenav');
                console.log('sec');
                $('html').animate({
-              scrollTop: $('#capture').offset().top
+              scrollTop: $('#capture').offset().top - 100
             },1000);
           }else if(scrollValue == '#inspire'){
               $('.take-scroll').removeClass('active-homenav');
               $('.inspire1').addClass('active-homenav');
               console.log('third');
               $('html').animate({
-              scrollTop: $('#inspire').offset().top
+              scrollTop: $('#inspire').offset().top - 100
             },1000);
           }else if(scrollValue == '#relive'){
               $('.take-scroll').removeClass('active-homenav');
               $('.relive1').addClass('active-homenav');
               console.log('fourth');
               $('html').animate({
-              scrollTop: $('#relive ').offset().top
+              scrollTop: $('#relive ').offset().top - 100
             },1000);
           }else {
 
@@ -227,16 +228,16 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
              $('.home-navigate').addClass('fixed-subnavigation');
              $('.discover1').addClass('active-homenav');
              // navigation menu active
-             if( $(document).scrollTop() >= $('#discover').offset().top - 80 && $(document).scrollTop() <= $('#capture').offset().top - 80 ){
+             if( $(document).scrollTop() >= $('#discover').offset().top - 180 && $(document).scrollTop() <= $('#capture').offset().top - 180 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.discover1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#capture').offset().top - 80 && $(document).scrollTop() <= $('#inspire').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#capture').offset().top - 180 && $(document).scrollTop() <= $('#inspire').offset().top - 180 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.capture1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#inspire').offset().top - 80 && $(document).scrollTop() <= $('#relive').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#inspire').offset().top - 180 && $(document).scrollTop() <= $('#relive').offset().top - 180 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.inspire1').addClass('active-homenav');
-             }else if( $(document).scrollTop() >= $('#relive').offset().top - 80 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 80 ){
+             }else if( $(document).scrollTop() >= $('#relive').offset().top - 180 && $(document).scrollTop() <= $('.register-as-partner').offset().top - 180 ){
               $('.take-scroll').removeClass('active-homenav');
               $('.relive1').addClass('active-homenav');
              }
@@ -256,7 +257,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
               $('.home-navigate').removeClass('fixed-subnavigation');
               $('.take-scroll').removeClass('active-homenav');
             }
-            // mobile naviagtion end           
+            // mobile naviagtion end
             // on scroll function fixing the elements
           // if($(document).scrollTop() >= $('.mobile-view').offset().top){
           //   $('.iphone-fix').css({
@@ -374,12 +375,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             // if($(document).scrollTop() >= $('.about-slider-holder').offset().top - 50 && $(document).scrollTop() <= $('.capture-row').offset().top + 20){
 
             // }else {
-              
+
             // }
             // if($(document).scrollTop() >= $('.swipe-second').offset().top){
             //     $('.about-slider-holder').addClass('one-scroll-fix');
             //   }else {
-            //     $('.about-slider-holder').removeClass('one-scroll-fix');  
+            //     $('.about-slider-holder').removeClass('one-scroll-fix');
             //   }
             // if($(document).scrollTop() >= $('.capture-row').offset().top - 85){
             //   $('.iphone-fix').css({
@@ -470,7 +471,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     $scope.closeKnowMore = function () {
       $(".know-more-modal").removeClass("show-know-more");
     };
-    
+
     // $scope.go_at = function(section){
     //   console.log(section);
     //   if(section == 'discover'){
