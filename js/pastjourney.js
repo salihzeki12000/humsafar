@@ -1063,6 +1063,8 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           $scope.pastStory.UTCModified = moment($scope.pastStory.UTCModified).startOf('day').toDate();
         }
         // $scope.pastStory = {};
+        $scope.addNewCheckIn = $scope.pastStory.checkIn;
+        $scope.addNewThoughts = $scope.pastStory.thoughts;
         $scope.pastStory.checkIn = {};
         $scope.pastStory.thoughts = "";
         $scope.ongo = $scope.pastStory;
@@ -1078,7 +1080,10 @@ pastJourney.directive('pastJourneyCard',['$http', '$filter', '$window', '$state'
           backdropClass: "review-backdrop"
         });
         modal.closed.then( function(){
-          $window.location.reload();
+          console.log($scope.addNewCheckIn,'new checkIn',$scope.addNewThoughts,'new thoughts');
+          // $window.location.reload();
+          $scope.ongo.checkIn = $scope.addNewCheckIn;
+          $scope.ongo.thoughts = $scope.addNewThoughts;
         });
          // geo location
         if (navigator.geolocation) {
