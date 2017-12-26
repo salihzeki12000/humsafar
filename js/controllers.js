@@ -172,6 +172,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
         // on mouse dropdown scroll end
         // scroll on nav
         $('.take-scroll').click(function(){
+          $('.take-scroll').removeClass('active-homenav');
           var scrollValue = $(this).attr('href');
           if(scrollValue == '#discover'){
               console.log('first');
@@ -14385,15 +14386,15 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
     var screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     // for smooth scroll
     if ($state.current.controller == 'HomeCtrl') {
-        // setTimeout(function () {
-        //     var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-        //     var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
-        //     if (isChrome) {
-        //         $('html').smoothWheel();
-        //     } else if (isSafari) {
-        //         $('body').smoothWheel();
-        //     }
-        // }, 1500);
+        setTimeout(function () {
+            var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+            var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+            if (isChrome) {
+                $('html').smoothWheel();
+            } else if (isSafari) {
+                $('body').smoothWheel();
+            }
+        }, 1500);
     } else {
         setTimeout(function () {
             var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
