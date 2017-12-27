@@ -202,7 +202,7 @@
  							<span class="norm-edit">Edit</span>
  							<span class="draft-edit">Edit</span>
  						</span>
-            <div class="own-trip" ng-show="pastStory.edit.backgroundClick">
+ 						<div class="own-trip" ng-show="pastStory.edit.backgroundClick">
  							<ul>
  								<!-- ng if for checkin -->
  								<li>
@@ -290,8 +290,8 @@
 			<!-- <i class="fa fa-plus color-white"></i> -->
 		</span>
 		<p class="color-white mt10 avenir-roman">Add Activity To <span class="">Day
-      {{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span> <span class="block date-post">
-      {{pastStory.UTCModified|formatDate:'date'}}</span></p>
+		{{pastStory.UTCModified|dateDifference: pastJourneyArray.startTime}}</span> <span class="block date-post">
+		{{pastStory.UTCModified|formatDate:'date'}}</span></p>
 	</div>
 </div>
 <!-- add-date end-->

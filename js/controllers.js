@@ -2451,6 +2451,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           var xdiff = (centers[i].lat - centers[i - 1].lat);
           var ydiff = (centers[i].lng - centers[i - 1].lng);
           var currentZoom = currentZoom = map.getZoom();
+          console.log(currentZoom,'cz');
           var commingZoom;
           if (value) {
             var markerBounds = new google.maps.LatLngBounds();
@@ -2459,6 +2460,8 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
             commingZoom = getBoundsZoomLevel(markerBounds, mapDim);
             map.fitBounds(markerBounds);
           }
+          // currentZoom = map.setZoom() - 1;
+          console.log(map,'map',currentZoom,'cz new');
           var frac1 = xdiff / 100;
           var frac2 = ydiff / 100;
           var iniLat = centers[i - 1].lat;
@@ -2504,6 +2507,7 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                     });
                 }
                 var drawLine = function (departure, arrival, percent, i, value) {
+                  // console.log(departure,'departure',arrival,'arrival',percent,'percent',i,'i',value,'value');
                     percentFrac = percent / 100;
                     var are_we_there_yet = google.maps.geometry.spherical.interpolate(departure, arrival, percentFrac);
                     line[i].setPath([departure, are_we_there_yet]);
@@ -2574,9 +2578,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
                 }
                 //draw succeeding polyLines end
             };
-            // console.log(map,'setting map');
-            // map.setZoom(3);
-            // console.log(map,'setting map');
         }
     };
     setTimeout(function () {

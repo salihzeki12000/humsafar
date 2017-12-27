@@ -1732,8 +1732,9 @@ firstapp.directive('hideOnScroll', function ($document) {
             var $element = $(element);
             var lastScrollTop = 0;
             $(window).scroll(function (event) {
+                // console.log($(this).scrollTop(),'scroll Top value');
                 var st = $(this).scrollTop();
-                if (st > lastScrollTop) {
+                if (st >= lastScrollTop) {
                     $(element).addClass('nav-up');
                 } else {
                     $(element).removeClass('nav-up');

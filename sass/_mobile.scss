@@ -2453,6 +2453,12 @@
   .store-stripe {
     display: block !important;
   }
+  .store-stripe + .activeNavbar + .custom-search.open {
+    top: 60px;
+  }
+  .store-stripe.ng-hide + .activeNavbar + .custom-search.open {
+    top: 0px;
+  }
   .navbar > .row {
     padding: 5px 0;
   }
