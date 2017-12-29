@@ -858,6 +858,25 @@ firstapp.directive('uploadImage', function ($http, $filter, $timeout, TemplateSe
         }
     };
 });
+firstapp.directive('passwordVerify', function() {
+  return {
+    restrict: 'A',
+    require: '?ngModel',
+    link: function(scope, elem, attrs, ngModel) {
+      scope.$watch(attrs.ngModel, function() {
+        if(scope.userSignUpForm.password && scope.confirmPwd) {
+          if (scope.confirmPwd === scope.userSignUpForm.password) {
+            scope.errMsg = null;
+            scope.signUpForm.confirmPwd.$invalid = false;
+          } else {
+            scope.errMsg = 'Password do not macth!';
+            scope.signUpForm.confirmPwd.$invalid = true;
+          }
+        }
+      });
+    }
+  };
+});
 firstapp.directive('uploadImageCount', function ($http, $filter, $timeout, TemplateService) {
     return {
         templateUrl: 'views/directive/uploadFile.html',

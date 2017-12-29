@@ -625,7 +625,6 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
       ref = window.open(adminURL + "/user/" + loginTo, '_blank', 'location=no');
       stopinterval = $interval(callAtIntervaltwitter, 2000);
     };
-
     $scope.submit = function(formData) {
       console.log("sndasdjsdjsa", formData);
       NavigationService.oldUsersLogin(formData, function(succ1) {
