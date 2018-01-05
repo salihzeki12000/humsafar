@@ -14,7 +14,7 @@
               <li><a href="" class="tab-heading" ng-click="getTab(0); ">Journeys</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(1); ">Moments</a></li>
               <li><a href="" class="tab-heading" ng-click="getTab(2); ">Reviews</a></li>
-               <li ng-if="ownerProfile"><a href="" class="tab-heading" ng-click="getTab(3); ">Past Journeys</a></li>
+              <li ng-if="ownerProfile"><a href="" class="tab-heading" ng-click="getTab(3); ">Past Journeys</a></li>
             </ul>
           </div>
           <!-- end tabs -->
@@ -104,7 +104,7 @@
                       <h3 class="place-name pull-left m-clear color-blue avenir-heavy">{{view.checkIn.location}}</h3>
                       <img ng-src="{{view.checkIn.category|kindOfReviewCheckIn}}" alt="" class="pull-right">
                     </div>
-                    <div class="rate-location">
+                    <div class="rate-location" ng-if="template.isMine">
                       <p class=" m-clear inline-block avenir-roman pointer" ng-click="getReview(view);" ng-if="view.review.length==0" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}">Rate this now</p>
                       <div class="travel-life-rating" ng-if="!(view.review.length==0)" ng-click="getReview(view)" ;>
                         <span class="star-rating pointer" ng-repeat="time in view.review[0].rating|getArrayOfSize:'marked' track by $index"><i class="fa fa-star" ng-class="{'color-cyan':view.type=='local-life','color-pink':view.type=='travel-life'}"></i></span>

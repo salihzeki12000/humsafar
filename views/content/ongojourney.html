@@ -258,16 +258,16 @@
                   <span class="mr5">|</span>
                   <!-- <i class="fa fa-clock-o mr5"></i> -->
                   <span class="mr5">{{journey.endTime|formatDate: 'time'}}</span></p>
-                  <span class="options pointer pull-right" ng-init="journey.lastDate = {};">
-                  <img src="img/options.png" alt="" ng-click="editOption(journey.lastDate);">
-                  <div class="own-trip" ng-show="journey.lastDate.backgroundClick;">
-                    <ul class="text-left">
-                      <li>
-                        <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
-                      </li>
-                    </ul>
-                  </div>
-                </span>
+                  <span class="options pointer pull-right" ng-if="isMine" ng-init="journey.lastDate = {};">
+                    <img src="img/options.png" alt="" ng-click="editOption(journey.lastDate);">
+                    <div class="own-trip" ng-show="journey.lastDate.backgroundClick;">
+                      <ul class="text-left">
+                        <li>
+                          <a href="" title="Change End Journey Date" ng-click="changeEndDate();">Change End Journey Date</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </span>
                 </div>
                 <div class="end-journey-flag text-center">
                   <img src="img/ongojourney/end-flag.png" alt="" class="img-responsive m-center" width="50">
@@ -282,14 +282,14 @@
                 <p class="text-center avenir-roman color-white">​​​Real Journeys by Real People!</p>
                 <p class="text-justify avenir-roman color-white">TraveLibro boasts of a community of nomads, wanderers, explorers and storytellers. We bring to you visual travel stories highlighting the entire experience of a trip by the best global travel bloggers and photographers. Discover these travel stories by destinations or interest to help inspire your future travels.</p>
                 <p class="text-center avenir-roman color-pink">Download App or Login to view the journey.​</p>              </div>
-              <!-- <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button> -->
-              <div class="take-me-to-thestories">
-                <div style="overflow: hidden; border-radius: 8px">
-                  <div class="row">
-                    <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 trending-journey-story"><span class="explore-more">Trending Stories</span></div></a>
-                    <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 downloadapp-btn"><span class="explore-more">Download App</span></div></a>
-                    <a href="" ui-sref="login" ng-click="viewLoginJourney();"><div class="col-xs-4 login-journey-btn" style="border: none;"><span class="explore-more">Login</span></div></a>
-                    <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a> -->
+                <!-- <button class="btn" ng-show="loadmoreOption" ng-click="loadmore()">Load More</button> -->
+                <div class="take-me-to-thestories">
+                  <div style="overflow: hidden; border-radius: 8px">
+                    <div class="row">
+                      <a href="#/popular-journey" ui-sref="popularjourney"><div class="col-xs-4 trending-journey-story"><span class="explore-more">Trending Stories</span></div></a>
+                      <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 downloadapp-btn"><span class="explore-more">Download App</span></div></a>
+                      <a href="" ui-sref="login" ng-click="viewLoginJourney();"><div class="col-xs-4 login-journey-btn" style="border: none;"><span class="explore-more">Login</span></div></a>
+                      <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories"><span>Start</span><span class="explore-more">Live Stories</span></div></a> -->
                       <!-- <a href="{{iOS?'https://itunes.apple.com/in/app/travelibro/id1056641759':'https://play.google.com/store/apps/details?id=com.ascra.app.travellibro'}}"><div class="col-xs-4 explore-stories" style="border:none" ng-init='ongo.shareJrny={}'>
                         <span>Share</span><span class="explore-more">Past Stories</span></div></a> -->
                       </div>

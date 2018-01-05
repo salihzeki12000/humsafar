@@ -2692,6 +2692,39 @@ header {
       margin: 10px;
     }
   }
+  .change-journey-cover {
+    @include square(100%);
+    position: absolute;
+    z-index: 1;
+    &:after {
+      content: '';
+      @include position(absolute, 0);
+      background-color: rgba(0,0,0,.7);
+    }
+    span {
+      border: 1px solid #fff;
+      border-radius: 4px;
+      padding: 10px 16px;
+      color: #fff;
+      z-index: 1;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    upload-image {
+      .form-group { margin: 0; }
+      .btn-upload {
+        width: 100%;
+        @include position(absolute, 0);
+        opacity: 0;
+      }
+      input {
+        width: 100%;
+        @include position(absolute, 0);
+        cursor: pointer;
+      }
+      .label { display: none; }
+    }
+  }
 
   .travel-journey-heading {
     padding: 5px 50px 5px 8px;
@@ -5328,7 +5361,7 @@ header {
   }
   .video-sec, .album-videoholder  {
     .video-bg-blur {
-      background-position: 50% 50%;
+      background-position: 50% 50% !important;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -6019,6 +6052,7 @@ header {
   // on go journey
 
   .on-go-journey {
+    width: 550px;
     position: relative;
     z-index: 3;
   }
@@ -6794,7 +6828,7 @@ header {
     //max-height: 350px;
     overflow: hidden;
     .video-bg-blur {
-      background-position: 50% 50%;
+      background-position: 50% 50% !important;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -11096,6 +11130,7 @@ header {
       }
 
       .days {
+        position: relative;
         margin-bottom: -4px;
         font-size: 37px;
       }
@@ -12372,7 +12407,7 @@ header {
         z-index: 2;
       }
       .video-bg-blur {
-        background-position: 50% 50%;
+      background-position: 50% 50% !important;
       @include position(absolute,0);
       @include filter(blur(8px));
       @include transform(scale(1.1));
@@ -12810,11 +12845,14 @@ header {
     }
 
     img[src="https://maps.gstatic.com/mapfiles/api-3/images/google_white5.png"] {
-      display: none !important;
+      display: block !important;
     }
 
     img[src="https://maps.gstatic.com/mapfiles/api-3/images/google4.png"] {
-      display: none !important;
+      display: block !important;
+    }
+    .gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
+      position: fixed !important;
     }
   }
 

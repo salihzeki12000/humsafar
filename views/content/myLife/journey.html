@@ -45,102 +45,102 @@
                       <!--<li><a ui-sref="popularjourney">On The Go Journeys</a></li>-->
                       <!--<li><a ui-sref="itinerary">Upload An Itinerary</a></li>-->
                       <!--&lt;!&ndash;<li><a href="">Holiday Planner</a></li>&ndash;&gt;-->
-                    <!--</ul>-->
-                  <!--</div>-->
-                <!--</div>-->
-              </div>
-            </div>
-          </div>
-          <!--End of switch Travel life and local life-->
-          <!-- user logged for first time -->
-          <div class="empty-profile-journey" ng-if="!hasJourney && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
-            <div class="row m-m0">
-              <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
-                <div class="row">
-                  <div class="col-md-6 col-sm-6">
-                    <div class="video-gif-journey videoplays">
-                      <div class="mobile-gif">
-                        <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
-                        <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
-                          <i class="fa on-off" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
-                        </a>
-                      </div>
-                      <div class="videoplay-empty-journey">
-                        <video width="238px" height="100%" autoplay id="video" muted videoend>
-                          <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
-                          </video>
-                          <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906141?title=0&amp;byline=0&amp;portrait=0"
-                          fancybox-box width='500' height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
-                          <div class="play-show">
-                            <i class="fa fa-play-circle" aria-hidden="true"></i>
+                      <!--</ul>-->
+                      <!--</div>-->
+                      <!--</div>-->
+                    </div>
+                  </div>
+                </div>
+                <!--End of switch Travel life and local life-->
+                <!-- user logged for first time -->
+                <div class="empty-profile-journey" ng-if="!hasJourney && (template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public')">
+                  <div class="row m-m0">
+                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-1 col-md-10">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                          <div class="video-gif-journey videoplays">
+                            <div class="mobile-gif">
+                              <img src="img/profile-empty/gif-mobile.png" alt="GIF Travelibro" class="img-responsive">
+                              <a class="volume-off-on-mylife" id="mute-video" ng-click="muteVolume()">
+                                <i class="fa on-off" aria-hidden="true" ng-class="{'fa-microphone':(audioStatus.on), 'fa-microphone-slash': (!audioStatus.on)}"></i>
+                              </a>
+                            </div>
+                            <div class="videoplay-empty-journey">
+                              <video width="238px" height="100%" autoplay id="video" muted videoend>
+                                <source src="img/libro-home/videos/travellife.mp4" type="video/mp4">
+                                </video>
+                                <a class="various color-pink fancybox.iframe vimeo" href="https://player.vimeo.com/video/207906141?title=0&amp;byline=0&amp;portrait=0"
+                                fancybox-box width='500' height='281' frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                                <div class="play-show">
+                                  <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                </div>
+                              </a>
+                            </div>
                           </div>
-                        </a>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                          <div class="empty-travel-journey">
+                            <div class="journey-parachute">
+                              <img src="img/profile-empty/travel-empty.png" alt="" class="img-responsive inline-block">
+                            </div>
+                            <h3 class="color-pink avenir-heavy">My Tales &amp; Trails</h3>
+                            <div class="empty-ongo">
+                              <h4>On-the-Go Journeys</h4>
+                              <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
+                              these treasured experiences of your past.</p>
+                            </div>
+                            <div class="empty-chronicling">
+                              <h4>Chronicling Past Travels</h4>
+                              <p class="empty-descp">Revisit the treasured moments of your past travels by creating a beautiful memoir of your trip.</p>
+                            </div>
+                            <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
+                          </div>
+                          <div class="journey-downloadicon">
+                            <ul class="list-unstyled list-inline text-center color-pink">
+                              <li class="">
+                                Download App
+                              </li>
+                              <li>
+                                <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-pink">
+                                  <i class="fa fa-apple"></i>
+                                </a>
+                              </li>
+                              <li>|</li>
+                              <li>
+                                <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-pink" target="_blank">
+                                  <i class="fa fa-android"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6 col-sm-6">
-                    <div class="empty-travel-journey">
-                      <div class="journey-parachute">
-                        <img src="img/profile-empty/travel-empty.png" alt="" class="img-responsive inline-block">
+                </div>
+                <!-- user logged for first time end -->
+                <!-- PRIVATE PROFILE EMPTY SCREEN -->
+                <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined ||userData.following==null) && userData.status=='private'">
+                  <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="private-accountcover text-center">
+                        <h3>This account is Private.</h3>
+                        <p>Follow to view their Travel and Local Life.</p>
                       </div>
-                      <h3 class="color-pink avenir-heavy">My Tales &amp; Trails</h3>
-                      <div class="empty-ongo">
-                        <h4>On-the-Go Journeys</h4>
-                        <p class="empty-descp">Capture your journeys and activities whether local or global, creating a beautiful timeline and relive
-                        these treasured experiences of your past.</p>
-                      </div>
-                      <div class="empty-chronicling">
-                        <h4>Chronicling Past Travels</h4>
-                        <p class="empty-descp">Revisit the treasured moments of your past travels by creating a beautiful memoir of your trip.</p>
-                      </div>
-                      <p class="empty-descp">This space will get populated when you capture your Travel and Local Life using the TraveLibro App.</p>
-                    </div>
-                    <div class="journey-downloadicon">
-                      <ul class="list-unstyled list-inline text-center color-pink">
-                        <li class="">
-                          Download App
-                        </li>
-                        <li>
-                          <a href="https://itunes.apple.com/in/app/travelibro/id1056641759" target="_blank" class="color-pink">
-                            <i class="fa fa-apple"></i>
-                          </a>
-                        </li>
-                        <li>|</li>
-                        <li>
-                          <a href="https://play.google.com/store/apps/details?id=com.ascra.app.travellibro" class="color-pink" target="_blank">
-                            <i class="fa fa-android"></i>
-                          </a>
-                        </li>
-                      </ul>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- user logged for first time end -->
-          <!-- PRIVATE PROFILE EMPTY SCREEN -->
-          <div class="empty-profile-journey private-accountempty" ng-if="!template.isMine && (userData.following==0 || userData.following==2 || userData.following==undefined ||userData.following==null) && userData.status=='private'">
-            <div class="row">
-              <div class="col-md-offset-2 col-md-8">
-                <div class="private-accountcover text-center">
-                  <h3>This account is Private.</h3>
-                  <p>Follow to view their Travel and Local Life.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- PRIVATE PROFILE EMPTY SCREEN END -->
-          <div class="container" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
+                <!-- PRIVATE PROFILE EMPTY SCREEN END -->
+                <div class="container" ng-if="template.isMine || (userData.following==1 && userData.status=='private') || userData.status=='public'">
 
-            <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
-              <div masonry preserve-order>
-                <div class="row" style="background-color: #fff">
-                  <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in  travelLife  track by $index">
-                    <!--journey card -->
-                    <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
-                      <div class="travel-life-part avenir-roman">
-                        <div class="travel-journey-heading relate">
+                  <div class="masonry-detail" ng-show="hasJourney" infinite-scroll="getMore()" infinite-scroll-disabled="scroll.busy" infinite-scroll-distance='1'>
+                    <div masonry preserve-order>
+                      <div class="row" style="background-color: #fff">
+                        <div class="col-lg-4 col-md-6 col-sm-6 masonry-brick " ng-repeat="life in  travelLife  track by $index">
+                          <!--journey card -->
+                          <div class="journey-masonry-brick" ng-if="life.type=='ended-journey' || life.type=='on-the-go-journey'">
+                            <div class="travel-life-part avenir-roman">
+                              <div class="travel-journey-heading relate">
                           <!-- <p ng-if="life.type=='ended-journey'">Has ended the Journey</p>
                             <p ng-if="life.type=='on-the-go-journey'">Has started a Journey</p> -->
                             <p><span class="text-capitalize">{{life.name}}</span> - Journey (<span>{{life.duration}} {{life.duration | singularPlural: 'Days'}}</span>)</p>
@@ -156,17 +156,24 @@
                             <i class="fa fa-clock-o mr5 ml5"></i><span class="avenir-roman">{{life.startTime|formatDate: 'time'}}</span>                            <span>{{life.timestampHour}}</span></p> -->
                           </div>
                           <!--jounrey main detail card-->
-                          <div class="travelled-journey relate" ng-click="routeTO(life)">
+                          <div class="travelled-journey relate">
                             <!-- ONGO BADGE BADGE -->
                           <!-- <div class="tag-ongo-journey">
                             <span class="inline-block color-white">On The Go</span>
                           </div> -->
-                          <!-- ONGO BADGE BADGE -->
+                          <!-- ONGO BADGE BADGE -->                          
                           <div class="travelled-imgholder pointer relate" ng-if="life.coverPhoto!=null">
-                            <fade-img-loading blur="{{life.coverPhoto|uploadpath:10:10:'cover'}}" image="{{life.coverPhoto|uploadpath:722:750:'cover'}}" >
+                            <fade-img-loading blur="{{life.coverPhoto|uploadpath:10:10:'cover'}}" image="{{life.coverPhoto|uploadpath:722:750:'cover'}}" ng-click="routeTO(life)">
                             </fade-img-loading>
+                            <!-- change cover photo -->
+                            <div class="change-journey-cover" ng-if="life.coverPhoto == '5804a405cfb0032d8178747f.png'">
+                              <span class="get-center">Change Cover Photo
+                                <upload-image allow-type="image/*" ng-model="life.newCover" ng-callback="addJourneyCover(data,life);" no-view class="pointer"></upload-image>
+                              </span>
+                            </div>
+                            <!-- change cover photo end-->
                           </div>
-                          <div class="travelled-imgholder pointer map-imageholder relate" ng-if="life.coverPhoto==null">
+                          <div class="travelled-imgholder pointer map-imageholder relate" ng-if="life.coverPhoto==null" ng-click="routeTO(life)">
                             <fade-img-loading blur="{{life.startLocationPic|small|uploadpath:10:10:'cover'}}" image="{{life.startLocationPic|small|uploadpath:722:750:'cover'}}" >
                             </fade-img-loading>
                           </div>
