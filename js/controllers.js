@@ -2372,7 +2372,10 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           center: center,
           zoom: 4,
           styles: mapStyle,
-          disableDefaultUI: true
+          zoomControl: true,
+          scaleControl: true,
+          disableDefaultUI: true,
+          gestureHandling: 'greedy'
         });
 
         var step = 0;
@@ -12210,9 +12213,12 @@ angular.module('phonecatControllers', ['templateservicemod', 'mylife', 'ongojour
           draggable: true,
           animation: google.maps.Animation.DROP,
           center: center,
-          zoom: 3,
+          zoom: 4,
           styles: mapStyle,
-          disableDefaultUI: true
+          zoomControl: true,
+          scaleControl: true,
+          disableDefaultUI: true,
+          gestureHandling: 'greedy'
         });
 
         var step = 0;
